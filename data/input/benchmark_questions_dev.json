@@ -1,0 +1,182 @@
+[
+  {
+    "id": "q01",
+    "source_doc_id": "001-83617",
+    "question": "In ECHR case 001-83617 (application no. 4212/02 against Turkey), what is the name of the applicant?",
+    "ground_truth": "The applicant is Ms Sabriye Akıncıbaşı, a Turkish national."
+  },
+  {
+    "id": "q02",
+    "source_doc_id": "001-79012",
+    "question": "In ECHR case 001-79012 (application no. 56745/00 against the United Kingdom), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-79012 was born in 1967."
+  },
+  {
+    "id": "q03",
+    "source_doc_id": "001-111540",
+    "question": "In ECHR case 001-111540 (application no. 36124/06 against Sweden), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr P. Cronhult, a lawyer practising in Stockholm."
+  },
+  {
+    "id": "q04",
+    "source_doc_id": "001-169481",
+    "question": "On what date was the application in ECHR case 001-169481 (no. 8693/11 against Denmark) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 22 October 2010."
+  },
+  {
+    "id": "q05",
+    "source_doc_id": "001-159211",
+    "question": "In ECHR case 001-159211 (application no. 1176/10 against Norway), under which Article of the Convention did the applicant allege that he had not been afforded a fair hearing by an impartial tribunal?",
+    "ground_truth": "The applicant alleged a violation of Article 6 § 1 of the Convention, claiming he had not been afforded a fair hearing by an impartial tribunal."
+  },
+  {
+    "id": "q06",
+    "source_doc_id": "001-85722",
+    "question": "In ECHR case 001-85722 (application no. 40387/06 against Poland), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Janusz Krawczak, a Polish national."
+  },
+  {
+    "id": "q07",
+    "source_doc_id": "001-87407",
+    "question": "In ECHR case 001-87407 (application no. 63480/00 against the United Kingdom), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-87407 was born in 1948."
+  },
+  {
+    "id": "q08",
+    "source_doc_id": "001-89321",
+    "question": "In ECHR case 001-89321 (application no. 11320/05 against Sweden), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr P.-O. Nordh, a lawyer practising in Vallentuna."
+  },
+  {
+    "id": "q09",
+    "source_doc_id": "001-89184",
+    "question": "On what date was the application in ECHR case 001-89184 (no. 21773/02 against Turkey) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 7 July 2000."
+  },
+  {
+    "id": "q10",
+    "source_doc_id": "001-93953",
+    "question": "In ECHR case 001-93953 (application no. 6093/04 against Poland), under which Article of the Convention did the applicant allege that his pre-trial detention had exceeded a 'reasonable time'?",
+    "ground_truth": "The applicant alleged that his pre-trial detention had exceeded a 'reasonable time' within the meaning of Article 5 § 3 of the Convention."
+  },
+  {
+    "id": "q11",
+    "source_doc_id": "001-101444",
+    "question": "In ECHR case 001-101444 (application no. 1520/06 against Turkey), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Osman Erden, a Turkish national."
+  },
+  {
+    "id": "q12",
+    "source_doc_id": "001-90710",
+    "question": "In ECHR case 001-90710 (application no. 23815/04 against Turkey), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Abdülkadir Uslu, a Turkish national."
+  },
+  {
+    "id": "q13",
+    "source_doc_id": "001-87462",
+    "question": "In ECHR case 001-87462 (application no. 10721/02 against the United Kingdom), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Nigel Harrison, a British national."
+  },
+  {
+    "id": "q14",
+    "source_doc_id": "001-87515",
+    "question": "In ECHR case 001-87515 (application no. 63647/00 against the United Kingdom), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Nicholas P. Jackson, a British national."
+  },
+  {
+    "id": "q15",
+    "source_doc_id": "001-78431",
+    "question": "In ECHR case 001-78431 (application no. 77361/01 against Turkey), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-78431 was born in 1948."
+  },
+  {
+    "id": "q16",
+    "source_doc_id": "001-82485",
+    "question": "In ECHR case 001-82485 (application no. 75573/01 against Turkey), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-82485 was born in 1972."
+  },
+  {
+    "id": "q17",
+    "source_doc_id": "001-61376",
+    "question": "In ECHR case 001-61376 (application no. 67385/01 against the United Kingdom), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-61376 was born in 1939."
+  },
+  {
+    "id": "q18",
+    "source_doc_id": "001-87426",
+    "question": "In ECHR case 001-87426 (application no. 63477/00 against the United Kingdom), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-87426 was born in 1954."
+  },
+  {
+    "id": "q19",
+    "source_doc_id": "001-84819",
+    "question": "In ECHR case 001-84819 (application no. 26803/02 against Turkey), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr A. Talipoğlu, a lawyer practising in Istanbul."
+  },
+  {
+    "id": "q20",
+    "source_doc_id": "001-88377",
+    "question": "In ECHR case 001-88377 (application no. 1249/03 against Turkey), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr Şeref Turgut, a lawyer practising in Istanbul."
+  },
+  {
+    "id": "q21",
+    "source_doc_id": "001-87405",
+    "question": "In ECHR case 001-87405 (application no. 61395/00 against the United Kingdom), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
+  },
+  {
+    "id": "q22",
+    "source_doc_id": "001-87483",
+    "question": "In ECHR case 001-87483 (application no. 63701/00 against the United Kingdom), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
+  },
+  {
+    "id": "q23",
+    "source_doc_id": "001-97995",
+    "question": "On what date was the application in ECHR case 001-97995 (no. 33102/04 against Turkey) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 15 July 2004."
+  },
+  {
+    "id": "q24",
+    "source_doc_id": "001-90131",
+    "question": "On what date was the application in ECHR case 001-90131 (no. 18753/04 against Turkey) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 11 February 2004."
+  },
+  {
+    "id": "q25",
+    "source_doc_id": "001-67582",
+    "question": "On what date was the application in ECHR case 001-67582 (no. 47116/99 against Turkey) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 19 November 1998."
+  },
+  {
+    "id": "q26",
+    "source_doc_id": "001-91286",
+    "question": "On what date was the application in ECHR case 001-91286 (no. 27319/07 against the United Kingdom) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 29 June 2007."
+  },
+  {
+    "id": "q27",
+    "source_doc_id": "001-87448",
+    "question": "In ECHR case 001-87448 (application no. 8917/05 against Turkey), under which Article of the Convention did the applicant complain that the refusal to lift his parliamentary immunity had deprived him of his right of access to a court?",
+    "ground_truth": "The applicant complained, in particular, that the refusal to lift his parliamentary immunity had hindered criminal proceedings against him, thereby depriving him of his right of access to a court under Article 6 § 1 of the Convention."
+  },
+  {
+    "id": "q28",
+    "source_doc_id": "001-84285",
+    "question": "In ECHR case 001-84285 (application no. 55434/00 against the United Kingdom), under which Article of the Convention did the applicant allege a breach in respect of his detention on remand pending his trial by court martial?",
+    "ground_truth": "The applicant alleged that his detention on remand pending his trial by court martial was in breach of Article 5 § 3 of the Convention."
+  },
+  {
+    "id": "q29",
+    "source_doc_id": "001-108462",
+    "question": "In ECHR case 001-108462 (application no. 2917/05 against Turkey), under which Article of the Convention did the applicant allege a violation?",
+    "ground_truth": "The applicant alleged a violation under Article 6 of the Convention."
+  },
+  {
+    "id": "q30",
+    "source_doc_id": "001-110322",
+    "question": "In ECHR case 001-110322 (application no. 60437/08 against Sweden), which Article of the Convention did the applicant invoke?",
+    "ground_truth": "The applicant invoked Article 6 of the Convention."
+  }
+]

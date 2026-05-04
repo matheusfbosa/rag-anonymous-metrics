@@ -1,0 +1,182 @@
+[
+  {
+    "id": "q01",
+    "source_doc_id": "001-93358",
+    "question": "In ECHR case 001-93358 (application no. 44034/07 against Denmark), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Rolf Nielsen, a Danish national."
+  },
+  {
+    "id": "q02",
+    "source_doc_id": "001-114965",
+    "question": "In ECHR case 001-114965 (application no. 25088/07 against Switzerland), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-114965 was born in 1974."
+  },
+  {
+    "id": "q03",
+    "source_doc_id": "001-91042",
+    "question": "In ECHR case 001-91042 (application no. 5138/04 against Turkey), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Ms B. Özpolat, a lawyer practising in Gaziantep."
+  },
+  {
+    "id": "q04",
+    "source_doc_id": "001-88010",
+    "question": "On what date was the application in ECHR case 001-88010 (no. 25166/05 against Austria) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 29 June 2005."
+  },
+  {
+    "id": "q05",
+    "source_doc_id": "001-117742",
+    "question": "In ECHR case 001-117742 (application no. 26118/10 against France), under which Article of the Convention did the applicant allege a violation?",
+    "ground_truth": "The applicant alleged, in particular, a violation of Article 10 of the Convention."
+  },
+  {
+    "id": "q06",
+    "source_doc_id": "001-138919",
+    "question": "In ECHR case 001-138919 (application no. 19165/08 against Ireland), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Kenneth Donohoe, an Irish national."
+  },
+  {
+    "id": "q07",
+    "source_doc_id": "001-93333",
+    "question": "In ECHR case 001-93333 (application no. 29940/06 against Poland), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-93333 was born in 1968."
+  },
+  {
+    "id": "q08",
+    "source_doc_id": "001-79427",
+    "question": "In ECHR case 001-79427 (application no. 19124/02 against Germany), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr K.H. Christoph, a lawyer practising in Berlin."
+  },
+  {
+    "id": "q09",
+    "source_doc_id": "001-97980",
+    "question": "On what date was the application in ECHR case 001-97980 (no. 18837/06 against the United Kingdom) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 2 May 2006."
+  },
+  {
+    "id": "q10",
+    "source_doc_id": "001-150670",
+    "question": "In ECHR case 001-150670 (application no. 37715/11 against Turkey), under which Article of the Convention did the applicant allege the failure to carry out an effective investigation into her husband's disappearance?",
+    "ground_truth": "The applicant alleged a breach of Article 2 of the Convention on account of the national authorities' failure to carry out an effective investigation into the disappearance of her husband."
+  },
+  {
+    "id": "q11",
+    "source_doc_id": "001-107258",
+    "question": "In ECHR case 001-107258 (application no. 10450/08 against Turkey), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Hatem İşcan, a Turkish national."
+  },
+  {
+    "id": "q12",
+    "source_doc_id": "001-66727",
+    "question": "In ECHR case 001-66727 (application no. 65017/01 against Poland), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Mieczysław Król, a Polish national."
+  },
+  {
+    "id": "q13",
+    "source_doc_id": "001-126128",
+    "question": "In ECHR case 001-126128 (application no. 3042/05 against Turkey), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Nihat Konak, a Turkish national."
+  },
+  {
+    "id": "q14",
+    "source_doc_id": "001-86678",
+    "question": "In ECHR case 001-86678 (application no. 24322/02 against Poland), what is the name of the applicant?",
+    "ground_truth": "The applicant is Mr Ryszard Panusz, a Polish national."
+  },
+  {
+    "id": "q15",
+    "source_doc_id": "001-80303",
+    "question": "In ECHR case 001-80303 (application no. 36391/02 against Turkey), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-80303 was born in 1984."
+  },
+  {
+    "id": "q16",
+    "source_doc_id": "001-83402",
+    "question": "In ECHR case 001-83402 (application no. 73283/01 against Turkey), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-83402 was born in 1951."
+  },
+  {
+    "id": "q17",
+    "source_doc_id": "001-77315",
+    "question": "In ECHR case 001-77315 (application no. 75870/01 against Poland), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-77315 was born in 1936."
+  },
+  {
+    "id": "q18",
+    "source_doc_id": "001-87556",
+    "question": "In ECHR case 001-87556 (application no. 2311/04 against Poland), in what year was the applicant born?",
+    "ground_truth": "The applicant in case 001-87556 was born in 1951."
+  },
+  {
+    "id": "q19",
+    "source_doc_id": "001-151047",
+    "question": "In ECHR case 001-151047 (application no. 53645/10 against Turkey), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr O. Gündoğdu, a lawyer practising in Kars."
+  },
+  {
+    "id": "q20",
+    "source_doc_id": "001-80593",
+    "question": "In ECHR case 001-80593 (application no. 47297/99 against Turkey), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr L. Kanat, a lawyer practising in Ankara."
+  },
+  {
+    "id": "q21",
+    "source_doc_id": "001-89960",
+    "question": "In ECHR case 001-89960 (application no. 33176/06 against Poland), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Ms A. Pietras, a lawyer practising in Gdynia."
+  },
+  {
+    "id": "q22",
+    "source_doc_id": "001-159916",
+    "question": "In ECHR case 001-159916 (application no. 653/12 against Poland), who represented the applicant before the Court, and in which city does that lawyer practise?",
+    "ground_truth": "The applicant was represented by Mr T. Bąk, a lawyer practising in Szczecin."
+  },
+  {
+    "id": "q23",
+    "source_doc_id": "001-83610",
+    "question": "On what date was the application in ECHR case 001-83610 (no. 65942/01 against Turkey) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 8 November 2000."
+  },
+  {
+    "id": "q24",
+    "source_doc_id": "001-97411",
+    "question": "On what date was the application in ECHR case 001-97411 (no. 15649/05 against Turkey) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 27 April 2005."
+  },
+  {
+    "id": "q25",
+    "source_doc_id": "001-88723",
+    "question": "On what date was the application in ECHR case 001-88723 (no. 23789/04 against Poland) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 18 June 2004."
+  },
+  {
+    "id": "q26",
+    "source_doc_id": "001-150788",
+    "question": "On what date was the application in ECHR case 001-150788 (no. 16608/09 against Slovenia) lodged with the Court?",
+    "ground_truth": "The application was lodged with the Court on 23 March 2009."
+  },
+  {
+    "id": "q27",
+    "source_doc_id": "001-92416",
+    "question": "In ECHR case 001-92416 (application no. 46949/07 against Poland), under which Article of the Convention did the applicant allege that his pre-trial detention had exceeded a 'reasonable time'?",
+    "ground_truth": "The applicant alleged that his detention on remand exceeded a 'reasonable time' within the meaning of Article 5 § 3 of the Convention."
+  },
+  {
+    "id": "q28",
+    "source_doc_id": "001-159917",
+    "question": "In ECHR case 001-159917 (application no. 59285/12 against Poland), under which Article of the Convention did the applicant allege a breach?",
+    "ground_truth": "The applicant alleged, in particular, a breach of Article 3 of the Convention."
+  },
+  {
+    "id": "q29",
+    "source_doc_id": "001-98909",
+    "question": "In ECHR case 001-98909 (application no. 30357/05 against Turkey), under which Article of the Convention did the applicant allege ill-treatment by police officers during her arrest?",
+    "ground_truth": "The applicant alleged that police officers had used excessive force in order to disperse participants in a press conference and inflicted ill-treatment on her during her arrest, in violation of Article 3 of the Convention."
+  },
+  {
+    "id": "q30",
+    "source_doc_id": "001-175007",
+    "question": "In ECHR case 001-175007 (application no. 8806/12 against France), under which Article of the Convention did the applicant allege that his conviction for refusing to undergo DNA profiling infringed his right to respect for his private life?",
+    "ground_truth": "The applicant alleged, in particular, that his conviction for having refused to undergo DNA profiling had amounted to an unjustified infringement of his right to respect for his private life within the meaning of Article 8 of the Convention."
+  }
+]
