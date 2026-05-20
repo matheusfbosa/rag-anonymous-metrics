@@ -1,17 +1,8 @@
-"""Per-query evaluation record schema.
-
-The :class:`QueryRecord` dataclass is the single source of truth for the
-fields persisted to ``data/output/results_*.jsonl`` and re-aggregated into
-``data/output/metrics_summary.csv``. Use ``dataclasses.asdict`` for serialisation.
-"""
-
 from dataclasses import dataclass, field
 
 
 @dataclass(slots=True)
 class QueryRecord:
-    """One evaluated benchmark question for a single strategy."""
-
     run_id: str
     strategy: str
     question_id: str
@@ -32,8 +23,6 @@ class QueryRecord:
 
 @dataclass(frozen=True, slots=True)
 class StrategyResult:
-    """Output of :func:`rag_anonymous_metrics.evaluator.evaluate_strategy`."""
-
     strategy: str
     records: list[QueryRecord] = field(default_factory=list)
     output_path: str = ""

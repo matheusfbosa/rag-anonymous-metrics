@@ -1,5 +1,3 @@
-"""Per-question evaluation loop and JSONL persistence."""
-
 import json
 import logging
 import os
@@ -30,7 +28,6 @@ def run_evaluation(
     llm_model: str | None = None,
     judge_model: str | None = None,
 ) -> dict[str, StrategyResult]:
-    """Run the full evaluation pipeline for one or more strategies."""
     from rag_anonymous_metrics.corpus import load_corpus
 
     logger.info("Loading TAB corpus (split=%s) for PII annotations...", corpus_split)
@@ -59,9 +56,7 @@ def evaluate_strategy(
     llm_model: str | None = None,
     judge_model: str | None = None,
 ) -> StrategyResult:
-    """Evaluate one strategy across all benchmark questions and persist JSONL."""
-    logger.info("")
-    logger.info("=== Evaluating strategy: %s ===", strategy)
+    logger.info("Evaluating: strategy=%s", strategy)
 
     gen_model = llm_model or _llm_model()
     judge_m = judge_model or _judge_model()
@@ -98,7 +93,6 @@ def evaluate_question(
     run_id: str,
     k_docs: int | None = None,
 ) -> QueryRecord:
-    """Run RAG, anonymize (if applicable), score privacy + refusal for one question."""
     if k_docs is None:
         k_docs = _k_docs()
     question = question_obj["question"]
@@ -134,7 +128,6 @@ def evaluate_question(
 
 
 def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
-    """Compute and attach faithfulness / context_precision in place."""
     from rag_anonymous_metrics.metrics import faithfulness, context_precision
     from rag_anonymous_metrics.metrics._judge import build_judge_chain
 
@@ -167,7 +160,6 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
 
 
 def _save_jsonl(records: list[QueryRecord], path: Path) -> None:
-    """Write a batch of records as one JSON object per line."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         for record in records:
@@ -176,7 +168,6 @@ def _save_jsonl(records: list[QueryRecord], path: Path) -> None:
 
 
 def _jsonl_filename(strategy: str, llm_model: str) -> str:
-    """Build output filename per the project naming convention."""
     model_slug = llm_model.replace(":", "_").replace("/", "_")
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     return f"results_{model_slug}_{strategy}_{timestamp}.jsonl"

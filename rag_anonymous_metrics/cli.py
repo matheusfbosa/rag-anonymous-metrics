@@ -1,5 +1,3 @@
-"""rag-metrics CLI: ``rag-metrics evaluate|export`` (env-driven, no flags)."""
-
 import logging
 import os
 import statistics
@@ -85,7 +83,6 @@ def cmd_export() -> None:
 
 
 def _safe_mean(values: Iterable[float | None]) -> float:
-    """Mean of the non-None values, or 0.0 when none are defined."""
     nums = [v for v in values if v is not None]
     return statistics.fmean(nums) if nums else 0.0
 

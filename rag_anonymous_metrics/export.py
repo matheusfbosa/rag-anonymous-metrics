@@ -1,5 +1,3 @@
-"""Aggregate per-run JSONL results into a metrics_summary.csv grouped by strategy."""
-
 import json
 import logging
 import os
@@ -22,7 +20,6 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 def export_csv(results_dir: Path | None = None, output_path: Path | None = None) -> Path:
-    """Aggregate JSONL results into ``metrics_summary.csv`` and return its path."""
     results_dir = Path(results_dir or _results_dir())
     output_path = Path(output_path or results_dir / "metrics_summary.csv")
 
@@ -47,13 +44,6 @@ def export_csv(results_dir: Path | None = None, output_path: Path | None = None)
 
 
 def _format_summary(summary: pd.DataFrame) -> str:
-    """Render a compact, terminal-friendly view of the per-strategy summary.
-
-    Strategies become columns and metrics become rows, so the line width
-    grows with the (small) number of strategies rather than the (large)
-    number of metric/stat combinations. The full ``mean``/``std``/``count``
-    grid still lives in the CSV; this view is for the log only.
-    """
     means = (
         summary.set_index("strategy")
         .filter(regex=r"_mean$")
@@ -79,7 +69,6 @@ def _format_summary(summary: pd.DataFrame) -> str:
 
 
 def _load_all_jsonl(results_dir: Path) -> list[dict]:
-    """Read every ``results_*.jsonl`` file in ``results_dir`` into one list."""
     if not results_dir.exists():
         raise FileNotFoundError(f"Results directory not found: {results_dir}")
 
