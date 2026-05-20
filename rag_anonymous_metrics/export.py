@@ -1,9 +1,10 @@
 import json
 import logging
-import os
 from pathlib import Path
 
 import pandas as pd
+
+from rag_anonymous_metrics.config import Settings
 
 logger = logging.getLogger(__name__)
 
@@ -16,12 +17,10 @@ METRIC_COLUMNS = (
     "leaked_pii",
 )
 
-_PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
-
 def export_csv(results_dir: Path | None = None, output_path: Path | None = None) -> Path:
-    results_dir = Path(results_dir or _results_dir())
-    output_path = Path(output_path or results_dir / "metrics_summary.csv")
+    cfg = Settings.load()
+    results_dir = cfg.results_dir if results_dir is None else Path(results_dir)
+    output_path = results_dir / "metrics_summary.csv" if output_path is None else Path(output_path)
 
     records = _load_all_jsonl(results_dir)
     df = pd.DataFrame(records)
@@ -87,7 +86,3 @@ def _load_all_jsonl(results_dir: Path) -> list[dict]:
 
     logger.info("Total records loaded: %d", len(records))
     return records
-
-
-def _results_dir() -> Path:
-    return _PROJECT_ROOT / os.getenv("RAG_METRICS_RESULTS_DIR", "./data/output")

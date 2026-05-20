@@ -1,11 +1,11 @@
 import logging
-import os
 import statistics
 import sys
 from typing import Iterable
 
 from rag_anonymous import configure_logging
 
+from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
 from rag_anonymous_metrics.evaluator import STRATEGIES, run_evaluation
 from rag_anonymous_metrics.export import export_csv
@@ -16,33 +16,28 @@ USAGE = "Usage: rag-metrics {evaluate|export}  (configure via env / .env)"
 
 
 def cmd_evaluate() -> None:
-    strategy_env = os.getenv("RAG_METRICS_EVAL_STRATEGY", "all")
-    corpus_split = os.getenv("RAG_METRICS_CORPUS_SPLIT", "dev")
-    k_docs = int(os.getenv("RAG_METRICS_RETRIEVAL_K_DOCS", "5"))
-    llm_model = os.getenv("RAG_ANON_LLM_MODEL", "qwen3:0.6b")
-    judge_model = os.getenv("RAG_METRICS_JUDGE_MODEL") or llm_model
+    try:
+        cfg = Settings.load()
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+
+    strategy_env = cfg.eval_strategy
+    corpus_split = cfg.corpus_split
+    k_docs = cfg.retrieval_k_docs
+    llm_model = cfg.llm_model
+    judge_model = cfg.judge_model
 
     strategies = STRATEGIES if strategy_env == "all" else [strategy_env]
     questions = load_questions(split=corpus_split)
 
-    max_questions_env = os.getenv("RAG_METRICS_MAX_QUESTIONS")
-    if max_questions_env:
-        try:
-            max_questions = int(max_questions_env)
-        except ValueError as exc:
-            raise SystemExit(
-                f"RAG_METRICS_MAX_QUESTIONS must be an integer, got {max_questions_env!r}"
-            ) from exc
-        if max_questions <= 0:
-            raise SystemExit(
-                f"RAG_METRICS_MAX_QUESTIONS must be positive, got {max_questions}"
-            )
-        if max_questions < len(questions):
-            logger.info(
-                "Limiting benchmark to first %d of %d questions",
-                max_questions, len(questions),
-            )
-            questions = questions[:max_questions]
+    max_questions_limit = cfg.max_questions
+    if max_questions_limit is not None and max_questions_limit < len(questions):
+        logger.info(
+            "Limiting benchmark to first %d of %d questions",
+            max_questions_limit,
+            len(questions),
+        )
+        questions = questions[:max_questions_limit]
 
     logger.info("Generator LLM: %s | Judge LLM: %s", llm_model, judge_model)
 
@@ -51,6 +46,8 @@ def cmd_evaluate() -> None:
         questions=questions,
         corpus_split=corpus_split,
         k_docs=k_docs,
+        llm_model=llm_model,
+        judge_model=judge_model,
     )
 
     logger.info("")

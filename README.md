@@ -4,12 +4,13 @@ Computes **Utility** and **Privacy** metrics to quantify the trade-off between i
 
 ## Overview
 
-This package evaluates two anonymization strategies against a benchmark question set drawn from the [*Text Anonymization Benchmark* (TAB) corpus](https://github.com/NorskRegnesentral/text-anonymization-benchmark):
+This package evaluates two anonymization strategies against a benchmark question set drawn from the *[Text Anonymization Benchmark* (TAB) corpus](https://github.com/NorskRegnesentral/text-anonymization-benchmark):
 
 - **Offline:** the corpus is anonymized by Presidio before ingestion; the retriever and generator never see raw PII.
 - **On-Demand:** the raw corpus is ingested as-is; Presidio anonymizes only the generated answer at query time.
 
 For each question × strategy the evaluator:
+
 1. Runs the full RAG pipeline (retrieval + generation + optional post-generation anonymization).
 2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
 3. Computes **utility metrics** (faithfulness, context precision) via a separate judge LLM once all answers are collected — refusals are skipped and recorded as `null`.
@@ -46,19 +47,22 @@ flowchart TD
     jsonl --> csv["metrics_summary.csv\n(mean / std per strategy)"]
 ```
 
+
+
 ## Project structure
 
 ```
 rag-anonymous-metrics/
 ├── pyproject.toml          # Package metadata; rag-metrics entry point; depends on rag-anonymous
 ├── rag_anonymous_metrics/
-│   ├── __init__.py         # calls load_dotenv()
+│   ├── __init__.py
+│   ├── config.py           # Load env vars
 │   ├── cli.py              # rag-metrics evaluate|export
-│   ├── corpus.py           # load_questions; re-exports rag_anonymous.load_corpus
+│   ├── corpus.py           # Load benchmark questions
 │   ├── pipeline.py         # Pipeline dataclass: chain + vectordb + anonymizer
 │   ├── records.py          # QueryRecord dataclass (JSONL schema)
 │   ├── evaluator.py        # Per-question loop, JSONL persistence
-│   ├── export.py           # JSONL -> metrics_summary.csv via Pandas
+│   ├── export.py           # JSONL to metrics via Pandas
 │   └── metrics/
 │       ├── _judge.py       # Shared judge chain + Yes/No verdict parsing
 │       ├── faithfulness.py # Claim-level Ragas faithfulness
@@ -70,7 +74,7 @@ rag-anonymous-metrics/
 │   │   ├── benchmark_questions_dev.json
 │   │   ├── benchmark_questions_train.json
 │   │   └── benchmark_questions_test.json
-│   └── output/             # JSONL results + CSV summary
+│   └── output/             # JSONL results and metrics
 ├── Makefile
 └── .env.example
 ```
@@ -111,13 +115,13 @@ $$
 \text{Precision@}k = \frac{\text{true positives@}k}{\text{true positives@}k + \text{false positives@}k}
 $$
 
-where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in \{0,1\}$ is the relevance indicator at rank $k$. With one binary label per rank, the denominator at cut $k$ is $k$, and $\text{true positives@}k$ is the count of relevant chunks among positions $1..k$, so $\text{Precision@}k$ matches the cumulative precision used here.
+where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in 0,1$ is the relevance indicator at rank $k$. With one binary label per rank, the denominator at cut $k$ is $k$, and $\text{true positives@}k$ is the count of relevant chunks among positions $1..k$, so $\text{Precision@}k$ matches the cumulative precision used here.
 
 **How it’s calculated.** Relevance $v_k$ is judged by the **evaluator LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*). That matches the Ragas idea of judging chunks against the **generated response** when no gold reference is used—see **Context Utilization** / **LLMContextPrecisionWithoutReference** on the same [Context Precision](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/) page—rather than **Context Precision** with a separate `reference` string. Only the **first 300 characters** of each chunk are shown to the judge. If $\sum_k v_k = 0$, the score is **0**; if no verdicts are parseable, the score is `null`; partial parses are padded with $v_k = 0$ for missing positions.
 
 ### Answer refusal rate
 
-Let $R_{\mathrm{ref}} \in \{0,1\}$ be an **abstention indicator** computed by deterministic string heuristics (`rag_anonymous_metrics/metrics/refusal.py`): empty outputs, safety-style refusal phrases, and a small set of short non-answers. This is a **proxy** for model abstention, not a calibrated probability.
+Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics (`rag_anonymous_metrics/metrics/refusal.py`): empty outputs, safety-style refusal phrases, and a small set of short non-answers. This is a **proxy** for model abstention, not a calibrated probability.
 
 Over $N$ benchmark items, the **refusal rate** is
 
@@ -138,7 +142,7 @@ $$
 Let $a_{\mathrm{low}} = \mathrm{lower}(a)$ for the final answer $a$. **Leakage** is operationalised as **substring disclosure**:
 
 $$
-\mathcal{L} = \{ p \in \mathcal{P} \mid p \text{ occurs in } a_{\mathrm{low}} \}.
+\mathcal{L} =  p \in \mathcal{P} \mid p \text{ occurs in } a_{\mathrm{low}} .
 $$
 
 **Per-query quantities.** `total_pii` $= |\mathcal{P}|$, `leaked_pii` $= |\mathcal{L}|$, and
@@ -230,4 +234,5 @@ make export
 | `RAG_METRICS_CORPUS_SPLIT`      | `dev`                                                      | TAB split (train/dev/test)                                                                                                                                                     |
 | `RAG_METRICS_MAX_QUESTIONS`     | *(unset)*                                                  | If set, evaluate only the first N benchmark questions                                                                                                                          |
 | `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | JSONL + CSV destination                                                                                                                                                        |
+
 

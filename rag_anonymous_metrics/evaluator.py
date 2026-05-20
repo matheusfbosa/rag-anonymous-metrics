@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 import uuid
 from dataclasses import asdict
 from datetime import datetime
@@ -8,6 +7,7 @@ from pathlib import Path
 
 from rag_anonymous import query_rag
 
+from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.metrics.pii_leakage import build_pii_index, compute_pii_leakage
 from rag_anonymous_metrics.metrics.refusal import is_refusal_answer
 from rag_anonymous_metrics.pipeline import Pipeline, build_pipeline, response_text
@@ -16,9 +16,6 @@ from rag_anonymous_metrics.records import QueryRecord, StrategyResult
 logger = logging.getLogger(__name__)
 
 STRATEGIES = ["offline", "ondemand"]
-
-_PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
 
 def run_evaluation(
     strategies: list[str],
@@ -58,10 +55,11 @@ def evaluate_strategy(
 ) -> StrategyResult:
     logger.info("Evaluating: strategy=%s", strategy)
 
-    gen_model = llm_model or _llm_model()
-    judge_m = judge_model or _judge_model()
+    cfg = Settings.load()
+    gen_model = llm_model or cfg.llm_model
+    judge_m = judge_model or cfg.judge_model
     if k_docs is None:
-        k_docs = _k_docs()
+        k_docs = cfg.retrieval_k_docs
 
     pipeline = build_pipeline(strategy, gen_model)
     run_id = str(uuid.uuid4())[:8]
@@ -79,7 +77,7 @@ def evaluate_strategy(
 
     _attach_utility(records, judge_m)
 
-    output_path = _results_dir() / _jsonl_filename(strategy, gen_model)
+    output_path = cfg.results_dir / _jsonl_filename(strategy, gen_model)
     _save_jsonl(records, output_path)
 
     return StrategyResult(strategy=strategy, records=records, output_path=str(output_path))
@@ -94,7 +92,7 @@ def evaluate_question(
     k_docs: int | None = None,
 ) -> QueryRecord:
     if k_docs is None:
-        k_docs = _k_docs()
+        k_docs = Settings.load().retrieval_k_docs
     question = question_obj["question"]
     result = query_rag(pipeline.chain, pipeline.vectordb, question, k_docs=k_docs)
 
@@ -171,19 +169,3 @@ def _jsonl_filename(strategy: str, llm_model: str) -> str:
     model_slug = llm_model.replace(":", "_").replace("/", "_")
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     return f"results_{model_slug}_{strategy}_{timestamp}.jsonl"
-
-
-def _results_dir() -> Path:
-    return _PROJECT_ROOT / os.getenv("RAG_METRICS_RESULTS_DIR", "./data/output")
-
-
-def _llm_model() -> str:
-    return os.getenv("RAG_ANON_LLM_MODEL", "qwen3:0.6b")
-
-
-def _judge_model() -> str:
-    return os.getenv("RAG_METRICS_JUDGE_MODEL") or _llm_model()
-
-
-def _k_docs() -> int:
-    return int(os.getenv("RAG_METRICS_RETRIEVAL_K_DOCS", "5"))

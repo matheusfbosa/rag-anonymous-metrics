@@ -1,3 +1,3 @@
-from dotenv import load_dotenv
+from rag_anonymous_metrics.config import PROJECT_ROOT, Settings
 
-load_dotenv()
+__all__ = ["PROJECT_ROOT", "Settings"]

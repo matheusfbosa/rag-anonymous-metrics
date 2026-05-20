@@ -1,15 +1,14 @@
 import json
 import logging
-import os
 from pathlib import Path
 
 from rag_anonymous import load_corpus
 
+from rag_anonymous_metrics.config import PROJECT_ROOT, Settings
+
 __all__ = ["load_corpus", "load_questions"]
 
 logger = logging.getLogger(__name__)
-
-_PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 def load_questions(path: Path | None = None, split: str | None = None) -> list[dict]:
@@ -18,7 +17,7 @@ def load_questions(path: Path | None = None, split: str | None = None) -> list[d
     elif path is not None:
         target = path
     else:
-        default_split = os.getenv("RAG_METRICS_CORPUS_SPLIT", "dev")
+        default_split = Settings.load().corpus_split
         target = _questions_path_for_split(default_split)
 
     if not target.exists():
@@ -32,4 +31,4 @@ def load_questions(path: Path | None = None, split: str | None = None) -> list[d
 
 
 def _questions_path_for_split(split: str) -> Path:
-    return _PROJECT_ROOT / "data" / "input" / f"benchmark_questions_{split}.json"
+    return PROJECT_ROOT / "data" / "input" / f"benchmark_questions_{split}.json"

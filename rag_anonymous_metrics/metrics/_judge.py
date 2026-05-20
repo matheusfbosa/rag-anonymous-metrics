@@ -7,7 +7,6 @@ boilerplate into a single call.
 """
 
 import logging
-import os
 import re
 from typing import Any
 
@@ -15,6 +14,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
 from rag_anonymous import build_llm
+
+from rag_anonymous_metrics.config import Settings
 
 logger = logging.getLogger(__name__)
 
@@ -64,6 +65,4 @@ def parse_verdicts(text: str, expected_count: int) -> list[bool]:
 
 
 def _default_judge_model() -> str:
-    return os.getenv("RAG_METRICS_JUDGE_MODEL") or os.getenv(
-        "RAG_ANON_LLM_MODEL", "qwen3:0.6b"
-    )
+    return Settings.load().judge_model
