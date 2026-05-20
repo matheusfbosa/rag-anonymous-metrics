@@ -69,7 +69,7 @@ def cmd_evaluate() -> None:
         logger.info("           -> %s", result.output_path)
 
     logger.info("")
-    logger.info("Exporting CSV summary...")
+    logger.info("Exporting metrics...")
     csv_path = export_csv()
     logger.info("Done. CSV at %s", csv_path)
 

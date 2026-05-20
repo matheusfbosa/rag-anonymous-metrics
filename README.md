@@ -14,7 +14,7 @@ For each question × strategy the evaluator:
 1. Runs the full RAG pipeline (retrieval + generation + optional post-generation anonymization).
 2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
 3. Computes **utility metrics** (faithfulness, context precision) via a separate judge LLM once all answers are collected — refusals are skipped and recorded as `null`.
-4. Persists per-query results to JSONL and aggregates to a CSV summary.
+4. Persists per-query results to JSONL and aggregates to `metrics.csv`.
 
 ```mermaid
 flowchart TD
@@ -44,7 +44,7 @@ flowchart TD
     null_scores --> jsonl
     faithfulness --> jsonl
     ctx_precision --> jsonl
-    jsonl --> csv["metrics_summary.csv\n(mean / std per strategy)"]
+    jsonl --> csv["metrics.csv\n(mean / std per strategy)"]
 ```
 
 
@@ -211,8 +211,8 @@ make export
 ## Output
 
 - **JSONL** (per run): `data/output/results_<model>_<strategy>_<timestamp>.jsonl` — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
-- **CSV** (aggregated): `data/output/metrics_summary.csv` — means/std per strategy; `answer_is_refusal_mean` is the refusal rate (older JSONL without this field defaults to 0 in export).
-- **Archiving experiments:** `make export` loads every `results_*.jsonl` in `data/output/` (not subfolders). Before a new run with different models, move the previous `results_*.jsonl`, `metrics_summary.csv`, and optional `analysis.md` into e.g. `data/output/archive/experiment_<date>_<slug>/` so the next export reflects only the new JSONL files.
+- **CSV** (aggregated): `data/output/metrics.csv` — means/std per strategy; `answer_is_refusal_mean` is the refusal rate (older JSONL without this field defaults to 0 in export). New exports use this filename; older runs may still have `metrics_summary.csv` in archived folders until you rerun `export`.
+- **Archiving experiments:** `make export` loads every `results_*.jsonl` in `data/output/` (not subfolders). Before a new run with different models, move the previous `results_*.jsonl`, `metrics.csv` or legacy `metrics_summary.csv`, and optional `analysis.md` into e.g. `data/output/archive/experiment_<date>_<slug>/` so the next export reflects only the new JSONL files.
 
 ## Configuration
 

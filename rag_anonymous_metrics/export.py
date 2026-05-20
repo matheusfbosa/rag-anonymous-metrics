@@ -20,7 +20,7 @@ METRIC_COLUMNS = (
 def export_csv(results_dir: Path | None = None, output_path: Path | None = None) -> Path:
     cfg = Settings.load()
     results_dir = cfg.results_dir if results_dir is None else Path(results_dir)
-    output_path = results_dir / "metrics_summary.csv" if output_path is None else Path(output_path)
+    output_path = results_dir / "metrics.csv" if output_path is None else Path(output_path)
 
     records = _load_all_jsonl(results_dir)
     df = pd.DataFrame(records)
@@ -37,7 +37,7 @@ def export_csv(results_dir: Path | None = None, output_path: Path | None = None)
     summary = summary.reset_index()
 
     summary.to_csv(output_path, index=False)
-    logger.info("Exported metrics summary to %s", output_path)
+    logger.info("Exported metrics: output_path=%s", output_path)
     logger.info("\n%s", _format_summary(summary))
     return output_path
 
