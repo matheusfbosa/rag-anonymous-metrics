@@ -17,9 +17,13 @@ dependencies = [
 rag-metrics = "rag_anonymous_metrics.cli:main"
 
 [project.optional-dependencies]
-dev = [
+test = [
     "pytest>=8",
-    "ruff>=0.6",
+]
+notebook = [
+    "ipykernel>=6.29",
+    "jupyter>=1.0,<2",
+    "statsmodels>=0.14,<1",
 ]
 
 [tool.setuptools.packages.find]

@@ -38,6 +38,9 @@ class Settings:
         )
 
 
+__all__ = ["PROJECT_ROOT", "Settings"]
+
+
 def _parse_max_questions(raw: str | None) -> int | None:
     if raw is None or not raw.strip():
         return None
@@ -51,7 +54,3 @@ def _parse_max_questions(raw: str | None) -> int | None:
     if n <= 0:
         raise ValueError(f"RAG_METRICS_MAX_QUESTIONS must be positive, got {n}")
     return n
-
-
-
-__all__ = ["PROJECT_ROOT", "Settings"]

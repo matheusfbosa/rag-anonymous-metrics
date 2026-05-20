@@ -6,9 +6,9 @@ from rag_anonymous import load_corpus
 
 from rag_anonymous_metrics.config import PROJECT_ROOT, Settings
 
-__all__ = ["load_corpus", "load_questions"]
-
 logger = logging.getLogger(__name__)
+
+__all__ = ["load_corpus", "load_questions"]
 
 
 def load_questions(path: Path | None = None, split: str | None = None) -> list[dict]:

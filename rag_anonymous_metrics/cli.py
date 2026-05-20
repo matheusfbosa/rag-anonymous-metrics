@@ -7,15 +7,14 @@ from rag_anonymous import configure_logging
 
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
-from rag_anonymous_metrics.evaluator import STRATEGIES, run_evaluation
-from rag_anonymous_metrics.export import export_csv
+from rag_anonymous_metrics.run import STRATEGIES, run_experiment
 
 logger = logging.getLogger(__name__)
 
-USAGE = "Usage: rag-metrics {evaluate|export}  (configure via env / .env)"
+USAGE = "Usage: rag-metrics run"
 
 
-def cmd_evaluate() -> None:
+def cmd_run_experiment() -> None:
     try:
         cfg = Settings.load()
     except ValueError as exc:
@@ -41,7 +40,7 @@ def cmd_evaluate() -> None:
 
     logger.info("Generator LLM: %s | Judge LLM: %s", llm_model, judge_model)
 
-    results = run_evaluation(
+    results, experiment_dir = run_experiment(
         strategies=strategies,
         questions=questions,
         corpus_split=corpus_split,
@@ -69,24 +68,13 @@ def cmd_evaluate() -> None:
         logger.info("           -> %s", result.output_path)
 
     logger.info("")
-    logger.info("Exporting metrics...")
-    csv_path = export_csv()
-    logger.info("Done. CSV at %s", csv_path)
-
-
-def cmd_export() -> None:
-    csv_path = export_csv()
-    logger.info("Exported CSV to %s", csv_path)
-
-
-def _safe_mean(values: Iterable[float | None]) -> float:
-    nums = [v for v in values if v is not None]
-    return statistics.fmean(nums) if nums else 0.0
+    logger.info("Done. Run directory: %s", experiment_dir)
+    logger.info("Aggregate metrics and tests: use notebooks/ (e.g. privacy_utility.ipynb).")
 
 
 COMMANDS = {
-    "evaluate": cmd_evaluate,
-    "export": cmd_export,
+    "run": cmd_run_experiment,
+    "evaluate": cmd_run_experiment,
 }
 
 
@@ -97,6 +85,11 @@ def main() -> None:
         raise SystemExit(USAGE)
 
     COMMANDS[sys.argv[1]]()
+
+
+def _safe_mean(values: Iterable[float | None]) -> float:
+    nums = [v for v in values if v is not None]
+    return statistics.fmean(nums) if nums else 0.0
 
 
 if __name__ == "__main__":

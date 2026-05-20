@@ -14,7 +14,7 @@ For each question × strategy the evaluator:
 1. Runs the full RAG pipeline (retrieval + generation + optional post-generation anonymization).
 2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
 3. Computes **utility metrics** (faithfulness, context precision) via a separate judge LLM once all answers are collected — refusals are skipped and recorded as `null`.
-4. Persists per-query results to JSONL and aggregates to `metrics.csv`.
+4. Persists per-query results to JSONL.
 
 ```mermaid
 flowchart TD
@@ -44,7 +44,6 @@ flowchart TD
     null_scores --> jsonl
     faithfulness --> jsonl
     ctx_precision --> jsonl
-    jsonl --> csv["metrics.csv\n(mean / std per strategy)"]
 ```
 
 
@@ -57,24 +56,21 @@ rag-anonymous-metrics/
 ├── rag_anonymous_metrics/
 │   ├── __init__.py
 │   ├── config.py           # Load env vars
-│   ├── cli.py              # rag-metrics evaluate|export
+│   ├── cli.py              # rag-metrics run
 │   ├── corpus.py           # Load benchmark questions
-│   ├── pipeline.py         # Pipeline dataclass: chain + vectordb + anonymizer
 │   ├── records.py          # QueryRecord dataclass (JSONL schema)
-│   ├── evaluator.py        # Per-question loop, JSONL persistence
-│   ├── export.py           # JSONL to metrics via Pandas
+│   ├── run.py              # Pipeline per-question loop
 │   └── metrics/
 │       ├── _judge.py       # Shared judge chain + Yes/No verdict parsing
-│       ├── faithfulness.py # Claim-level Ragas faithfulness
-│       ├── context_precision.py # Ragas Context Precision@K
-│       ├── pii_leakage.py  # Retrieval-conditioned PII leakage rate
-│       └── refusal.py      # Heuristic refusal / non-answer detection
+│       ├── privacy.py      # PII leakage index/rate + refusal heuristics
+│       └── utility.py      # Ragas-style faithfulness + Context Precision@K
 ├── data/
 │   ├── input/
 │   │   ├── benchmark_questions_dev.json
 │   │   ├── benchmark_questions_train.json
 │   │   └── benchmark_questions_test.json
-│   └── output/             # JSONL results and metrics
+│   └── output/             # Results and metrics
+├── notebooks/              # Jupyter Notebooks for analysis
 ├── Makefile
 └── .env.example
 ```
@@ -121,7 +117,7 @@ where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in 0,1$ is t
 
 ### Answer refusal rate
 
-Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics (`rag_anonymous_metrics/metrics/refusal.py`): empty outputs, safety-style refusal phrases, and a small set of short non-answers. This is a **proxy** for model abstention, not a calibrated probability.
+Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics (`rag_anonymous_metrics/metrics/privacy.py`): empty outputs, safety-style refusal phrases, and a small set of short non-answers. This is a **proxy** for model abstention, not a calibrated probability.
 
 Over $N$ benchmark items, the **refusal rate** is
 
@@ -129,7 +125,7 @@ $$
 \rho = \frac{1}{N}\sum_{j=1}^{N} R_{\mathrm{ref}}^{(j)}.  
 $$
 
-**Censoring of utility.** When $R_{\mathrm{ref}}=1$, faithfulness and context precision are **omitted** (recorded as `null`) so the judge is not applied to non-answers. Per-run means in `rag_anonymous_metrics/cli.py` average only **defined** judge scores; CSV aggregation reports `mean`, `std`, and **non-null counts** per metric column.
+**Censoring of utility.** When $R_{\mathrm{ref}}=1$, faithfulness and context precision are **omitted** (recorded as `null`) so the judge is not applied to non-answers.
 
 ### PII leakage rate
 
@@ -178,7 +174,9 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 
 pip install -e ../rag-anonymous
-pip install -e ".[dev]"
+
+# Optional dependencies
+pip install -e ".[test,notebook]"
 
 cp .env.example .env
 ```
@@ -188,51 +186,41 @@ cp .env.example .env
 ### Run full evaluation (both strategies)
 
 ```sh
-make evaluate
+make run
 ```
 
-### Evaluate a single strategy or corpus split
+### Run a single strategy or corpus split
 
 ```sh
-RAG_METRICS_EVAL_STRATEGY=offline make evaluate
-RAG_METRICS_EVAL_STRATEGY=ondemand make evaluate
-RAG_METRICS_CORPUS_SPLIT=train make evaluate
-RAG_METRICS_CORPUS_SPLIT=test make evaluate
+RAG_METRICS_EVAL_STRATEGY=offline make run
+RAG_METRICS_EVAL_STRATEGY=ondemand make run
+RAG_METRICS_CORPUS_SPLIT=train make run
+RAG_METRICS_CORPUS_SPLIT=test make run
 ```
 
 `RAG_METRICS_CORPUS_SPLIT` selects both the TAB JSON used for the PII index and the matching `data/input/benchmark_questions_<split>.json` file.
 
-### Re-export CSV from existing JSONL results
-
-```sh
-make export
-```
-
 ## Output
 
-- **JSONL** (per run): `data/output/results_<model>_<strategy>_<timestamp>.jsonl` — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
-- **CSV** (aggregated): `data/output/metrics.csv` — means/std per strategy; `answer_is_refusal_mean` is the refusal rate (older JSONL without this field defaults to 0 in export). New exports use this filename; older runs may still have `metrics_summary.csv` in archived folders until you rerun `export`.
-- **Archiving experiments:** `make export` loads every `results_*.jsonl` in `data/output/` (not subfolders). Before a new run with different models, move the previous `results_*.jsonl`, `metrics.csv` or legacy `metrics_summary.csv`, and optional `analysis.md` into e.g. `data/output/archive/experiment_<date>_<slug>/` so the next export reflects only the new JSONL files.
+- **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
+  - `results_offline.jsonl` and/or `results_ondemand.jsonl` (depending on `RAG_METRICS_EVAL_STRATEGY`) — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
 
 ## Configuration
 
-
 | Variable                        | Default                                                    | Description                                                                                                                                                                    |
 | ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                            |
-| `RAG_ANON_LLM_MODEL`            | `qwen3:0.6b`                                               | Generator LLM                                                                                                                                                                  |
-| `RAG_ANON_LLM_TEMPERATURE`      | `0.0`                                                      | Generation temperature                                                                                                                                                         |
-| `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`. |
-| `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                               |
 | `RAG_ANON_CHROMADB_PERSIST_DIR` | `../rag-anonymous/chromadb`                                | Shared ChromaDB path                                                                                                                                                           |
+| `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                               |
+| `RAG_ANON_LLM_MODEL`            | `qwen3:0.6b`                                               | Generator LLM                                                                                                                                                                  |
+| `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`. |
+| `RAG_ANON_LLM_TEMPERATURE`      | `0.0`                                                      | Generation temperature                                                                                                                                                         |
 | `RAG_ANON_LOG_LEVEL`            | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                          |
 | `RAG_ANON_LOG_LEVEL_HTTP`       | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                 |
 | `RAG_ANON_LOG_LEVEL_PRESIDIO`   | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                           |
-| `RAG_METRICS_JUDGE_MODEL`       | `gemma4:e2b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                            |
-| `RAG_METRICS_RETRIEVAL_K_DOCS`  | `5`                                                        | Retrieved chunks per query                                                                                                                                                     |
-| `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                |
+| `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                            |
 | `RAG_METRICS_CORPUS_SPLIT`      | `dev`                                                      | TAB split (train/dev/test)                                                                                                                                                     |
+| `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                |
+| `RAG_METRICS_JUDGE_MODEL`       | `gemma4:e2b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                            |
 | `RAG_METRICS_MAX_QUESTIONS`     | *(unset)*                                                  | If set, evaluate only the first N benchmark questions                                                                                                                          |
-| `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | JSONL + CSV destination                                                                                                                                                        |
-
-
+| `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                     |
+| `RAG_METRICS_RETRIEVAL_K_DOCS`  | `5`                                                        | Retrieved chunks per query                                                                                                                                                     |
