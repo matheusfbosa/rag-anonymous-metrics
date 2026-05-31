@@ -95,7 +95,7 @@ $$
 \text{Faithfulness} = \frac{\text{Number of claims in the response supported by the retrieved context}}{\text{Total number of claims in the response}}.
 $$
 
-**How it’s calculated.** The **response** is `final_answer` (after any strategy-specific anonymisation). **Retrieved context** is the list of chunk texts returned by the retriever. The evaluator performs steps (1)–(2) via prompted decomposition and yes/no verification (`CLAIMS_EXTRACTION_PROMPT`, `CLAIMS_VERIFICATION_PROMPT`). If no claims are extracted or verdicts cannot be parsed, the score is **undefined** and stored as `null`; otherwise the score is in $[0,1]$.
+**How it’s calculated:** The **response** is `final_answer` (after any strategy-specific anonymisation). **Retrieved context** is the list of chunk texts returned by the retriever. The evaluator performs steps (1)–(2) via prompted decomposition and yes/no verification (`CLAIMS_EXTRACTION_PROMPT`, `CLAIMS_VERIFICATION_PROMPT`). If no claims are extracted or verdicts cannot be parsed, the score is **undefined** and stored as `null`; otherwise the score is in $[0,1]$.
 
 ### Context precision
 
@@ -113,11 +113,11 @@ $$
 
 where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in 0,1$ is the relevance indicator at rank $k$. With one binary label per rank, the denominator at cut $k$ is $k$, and $\text{true positives@}k$ is the count of relevant chunks among positions $1..k$, so $\text{Precision@}k$ matches the cumulative precision used here.
 
-**How it’s calculated.** Relevance $v_k$ is judged by the **evaluator LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*). That matches the Ragas idea of judging chunks against the **generated response** when no gold reference is used—see **Context Utilization** / **LLMContextPrecisionWithoutReference** on the same [Context Precision](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/) page—rather than **Context Precision** with a separate `reference` string. Only the **first 300 characters** of each chunk are shown to the judge. If $\sum_k v_k = 0$, the score is **0**; if no verdicts are parseable, the score is `null`; partial parses are padded with $v_k = 0$ for missing positions.
+**How it’s calculated:** Relevance $v_k$ is judged by the **evaluator LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*). That matches the Ragas idea of judging chunks against the **generated response** when no gold reference is used—see **Context Utilization** / **LLMContextPrecisionWithoutReference** on the same [Context Precision](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/) page—rather than **Context Precision** with a separate `reference` string. Only the **first 300 characters** of each chunk are shown to the judge. If $\sum_k v_k = 0$, the score is **0**; if no verdicts are parseable, the score is `null`; partial parses are padded with $v_k = 0$ for missing positions.
 
 ### Answer refusal rate
 
-Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics (`rag_anonymous_metrics/metrics/privacy.py`): empty outputs, safety-style refusal phrases, and a small set of short non-answers. This is a **proxy** for model abstention, not a calibrated probability.
+Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics.
 
 Over $N$ benchmark items, the **refusal rate** is
 
@@ -125,7 +125,7 @@ $$
 \rho = \frac{1}{N}\sum_{j=1}^{N} R_{\mathrm{ref}}^{(j)}.  
 $$
 
-**Censoring of utility.** When $R_{\mathrm{ref}}=1$, faithfulness and context precision are **omitted** (recorded as `null`) so the judge is not applied to non-answers.
+**Censoring of utility:** When $R_{\mathrm{ref}}=1$, faithfulness and context precision are **omitted** (recorded as `null`) so the judge is not applied to non-answers.
 
 ### PII leakage rate
 
@@ -141,7 +141,7 @@ $$
 \mathcal{L} =  p \in \mathcal{P} \mid p \text{ occurs in } a_{\mathrm{low}} .
 $$
 
-**Per-query quantities.** `total_pii` $= |\mathcal{P}|$, `leaked_pii` $= |\mathcal{L}|$, and
+**Per-query quantities:** `total_pii` $= |\mathcal{P}|$, `leaked_pii` $= |\mathcal{L}|$, and
 
 $$
 L = \begin{cases}
