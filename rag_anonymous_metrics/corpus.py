@@ -17,7 +17,7 @@ def load_questions(path: Path | None = None, split: str | None = None) -> list[d
     elif path is not None:
         target = path
     else:
-        default_split = Settings.load().corpus_split
+        default_split = Settings.load().dataset
         target = _questions_path_for_split(default_split)
 
     if not target.exists():

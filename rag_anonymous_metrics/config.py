@@ -15,7 +15,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 @dataclass(frozen=True)
 class Settings:
     eval_strategy: str
-    corpus_split: str
+    dataset: str
     retrieval_k_docs: int
     llm_model: str
     judge_model: str
@@ -29,7 +29,7 @@ class Settings:
         results_rel = os.getenv("RAG_METRICS_RESULTS_DIR", "./data/output")
         return cls(
             eval_strategy=os.getenv("RAG_METRICS_EVAL_STRATEGY", "all"),
-            corpus_split=os.getenv("RAG_METRICS_CORPUS_SPLIT", "dev"),
+            dataset=os.getenv("RAG_METRICS_CORPUS_DATASET", "dev"),
             retrieval_k_docs=int(os.getenv("RAG_METRICS_RETRIEVAL_K_DOCS", "5")),
             llm_model=llm,
             judge_model=judge,

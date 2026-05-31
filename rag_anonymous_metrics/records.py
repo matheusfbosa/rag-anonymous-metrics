@@ -14,6 +14,7 @@ class QueryRecord:
     answer_is_refusal: bool
     contexts: list[str]
     doc_ids: list[str]
+    dataset: str
     total_pii: int
     leaked_pii: int
     leakage_rate: float

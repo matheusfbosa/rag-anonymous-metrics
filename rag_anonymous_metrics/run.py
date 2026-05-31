@@ -52,10 +52,9 @@ def evaluate_question(
     pii_index: dict,
     judge_model: str,
     run_id: str,
-    k_docs: int | None = None,
+    dataset: str,
+    k_docs: int,
 ) -> QueryRecord:
-    if k_docs is None:
-        k_docs = Settings.load().retrieval_k_docs
     question = question_obj["question"]
     result = query_rag(pipeline.chain, pipeline.vectordb, question, k_docs=k_docs)
 
@@ -82,6 +81,7 @@ def evaluate_question(
         answer_is_refusal=refusal,
         contexts=contexts,
         doc_ids=doc_ids,
+        dataset=dataset,
         total_pii=privacy["total_pii"],
         leaked_pii=privacy["leaked_pii"],
         leakage_rate=privacy["leakage_rate"],
@@ -93,7 +93,8 @@ def evaluate_strategy(
     questions: list[dict],
     pii_index: dict,
     experiment_dir: Path,
-    k_docs: int | None = None,
+    dataset: str,
+    k_docs: int,
     llm_model: str | None = None,
     judge_model: str | None = None,
 ) -> StrategyResult:
@@ -102,8 +103,6 @@ def evaluate_strategy(
     cfg = Settings.load()
     gen_model = llm_model or cfg.llm_model
     judge_m = judge_model or cfg.judge_model
-    if k_docs is None:
-        k_docs = cfg.retrieval_k_docs
 
     pipeline = build_pipeline(strategy, gen_model)
     run_id = str(uuid.uuid4())[:8]
@@ -116,7 +115,7 @@ def evaluate_strategy(
             width, idx, len(questions), q.get("id", "-"), q["question"],
         )
         records.append(
-            evaluate_question(pipeline, q, pii_index, judge_m, run_id, k_docs=k_docs)
+            evaluate_question(pipeline, q, pii_index, judge_m, run_id, dataset=dataset, k_docs=k_docs)
         )
 
     _attach_utility(records, judge_m)
@@ -136,8 +135,8 @@ def response_text(raw):
 def run_experiment(
     strategies: list[str],
     questions: list[dict],
-    corpus_split: str,
-    k_docs: int | None = None,
+    dataset: str,
+    k_docs: int,
     llm_model: str | None = None,
     judge_model: str | None = None,
 ) -> tuple[dict[str, StrategyResult], Path]:
@@ -149,8 +148,8 @@ def run_experiment(
     experiment_dir.mkdir(parents=True, exist_ok=True)
     logger.info("Experiment output directory: %s", experiment_dir)
 
-    logger.info("Loading TAB corpus (split=%s) for PII annotations...", corpus_split)
-    corpus = load_corpus(corpus_split)
+    logger.info("Loading TAB corpus (split=%s) for PII annotations...", dataset)
+    corpus = load_corpus(dataset)
     pii_index = build_pii_index(corpus)
     logger.info("PII index built: %d documents with sensitive spans", len(pii_index))
 
@@ -160,6 +159,7 @@ def run_experiment(
             questions,
             pii_index,
             experiment_dir,
+            dataset=dataset,
             k_docs=k_docs,
             llm_model=llm_model,
             judge_model=judge_model,

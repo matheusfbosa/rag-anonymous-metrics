@@ -21,13 +21,13 @@ def cmd_run_experiment() -> None:
         raise SystemExit(str(exc)) from exc
 
     strategy_env = cfg.eval_strategy
-    corpus_split = cfg.corpus_split
+    dataset = cfg.dataset
     k_docs = cfg.retrieval_k_docs
     llm_model = cfg.llm_model
     judge_model = cfg.judge_model
 
     strategies = STRATEGIES if strategy_env == "all" else [strategy_env]
-    questions = load_questions(split=corpus_split)
+    questions = load_questions(split=dataset)
 
     max_questions_limit = cfg.max_questions
     if max_questions_limit is not None and max_questions_limit < len(questions):
@@ -43,7 +43,7 @@ def cmd_run_experiment() -> None:
     results, experiment_dir = run_experiment(
         strategies=strategies,
         questions=questions,
-        corpus_split=corpus_split,
+        dataset=dataset,
         k_docs=k_docs,
         llm_model=llm_model,
         judge_model=judge_model,

@@ -194,11 +194,11 @@ make run
 ```sh
 RAG_METRICS_EVAL_STRATEGY=offline make run
 RAG_METRICS_EVAL_STRATEGY=ondemand make run
-RAG_METRICS_CORPUS_SPLIT=train make run
-RAG_METRICS_CORPUS_SPLIT=test make run
+RAG_METRICS_CORPUS_DATASET=train make run
+RAG_METRICS_CORPUS_DATASET=test make run
 ```
 
-`RAG_METRICS_CORPUS_SPLIT` selects both the TAB JSON used for the PII index and the matching `data/input/benchmark_questions_<split>.json` file.
+`RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching `data/input/benchmark_questions_<split>.json` file.
 
 ## Output
 
@@ -218,7 +218,7 @@ RAG_METRICS_CORPUS_SPLIT=test make run
 | `RAG_ANON_LOG_LEVEL_HTTP`       | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                 |
 | `RAG_ANON_LOG_LEVEL_PRESIDIO`   | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                           |
 | `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                            |
-| `RAG_METRICS_CORPUS_SPLIT`      | `dev`                                                      | TAB split (train/dev/test)                                                                                                                                                     |
+| `RAG_METRICS_CORPUS_DATASET`      | `dev`                                                      | TAB split (train/dev/test)                                                                                                                                                     |
 | `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                |
 | `RAG_METRICS_JUDGE_MODEL`       | `gemma4:e2b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                            |
 | `RAG_METRICS_MAX_QUESTIONS`     | *(unset)*                                                  | If set, evaluate only the first N benchmark questions                                                                                                                          |
