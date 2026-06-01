@@ -64,7 +64,7 @@ def evaluate_question(
     )
 
     contexts = [c["content"] for c in result["retrieved_chunks"]]
-    doc_ids = list({c["doc_id"] for c in result["retrieved_chunks"]})
+    doc_ids = [c["doc_id"] for c in result["retrieved_chunks"]]
 
     privacy = compute_pii_leakage(final_answer, doc_ids, pii_index)
     refusal = is_refusal_answer(final_answer)
