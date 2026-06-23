@@ -68,8 +68,7 @@ def cmd_run_experiment() -> None:
         logger.info("           -> %s", result.output_path)
 
     logger.info("")
-    logger.info("Done. Run directory: %s", experiment_dir)
-    logger.info("Aggregate metrics and tests: use notebooks/ (e.g. privacy_utility.ipynb).")
+    logger.info("Done. Experiment directory: %s", experiment_dir)
 
 
 COMMANDS = {

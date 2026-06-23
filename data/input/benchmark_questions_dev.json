@@ -1,182 +1,212 @@
 [
   {
     "id": "q01",
-    "source_doc_id": "001-83617",
-    "question": "In ECHR case 001-83617 (application no. 4212/02 against Turkey), what is the name of the applicant?",
-    "ground_truth": "The applicant is Ms Sabriye Akıncıbaşı, a Turkish national."
+    "level": "easy",
+    "source_doc_id": "001-83927",
+    "question": "In ECHR case 001-83927 (application no. 40593/04 against Turkey), which illegal armed organisation was the applicant suspected of being involved with?",
+    "ground_truth": "The TKP/ML-TIKKO (the Turkish Communist Party/Marxist Leninist - Turkish Workers and Peasants' Liberation Army)."
   },
   {
     "id": "q02",
-    "source_doc_id": "001-79012",
-    "question": "In ECHR case 001-79012 (application no. 56745/00 against the United Kingdom), in what year was the applicant born?",
-    "ground_truth": "The applicant in case 001-79012 was born in 1967."
+    "level": "easy",
+    "source_doc_id": "001-61815",
+    "question": "In ECHR case 001-61815 (application no. 35574/97 against the United Kingdom), which body rejected the applicant's petition against his conviction?",
+    "ground_truth": "The Admiralty Board."
   },
   {
     "id": "q03",
-    "source_doc_id": "001-111540",
-    "question": "In ECHR case 001-111540 (application no. 36124/06 against Sweden), who represented the applicant before the Court, and in which city does that lawyer practise?",
-    "ground_truth": "The applicant was represented by Mr P. Cronhult, a lawyer practising in Stockholm."
+    "level": "easy",
+    "source_doc_id": "001-81368",
+    "question": "In ECHR case 001-81368 (application no. 13146/02 against Poland), to which government ministry did the Agent representing the Polish Government belong?",
+    "ground_truth": "The Ministry of Foreign Affairs."
   },
   {
     "id": "q04",
-    "source_doc_id": "001-169481",
-    "question": "On what date was the application in ECHR case 001-169481 (no. 8693/11 against Denmark) lodged with the Court?",
-    "ground_truth": "The application was lodged with the Court on 22 October 2010."
+    "level": "easy",
+    "source_doc_id": "001-101444",
+    "question": "In ECHR case 001-101444 (application no. 1520/06 against Turkey), which ministry did the applicant ask to reimburse him for his unpaid salaries?",
+    "ground_truth": "The Ministry of Education."
   },
   {
     "id": "q05",
-    "source_doc_id": "001-159211",
-    "question": "In ECHR case 001-159211 (application no. 1176/10 against Norway), under which Article of the Convention did the applicant allege that he had not been afforded a fair hearing by an impartial tribunal?",
-    "ground_truth": "The applicant alleged a violation of Article 6 § 1 of the Convention, claiming he had not been afforded a fair hearing by an impartial tribunal."
+    "level": "easy",
+    "source_doc_id": "001-58913",
+    "question": "In ECHR case 001-58913 (application no. 27267/95 against the United Kingdom), which authority granted the applicant legal aid?",
+    "ground_truth": "The Ministry of Defence."
   },
   {
     "id": "q06",
-    "source_doc_id": "001-85722",
-    "question": "In ECHR case 001-85722 (application no. 40387/06 against Poland), what is the name of the applicant?",
-    "ground_truth": "The applicant is Mr Janusz Krawczak, a Polish national."
+    "level": "easy",
+    "source_doc_id": "001-90710",
+    "question": "In ECHR case 001-90710 (application no. 23815/04 against Turkey), which ministry did the applicant request to quash the Assize Court's judgment by a written order?",
+    "ground_truth": "The Ministry of Justice."
   },
   {
     "id": "q07",
-    "source_doc_id": "001-87407",
-    "question": "In ECHR case 001-87407 (application no. 63480/00 against the United Kingdom), in what year was the applicant born?",
-    "ground_truth": "The applicant in case 001-87407 was born in 1948."
+    "level": "easy",
+    "source_doc_id": "001-114244",
+    "question": "In ECHR case 001-114244 (application no. 22341/09 against the United Kingdom), which court dismissed the first applicant's application for reconsideration?",
+    "ground_truth": "The Administrative Court."
   },
   {
     "id": "q08",
-    "source_doc_id": "001-89321",
-    "question": "In ECHR case 001-89321 (application no. 11320/05 against Sweden), who represented the applicant before the Court, and in which city does that lawyer practise?",
-    "ground_truth": "The applicant was represented by Mr P.-O. Nordh, a lawyer practising in Vallentuna."
+    "level": "easy",
+    "source_doc_id": "001-57508",
+    "question": "In ECHR case 001-57508 (application no. 9697/82 against Ireland), which institution referred the case to the Court?",
+    "ground_truth": "The European Commission of Human Rights."
   },
   {
     "id": "q09",
-    "source_doc_id": "001-89184",
-    "question": "On what date was the application in ECHR case 001-89184 (no. 21773/02 against Turkey) lodged with the Court?",
-    "ground_truth": "The application was lodged with the Court on 7 July 2000."
+    "level": "easy",
+    "source_doc_id": "001-109046",
+    "question": "In ECHR case 001-109046 (application no. 1813/07 against Sweden), which court's judgment did the applicants allege violated their freedom of expression?",
+    "ground_truth": "The Supreme Court."
   },
   {
     "id": "q10",
-    "source_doc_id": "001-93953",
-    "question": "In ECHR case 001-93953 (application no. 6093/04 against Poland), under which Article of the Convention did the applicant allege that his pre-trial detention had exceeded a 'reasonable time'?",
-    "ground_truth": "The applicant alleged that his pre-trial detention had exceeded a 'reasonable time' within the meaning of Article 5 § 3 of the Convention."
+    "level": "easy",
+    "source_doc_id": "001-148610",
+    "question": "In ECHR case 001-148610 (application no. 31706/10 against Turkey), which political party was dissolved by the Constitutional Court?",
+    "ground_truth": "The Party for a Democratic Society (Demokratik Toplum Partisi, DTP)."
   },
   {
     "id": "q11",
-    "source_doc_id": "001-101444",
-    "question": "In ECHR case 001-101444 (application no. 1520/06 against Turkey), what is the name of the applicant?",
-    "ground_truth": "The applicant is Mr Osman Erden, a Turkish national."
+    "level": "medium",
+    "source_doc_id": "001-79012",
+    "question": "In ECHR case 001-79012 (application no. 56745/00 against the United Kingdom), what did the applicant complain about in his prison adjudication proceedings?",
+    "ground_truth": "The role of the Governor in the proceedings and the lack of a public pronouncement of the decision."
   },
   {
     "id": "q12",
-    "source_doc_id": "001-90710",
-    "question": "In ECHR case 001-90710 (application no. 23815/04 against Turkey), what is the name of the applicant?",
-    "ground_truth": "The applicant is Mr Abdülkadir Uslu, a Turkish national."
+    "level": "medium",
+    "source_doc_id": "001-61228",
+    "question": "In ECHR case 001-61228 (application no. 63737/00 against the United Kingdom), what police conduct did the applicant object to?",
+    "ground_truth": "The police covertly videotaped him for identification purposes and used the material in the prosecution against him."
   },
   {
     "id": "q13",
-    "source_doc_id": "001-87462",
-    "question": "In ECHR case 001-87462 (application no. 10721/02 against the United Kingdom), what is the name of the applicant?",
-    "ground_truth": "The applicant is Mr Nigel Harrison, a British national."
+    "level": "medium",
+    "source_doc_id": "001-67470",
+    "question": "In ECHR case 001-67470 (application no. 14399/02 against the United Kingdom), what was the substance of the applicant's complaint?",
+    "ground_truth": "That the criminal proceedings brought against him had exceeded a reasonable time."
   },
   {
     "id": "q14",
-    "source_doc_id": "001-87515",
-    "question": "In ECHR case 001-87515 (application no. 63647/00 against the United Kingdom), what is the name of the applicant?",
-    "ground_truth": "The applicant is Mr Nicholas P. Jackson, a British national."
+    "level": "medium",
+    "source_doc_id": "001-61549",
+    "question": "In ECHR case 001-61549 (application no. 48843/99 against the United Kingdom), what did the applicant say was wrong with his trial?",
+    "ground_truth": "That he did not have a fair trial by an independent and impartial tribunal established by law."
   },
   {
     "id": "q15",
-    "source_doc_id": "001-78431",
-    "question": "In ECHR case 001-78431 (application no. 77361/01 against Turkey), in what year was the applicant born?",
-    "ground_truth": "The applicant in case 001-78431 was born in 1948."
+    "level": "medium",
+    "source_doc_id": "001-111540",
+    "question": "In ECHR case 001-111540 (application no. 36124/06 against Sweden), what right did the applicant allege he had been denied?",
+    "ground_truth": "That he had been deprived of effective access to court."
   },
   {
     "id": "q16",
-    "source_doc_id": "001-82485",
-    "question": "In ECHR case 001-82485 (application no. 75573/01 against Turkey), in what year was the applicant born?",
-    "ground_truth": "The applicant in case 001-82485 was born in 1972."
+    "level": "medium",
+    "source_doc_id": "001-85722",
+    "question": "In ECHR case 001-85722 (application no. 40387/06 against Poland), what did the applicant allege he had been deprived of in respect of his remedy?",
+    "ground_truth": "That he had been deprived of his right to have the remedy examined by an impartial court."
   },
   {
     "id": "q17",
-    "source_doc_id": "001-61376",
-    "question": "In ECHR case 001-61376 (application no. 67385/01 against the United Kingdom), in what year was the applicant born?",
-    "ground_truth": "The applicant in case 001-61376 was born in 1939."
+    "level": "medium",
+    "source_doc_id": "001-61816",
+    "question": "In ECHR case 001-61816 (application no. 36256/97 against the United Kingdom), what were the applicant's main complaints?",
+    "ground_truth": "His pre-trial detention and his summary trial before his Commanding Officer."
   },
   {
     "id": "q18",
-    "source_doc_id": "001-87426",
-    "question": "In ECHR case 001-87426 (application no. 63477/00 against the United Kingdom), in what year was the applicant born?",
-    "ground_truth": "The applicant in case 001-87426 was born in 1954."
+    "level": "medium",
+    "source_doc_id": "001-92615",
+    "question": "In ECHR case 001-92615 (application no. 2815/05 against Poland), what access did the applicant allege he had been denied?",
+    "ground_truth": "That he had been deprived of access to the Supreme Court."
   },
   {
     "id": "q19",
-    "source_doc_id": "001-84819",
-    "question": "In ECHR case 001-84819 (application no. 26803/02 against Turkey), who represented the applicant before the Court, and in which city does that lawyer practise?",
-    "ground_truth": "The applicant was represented by Mr A. Talipoğlu, a lawyer practising in Istanbul."
+    "level": "medium",
+    "source_doc_id": "001-83613",
+    "question": "In ECHR case 001-83613 (application no. 66446/01 against Turkey), a breach of which Convention provisions did the applicant allege?",
+    "ground_truth": "Articles 6 and 13 of the Convention and Article 1 of Protocol No. 1."
   },
   {
     "id": "q20",
-    "source_doc_id": "001-88377",
-    "question": "In ECHR case 001-88377 (application no. 1249/03 against Turkey), who represented the applicant before the Court, and in which city does that lawyer practise?",
-    "ground_truth": "The applicant was represented by Mr Şeref Turgut, a lawyer practising in Istanbul."
+    "level": "medium",
+    "source_doc_id": "001-58807",
+    "question": "In ECHR case 001-58807 (application no. 36273/97 against the United Kingdom), what complaint did the applicant, a recalled life prisoner, make?",
+    "ground_truth": "That he had been denied a fair hearing before the Parole Board, and that his detention had not been reviewed for over two years."
   },
   {
     "id": "q21",
-    "source_doc_id": "001-87405",
-    "question": "In ECHR case 001-87405 (application no. 61395/00 against the United Kingdom), who represented the applicant before the Court, and in which city does that lawyer practise?",
-    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
+    "level": "hard",
+    "source_doc_id": "001-67466",
+    "question": "In ECHR case 001-67466 (application no. 42317/98 against the United Kingdom), what procedural irregularity did the Divisional Court identify in the magistrate's binding over order, and on what legal doctrine and domestic authority did it base its finding?",
+    "ground_truth": "The Divisional Court found that the magistrate had failed to give the applicant or his legal representative any opportunity to make submissions about the terms of the binding over order before imposing it — in particular regarding the requirement to produce a surety of GBP 250 and the alternative of 28 days' imprisonment in default. The court based its finding on the rules of natural justice, holding that a defendant must not be put at risk of imprisonment without first being specifically invited to address the court on the proposed terms, especially when a surety is required. The court relied on established domestic case-law, including the headnote of R. v. Central Criminal Court ex parte Boulding [1984] 1 QB 813, which held that it was a breach of natural justice for a court to bind a person over without inquiring into his means and giving him an opportunity to make representations as to the size of the recognisance."
   },
   {
     "id": "q22",
-    "source_doc_id": "001-87483",
-    "question": "In ECHR case 001-87483 (application no. 63701/00 against the United Kingdom), who represented the applicant before the Court, and in which city does that lawyer practise?",
-    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
+    "level": "hard",
+    "source_doc_id": "001-57721",
+    "question": "In ECHR case 001-57721 (applications nos. 12244/86, 12245/86 and 12383/86 against the United Kingdom), which Convention articles did the Commission's request seek a decision on, under which domestic statutory provision were all three applicants arrested, and what information was given to each at the time of their arrest?",
+    "ground_truth": "The Commission's request sought a decision on whether the facts disclosed a breach of Articles 5 and 13 of the Convention. All three applicants were arrested under section 11(1) of the Northern Ireland (Emergency Provisions) Act 1978 on suspicion of being terrorists. The first two applicants (Fox and Campbell) were informed at the time of arrest that they were being arrested under this section because the arresting officer suspected them of being terrorists, and that they could be detained for up to 72 hours. The third applicant (Hartley) was similarly informed at the time of his arrest that he was being arrested under section 11(1) as he was suspected of being a terrorist."
   },
   {
     "id": "q23",
-    "source_doc_id": "001-97995",
-    "question": "On what date was the application in ECHR case 001-97995 (no. 33102/04 against Turkey) lodged with the Court?",
-    "ground_truth": "The application was lodged with the Court on 15 July 2004."
+    "level": "hard",
+    "source_doc_id": "001-91286",
+    "question": "In ECHR case 001-91286 (application no. 27319/07 against the United Kingdom), what was the applicant's principal legal argument before the Asylum and Immigration Tribunal regarding which version of the Immigration Rules applied to his deportation, and how did the AIT resolve this dispute?",
+    "ground_truth": "The applicant argued that the decision to deport him had been made on 6 July 2006, the date the 'Reasons for Deportation' letter was prepared, and therefore his case should be assessed under the pre-20 July 2006 version of paragraph 364 of the Immigration Rules, which required a balancing exercise between the public interest and compassionate circumstances. The post-20 July 2006 version of paragraph 364 established a presumption that the public interest required deportation, with only exceptional circumstances capable of outweighing it. The AIT resolved the dispute by finding that the relevant date was 1 October 2006 — when the decision was served and communicated to the applicant — since the decision remained incomplete until communicated. Accordingly, the stricter post-20 July 2006 version applied. The AIT further stated that, even if it was wrong and the earlier version applied, it would have reached the same conclusion."
   },
   {
     "id": "q24",
-    "source_doc_id": "001-90131",
-    "question": "On what date was the application in ECHR case 001-90131 (no. 18753/04 against Turkey) lodged with the Court?",
-    "ground_truth": "The application was lodged with the Court on 11 February 2004."
+    "level": "hard",
+    "source_doc_id": "001-58134",
+    "question": "In ECHR case 001-58134 (application no. 24839/94 against the United Kingdom), under which domestic provision was the applicant charged, why was she acquitted at trial, and how did this outcome differ from the results of her two earlier prosecutions for comparable conduct?",
+    "ground_truth": "The applicant was charged under subsections 75(1) and (5) of the Representation of the People Act 1983, which prohibits expenditure of more than GBP 5 by an unauthorised person during the period before an election on conveying information to electors with a view to promoting or procuring the election of a candidate. She was acquitted because the summons had not been issued within one year of the alleged prohibited expenditure, as required by the time-limit in section 176 of the 1983 Act. This differed from her two earlier prosecutions: in 1979 (in respect of a leaflet distributed before the Ilford North by-election) and in 1982 (in respect of a leaflet distributed during elections for the European Parliament), she had been convicted on both occasions and ordered to pay fines and prosecution costs."
   },
   {
     "id": "q25",
-    "source_doc_id": "001-67582",
-    "question": "On what date was the application in ECHR case 001-67582 (no. 47116/99 against Turkey) lodged with the Court?",
-    "ground_truth": "The application was lodged with the Court on 19 November 1998."
+    "level": "hard",
+    "source_doc_id": "001-58039",
+    "question": "In ECHR case 001-58039 (application no. 20605/92 against the United Kingdom), which Convention articles formed the basis of the Commission's request, what was the applicant's complaint about the interception of her telephone calls, and what legal obstacle prevented her from adducing evidence of those interceptions before the Industrial Tribunal?",
+    "ground_truth": "The Commission's request concerned a possible breach of Articles 8, 10, 13 and 14 of the Convention. The applicant alleged that calls from both her office telephones and her home telephone were intercepted by the Merseyside police to obtain information for use against her in discrimination proceedings. The legal obstacle was section 9 of the Interception of Communications Act 1985, which expressly excluded the calling of evidence before any court or tribunal that tended to suggest an offence under section 1 of that Act had been committed. When the applicant raised her concerns at the Industrial Tribunal hearing, counsel for the Home Secretary invoked section 9, effectively blocking her from adducing any evidence of the alleged interceptions."
   },
   {
     "id": "q26",
-    "source_doc_id": "001-91286",
-    "question": "On what date was the application in ECHR case 001-91286 (no. 27319/07 against the United Kingdom) lodged with the Court?",
-    "ground_truth": "The application was lodged with the Court on 29 June 2007."
+    "level": "hard",
+    "source_doc_id": "001-57804",
+    "question": "In ECHR case 001-57804 (application no. 13134/87 against the United Kingdom), which Convention articles did the Commission's request concern, what was the procedural status of the mother's complaints, and what domestic remedies did the mother pursue after the corporal punishment was administered?",
+    "ground_truth": "The Commission's request sought a decision on whether the facts disclosed a breach of Articles 3, 8 and 13. The mother's complaints were declared inadmissible by the Commission; only the son's complaints proceeded before the Court. After the corporal punishment was administered, the mother complained to the police, who told her no action could be taken without visible bruising on the child's buttocks. She also complained to the National Society for the Prevention of Cruelty to Children, which gave a similar response. She then wrote to the school Governors and the headmaster, the latter of whom responded by requiring the applicant to leave the school at the end of term."
   },
   {
     "id": "q27",
-    "source_doc_id": "001-87448",
-    "question": "In ECHR case 001-87448 (application no. 8917/05 against Turkey), under which Article of the Convention did the applicant complain that the refusal to lift his parliamentary immunity had deprived him of his right of access to a court?",
-    "ground_truth": "The applicant complained, in particular, that the refusal to lift his parliamentary immunity had hindered criminal proceedings against him, thereby depriving him of his right of access to a court under Article 6 § 1 of the Convention."
+    "level": "hard",
+    "source_doc_id": "001-81359",
+    "question": "In ECHR case 001-81359 (applications nos. 15809/02 and 25624/02 against the United Kingdom), the two applicants took different approaches to the section 172 demand under the Road Traffic Act 1988. What was each applicant's response, and what distinct criminal conviction resulted in each case?",
+    "ground_truth": "The first applicant (O'Halloran) answered the section 172 demand and confirmed he was the driver. That admission was then used in the prosecution's case at his trial for the speeding offence, and he was convicted of driving in excess of the speed limit and fined GBP 100, ordered to pay GBP 150 costs, and had his licence endorsed with six penalty points. The second applicant (Francis) invoked his right to remain silent and refused to supply the information, relying on the privilege against self-incrimination. He was not prosecuted for speeding but was convicted of the separate offence of failing to comply with section 172(3) of the Road Traffic Act 1988 and fined GBP 750 with GBP 250 costs — a penalty substantially heavier than would have been imposed for a guilty plea to speeding. Both applicants relied on Article 6 §§ 1 and 2 of the Convention."
   },
   {
     "id": "q28",
-    "source_doc_id": "001-84285",
-    "question": "In ECHR case 001-84285 (application no. 55434/00 against the United Kingdom), under which Article of the Convention did the applicant allege a breach in respect of his detention on remand pending his trial by court martial?",
-    "ground_truth": "The applicant alleged that his detention on remand pending his trial by court martial was in breach of Article 5 § 3 of the Convention."
+    "level": "hard",
+    "source_doc_id": "001-97149",
+    "question": "In ECHR case 001-97149 (application no. 19859/04 against the United Kingdom), through which levels of the Scottish court system did the applicant's civil proceedings pass, and what was the outcome at each level?",
+    "ground_truth": "The proceedings passed through five levels: (1) Sheriff Court — upheld the council's claim, rejected the applicant's counter-claim, and refused referral to the Court of Session; (2) Sheriff Principal — dismissed the applicant's appeal; (3) Outer House of the Court of Session — dismissed the applicant's action on 4 September 2002, finding his claims unfounded and unspecified; (4) Inner House (interlocutory appeal on a disclosure order) — allowed the first defenders' reclaiming motion and remitted the case back to the Outer House; (5) Inner House (final appeal against the Outer House dismissal) — unanimously dismissed the appeal on 11 December 2003, finding the applicant's pleadings lacked specification, and found the applicant liable for the first defenders' costs. The applicant also separately and unsuccessfully sought to bring proceedings against the council's solicitors, with complaints rejected by both professional bodies and the Scottish Legal Services Ombudsman."
   },
   {
     "id": "q29",
-    "source_doc_id": "001-108462",
-    "question": "In ECHR case 001-108462 (application no. 2917/05 against Turkey), under which Article of the Convention did the applicant allege a violation?",
-    "ground_truth": "The applicant alleged a violation under Article 6 of the Convention."
+    "level": "hard",
+    "source_doc_id": "001-60886",
+    "question": "In ECHR case 001-60886 (application no. 50034/99 against the United Kingdom), what was the legal basis for the applicant's discrimination claim in the domestic proceedings, what temporal limitation did the Employment Tribunal apply, and what was the outcome of the merits decision and the subsequent appeal chain?",
+    "ground_truth": "The applicant brought her claim under the Race Relations Act 1976, alleging discrimination on grounds of race (and disability) — including denial of promotion, failure to transfer her to another post, and failure to recognise her professional qualifications. The Employment Tribunal applied section 68(1) of the Race Relations Act 1976 (three-month time-limit), limiting the applicant to relying on events from September 1990 onward. The Tribunal found discrimination by the employer in a number of procedural aspects and awarded GBP 24,952.51 in damages. The Council appealed to the Employment Appeal Tribunal, which quashed the findings of discrimination. The applicant's appeal to the Court of Appeal was rejected. The House of Lords refused leave to appeal."
   },
   {
     "id": "q30",
-    "source_doc_id": "001-110322",
-    "question": "In ECHR case 001-110322 (application no. 60437/08 against Sweden), which Article of the Convention did the applicant invoke?",
-    "ground_truth": "The applicant invoked Article 6 of the Convention."
+    "level": "hard",
+    "source_doc_id": "001-84285",
+    "question": "In ECHR case 001-84285 (application no. 55434/00 against the United Kingdom), which Convention provision did the applicant allege was violated, and what formal mechanism did the military authorities use to periodically review and justify his pre-trial detention — and how did the stated reasons for detention evolve over time?",
+    "ground_truth": "The applicant alleged a violation of Article 5 § 3 of the Convention (right to be brought promptly before a judge and to be released pending trial within a reasonable time). The military used two types of review forms: (1) '8-day delay' reports — twelve were completed throughout the detention; the first cited only that it was 'undesirable that he should remain at large,' while all subsequent reports added that he was likely to suborn witnesses and that it was undesirable in the interests of discipline that he be at large given the nature and prevalence of the alleged offence; the final report also added a new charge of rape. (2) '16-day arrest' forms under Rule 22 of the Investigation and Summary Dealing (Army) Regulations 1997 — six were completed, recording that the applicant was informed of his right to make representations about his detention status but noting no representations were made. The applicant was released only after his solicitor applied to the High Court for a writ of habeas corpus."
   }
 ]

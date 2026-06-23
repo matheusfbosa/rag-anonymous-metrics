@@ -152,38 +152,53 @@ $$
 
 Thus $L \in [0,1]$ is **conditional recall of annotated PII** over retrieved documents: it does **not** flag hallucinated identifiers absent from $\mathcal{P}$.
 
-## Prerequisites
-
-1. Ollama running with the required models pulled.
-  ```sh
-   cd ../rag-anonymous
-   make docker-up                  # or run `ollama serve` natively
-   make docker-ollama-pull-models  # or `make ollama-pull-models` for the host CLI
-  ```
-2. Both strategies ingested for the split you will evaluate (`dev`, `train`, or `test`):
-  ```sh
-   cd ../rag-anonymous
-   RAG_ANON_ANONYMIZER_STRATEGY=offline RAG_ANON_CORPUS_SPLIT=dev make ingest
-   RAG_ANON_ANONYMIZER_STRATEGY=ondemand RAG_ANON_CORPUS_SPLIT=dev make ingest
-  ```
-
 ## Setup
+
+### 1. Ollama
+
+The pipeline talks to Ollama over its HTTP API at `RAG_ANON_OLLAMA_BASE_URL` (default `http://localhost:11434`). Two equivalent ways to bring it up — pick one:
+
+**Option A — Native CLI / desktop app** (install from [https://ollama.com](https://ollama.com)):
+
+```sh
+ollama serve                      # or just launch the Ollama desktop app
+make ollama-pull-models           # pull models via the host CLI
+```
+
+Both paths expose the same API on port `11434`, so the rest of the pipeline doesn't need to know which one is running. **Don't run both at once** — they'll race for the port and the second one will fail to bind.
+
+**Option B — Docker** (uses `[docker-compose.yml](./docker-compose.yml)`):
+
+```sh
+make docker-up                    # start the ollama container
+make docker-ollama-pull-models    # pull models inside the container
+make docker-down                  # stop the container when done
+```
+
+### 2. Python package
 
 ```sh
 python3.12 -m venv .venv
 source .venv/bin/activate
 
 pip install -e ../rag-anonymous
-
-# Optional dependencies
-pip install -e ".[test,notebook]"
+pip install -e .
 
 cp .env.example .env
 ```
 
 ## Usage
 
-### Run full evaluation (both strategies)
+### Prerequisites
+
+1. Offline and On-Demand strategies ingested for the split you will evaluate (`dev`, `train`, or `test`):
+  ```sh
+   cd ../rag-anonymous
+   RAG_ANON_ANONYMIZER_STRATEGY=offline RAG_ANON_CORPUS_SPLIT=dev make ingest
+   RAG_ANON_ANONYMIZER_STRATEGY=ondemand RAG_ANON_CORPUS_SPLIT=dev make ingest
+  ```
+
+### Run full evaluation (Offline and On-Demand strategies)
 
 ```sh
 make run
@@ -207,20 +222,23 @@ RAG_METRICS_CORPUS_DATASET=test make run
 
 ## Configuration
 
+
 | Variable                        | Default                                                    | Description                                                                                                                                                                    |
 | ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `RAG_ANON_CHROMADB_PERSIST_DIR` | `../rag-anonymous/chromadb`                                | Shared ChromaDB path                                                                                                                                                           |
 | `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                               |
-| `RAG_ANON_LLM_MODEL`            | `qwen3:0.6b`                                               | Generator LLM                                                                                                                                                                  |
+| `RAG_ANON_LLM_MODEL`            | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                  |
 | `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`. |
 | `RAG_ANON_LLM_TEMPERATURE`      | `0.0`                                                      | Generation temperature                                                                                                                                                         |
 | `RAG_ANON_LOG_LEVEL`            | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                          |
 | `RAG_ANON_LOG_LEVEL_HTTP`       | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                 |
 | `RAG_ANON_LOG_LEVEL_PRESIDIO`   | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                           |
 | `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                            |
-| `RAG_METRICS_CORPUS_DATASET`      | `dev`                                                      | TAB split (train/dev/test)                                                                                                                                                     |
+| `RAG_METRICS_CORPUS_DATASET`    | `dev`                                                      | TAB split (train/dev/test)                                                                                                                                                     |
 | `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                |
-| `RAG_METRICS_JUDGE_MODEL`       | `gemma4:e2b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                            |
+| `RAG_METRICS_JUDGE_MODEL`       | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                            |
 | `RAG_METRICS_MAX_QUESTIONS`     | *(unset)*                                                  | If set, evaluate only the first N benchmark questions                                                                                                                          |
-| `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                     |
+| `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                    |
 | `RAG_METRICS_RETRIEVAL_K_DOCS`  | `5`                                                        | Retrieved chunks per query                                                                                                                                                     |
+
+
