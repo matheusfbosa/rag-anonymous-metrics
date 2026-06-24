@@ -170,14 +170,13 @@ def run_experiment(
 
 
 def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
-    from rag_anonymous_metrics.metrics import utility
-    from rag_anonymous_metrics.metrics._judge import build_judge_chain
+    from rag_anonymous_metrics.metrics.utility import UtilityScorer
 
     logger.info(
         "Computing utility metrics for %d records (judge=%s)...",
         len(records), judge_model,
     )
-    chain = build_judge_chain(judge_model)
+    scorer = UtilityScorer(judge_model)
     width = len(str(len(records)))
 
     for idx, record in enumerate(records, 1):
@@ -193,11 +192,8 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
             )
             continue
 
-        record.faithfulness = utility.score_faithfulness(
-            chain, record.final_answer, record.contexts,
-        )
-        record.context_precision = utility.score_context_precision(
-            chain, record.question, record.final_answer, record.contexts,
+        record.faithfulness, record.context_precision = scorer.score(
+            record.question, record.final_answer, record.contexts,
         )
 
 

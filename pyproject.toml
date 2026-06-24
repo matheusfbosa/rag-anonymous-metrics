@@ -11,6 +11,8 @@ dependencies = [
     "rag-anonymous",
     "python-dotenv>=1.0,<2",
     "pandas>=2.0,<3.0",
+    "ragas==0.4.3",
+    "langchain-community==0.4.0",
 ]
 
 [project.scripts]

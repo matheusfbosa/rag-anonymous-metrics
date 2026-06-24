@@ -61,9 +61,8 @@ rag-anonymous-metrics/
 │   ├── records.py          # QueryRecord dataclass (JSONL schema)
 │   ├── run.py              # Pipeline per-question loop
 │   └── metrics/
-│       ├── _judge.py       # Shared judge chain + Yes/No verdict parsing
 │       ├── privacy.py      # PII leakage index/rate + refusal heuristics
-│       └── utility.py      # Ragas-style faithfulness + Context Precision@K
+│       └── utility.py      # Ragas faithfulness + context precision (judge LLM)
 ├── data/
 │   ├── input/
 │   │   ├── benchmark_questions_dev.json
@@ -77,7 +76,7 @@ rag-anonymous-metrics/
 
 ## Metrics
 
-Utility metrics (faithfulness and context precision) are evaluated by a dedicated **judge LLM** (`RAG_METRICS_JUDGE_MODEL`), which is intentionally different from the generator (`RAG_ANON_LLM_MODEL`) to avoid self-evaluation bias. Privacy metrics (PII leakage rate, answer refusal rate) are computed deterministically and do not involve the judge.
+Utility metrics (faithfulness and context precision) are computed by the [Ragas](https://docs.ragas.io) framework, driven by a dedicated **judge LLM** (`RAG_METRICS_JUDGE_MODEL`) that is intentionally different from the generator (`RAG_ANON_LLM_MODEL`) to avoid self-evaluation bias. Privacy metrics (PII leakage rate, answer refusal rate) are computed deterministically and do not involve Ragas or the judge.
 
 ### Faithfulness
 
@@ -95,7 +94,7 @@ $$
 \text{Faithfulness} = \frac{\text{Number of claims in the response supported by the retrieved context}}{\text{Total number of claims in the response}}.
 $$
 
-**How it’s calculated:** The **response** is `final_answer` (after any strategy-specific anonymisation). **Retrieved context** is the list of chunk texts returned by the retriever. The evaluator performs steps (1)–(2) via prompted decomposition and yes/no verification (`CLAIMS_EXTRACTION_PROMPT`, `CLAIMS_VERIFICATION_PROMPT`). If no claims are extracted or verdicts cannot be parsed, the score is **undefined** and stored as `null`; otherwise the score is in $[0,1]$.
+**How it’s calculated:** Computed by Ragas' [`Faithfulness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/faithfulness/) metric. The **response** is `final_answer` (after any strategy-specific anonymisation) and the **retrieved context** is the list of chunk texts returned by the retriever, passed as a `SingleTurnSample`. Ragas performs steps (1)–(2) — claim decomposition and per-claim verification — internally via the judge LLM. If no claims are extracted the score is **undefined** (Ragas returns `NaN`) and stored as `null`; otherwise the score is in $[0,1]$.
 
 ### Context precision
 
@@ -113,7 +112,7 @@ $$
 
 where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in 0,1$ is the relevance indicator at rank $k$. With one binary label per rank, the denominator at cut $k$ is $k$, and $\text{true positives@}k$ is the count of relevant chunks among positions $1..k$, so $\text{Precision@}k$ matches the cumulative precision used here.
 
-**How it’s calculated:** Relevance $v_k$ is judged by the **evaluator LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*). That matches the Ragas idea of judging chunks against the **generated response** when no gold reference is used—see **Context Utilization** / **LLMContextPrecisionWithoutReference** on the same [Context Precision](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/) page—rather than **Context Precision** with a separate `reference` string. Only the **first 300 characters** of each chunk are shown to the judge. If $\sum_k v_k = 0$, the score is **0**; if no verdicts are parseable, the score is `null`; partial parses are padded with $v_k = 0$ for missing positions.
+**How it’s calculated:** Computed by Ragas' [`LLMContextPrecisionWithoutReference`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/) metric. Relevance $v_k$ is judged by the **judge LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*) — the without-reference variant, since we have no gold `reference` string. Ragas computes the weighted Precision@$k$ formula above internally over the full `retrieved_contexts` list. If $\sum_k v_k = 0$ the score is **0**; if the metric cannot be computed it returns `NaN` and is stored as `null`.
 
 ### Answer refusal rate
 
