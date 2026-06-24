@@ -13,7 +13,7 @@ For each question × strategy the evaluator:
 
 1. Runs the full RAG pipeline (retrieval + generation + optional post-generation anonymization).
 2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
-3. Computes **utility metrics** (faithfulness, context precision) via a separate judge LLM once all answers are collected — refusals are skipped and recorded as `null`.
+3. Computes **utility metrics** (faithfulness, context precision, context recall, factual correctness) via a separate judge LLM once all answers are collected — refusals are skipped and recorded as `null`.
 4. Persists per-query results to JSONL.
 
 ```mermaid
@@ -31,19 +31,24 @@ flowchart TD
     final_answer --> pii_leakage["PII Leakage Rate\n(substring match vs PII index)"]
     final_answer --> refusal["Refusal Detection\n(heuristic)"]
     pii_index --> pii_leakage
+    ground_truth["ground_truth\n(gold answer)"] --> judge_block
 
     refusal -->|"is_refusal = false"| judge_block
-    refusal -->|"is_refusal = true"| null_scores["faithfulness = null\ncontext_precision = null"]
+    refusal -->|"is_refusal = true"| null_scores["utility scores = null"]
 
-    subgraph judge_block [Judge LLM - RAG_METRICS_JUDGE_MODEL]
+    subgraph judge_block [Judge LLM - RAG_METRICS_JUDGE_MODEL via Ragas]
         faithfulness["Faithfulness\n(claim-level)"]
-        ctx_precision["Context Precision@K\n(no gold reference)"]
+        ctx_precision["Context Precision\n(no reference)"]
+        ctx_recall["Context Recall\n(vs ground_truth)"]
+        factual["Factual Correctness\n(vs ground_truth)"]
     end
 
     pii_leakage --> jsonl["JSONL per run"]
     null_scores --> jsonl
     faithfulness --> jsonl
     ctx_precision --> jsonl
+    ctx_recall --> jsonl
+    factual --> jsonl
 ```
 
 
@@ -76,7 +81,7 @@ rag-anonymous-metrics/
 
 ## Metrics
 
-Utility metrics (faithfulness and context precision) are computed by the [Ragas](https://docs.ragas.io) framework, driven by a dedicated **judge LLM** (`RAG_METRICS_JUDGE_MODEL`) that is intentionally different from the generator (`RAG_ANON_LLM_MODEL`) to avoid self-evaluation bias. Privacy metrics (PII leakage rate, answer refusal rate) are computed deterministically and do not involve Ragas or the judge.
+Utility metrics (faithfulness, context precision, context recall, factual correctness) are computed by the [Ragas](https://docs.ragas.io) framework, driven by a dedicated **judge LLM** (`RAG_METRICS_JUDGE_MODEL`) that is intentionally different from the generator (`RAG_ANON_LLM_MODEL`) to avoid self-evaluation bias. Context recall and factual correctness compare against the benchmark `ground_truth`; faithfulness and context precision do not use a reference. Privacy metrics (PII leakage rate, answer refusal rate) are computed deterministically and do not involve Ragas or the judge.
 
 ### Faithfulness
 
@@ -114,6 +119,22 @@ where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in 0,1$ is t
 
 **How it’s calculated:** Computed by Ragas' [`LLMContextPrecisionWithoutReference`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/) metric. Relevance $v_k$ is judged by the **judge LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*) — the without-reference variant, since we have no gold `reference` string. Ragas computes the weighted Precision@$k$ formula above internally over the full `retrieved_contexts` list. If $\sum_k v_k = 0$ the score is **0**; if the metric cannot be computed it returns `NaN` and is stored as `null`.
 
+### Context recall
+
+**Context recall** measures whether the **retrieved context** contains the information needed to produce the **reference answer** (`ground_truth`). It is the retrieval complement of context precision: precision penalises irrelevant chunks, recall penalises *missing* relevant chunks. It ranges from **0 to 1**, with higher scores indicating that more of the reference answer is supported by the retrieved context.
+
+$$
+\text{Context Recall} = \frac{\text{Number of reference claims attributable to the retrieved context}}{\text{Total number of reference claims}}.
+$$
+
+**How it’s calculated:** Computed by Ragas' [`LLMContextRecall`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_recall/) metric. Ragas decomposes the `ground_truth` into claims and, via the **judge LLM**, checks each claim against the `retrieved_contexts`. This is the signal most sensitive to the **offline** strategy, where anonymising the corpus *before* indexing can remove the anchors a query relies on. If the metric cannot be computed it returns `NaN` and is stored as `null`.
+
+### Factual correctness
+
+**Factual correctness** measures how well the **model response** agrees with the **reference answer** (`ground_truth`), independent of the retrieved context. Whereas faithfulness asks whether the answer is grounded in *what was retrieved*, factual correctness asks whether it matches *the truth*. It ranges from **0 to 1**.
+
+**How it’s calculated:** Computed by Ragas' [`FactualCorrectness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/) metric. Ragas decomposes both the **response** and the `ground_truth` into claims and uses the **judge LLM** to verify them against each other (natural-language inference), reporting an F1-style score over supported claims. This is the cleanest **utility** signal for the privacy/utility trade-off: it quantifies how much anonymisation degrades the correctness of answers relative to the gold reference. If the metric cannot be computed it returns `NaN` and is stored as `null`.
+
 ### Answer refusal rate
 
 Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics.
@@ -124,7 +145,7 @@ $$
 \rho = \frac{1}{N}\sum_{j=1}^{N} R_{\mathrm{ref}}^{(j)}.  
 $$
 
-**Censoring of utility:** When $R_{\mathrm{ref}}=1$, faithfulness and context precision are **omitted** (recorded as `null`) so the judge is not applied to non-answers.
+**Censoring of utility:** When $R_{\mathrm{ref}}=1$, all utility metrics (faithfulness, context precision, context recall, factual correctness) are **omitted** (recorded as `null`) so the judge is not applied to non-answers.
 
 ### PII leakage rate
 

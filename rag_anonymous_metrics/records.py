@@ -7,6 +7,7 @@ class QueryRecord:
     strategy: str
     question_id: str
     question: str
+    ground_truth: str
     llm_model: str
     judge_model: str
     raw_answer: str
@@ -20,6 +21,8 @@ class QueryRecord:
     leakage_rate: float
     faithfulness: float | None = None
     context_precision: float | None = None
+    context_recall: float | None = None
+    factual_correctness: float | None = None
 
 
 @dataclass(frozen=True, slots=True)

@@ -57,13 +57,15 @@ def cmd_run_experiment() -> None:
         records = result.records
         avg_faith = _safe_mean(r.faithfulness for r in records)
         avg_ctx = _safe_mean(r.context_precision for r in records)
+        avg_recall = _safe_mean(r.context_recall for r in records)
+        avg_factual = _safe_mean(r.factual_correctness for r in records)
         avg_leak = _safe_mean(r.leakage_rate for r in records)
         n_ref = sum(1 for r in records if r.answer_is_refusal)
         ref_rate = n_ref / len(records) if records else 0.0
 
         logger.info(
-            "[%-8s] faith=%.3f ctx=%.3f leak=%.3f refusal=%.2f (%d/%d)",
-            strategy, avg_faith, avg_ctx, avg_leak, ref_rate, n_ref, len(records),
+            "[%-8s] faith=%.3f ctx=%.3f recall=%.3f factual=%.3f leak=%.3f refusal=%.2f (%d/%d)",
+            strategy, avg_faith, avg_ctx, avg_recall, avg_factual, avg_leak, ref_rate, n_ref, len(records),
         )
         logger.info("           -> %s", result.output_path)
 

@@ -74,6 +74,7 @@ def evaluate_question(
         strategy=pipeline.strategy,
         question_id=question_obj.get("id", ""),
         question=question,
+        ground_truth=question_obj.get("ground_truth", ""),
         llm_model=pipeline.gen_model,
         judge_model=judge_model,
         raw_answer=raw_answer,
@@ -192,9 +193,13 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
             )
             continue
 
-        record.faithfulness, record.context_precision = scorer.score(
-            record.question, record.final_answer, record.contexts,
+        scores = scorer.score(
+            record.question, record.final_answer, record.contexts, record.ground_truth,
         )
+        record.faithfulness = scores["faithfulness"]
+        record.context_precision = scores["context_precision"]
+        record.context_recall = scores["context_recall"]
+        record.factual_correctness = scores["factual_correctness"]
 
 
 def _save_jsonl(records: list[QueryRecord], path: Path) -> None:
