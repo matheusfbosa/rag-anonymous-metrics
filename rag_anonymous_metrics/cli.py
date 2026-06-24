@@ -64,10 +64,15 @@ def cmd_run_experiment() -> None:
         ref_rate = n_ref / len(records) if records else 0.0
 
         logger.info(
-            "[%-8s] faith=%.3f ctx=%.3f recall=%.3f factual=%.3f leak=%.3f refusal=%.2f (%d/%d)",
+            "[%-8s] faith=%.3f ctx=%.3f recall=%.3f factual*=%.3f leak=%.3f refusal=%.2f (%d/%d)",
             strategy, avg_faith, avg_ctx, avg_recall, avg_factual, avg_leak, ref_rate, n_ref, len(records),
         )
         logger.info("           -> %s", result.output_path)
+
+    logger.info(
+        "(faith/ctx/recall are conditional on answering; "
+        "factual* is end-to-end, counting refusals as 0)"
+    )
 
     logger.info("")
     logger.info("Done. Experiment directory: %s", experiment_dir)

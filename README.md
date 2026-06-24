@@ -34,7 +34,7 @@ flowchart TD
     ground_truth["ground_truth\n(gold answer)"] --> judge_block
 
     refusal -->|"is_refusal = false"| judge_block
-    refusal -->|"is_refusal = true"| null_scores["utility scores = null"]
+    refusal -->|"is_refusal = true"| null_scores["faithfulness, context precision,\ncontext recall = null\nfactual correctness = 0"]
 
     subgraph judge_block [Judge LLM - RAG_METRICS_JUDGE_MODEL via Ragas]
         faithfulness["Faithfulness\n(claim-level)"]
@@ -135,6 +135,8 @@ $$
 
 **How it’s calculated:** Computed by Ragas' [`FactualCorrectness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/) metric. Ragas decomposes both the **response** and the `ground_truth` into claims and uses the **judge LLM** to verify them against each other (natural-language inference), reporting an F1-style score over supported claims. This is the cleanest **utility** signal for the privacy/utility trade-off: it quantifies how much anonymisation degrades the correctness of answers relative to the gold reference. If the metric cannot be computed it returns `NaN` and is stored as `null`.
 
+Unlike the other utility metrics, factual correctness is **not censored on refusal**: a refusal delivers zero correct facts, so it is scored **0** rather than `null`. This makes factual correctness an **end-to-end utility** measure — averaged over *all* benchmark questions, including refusals — so it stays comparable across strategies regardless of how often each one abstains. The other three metrics remain *conditional on answering* (refusals → `null`), so always read them alongside the refusal rate.
+
 ### Answer refusal rate
 
 Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics.
@@ -145,7 +147,7 @@ $$
 \rho = \frac{1}{N}\sum_{j=1}^{N} R_{\mathrm{ref}}^{(j)}.  
 $$
 
-**Censoring of utility:** When $R_{\mathrm{ref}}=1$, all utility metrics (faithfulness, context precision, context recall, factual correctness) are **omitted** (recorded as `null`) so the judge is not applied to non-answers.
+**Censoring of utility:** When $R_{\mathrm{ref}}=1$, faithfulness, context precision and context recall are **omitted** (recorded as `null`) so the judge is not applied to non-answers — these stay *conditional on answering*. **Factual correctness is the exception**: a refusal is scored **0**, making it an end-to-end utility measure over all questions (see [Factual correctness](#factual-correctness)).
 
 ### PII leakage rate
 

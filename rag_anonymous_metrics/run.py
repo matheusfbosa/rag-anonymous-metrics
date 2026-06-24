@@ -191,6 +191,7 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
                 "  [%*d/%d] skipping judge: refusal / non-answer",
                 width, idx, len(records),
             )
+            record.factual_correctness = 0.0
             continue
 
         scores = scorer.score(
