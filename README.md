@@ -18,37 +18,20 @@ For each question × strategy the evaluator:
 
 ```mermaid
 flowchart TD
-    corpus["TAB Corpus (split)"] --> pii_index["PII Index\n(per doc_id)"]
-    questions["Benchmark Questions"] --> loop["Per-question loop\n(offline × on-demand)"]
+    corpus["Corpus (dataset)"] --> pii_index["PII Index\n(per doc_id)"]
+    questions["Benchmark Questions"] --> rag
 
-    subgraph rag_pipeline [RAG Pipeline]
-        loop --> retriever["Retriever\n(ChromaDB, k chunks)"]
-        retriever --> generator["Generator LLM\n(RAG_ANON_LLM_MODEL)"]
-        generator --> anon["Anonymizer\n(offline: no-op | on-demand: Presidio)"]
-        anon --> final_answer["final_answer"]
+    subgraph rag [RAG Pipeline · per question × strategy]
+        retriever["Retriever\n(ChromaDB, k chunks)"] --> generator["Generator LLM"] --> anon["Anonymizer\n(offline: no-op | on-demand: Presidio)"] --> final_answer["final_answer"]
     end
 
-    final_answer --> pii_leakage["PII Leakage Rate\n(substring match vs PII index)"]
-    final_answer --> refusal["Refusal Detection\n(heuristic)"]
-    pii_index --> pii_leakage
-    ground_truth["ground_truth\n(gold answer)"] --> judge_block
+    pii_index --> privacy
+    final_answer --> privacy["Privacy\n(PII leakage + refusal)"]
+    final_answer --> utility["Utility · Judge LLM via Ragas\n(faithfulness, context precision/recall,\nfactual correctness — null if refusal)"]
+    ground_truth["ground_truth"] --> utility
 
-    refusal -->|"is_refusal = false"| judge_block
-    refusal -->|"is_refusal = true"| null_scores["faithfulness, context precision,\ncontext recall = null\nfactual correctness = 0"]
-
-    subgraph judge_block [Judge LLM - RAG_METRICS_JUDGE_MODEL via Ragas]
-        faithfulness["Faithfulness\n(claim-level)"]
-        ctx_precision["Context Precision\n(no reference)"]
-        ctx_recall["Context Recall\n(vs ground_truth)"]
-        factual["Factual Correctness\n(vs ground_truth)"]
-    end
-
-    pii_leakage --> jsonl["JSONL per run"]
-    null_scores --> jsonl
-    faithfulness --> jsonl
-    ctx_precision --> jsonl
-    ctx_recall --> jsonl
-    factual --> jsonl
+    privacy --> jsonl["JSONL per run"]
+    utility --> jsonl
 ```
 
 
@@ -213,11 +196,11 @@ cp .env.example .env
 
 ### Prerequisites
 
-1. Offline and On-Demand strategies ingested for the split you will evaluate (`dev`, `train`, or `test`):
+1. Offline and On-Demand strategies ingested for the dataset you will evaluate (`dev`, `train`, or `test`):
   ```sh
    cd ../rag-anonymous
-   RAG_ANON_ANONYMIZER_STRATEGY=offline RAG_ANON_CORPUS_SPLIT=dev make ingest
-   RAG_ANON_ANONYMIZER_STRATEGY=ondemand RAG_ANON_CORPUS_SPLIT=dev make ingest
+   RAG_ANON_ANONYMIZER_STRATEGY=offline RAG_ANON_CORPUS_DATASET=dev make ingest
+   RAG_ANON_ANONYMIZER_STRATEGY=ondemand RAG_ANON_CORPUS_DATASET=dev make ingest
   ```
 
 ### Run full evaluation (Offline and On-Demand strategies)
@@ -226,7 +209,7 @@ cp .env.example .env
 make run
 ```
 
-### Run a single strategy or corpus split
+### Run a single strategy or corpus dataset
 
 ```sh
 RAG_METRICS_EVAL_STRATEGY=offline make run
@@ -235,7 +218,7 @@ RAG_METRICS_CORPUS_DATASET=train make run
 RAG_METRICS_CORPUS_DATASET=test make run
 ```
 
-`RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching `data/input/benchmark_questions_<split>.json` file.
+`RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching `data/input/benchmark_questions_<dataset>.json` file.
 
 ## Output
 
@@ -248,6 +231,7 @@ RAG_METRICS_CORPUS_DATASET=test make run
 | Variable                        | Default                                                    | Description                                                                                                                                                                    |
 | ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `RAG_ANON_CHROMADB_PERSIST_DIR` | `../rag-anonymous/chromadb`                                | Shared ChromaDB path                                                                                                                                                           |
+| `RAG_ANON_CORPUS`               | TAB ECHR URL template                                      | Corpus source (URL or local path) with optional `{dataset}`, used by `rag_anonymous.load_corpus` to build the PII index. `{dataset}` is filled from `RAG_METRICS_CORPUS_DATASET`. |
 | `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                               |
 | `RAG_ANON_LLM_MODEL`            | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                  |
 | `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`. |
@@ -256,7 +240,7 @@ RAG_METRICS_CORPUS_DATASET=test make run
 | `RAG_ANON_LOG_LEVEL_HTTP`       | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                 |
 | `RAG_ANON_LOG_LEVEL_PRESIDIO`   | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                           |
 | `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                            |
-| `RAG_METRICS_CORPUS_DATASET`    | `dev`                                                      | TAB split (train/dev/test)                                                                                                                                                     |
+| `RAG_METRICS_CORPUS_DATASET`    | `dev`                                                      | TAB dataset (train/dev/test)                                                                                                                                                   |
 | `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                |
 | `RAG_METRICS_JUDGE_MODEL`       | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                            |
 | `RAG_METRICS_MAX_QUESTIONS`     | *(unset)*                                                  | If set, evaluate only the first N benchmark questions                                                                                                                          |

@@ -11,14 +11,14 @@ logger = logging.getLogger(__name__)
 __all__ = ["load_corpus", "load_questions"]
 
 
-def load_questions(path: Path | None = None, split: str | None = None) -> list[dict]:
-    if split:
-        target = _questions_path_for_split(split)
+def load_questions(path: Path | None = None, dataset: str | None = None) -> list[dict]:
+    if dataset:
+        target = _questions_path_for_dataset(dataset)
     elif path is not None:
         target = path
     else:
-        default_split = Settings.load().dataset
-        target = _questions_path_for_split(default_split)
+        default_dataset = Settings.load().dataset
+        target = _questions_path_for_dataset(default_dataset)
 
     if not target.exists():
         raise FileNotFoundError(f"Benchmark questions not found: {target}")
@@ -30,5 +30,5 @@ def load_questions(path: Path | None = None, split: str | None = None) -> list[d
     return questions
 
 
-def _questions_path_for_split(split: str) -> Path:
-    return PROJECT_ROOT / "data" / "input" / f"benchmark_questions_{split}.json"
+def _questions_path_for_dataset(dataset: str) -> Path:
+    return PROJECT_ROOT / "data" / "input" / f"benchmark_questions_{dataset}.json"

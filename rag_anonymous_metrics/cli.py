@@ -27,7 +27,7 @@ def cmd_run_experiment() -> None:
     judge_model = cfg.judge_model
 
     strategies = STRATEGIES if strategy_env == "all" else [strategy_env]
-    questions = load_questions(split=dataset)
+    questions = load_questions(dataset=dataset)
 
     max_questions_limit = cfg.max_questions
     if max_questions_limit is not None and max_questions_limit < len(questions):

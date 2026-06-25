@@ -149,7 +149,7 @@ def run_experiment(
     experiment_dir.mkdir(parents=True, exist_ok=True)
     logger.info("Experiment output directory: %s", experiment_dir)
 
-    logger.info("Loading TAB corpus (split=%s) for PII annotations...", dataset)
+    logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
     corpus = load_corpus(dataset)
     pii_index = build_pii_index(corpus)
     logger.info("PII index built: %d documents with sensitive spans", len(pii_index))

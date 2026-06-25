@@ -24,7 +24,7 @@ class Settings:
 
     @classmethod
     def load(cls) -> Settings:
-        llm = os.getenv("RAG_ANON_LLM_MODEL", "qwen3:0.6b")
+        llm = os.getenv("RAG_ANON_LLM_MODEL", "qwen3:8b")
         judge = os.getenv("RAG_METRICS_JUDGE_MODEL") or llm
         results_rel = os.getenv("RAG_METRICS_RESULTS_DIR", "./data/output")
         return cls(
