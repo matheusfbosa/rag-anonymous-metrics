@@ -64,8 +64,9 @@ class UtilityScorer:
     async def _safe(metric, sample: SingleTurnSample, name: str) -> float | None:
         try:
             score = await metric.single_turn_ascore(sample)
-        except Exception:
-            logger.warning("Ragas %s failed", name, exc_info=True)
+        except Exception as exc:
+            logger.warning("Ragas %s failed: %s", name, exc.__class__.__name__)
+            logger.debug("Ragas %s traceback", name, exc_info=True)
             return None
         if score is None or math.isnan(score):
             return None
