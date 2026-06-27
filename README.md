@@ -82,7 +82,7 @@ $$
 \text{Faithfulness} = \frac{\text{Number of claims in the response supported by the retrieved context}}{\text{Total number of claims in the response}}.
 $$
 
-**How it’s calculated:** Computed by Ragas' [`Faithfulness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/faithfulness/) metric. The **response** is `final_answer` (after any strategy-specific anonymisation) and the **retrieved context** is the list of chunk texts returned by the retriever, passed as a `SingleTurnSample`. Ragas performs steps (1)–(2) — claim decomposition and per-claim verification — internally via the judge LLM. If no claims are extracted the score is **undefined** (Ragas returns `NaN`) and stored as `null`; otherwise the score is in $[0,1]$.
+**How it’s calculated:** Computed by Ragas' `[Faithfulness](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/faithfulness/)` metric. The **response** is `final_answer` (after any strategy-specific anonymisation) and the **retrieved context** is the list of chunk texts returned by the retriever, passed as a `SingleTurnSample`. Ragas performs steps (1)–(2) — claim decomposition and per-claim verification — internally via the judge LLM. If no claims are extracted the score is **undefined** (Ragas returns `NaN`) and stored as `null`; otherwise the score is in $[0,1]$.
 
 ### Context precision
 
@@ -100,7 +100,7 @@ $$
 
 where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in 0,1$ is the relevance indicator at rank $k$. With one binary label per rank, the denominator at cut $k$ is $k$, and $\text{true positives@}k$ is the count of relevant chunks among positions $1..k$, so $\text{Precision@}k$ matches the cumulative precision used here.
 
-**How it’s calculated:** Computed by Ragas' [`LLMContextPrecisionWithoutReference`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/) metric. Relevance $v_k$ is judged by the **judge LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*) — the without-reference variant, since we have no gold `reference` string. Ragas computes the weighted Precision@$k$ formula above internally over the full `retrieved_contexts` list. If $\sum_k v_k = 0$ the score is **0**; if the metric cannot be computed it returns `NaN` and is stored as `null`.
+**How it’s calculated:** Computed by Ragas' `[LLMContextPrecisionWithoutReference](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/)` metric. Relevance $v_k$ is judged by the **judge LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*) — the without-reference variant, since we have no gold `reference` string. Ragas computes the weighted Precision@$k$ formula above internally over the full `retrieved_contexts` list. If $\sum_k v_k = 0$ the score is **0**; if the metric cannot be computed it returns `NaN` and is stored as `null`.
 
 ### Context recall
 
@@ -110,13 +110,13 @@ $$
 \text{Context Recall} = \frac{\text{Number of reference claims attributable to the retrieved context}}{\text{Total number of reference claims}}.
 $$
 
-**How it’s calculated:** Computed by Ragas' [`LLMContextRecall`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_recall/) metric. Ragas decomposes the `ground_truth` into claims and, via the **judge LLM**, checks each claim against the `retrieved_contexts`. This is the signal most sensitive to the **offline** strategy, where anonymising the corpus *before* indexing can remove the anchors a query relies on. If the metric cannot be computed it returns `NaN` and is stored as `null`.
+**How it’s calculated:** Computed by Ragas' `[LLMContextRecall](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_recall/)` metric. Ragas decomposes the `ground_truth` into claims and, via the **judge LLM**, checks each claim against the `retrieved_contexts`. This is the signal most sensitive to the **offline** strategy, where anonymising the corpus *before* indexing can remove the anchors a query relies on. If the metric cannot be computed it returns `NaN` and is stored as `null`.
 
 ### Factual correctness
 
 **Factual correctness** measures how well the **model response** agrees with the **reference answer** (`ground_truth`), independent of the retrieved context. Whereas faithfulness asks whether the answer is grounded in *what was retrieved*, factual correctness asks whether it matches *the truth*. It ranges from **0 to 1**.
 
-**How it’s calculated:** Computed by Ragas' [`FactualCorrectness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/) metric. Ragas decomposes both the **response** and the `ground_truth` into claims and uses the **judge LLM** to verify them against each other (natural-language inference), reporting an F1-style score over supported claims. This is the cleanest **utility** signal for the privacy/utility trade-off: it quantifies how much anonymisation degrades the correctness of answers relative to the gold reference. If the metric cannot be computed it returns `NaN` and is stored as `null`.
+**How it’s calculated:** Computed by Ragas' `[FactualCorrectness](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/)` metric. Ragas decomposes both the **response** and the `ground_truth` into claims and uses the **judge LLM** to verify them against each other (natural-language inference), reporting an F1-style score over supported claims. This is the cleanest **utility** signal for the privacy/utility trade-off: it quantifies how much anonymisation degrades the correctness of answers relative to the gold reference. If the metric cannot be computed it returns `NaN` and is stored as `null`.
 
 Unlike the other utility metrics, factual correctness is **not censored on refusal**: a refusal delivers zero correct facts, so it is scored **0** rather than `null`. This makes factual correctness an **end-to-end utility** measure — averaged over *all* benchmark questions, including refusals — so it stays comparable across strategies regardless of how often each one abstains. The other three metrics remain *conditional on answering* (refusals → `null`), so always read them alongside the refusal rate.
 
@@ -156,6 +156,20 @@ L = \begin{cases}
 $$
 
 Thus $L \in [0,1]$ is **conditional recall of annotated PII** over retrieved documents: it does **not** flag hallucinated identifiers absent from $\mathcal{P}$.
+
+**Per-strategy aggregates.** Over the set of queries $Q$ for a strategy, the summary reports two averages of leakage. The **macro-average** (`leak_macro`) weights each query equally:
+
+$$
+L_{\mathrm{macro}} = \frac{1}{|Q|} \sum_{q \in Q} L_q.
+$$
+
+The **micro-average** (`leak_micro`) weights each PII span equally by pooling counts before dividing:
+
+$$
+L_{\mathrm{micro}} = \frac{\sum_{q \in Q} |\mathcal{L}*q|}{\sum*{q \in Q} |\mathcal{P}_q|} \quad (0 \text{ if the denominator is } 0).
+$$
+
+Macro answers *"what is the typical per-query leakage?"*; micro answers *"what share of all retrieved PII leaked?"*. Queries with $|\mathcal{P}_q| = 0$ contribute $L_q = 0$ to the macro mean but add nothing to either micro sum.
 
 ## Setup
 
@@ -228,23 +242,23 @@ RAG_METRICS_CORPUS_DATASET=test make run
 ## Configuration
 
 
-| Variable                        | Default                                                    | Description                                                                                                                                                                    |
-| ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `RAG_ANON_CHROMADB_PERSIST_DIR` | `../rag-anonymous/chromadb`                                | Shared ChromaDB path                                                                                                                                                           |
+| Variable                        | Default                                                    | Description                                                                                                                                                                       |
+| ------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RAG_ANON_CHROMADB_PERSIST_DIR` | `../rag-anonymous/chromadb`                                | Shared ChromaDB path                                                                                                                                                              |
 | `RAG_ANON_CORPUS`               | TAB ECHR URL template                                      | Corpus source (URL or local path) with optional `{dataset}`, used by `rag_anonymous.load_corpus` to build the PII index. `{dataset}` is filled from `RAG_METRICS_CORPUS_DATASET`. |
-| `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                               |
-| `RAG_ANON_LLM_MODEL`            | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                  |
-| `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`. |
-| `RAG_ANON_LLM_TEMPERATURE`      | `0.0`                                                      | Generation temperature                                                                                                                                                         |
-| `RAG_ANON_LOG_LEVEL`            | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                          |
-| `RAG_ANON_LOG_LEVEL_HTTP`       | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                 |
-| `RAG_ANON_LOG_LEVEL_PRESIDIO`   | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                           |
-| `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                            |
-| `RAG_METRICS_CORPUS_DATASET`    | `dev`                                                      | TAB dataset (train/dev/test)                                                                                                                                                   |
-| `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                |
-| `RAG_METRICS_JUDGE_MODEL`       | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                            |
-| `RAG_METRICS_MAX_QUESTIONS`     | *(unset)*                                                  | If set, evaluate only the first N benchmark questions                                                                                                                          |
-| `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                    |
-| `RAG_METRICS_RETRIEVAL_K_DOCS`  | `5`                                                        | Retrieved chunks per query                                                                                                                                                     |
+| `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                                  |
+| `RAG_ANON_LLM_MODEL`            | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
+| `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |
+| `RAG_ANON_LLM_TEMPERATURE`      | `0.0`                                                      | Generation temperature                                                                                                                                                            |
+| `RAG_ANON_LOG_LEVEL`            | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                             |
+| `RAG_ANON_LOG_LEVEL_HTTP`       | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                    |
+| `RAG_ANON_LOG_LEVEL_PRESIDIO`   | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                              |
+| `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
+| `RAG_METRICS_CORPUS_DATASET`    | `dev`                                                      | TAB dataset (train/dev/test)                                                                                                                                                      |
+| `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                   |
+| `RAG_METRICS_JUDGE_MODEL`       | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                               |
+| `RAG_METRICS_MAX_QUESTIONS`     | `60`                                                       | If set, evaluate only the first N benchmark questions                                                                                                                             |
+| `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
+| `RAG_METRICS_RETRIEVAL_K_DOCS`  | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
 
 

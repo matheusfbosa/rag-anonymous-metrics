@@ -99,6 +99,8 @@ def evaluate_strategy(
     llm_model: str | None = None,
     judge_model: str | None = None,
 ) -> StrategyResult:
+    logger.info("")
+    logger.info("=" * 60)
     logger.info("Evaluating: strategy=%s", strategy)
 
     cfg = Settings.load()
@@ -110,9 +112,13 @@ def evaluate_strategy(
     records: list[QueryRecord] = []
     width = len(str(len(questions)))
 
+    logger.info(
+        "Generating answers (LLM=%s) and computing privacy metrics for %d records...",
+        gen_model, len(questions),
+    )
     for idx, q in enumerate(questions, 1):
         logger.info(
-            "[%*d/%d] %s: %.80s",
+            "  [%*d/%d] %s: %.80s",
             width, idx, len(questions), q.get("id", "-"), q["question"],
         )
         records.append(
@@ -174,8 +180,8 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
     from rag_anonymous_metrics.metrics.utility import UtilityScorer
 
     logger.info(
-        "Computing utility metrics for %d records (judge=%s)...",
-        len(records), judge_model,
+        "Computing utility metrics (judge=%s) for %d records...",
+        judge_model, len(records),
     )
     scorer = UtilityScorer(judge_model)
     width = len(str(len(records)))
