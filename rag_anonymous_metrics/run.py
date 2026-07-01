@@ -33,8 +33,9 @@ class Pipeline:
 STRATEGIES = ["offline", "ondemand"]
 
 
-def build_pipeline(strategy: str, gen_model: str) -> Pipeline:
+def build_pipeline(strategy: str, gen_model: str, dataset: str) -> Pipeline:
     vectordb = load_vectordb(collection_name=strategy)
+    _check_dataset(vectordb, strategy, dataset)
     chain = create_chain(build_llm(gen_model))
     anonymizer = Anonymizer() if strategy == "ondemand" else None
     return Pipeline(
@@ -107,7 +108,7 @@ def evaluate_strategy(
     gen_model = llm_model or cfg.llm_model
     judge_m = judge_model or cfg.judge_model
 
-    pipeline = build_pipeline(strategy, gen_model)
+    pipeline = build_pipeline(strategy, gen_model, dataset)
     run_id = str(uuid.uuid4())[:8]
     records: list[QueryRecord] = []
     width = len(str(len(questions)))
@@ -123,6 +124,13 @@ def evaluate_strategy(
         )
         records.append(
             evaluate_question(pipeline, q, pii_index, judge_m, run_id, dataset=dataset, k_docs=k_docs)
+        )
+
+    if records and not any(r.total_pii for r in records):
+        logger.error(
+            "total_pii=0 for all %d records in strategy='%s'; "
+            "PII index (dataset='%s') likely does not match the ChromaDB corpus.",
+            len(records), strategy, dataset,
         )
 
     _attach_utility(records, judge_m)
@@ -174,6 +182,27 @@ def run_experiment(
         for strategy in strategies
     }
     return results, experiment_dir
+
+
+def _check_dataset(vectordb, collection_name: str, expected: str) -> None:
+    try:
+        result = vectordb._collection.get(limit=1, include=["metadatas"])
+        detected = ((result.get("metadatas") or [{}])[0] or {}).get("dataset")
+    except Exception:
+        detected = None
+    if detected is None:
+        logger.warning(
+            "Collection '%s' has no 'dataset' metadata; skipping consistency check. "
+            "Re-ingest to enable this guard.",
+            collection_name,
+        )
+        return
+    if detected != expected:
+        raise SystemExit(
+            f"Dataset mismatch: collection '{collection_name}' was ingested with "
+            f"dataset='{detected}', but RAG_METRICS_CORPUS_DATASET='{expected}'. "
+            f"Re-ingest with RAG_ANON_CORPUS_DATASET={expected}."
+        )
 
 
 def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
