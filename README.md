@@ -217,6 +217,17 @@ cp .env.example .env
    RAG_ANON_ANONYMIZER_STRATEGY=ondemand RAG_ANON_CORPUS_DATASET=dev make ingest
   ```
 
+2. Sanity-check the judge
+
+Verifies the judge LLM before trusting its scores: feeds each question's own ground truth as the answer (`factual_correctness` should be ~1.0) and another question's ground truth as a control (should be ~0.0). Exits non-zero if the judge is unreliable.
+
+```sh
+make check-judge
+RAG_METRICS_JUDGE_MODEL=gemma4:12b RAG_METRICS_MAX_QUESTIONS=5 make check-judge
+```
+
+It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, and `RAG_METRICS_MAX_QUESTIONS`.
+
 ### Run full evaluation (Offline and On-Demand strategies)
 
 ```sh

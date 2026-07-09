@@ -5,13 +5,14 @@ from typing import Iterable
 
 from rag_anonymous import configure_logging
 
+from rag_anonymous_metrics.check_judge import check_judge
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
 from rag_anonymous_metrics.run import STRATEGIES, run_experiment
 
 logger = logging.getLogger(__name__)
 
-USAGE = "Usage: rag-metrics run"
+USAGE = "Usage: rag-metrics {run|check-judge}"
 
 
 def cmd_run_experiment() -> None:
@@ -85,9 +86,14 @@ def cmd_run_experiment() -> None:
     logger.info("Done. Experiment directory: %s", experiment_dir)
 
 
+def cmd_check_judge() -> None:
+    raise SystemExit(check_judge())
+
+
 COMMANDS = {
     "run": cmd_run_experiment,
     "evaluate": cmd_run_experiment,
+    "check-judge": cmd_check_judge,
 }
 
 
