@@ -13,12 +13,15 @@ _APOSTROPHE_VARIANTS = (
     "\u02bc",
 )
 
+_MARKDOWN_EMPHASIS = {ord(ch): None for ch in "*_`"}
+
 _REFUSAL_PATTERN = re.compile(
     # abstentions
     r"it\s+is\s+not\s+possible\s+to\s+answer"
     r"|based\s+on\s+the\s+(?:context\s+provided|provided\s+context),\s*i\s+cannot"
     r"|cannot\s+be\s+determined\s+from"
     r"|(?:provided\s+)?context\s+does\s+not"
+    r"|does\s+not\s+contain"
     r"|no\s+information(?:\s+is\s+provided)?"
     r"|does\s+not\s+(?:provide\s+information|mention)"
     r"|not\s+(?:mentioned|provided)\s+in\s+the"
@@ -85,4 +88,5 @@ def _normalise(text: str) -> str:
     s = unicodedata.normalize("NFKC", text).lower()
     for ch in _APOSTROPHE_VARIANTS:
         s = s.replace(ch, "'")
+    s = s.translate(_MARKDOWN_EMPHASIS)
     return s
