@@ -22,7 +22,7 @@ flowchart TD
     questions["Benchmark Questions"] --> rag
 
     subgraph rag [RAG Pipeline · per question × strategy]
-        retriever["Retriever\n(ChromaDB, k chunks)"] --> generator["Generator LLM"] --> anon["Anonymizer\n(offline: no-op | on-demand: Presidio)"] --> final_answer["final_answer"]
+        retriever["Retriever\n(Elasticsearch, k chunks)"] --> generator["Generator LLM"] --> anon["Anonymizer\n(offline: no-op | on-demand: Presidio)"] --> final_answer["final_answer"]
     end
 
     pii_index --> privacy
@@ -255,9 +255,9 @@ RAG_METRICS_CORPUS_DATASET=test make run
 
 | Variable                        | Default                                                    | Description                                                                                                                                                                       |
 | ------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RAG_ANON_CHROMADB_PERSIST_DIR` | `../rag-anonymous/chromadb`                                | Shared ChromaDB path                                                                                                                                                              |
 | `RAG_ANON_CORPUS`               | TAB ECHR URL template                                      | Corpus source (URL or local path) with optional `{dataset}`, used by `rag_anonymous.load_corpus` to build the PII index. `{dataset}` is filled from `RAG_METRICS_CORPUS_DATASET`. |
 | `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                                  |
+| `RAG_ANON_ES_URL`               | `http://localhost:9200`                                    | Elasticsearch base URL (shared with `rag-anonymous`)                                                                                                                             |
 | `RAG_ANON_LLM_MODEL`            | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
 | `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |
 | `RAG_ANON_LLM_TEMPERATURE`      | `0.0`                                                      | Generation temperature                                                                                                                                                            |
@@ -271,5 +271,3 @@ RAG_METRICS_CORPUS_DATASET=test make run
 | `RAG_METRICS_MAX_QUESTIONS`     | `60`                                                       | If set, evaluate only the first N benchmark questions                                                                                                                             |
 | `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
 | `RAG_METRICS_RETRIEVAL_K_DOCS`  | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
-
-
