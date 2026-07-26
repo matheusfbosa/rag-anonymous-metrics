@@ -381,8 +381,8 @@
     "id": "q55",
     "level": "hard",
     "source_doc_id": "001-58456",
-    "question": "In ECHR case 001-58456 (application no. 34406/97 against France), which national legal provision formed the central issue, what was the applicant's Convention-based argument against it, and how did the domestic courts at each level justify its compatibility with the Convention?",
-    "ground_truth": "The central provision was Article 760 of the French Civil Code, which restricts the inheritance rights of adulterine children. The applicant argued it was discriminatory and incompatible with Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1. The Nîmes tribunal de grande instance upheld Article 760 as a principle of public policy necessary to ensure minimum compliance with marital obligations and to protect legitimate children — not to discriminate between children on grounds of birth. The Nîmes Court of Appeal confirmed this, reasoning that Article 760 protects children born of a marriage who might be disadvantaged on division of the estate by the presence of an adulterine child who could otherwise inherit from both parents. The Court of Cassation further held that inheritance rights had 'nothing to do' with respect for private and family life under Article 8 of the Convention."
+    "question": "In ECHR case 001-58456 (application no. 34406/97 against France), concerning inheritance rights of adulterine children under Article 760 of the Civil Code, which Convention and Protocol provisions did the applicant invoke before the Nîmes Court of Appeal, and how did the Court of Cassation distinguish inheritance rights from Article 8 private and family life?",
+    "ground_truth": "Before the Nîmes Court of Appeal the applicant argued that Article 760 was incompatible with Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1. The Court of Cassation held that inheritance rights had nothing to do with respect for private and family life guaranteed by Article 8 of the Convention."
   },
   {
     "id": "q56",
@@ -402,8 +402,8 @@
     "id": "q58",
     "level": "hard",
     "source_doc_id": "001-80364",
-    "question": "In ECHR case 001-80364 (application no. 32581/96 against Turkey), what were the applicant's two distinct categories of complaint and the Convention provisions they engaged, and how were the two categories treated differently at the ECHR admissibility stage?",
-    "ground_truth": "The applicant raised two categories of complaint: (1) ill-treatment while in police custody under Article 3 of the Convention — declared admissible by the Court's decision of 7 October 2003; (2) denial of legal assistance during questioning by the police, the public prosecutor and the remand judge under Articles 6 § 1 and 6 § 3(c) of the Convention — not declared admissible at that stage, but later examined on 10 October 2006 when the Court decided to examine the merits of this complaint at the same time as its admissibility under Article 29 § 3. The two complaints thus followed separate procedural tracks before the Court, with the ill-treatment complaint proceeding to full examination first."
+    "question": "In ECHR case 001-80364 (application no. 32581/96 against Turkey), the applicant alleged 'Palestinian hanging' and electric shocks at the anti-terror branch of the Istanbul Security Directorate. Which Convention complaints followed separate admissibility tracks before the Court, and on what dates was the Article 3 complaint declared admissible and the Article 6 legal-assistance complaint taken up under Article 29 § 3?",
+    "ground_truth": "The Article 3 complaint concerning ill-treatment in police custody was declared admissible on 7 October 2003. The complaint under Articles 6 § 1 and 6 § 3(c) concerning denial of legal assistance during questioning was not declared admissible at that stage; on 10 October 2006 the Court decided to examine its merits at the same time as its admissibility under Article 29 § 3."
   },
   {
     "id": "q59",
