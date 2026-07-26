@@ -6,6 +6,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from rag_anonymous_metrics.questions_filter import FilterSpec, parse_questions_filter
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 load_dotenv()
@@ -20,7 +22,7 @@ class Settings:
     llm_model: str
     judge_model: str
     results_dir: Path
-    max_questions: int | None
+    questions_filter: FilterSpec
 
     @classmethod
     def load(cls) -> Settings:
@@ -34,23 +36,10 @@ class Settings:
             llm_model=llm,
             judge_model=judge,
             results_dir=PROJECT_ROOT / results_rel,
-            max_questions=_parse_max_questions(os.getenv("RAG_METRICS_MAX_QUESTIONS")),
+            questions_filter=parse_questions_filter(
+                os.getenv("RAG_METRICS_QUESTIONS_FILTER")
+            ),
         )
 
 
 __all__ = ["PROJECT_ROOT", "Settings"]
-
-
-def _parse_max_questions(raw: str | None) -> int | None:
-    if raw is None or not raw.strip():
-        return None
-    trimmed = raw.strip()
-    try:
-        n = int(trimmed)
-    except ValueError as exc:
-        raise ValueError(
-            f"RAG_METRICS_MAX_QUESTIONS must be an integer, got {raw!r}"
-        ) from exc
-    if n <= 0:
-        raise ValueError(f"RAG_METRICS_MAX_QUESTIONS must be positive, got {n}")
-    return n

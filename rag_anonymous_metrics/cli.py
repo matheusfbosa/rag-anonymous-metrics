@@ -8,6 +8,7 @@ from rag_anonymous import configure_logging
 from rag_anonymous_metrics.check_judge import check_judge
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
+from rag_anonymous_metrics.questions_filter import apply_questions_filter, describe_questions_filter
 from rag_anonymous_metrics.run import STRATEGIES, run_experiment
 
 logger = logging.getLogger(__name__)
@@ -28,16 +29,17 @@ def cmd_run_experiment() -> None:
     judge_model = cfg.judge_model
 
     strategies = STRATEGIES if strategy_env == "all" else [strategy_env]
-    questions = load_questions(dataset=dataset)
-
-    max_questions_limit = cfg.max_questions
-    if max_questions_limit is not None and max_questions_limit < len(questions):
+    all_questions = load_questions(dataset=dataset)
+    questions = apply_questions_filter(all_questions, cfg.questions_filter)
+    if len(questions) != len(all_questions):
         logger.info(
-            "Limiting benchmark to first %d of %d questions",
-            max_questions_limit,
+            "Questions filter %s: %d of %d benchmark questions",
+            describe_questions_filter(cfg.questions_filter),
             len(questions),
+            len(all_questions),
         )
-        questions = questions[:max_questions_limit]
+    if not questions:
+        raise SystemExit("No benchmark questions match RAG_METRICS_QUESTIONS_FILTER")
 
     logger.info("Generator LLM: %s | Judge LLM: %s", llm_model, judge_model)
 
@@ -60,9 +62,9 @@ def cmd_run_experiment() -> None:
         avg_ctx = _safe_mean(r.context_precision for r in records)
         avg_recall = _safe_mean(r.context_recall for r in records)
         avg_factual = _safe_mean(r.factual_correctness for r in records)
-        macro_avg_leak = _safe_mean(r.leakage_rate_anonymized for r in records)
-        sum_leaked = sum(r.leaked_anonymized for r in records)
-        sum_total = sum(r.total_anonymized for r in records)
+        macro_avg_leak = _safe_mean(r.pii_leakage_rate_final for r in records)
+        sum_leaked = sum(r.pii_leaked_final for r in records)
+        sum_total = sum(r.pii_total_final for r in records)
         micro_avg_leak = sum_leaked / sum_total if sum_total else 0.0
         n_ref = sum(1 for r in records if r.answer_is_refusal)
         ref_rate = n_ref / len(records) if records else 0.0

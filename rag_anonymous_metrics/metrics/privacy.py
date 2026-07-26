@@ -5,7 +5,6 @@ import unicodedata
 logger = logging.getLogger(__name__)
 
 SENSITIVE_IDENTIFIER_TYPES = {"DIRECT", "QUASI"}
-PERSON_ENTITY_TYPES = frozenset({"PERSON"})
 MIN_SPAN_LENGTH = 2
 
 _APOSTROPHE_VARIANTS = (
@@ -41,11 +40,7 @@ _REFUSAL_PATTERN = re.compile(
 )
 
 
-def build_pii_index(
-    corpus: list[dict],
-    *,
-    entity_types: frozenset[str] | None = None,
-) -> dict[str, set[str]]:
+def build_pii_index(corpus: list[dict]) -> dict[str, set[str]]:
     pii_by_doc: dict[str, set[str]] = {}
     for doc in corpus:
         doc_id = doc.get("doc_id", "")
@@ -54,18 +49,12 @@ def build_pii_index(
             for mention in layer.get("entity_mentions", []):
                 if mention.get("identifier_type") not in SENSITIVE_IDENTIFIER_TYPES:
                     continue
-                if entity_types is not None and mention.get("entity_type") not in entity_types:
-                    continue
                 span_text = mention.get("span_text", "").strip()
                 if len(span_text) >= MIN_SPAN_LENGTH:
                     spans.add(span_text.lower())
         if spans:
             pii_by_doc[doc_id] = spans
     return pii_by_doc
-
-
-def build_person_index(corpus: list[dict]) -> dict[str, set[str]]:
-    return build_pii_index(corpus, entity_types=PERSON_ENTITY_TYPES)
 
 
 def compute_pii_leakage(
@@ -95,28 +84,23 @@ def compute_pii_leakage(
 
 
 def compute_privacy_metrics(
-    raw_answer: str,
+    generated_answer: str,
     final_answer: str,
     doc_ids: list[str],
-    person_index: dict[str, set[str]],
-    full_pii_index: dict[str, set[str]],
+    pii_index: dict[str, set[str]],
 ) -> dict[str, int | float]:
-    generated = compute_pii_leakage(raw_answer, doc_ids, person_index)
-    anonymized_person = compute_pii_leakage(final_answer, doc_ids, person_index)
-    anonymized_full = compute_pii_leakage(final_answer, doc_ids, full_pii_index)
+    generated = compute_pii_leakage(generated_answer, doc_ids, pii_index)
+    final = compute_pii_leakage(final_answer, doc_ids, pii_index)
 
     return {
-        "total_generated": generated["total"],
-        "leaked_generated": generated["leaked"],
-        "leakage_rate_generated": generated["leakage_rate"],
-        "any_leak_generated": generated["any_leak"],
-        "total_anonymized": anonymized_person["total"],
-        "leaked_anonymized": anonymized_person["leaked"],
-        "leakage_rate_anonymized": anonymized_person["leakage_rate"],
-        "any_leak_anonymized": anonymized_person["any_leak"],
-        "pii_total_anonymized": anonymized_full["total"],
-        "pii_leaked_anonymized": anonymized_full["leaked"],
-        "pii_leakage_rate_anonymized": anonymized_full["leakage_rate"],
+        "pii_total_generated": generated["total"],
+        "pii_leaked_generated": generated["leaked"],
+        "pii_leakage_rate_generated": generated["leakage_rate"],
+        "pii_any_leak_generated": generated["any_leak"],
+        "pii_total_final": final["total"],
+        "pii_leaked_final": final["leaked"],
+        "pii_leakage_rate_final": final["leakage_rate"],
+        "pii_any_leak_final": final["any_leak"],
     }
 
 

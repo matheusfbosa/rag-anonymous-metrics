@@ -12,6 +12,7 @@ from rag_anonymous import build_llm
 
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
+from rag_anonymous_metrics.questions_filter import apply_questions_filter
 
 THRESHOLD = 0.9
 SEPARATION = 0.3
@@ -19,11 +20,12 @@ SEPARATION = 0.3
 
 def check_judge() -> int:
     cfg = Settings.load()
-    return asyncio.run(_run(cfg.judge_model, cfg.dataset, cfg.max_questions))
+    return asyncio.run(_run(cfg.judge_model, cfg.dataset, cfg.questions_filter))
 
 
-async def _run(judge, dataset, n):
-    questions = load_questions(dataset=dataset)[:n]
+async def _run(judge, dataset, questions_filter):
+    all_questions = load_questions(dataset=dataset)
+    questions = apply_questions_filter(all_questions, questions_filter)
     if not questions:
         print(f"No questions in {dataset}.")
         return 2

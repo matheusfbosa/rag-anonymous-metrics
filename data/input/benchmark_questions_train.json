@@ -1,422 +1,722 @@
 [
   {
-    "id": "q01",
+    "id": "1",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-80593",
     "question": "In ECHR case 001-80593 (application no. 47297/99 against Turkey), which illegal organisation was the applicant suspected of assisting?",
     "ground_truth": "The PKK (the Kurdistan Workers' Party)."
   },
   {
-    "id": "q02",
+    "id": "2",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-59335",
     "question": "In ECHR case 001-59335 (application no. 29851/96 against Turkey), which political party organised the meeting at which the applicant made a speech?",
     "ground_truth": "The People's Labour Party (Halkın Emek Partisi, HEP)."
   },
   {
-    "id": "q03",
+    "id": "3",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-90194",
     "question": "In ECHR case 001-90194 (application no. 36244/06 against Denmark), which body grants leave to appeal to the Supreme Court?",
     "ground_truth": "The Leave to Appeal Board (Procesbevillingsnævnet)."
   },
   {
-    "id": "q04",
+    "id": "4",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-84741",
     "question": "In ECHR case 001-84741 (application no. 29366/03 against Poland), to which government ministry did the Agent representing the Polish Government belong?",
     "ground_truth": "The Ministry of Foreign Affairs."
   },
   {
-    "id": "q05",
+    "id": "5",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-75454",
     "question": "In ECHR case 001-75454 (application no. 32570/03 against the United Kingdom), the applicant's case was adjourned to await a judgment from which judicial body in Bellinger v. Bellinger?",
     "ground_truth": "The House of Lords."
   },
   {
-    "id": "q06",
+    "id": "6",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-58609",
     "question": "In ECHR case 001-58609 (application no. 30280/96 against the United Kingdom), from which authority did the applicant seek compensation in the High Court proceedings?",
     "ground_truth": "The Ministry of Defence."
   },
   {
-    "id": "q07",
+    "id": "7",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-57546",
     "question": "In ECHR case 001-57546 (application no. 10300/83 against Germany), to which court did the applicant apply, claiming a breach of the protection of human dignity?",
     "ground_truth": "The Federal Constitutional Court (Bundesverfassungsgericht)."
   },
   {
-    "id": "q08",
+    "id": "8",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-106918",
     "question": "In ECHR case 001-106918 (application no. 36801/06 against Sweden), to which court did the applicant appeal against the decision by letter?",
     "ground_truth": "The County Administrative Court (länsrätten)."
   },
   {
-    "id": "q09",
+    "id": "9",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-70538",
     "question": "In ECHR case 001-70538 (application no. 66689/01 against Turkey), of membership of which illegal armed organisation was the applicant suspected?",
     "ground_truth": "The Revolutionary Communists' Union of Turkey (Türkiye İhtilalci Komünistler Birliği, TIKB)."
   },
   {
-    "id": "q10",
+    "id": "10",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-158945",
     "question": "In ECHR case 001-158945 (application no. 26589/06 against Turkey), which pro-Kurdish political party is referred to in the case?",
     "ground_truth": "The Democracy Party (DEP)."
   },
   {
-    "id": "q11",
+    "id": "11",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-91042",
     "question": "In ECHR case 001-91042 (application no. 5138/04 against Turkey), of which illegal armed organisation was the applicant suspected of being a member?",
     "ground_truth": "The PKK (the Workers' Party of Kurdistan)"
   },
   {
-    "id": "q12",
+    "id": "12",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-73062",
     "question": "In ECHR case 001-73062 (application no. 42596/98 against Turkey), in connection with an investigation into which illegal organisation were the applicants arrested?",
     "ground_truth": "The THKP-C Dev Yol (Turkish People's Liberation Party-Front - Revolutionary Way)"
   },
   {
-    "id": "q13",
+    "id": "13",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-70168",
     "question": "In ECHR case 001-70168 (application no. 45718/99 against Turkey), membership of which illegal organisation was the applicant suspected of?",
     "ground_truth": "The TDKP/GKB (Turkish Revolutionary Communist Party / Young Communist Union)"
   },
   {
-    "id": "q14",
+    "id": "14",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-83747",
     "question": "In ECHR case 001-83747 (application no. 38007/02 against Poland), with what offence was the applicant charged?",
     "ground_truth": "Drug trafficking"
   },
   {
-    "id": "q15",
+    "id": "15",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-84618",
     "question": "In ECHR case 001-84618 (application no. 27225/02 against Turkey), of which non-governmental organisation were the applicants board members?",
     "ground_truth": "The Pir Sultan Abdal Cultural Association"
   },
   {
-    "id": "q16",
+    "id": "16",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-166682",
     "question": "In ECHR case 001-166682 (application no. 29483/09 against Turkey), of which political party was the applicant the vice-president?",
     "ground_truth": "HAK-PAR (the Rights and Freedoms Party)"
   },
   {
-    "id": "q17",
+    "id": "17",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-107258",
     "question": "In ECHR case 001-107258 (application no. 10450/08 against Turkey), which public authority seized the applicant's plot of land for the construction of a highway?",
     "ground_truth": "The General Directorate of Highways"
   },
   {
-    "id": "q18",
+    "id": "18",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-93333",
     "question": "In ECHR case 001-93333 (application no. 29940/06 against Poland), on suspicion of which offence was the applicant remanded in custody?",
     "ground_truth": "Murder"
   },
   {
-    "id": "q19",
+    "id": "19",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-92883",
     "question": "In ECHR case 001-92883 (application no. 30279/07 against Poland), besides unlawful possession of firearms and gang membership, with which trafficking offence was the applicant charged?",
     "ground_truth": "Drug trafficking"
   },
   {
-    "id": "q20",
+    "id": "20",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-94125",
     "question": "In ECHR case 001-94125 (application no. 24801/05 against Turkey), during the commission of which crime was the applicant arrested?",
     "ground_truth": "A bank robbery"
   },
   {
-    "id": "q21",
+    "id": "21",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-88513",
     "question": "In ECHR case 001-88513 (application no. 22930/05 against Poland), on suspicion of which offence was the applicant arrested?",
     "ground_truth": "Murder"
   },
   {
-    "id": "q22",
+    "id": "22",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-99176",
     "question": "In ECHR case 001-99176 (application no. 39631/06 against Poland), the reasonable suspicion that the applicant was guilty of which offence was relied on for his pre-trial detention?",
     "ground_truth": "Fraud"
   },
   {
-    "id": "q23",
+    "id": "23",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-126128",
     "question": "In ECHR case 001-126128 (application no. 3042/05 against Turkey), membership of which illegal organisation was the applicant suspected of?",
     "ground_truth": "The TKP/ML-TIKKO (Communist Party of Turkey/Marxist-Leninist Turkish Workers and Peasants' Liberation Army)"
   },
   {
-    "id": "q24",
+    "id": "24",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-90973",
     "question": "In ECHR case 001-90973 (application no. 18403/91 against Turkey), with which Convention institution was the application originally lodged?",
     "ground_truth": "The European Commission of Human Rights"
   },
   {
-    "id": "q25",
+    "id": "25",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-80303",
     "question": "In ECHR case 001-80303 (application no. 36391/02 against Turkey), in support of whose imprisoned leader was the applicant accused of participating in an illegal demonstration?",
     "ground_truth": "The PKK (the Kurdistan Workers' Party)"
   },
   {
-    "id": "q26",
+    "id": "26",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-92416",
     "question": "In ECHR case 001-92416 (application no. 46949/07 against Poland), besides tax evasion and forgery, of which offence was the applicant suspected on arrest?",
     "ground_truth": "Bribery"
   },
   {
-    "id": "q27",
+    "id": "27",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-93448",
     "question": "In ECHR case 001-93448 (application no. 18623/03 against Turkey), in the activities of which illegal organisation was the applicant suspected of involvement?",
     "ground_truth": "The PKK (the Workers' Party of Kurdistan)"
   },
   {
-    "id": "q28",
+    "id": "28",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-83632",
     "question": "In ECHR case 001-83632 (application no. 31080/02 against Turkey), what position did the first applicant hold at the weekly newspaper Yedinci Gündem?",
     "ground_truth": "Editor-in-chief"
   },
   {
-    "id": "q29",
+    "id": "29",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-83402",
     "question": "In ECHR case 001-83402 (application no. 73283/01 against Turkey), of involvement with which illegal organisation was the applicant accused?",
     "ground_truth": "The PKK"
   },
   {
-    "id": "q30",
+    "id": "30",
+    "category": "factual",
     "level": "easy",
     "source_doc_id": "001-61631",
     "question": "In ECHR case 001-61631 (application no. 6214/02 against Poland), to which government official did the applicant complain in a letter about the slow progress of the proceedings?",
     "ground_truth": "The Minister of Justice"
   },
   {
-    "id": "q31",
+    "id": "31",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-162024",
     "question": "In ECHR case 001-162024 (application no. 29869/13 against Poland), what treatment did the applicant allege the \"dangerous detainee\" regime amounted to?",
     "ground_truth": "Inhuman and degrading treatment."
   },
   {
-    "id": "q32",
+    "id": "32",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-59518",
     "question": "In ECHR case 001-59518 (application no. 20491/92 against Switzerland), what did the applicant allege the Assize Court had done?",
     "ground_truth": "That the Assize Court had tried and convicted him in absentia."
   },
   {
-    "id": "q33",
+    "id": "33",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-80849",
     "question": "In ECHR case 001-80849 (application no. 28152/02 against Turkey), what conduct did the applicants complain about?",
     "ground_truth": "The non-enforcement of court decisions given in their favour."
   },
   {
-    "id": "q34",
+    "id": "34",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-61901",
     "question": "In ECHR case 001-61901 (application no. 41956/98 against Turkey), why did the applicant say his hearing had been unfair?",
     "ground_truth": "That he had been denied a fair hearing on account of the presence of a military judge on the bench of the State Security Court that tried and convicted him."
   },
   {
-    "id": "q35",
+    "id": "35",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-72015",
     "question": "In ECHR case 001-72015 (application no. 52562/99 against Denmark), what arrangement did the applicants say violated their freedom of association?",
     "ground_truth": "The existence of closed-shop agreements in their respective areas of employment."
   },
   {
-    "id": "q36",
+    "id": "36",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-97054",
     "question": "In ECHR case 001-97054 (application no. 36137/04 against Poland), proceedings before which body did the applicant complain about?",
     "ground_truth": "The Polish-German Reconciliation Foundation."
   },
   {
-    "id": "q37",
+    "id": "37",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-59097",
     "question": "In ECHR case 001-59097 (application no. 34720/97 against Ireland), which Convention Articles did the applicants say section 52 of the Offences against the State Act 1939 violated?",
     "ground_truth": "Articles 6, 8 and 10 of the Convention."
   },
   {
-    "id": "q38",
+    "id": "38",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-79996",
     "question": "In ECHR case 001-79996 (application no. 62617/00 against the United Kingdom), what monitoring did the applicant complain about?",
     "ground_truth": "The monitoring of her telephone calls, e-mail correspondence and Internet usage."
   },
   {
-    "id": "q39",
+    "id": "39",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-113142",
     "question": "In ECHR case 001-113142 (application no. 10781/08 against Austria), what procedural omission did the applicant rely on?",
     "ground_truth": "That neither the Appeals Commission nor the Constitutional Court had held an oral hearing."
   },
   {
-    "id": "q40",
+    "id": "40",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-147045",
     "question": "In ECHR case 001-147045 (application no. 8307/11 against Sweden), what aspect of the detention order did the applicant challenge?",
     "ground_truth": "The proportionality of the detention order."
   },
   {
-    "id": "q41",
+    "id": "41",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-70871",
     "question": "In ECHR case 001-70871 (application no. 64204/01 against Poland), what was the substance of the applicants' complaint about the proceedings on their action for payment?",
     "ground_truth": "The excessive length of the civil proceedings."
   },
   {
-    "id": "q42",
+    "id": "42",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-66727",
     "question": "In ECHR case 001-66727 (application no. 65017/01 against Poland), what did the applicant complain about regarding the conduct of his civil case?",
     "ground_truth": "The excessive length of the proceedings."
   },
   {
-    "id": "q43",
+    "id": "43",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-107264",
     "question": "In ECHR case 001-107264 (application no. 10458/08 against Turkey), what did the applicants seek compensation for before the domestic courts?",
     "ground_truth": "The de facto expropriation of their land."
   },
   {
-    "id": "q44",
+    "id": "44",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-70372",
     "question": "In ECHR case 001-70372 (application no. 64207/01 against Poland), what was the substance of the applicant's complaint concerning his divorce petition?",
     "ground_truth": "The excessive length of the proceedings."
   },
   {
-    "id": "q45",
+    "id": "45",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-94238",
     "question": "In ECHR case 001-94238 (application no. 16160/90 against Turkey), what did the applicant complain he had been deprived of?",
     "ground_truth": "Access to, and the use and possession of, his home and property."
   },
   {
-    "id": "q46",
+    "id": "46",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-79036",
     "question": "In ECHR case 001-79036 (application no. 2065/03 against Poland), why did the applicant say the proceedings on her cassation appeal had been unfair?",
     "ground_truth": "Because the same judge had sat on the panel giving the second-instance judgment on the merits and on the panel rejecting the cassation appeal against that judgment."
   },
   {
-    "id": "q47",
+    "id": "47",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-151047",
     "question": "In ECHR case 001-151047 (application no. 53645/10 against Turkey), what treatment did the applicant allege he had been subjected to during his interrogation at the police station?",
     "ground_truth": "Being beaten, having his ears pulled and being subjected to falaka (beating on the soles of his feet)."
   },
   {
-    "id": "q48",
+    "id": "48",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-77315",
     "question": "In ECHR case 001-77315 (application no. 75870/01 against Poland), what was the substance of the complaint communicated to the Government?",
     "ground_truth": "The length of the proceedings."
   },
   {
-    "id": "q49",
+    "id": "49",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-86687",
     "question": "In ECHR case 001-86687 (application no. 43837/06 against Poland), what conduct affecting his correspondence did the applicant complain about?",
     "ground_truth": "The censorship of his correspondence by the authorities."
   },
   {
-    "id": "q50",
+    "id": "50",
+    "category": "factual",
     "level": "medium",
     "source_doc_id": "001-86678",
     "question": "In ECHR case 001-86678 (application no. 24322/02 against Poland), what conduct concerning his correspondence did the applicant complain about?",
     "ground_truth": "The monitoring of his correspondence."
   },
   {
-    "id": "q51",
+    "id": "51",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-93358",
     "question": "In ECHR case 001-93358 (application no. 44034/07 against Denmark), what was the 'tax asset stripping' scheme that formed the background to the civil proceedings, and what was the central legal question that the domestic High Court proceedings had to resolve?",
     "ground_truth": "Tax asset stripping (selskabstømmersager) was a criminal scheme whereby persons bought up and sold numerous inactive solvent private limited companies within a short period, stripping them of assets including deposits earmarked for corporation tax. Approximately 1,600 companies with tax debts exceeding DKK 2 billion were stripped between the late 1980s and 1994. In the applicant's civil proceedings, the trustee in bankruptcy of HOP no. 49 alleged that the applicant (as the seller) and a bank (BG Bank A/S) were jointly and severally liable for stripping the company of assets in connection with the 1992 sale. The central legal question was the liability of the buyer's bank and the buyer's attorney and accountant for the advice they had provided — a question whose answer was awaited from a Supreme Court judgment in the parallel 'Else Thrane' case."
   },
   {
-    "id": "q52",
+    "id": "52",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-79486",
     "question": "In ECHR case 001-79486 (application no. 37850/97 against Turkey), which Convention articles and Protocol provisions did the applicant allege were violated, and what was the outcome of the domestic investigation into his complaints about the conduct of the security forces?",
     "ground_truth": "The applicant alleged violations of Articles 3, 6, 8, 13 and 14 of the Convention and Article 1 of Protocol No. 1. The domestic investigation resulted in a decision of non-prosecution: the Lice Chief Public Prosecutor issued a decision of non-jurisdiction and transferred the case to the Lice District Governor's office under the Law on Prosecution of Civil Servants. After a preliminary investigation, Inspector İlbaş concluded the applicant's allegations were groundless — finding that the security forces had intervened following a PKK road block and had carried out searches in the villages with due respect for citizens. The Lice District Administrative Council therefore issued a decision of non-prosecution, which was upheld by the Regional Administrative Court."
   },
   {
-    "id": "q53",
+    "id": "53",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-60532",
     "question": "In ECHR case 001-60532 (application no. 51279/99 against France), what were the different outcomes of the domestic criminal proceedings at each level, and on what legal reasoning did the Paris Court of Appeal convict the applicants despite the first-instance acquittal?",
     "ground_truth": "The Paris Criminal Court acquitted both applicants at first instance, finding the journalist had merely quoted extracts from a reliable report without distorting it and had acted in good faith pursuing a legitimate aim. The Paris Court of Appeal convicted them, sentencing each to a fine of FRF 5,000 and ordering them to pay the King of Morocco FRF 1 in damages and FRF 10,000 in costs. The Court of Appeal reasoned that: the desire to implicate the King in person was tainted with malicious intent; the journalist had not checked the accuracy of the OGD's comments or verified whether the 1994 report remained valid in 1995; he had not contacted Moroccan officials for their observations; and he had omitted to mention Morocco's White Paper on anti-drug trafficking policy. The Criminal Division of the Court of Cassation dismissed the applicants' further appeal, confirming the Court of Appeal's assessment."
   },
   {
-    "id": "q54",
+    "id": "54",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-157755",
     "question": "In ECHR case 001-157755 (application no. 7505/06 against Turkey), what specific procedural failures did the Supreme Military Administrative Court commit in assessing the applicant's compensation claim, and on what grounds did the dissenting judge disagree with the majority?",
     "ground_truth": "The Supreme Military Administrative Court failed to address the applicant's key allegation — that he had been unable to see a doctor for approximately one week because no doctor was present at the regiment infirmary — other than by stating he had 'contacted the infirmary and started receiving medical treatment.' It also failed to respond to the applicant's repeated requests to have his witnesses heard and the allegedly absent military doctor summoned. The majority relied on the expert report of 6 April 2005. The dissenting judge disagreed because that report had not established: the specific cause of the corneal ulcer; whether the injury was connected to military service; or what bearing the one-to-two week delay had on the outcome. The dissenting judge concluded the court should not have decided the case without obtaining a new, clarified expert report."
   },
   {
-    "id": "q55",
+    "id": "55",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-58456",
     "question": "In ECHR case 001-58456 (application no. 34406/97 against France), concerning inheritance rights of adulterine children under Article 760 of the Civil Code, which Convention and Protocol provisions did the applicant invoke before the Nîmes Court of Appeal, and how did the Court of Cassation distinguish inheritance rights from Article 8 private and family life?",
     "ground_truth": "Before the Nîmes Court of Appeal the applicant argued that Article 760 was incompatible with Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1. The Court of Cassation held that inheritance rights had nothing to do with respect for private and family life guaranteed by Article 8 of the Convention."
   },
   {
-    "id": "q56",
+    "id": "56",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-87156",
     "question": "In ECHR case 001-87156 (application no. 1638/03 against Austria), what was the applicant's legal argument against the exclusion order under both domestic law and the Convention, and what was the unusual procedural route by which the case reached the Grand Chamber?",
     "ground_truth": "The applicant argued that the ten-year exclusion order violated Article 8 of the Convention since he was a minor who had come to Austria at age six, his entire family had acquired Austrian nationality and lived in Austria, and he had no relatives or social contacts in Bulgaria and could not speak Bulgarian. Under domestic law, he relied on section 38(1)(4) of the Aliens Act 1997, which he argued prohibited exclusion orders against aliens lawfully resident from an early age. The Administrative Court rejected this, holding that its case-law required lawful residence from age three or younger. The case reached the Grand Chamber through an Article 43 referral at the respondent Government's request, after a Chamber of the First Section had already delivered a judgment finding a violation of Article 8 by four votes to three — making it a second-instance Grand Chamber rehearing, not a first-instance relinquishment."
   },
   {
-    "id": "q57",
+    "id": "57",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-60555",
     "question": "In ECHR case 001-60555 (application no. 33402/96 against France), what was the applicant's double-punishment argument, which Convention provision and Protocol article did he invoke, and how did the domestic Court of Cassation reject that argument?",
     "ground_truth": "The applicant argued that serving two years' imprisonment in default of payment of a customs fine — after already completing his five-year criminal prison sentence — amounted to being punished twice for the same offence, contrary to the non bis in idem principle. He invoked Article 6 § 1 of the Convention and Article 4 of Protocol No. 7, relying on the Court's judgment in Jamil v. France (1995) in which imprisonment in default was found to constitute a 'penalty.' The Court of Cassation dismissed the appeal on two grounds: first, that the public hearing requirement of Article 6 § 1 applies only to proceedings determining a criminal charge and not to applications for concurrent sentencing; and second, that imprisonment in default possesses the legal character of a means of enforcement — not a penalty — so the concurrent-sentencing rule did not apply."
   },
   {
-    "id": "q58",
+    "id": "58",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-80364",
     "question": "In ECHR case 001-80364 (application no. 32581/96 against Turkey), the applicant alleged 'Palestinian hanging' and electric shocks at the anti-terror branch of the Istanbul Security Directorate. Which Convention complaints followed separate admissibility tracks before the Court, and on what dates was the Article 3 complaint declared admissible and the Article 6 legal-assistance complaint taken up under Article 29 § 3?",
     "ground_truth": "The Article 3 complaint concerning ill-treatment in police custody was declared admissible on 7 October 2003. The complaint under Articles 6 § 1 and 6 § 3(c) concerning denial of legal assistance during questioning was not declared admissible at that stage; on 10 October 2006 the Court decided to examine its merits at the same time as its admissibility under Article 29 § 3."
   },
   {
-    "id": "q59",
+    "id": "59",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-58114",
     "question": "In ECHR case 001-58114 (application no. 21835/93 against Austria), what specific procedural defect affected the applicant's compensation proceedings, and on what legal standard did both domestic courts refuse his compensation claim?",
     "ground_truth": "The specific procedural defect was that the principal public prosecutor's office submitted written observations to the Vienna Court of Appeal recommending dismissal of the applicant's compensation appeal — but those observations were never communicated to the applicant, who was therefore unable to respond to them. Both the Regional Court (Review Division) and the Court of Appeal sat in private, with no prosecution representative attending the deliberations. Both courts refused the compensation claim under section 2(1)(b) of the Compensation (Criminal Proceedings) Act 1969, which required that the suspicion against the detained person be fully 'dispelled' — meaning it must be positively established that the person was not punishable for the conduct in question. Both courts found that, although the criminal proceedings had been discontinued, the suspicion had not been sufficiently dispelled because the evidence merely gave rise to residual doubt rather than positive exculpation."
   },
   {
-    "id": "q60",
+    "id": "60",
+    "category": "factual",
     "level": "hard",
     "source_doc_id": "001-57880",
     "question": "In ECHR case 001-57880 (application no. 13580/88 against Germany), which Convention provisions were alleged violated, what was the specific discriminatory measure challenged, and how did the Federal Constitutional Court repeatedly justify maintaining the distinction between men and women?",
     "ground_truth": "The applicant alleged violations of Article 14 of the Convention taken together with Article 1 of Protocol No. 1 and Article 4 § 3(d). The specific measure was the fire service levy (Feuerwehrabgabe) imposed only on male adult residents under section 43 of the Baden-Württemberg Land Fire Brigades Act 1978, requiring only men to either serve in the fire brigade or pay a financial contribution in lieu. The Federal Constitutional Court repeatedly upheld this distinction on the ground that objective reasons justified treating men and women differently because of the risks inherent in fire brigade service; that there had been no fundamental change in legal opinion or new facts requiring departure from its settled case-law; and that the fact that certain other Länder had adopted sex-neutral fire brigade obligations did not oblige it to alter its position, since the decisive factor was that objective grounds for the distinction continued to exist."
+  },
+  {
+    "id": "61",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-92408",
+    "question": "In the case against Poland concerning financial fraud, who was the applicant?",
+    "ground_truth": "Mr Kazimierz Klimkiewicz"
+  },
+  {
+    "id": "62",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-83610",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "Mr Mustafa Karatepe"
+  },
+  {
+    "id": "63",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-88564",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "Ms Emine Araç"
+  },
+  {
+    "id": "64",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-97411",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "Ms Bahar Yeşilyurt"
+  },
+  {
+    "id": "65",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-96442",
+    "question": "In the case against Poland concerning several counts of robbery, who was the applicant?",
+    "ground_truth": "Mr Krzysztof Kulik"
+  },
+  {
+    "id": "66",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-67482",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "Mrs Ayten Ünal Tekeli"
+  },
+  {
+    "id": "67",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-72158",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "Ms Maria Kaczmarczyk"
+  },
+  {
+    "id": "68",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-90786",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "Ms Şerife Yiğit"
+  },
+  {
+    "id": "69",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-90287",
+    "question": "In the case against Poland concerning proceedings before the Warszawa District Court had, who was the applicant?",
+    "ground_truth": "Mr Eugeniusz Ludwiczak"
+  },
+  {
+    "id": "70",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-92748",
+    "question": "In the case against Poland concerning the overall length of the proceedings, who was the applicant?",
+    "ground_truth": "Mr Józef Pabjan"
+  },
+  {
+    "id": "71",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-86359",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "Mr Ayhan Akyiğit"
+  },
+  {
+    "id": "72",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-94750",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "Mr K.T. Sürek"
+  },
+  {
+    "id": "73",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-159917",
+    "question": "In the case against Poland concerning murder committed with the use of firearms, who represented the applicant before the Court?",
+    "ground_truth": "Mr P. Osik"
+  },
+  {
+    "id": "74",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-87556",
+    "question": "In the case against Poland concerning proceedings before the Pruszków District Court had, who represented the applicant before the Court?",
+    "ground_truth": "Ms M. Gąsiorowska"
+  },
+  {
+    "id": "75",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-89960",
+    "question": "In the case against Poland concerning armed robbery and theft committed as part of an organised criminal gan, who represented the applicant before the Court?",
+    "ground_truth": "Ms A. Pietras"
+  },
+  {
+    "id": "76",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-159916",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "Mr T. Bąk"
+  },
+  {
+    "id": "77",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-69895",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "Mr İbrahim Gemici"
+  },
+  {
+    "id": "78",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-72154",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "Mr M. İşeri"
+  },
+  {
+    "id": "79",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-88723",
+    "question": "In the case against Poland concerning proceedings before the Nowy Dwór Mazowiecki Distri, who represented the applicant before the Court?",
+    "ground_truth": "Ms M. Gąsiorowska"
+  },
+  {
+    "id": "80",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-94129",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "Mr K. Koç"
+  },
+  {
+    "id": "81",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-61313",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr K. Drzewicki"
+  },
+  {
+    "id": "82",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-90501",
+    "question": "In the case against Poland concerning the proceedings were too lengthy, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
+  },
+  {
+    "id": "83",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-88579",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
+  },
+  {
+    "id": "84",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-78580",
+    "question": "In the case against Poland concerning fraud, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
+  },
+  {
+    "id": "85",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-81370",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
+  },
+  {
+    "id": "86",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-76756",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
+  },
+  {
+    "id": "87",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-99411",
+    "question": "In the case against Poland concerning proceedings before the Warsaw District Court had b, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
+  },
+  {
+    "id": "88",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-76070",
+    "question": "In the case against Poland concerning manslaughter, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
+  },
+  {
+    "id": "89",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-61365",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr K. Drzewicki"
+  },
+  {
+    "id": "90",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-86006",
+    "question": "In the case against Poland concerning armed robbery, who was the Agent representing the Government before the Court?",
+    "ground_truth": "Mr J. Wołąsiewicz"
   }
 ]

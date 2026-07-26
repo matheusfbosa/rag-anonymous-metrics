@@ -10,23 +10,20 @@ class QueryRecord:
     ground_truth: str
     llm_model: str
     judge_model: str
-    raw_answer: str
+    generated_answer: str
     final_answer: str
     answer_is_refusal: bool
     contexts: list[str]
     doc_ids: list[str]
     dataset: str
-    total_generated: int
-    leaked_generated: int
-    leakage_rate_generated: float
-    any_leak_generated: int
-    total_anonymized: int
-    leaked_anonymized: int
-    leakage_rate_anonymized: float
-    any_leak_anonymized: int
-    pii_total_anonymized: int
-    pii_leaked_anonymized: int
-    pii_leakage_rate_anonymized: float
+    pii_total_generated: int
+    pii_leaked_generated: int
+    pii_leakage_rate_generated: float
+    pii_any_leak_generated: int
+    pii_total_final: int
+    pii_leaked_final: int
+    pii_leakage_rate_final: float
+    pii_any_leak_final: int
     faithfulness: float | None = None
     context_precision: float | None = None
     context_recall: float | None = None

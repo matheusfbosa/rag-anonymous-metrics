@@ -23,6 +23,7 @@ flowchart TD
 
     subgraph rag [RAG Pipeline · per question × strategy]
         retriever["Retriever\n(Elasticsearch, k chunks)"] --> generator["Generator LLM"] --> anon["Anonymizer\n(offline: no-op | on-demand: Presidio)"] --> final_answer["final_answer"]
+        generator --> generated_answer["generated_answer"]
     end
 
     pii_index --> privacy
@@ -33,6 +34,8 @@ flowchart TD
     privacy --> jsonl["JSONL per run"]
     utility --> jsonl
 ```
+
+
 
 
 
@@ -61,6 +64,8 @@ rag-anonymous-metrics/
 ├── Makefile
 └── .env.example
 ```
+
+
 
 ## Metrics
 
@@ -134,6 +139,8 @@ $$
 
 ### PII leakage rate
 
+**Naming.** Pipeline stages are `generated` (LLM output, `generated_answer`) and `final` (system output, `final_answer`). Privacy metrics use domain prefix `pii_` and stage suffix `_generated` or `_final` — e.g. `pii_leakage_rate_final`, `pii_total_generated`.
+
 Let $\mathcal{D}_{\mathrm{ret}}$ be the set of **source document IDs** associated with chunks returned for a query. From TAB annotations, define per-document sensitive span sets $\mathcal{P}_d$ as lowercased `span_text` values with `identifier_type` $\in \mathrm{DIRECT},\mathrm{QUASI}$ and length $\geq 2$ after trimming. The **retrieval-conditioned PII inventory** is
 
 $$
@@ -146,7 +153,7 @@ $$
 \mathcal{L} =  p \in \mathcal{P} \mid p \text{ occurs in } a_{\mathrm{low}} .
 $$
 
-**Per-query quantities:** `total_pii` $= |\mathcal{P}|$, `leaked_pii` $= |\mathcal{L}|$, and
+**Per-query quantities:** `pii_total_final` $= |\mathcal{P}|$, `pii_leaked_final` $= |\mathcal{L}|$, and
 
 $$
 L = \begin{cases}
@@ -173,6 +180,8 @@ Macro answers *"what is the typical per-query leakage?"*; micro answers *"what s
 
 ## Setup
 
+
+
 ### 1. Ollama
 
 The pipeline talks to Ollama over its HTTP API at `RAG_ANON_OLLAMA_BASE_URL` (default `http://localhost:11434`). Two equivalent ways to bring it up — pick one:
@@ -194,6 +203,8 @@ make docker-ollama-pull-models    # pull models inside the container
 make docker-down                  # stop the container when done
 ```
 
+
+
 ### 2. Python package
 
 ```sh
@@ -206,7 +217,11 @@ pip install -e .
 cp .env.example .env
 ```
 
+
+
 ## Usage
+
+
 
 ### Prerequisites
 
@@ -216,23 +231,24 @@ cp .env.example .env
    RAG_ANON_ANONYMIZER_STRATEGY=offline RAG_ANON_CORPUS_DATASET=dev make ingest
    RAG_ANON_ANONYMIZER_STRATEGY=ondemand RAG_ANON_CORPUS_DATASET=dev make ingest
   ```
-
 2. Sanity-check the judge
 
 Verifies the judge LLM before trusting its scores: feeds each question's own ground truth as the answer (`factual_correctness` should be ~1.0) and another question's ground truth as a control (should be ~0.0). Exits non-zero if the judge is unreliable.
 
 ```sh
 make check-judge
-RAG_METRICS_JUDGE_MODEL=gemma4:12b RAG_METRICS_MAX_QUESTIONS=5 make check-judge
+RAG_METRICS_JUDGE_MODEL=gemma4:12b RAG_METRICS_QUESTIONS_FILTER=1-5 make check-judge
 ```
 
-It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, and `RAG_METRICS_MAX_QUESTIONS`.
+It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, and `RAG_METRICS_QUESTIONS_FILTER`.
 
 ### Run full evaluation (Offline and On-Demand strategies)
 
 ```sh
 make run
 ```
+
+
 
 ### Run a single strategy or corpus dataset
 
@@ -241,33 +257,47 @@ RAG_METRICS_EVAL_STRATEGY=offline make run
 RAG_METRICS_EVAL_STRATEGY=ondemand make run
 RAG_METRICS_CORPUS_DATASET=train make run
 RAG_METRICS_CORPUS_DATASET=test make run
+RAG_METRICS_QUESTIONS_FILTER=identity make run
+RAG_METRICS_QUESTIONS_FILTER=61-90 make run
 ```
 
 `RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching `data/input/benchmark_questions_<dataset>.json` file.
+
+`RAG_METRICS_QUESTIONS_FILTER` limits which benchmark questions are evaluated:
+
+- unset or `all` — every question
+- `factual` / `identity` — filter by the question `category` field
+- `1-60`, `61-90`, … — 1-based inclusive range by position in the JSON file
+
+
 
 ## Output
 
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
   - `results_offline.jsonl` and/or `results_ondemand.jsonl` (depending on `RAG_METRICS_EVAL_STRATEGY`) — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
 
+
+
 ## Configuration
 
 
-| Variable                        | Default                                                    | Description                                                                                                                                                                       |
-| ------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RAG_ANON_CORPUS`               | TAB ECHR URL template                                      | Corpus source (URL or local path) with optional `{dataset}`, used by `rag_anonymous.load_corpus` to build the PII index. `{dataset}` is filled from `RAG_METRICS_CORPUS_DATASET`. |
-| `RAG_ANON_EMBEDDING_MODEL`      | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                                  |
-| `RAG_ANON_ES_URL`               | `http://localhost:9200`                                    | Elasticsearch base URL (shared with `rag-anonymous`)                                                                                                                             |
-| `RAG_ANON_LLM_MODEL`            | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
-| `RAG_ANON_LLM_REASONING`        | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |
-| `RAG_ANON_LLM_TEMPERATURE`      | `0.0`                                                      | Generation temperature                                                                                                                                                            |
-| `RAG_ANON_LOG_LEVEL`            | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                             |
-| `RAG_ANON_LOG_LEVEL_HTTP`       | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                    |
-| `RAG_ANON_LOG_LEVEL_PRESIDIO`   | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                              |
-| `RAG_ANON_OLLAMA_BASE_URL`      | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
-| `RAG_METRICS_CORPUS_DATASET`    | `dev`                                                      | TAB dataset (train/dev/test)                                                                                                                                                      |
-| `RAG_METRICS_EVAL_STRATEGY`     | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                   |
-| `RAG_METRICS_JUDGE_MODEL`       | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                               |
-| `RAG_METRICS_MAX_QUESTIONS`     | `60`                                                       | If set, evaluate only the first N benchmark questions                                                                                                                             |
-| `RAG_METRICS_RESULTS_DIR`       | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
-| `RAG_METRICS_RETRIEVAL_K_DOCS`  | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
+| Variable                       | Default                                                    | Description                                                                                                                                                                       |
+| ------------------------------ | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RAG_ANON_CORPUS`              | TAB ECHR URL template                                      | Corpus source (URL or local path) with optional `{dataset}`, used by `rag_anonymous.load_corpus` to build the PII index. `{dataset}` is filled from `RAG_METRICS_CORPUS_DATASET`. |
+| `RAG_ANON_EMBEDDING_MODEL`     | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                                  |
+| `RAG_ANON_ES_URL`              | `http://localhost:9200`                                    | Elasticsearch base URL (shared with `rag-anonymous`)                                                                                                                              |
+| `RAG_ANON_LLM_MODEL`           | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
+| `RAG_ANON_LLM_REASONING`       | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |
+| `RAG_ANON_LLM_TEMPERATURE`     | `0.0`                                                      | Generation temperature                                                                                                                                                            |
+| `RAG_ANON_LOG_LEVEL`           | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                             |
+| `RAG_ANON_LOG_LEVEL_HTTP`      | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                    |
+| `RAG_ANON_LOG_LEVEL_PRESIDIO`  | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                              |
+| `RAG_ANON_OLLAMA_BASE_URL`     | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
+| `RAG_METRICS_CORPUS_DATASET`   | `dev`                                                      | TAB dataset (train/dev/test)                                                                                                                                                      |
+| `RAG_METRICS_EVAL_STRATEGY`    | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                   |
+| `RAG_METRICS_JUDGE_MODEL`      | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                               |
+| `RAG_METRICS_QUESTIONS_FILTER` | `all`                                                      | `all`, `factual`, `identity`, or a 1-based range (`1-60`, `61-90`, …)                                                                                                             |
+| `RAG_METRICS_RESULTS_DIR`      | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
+| `RAG_METRICS_RETRIEVAL_K_DOCS` | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
+
+

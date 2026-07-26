@@ -16,7 +16,6 @@ from rag_anonymous import (
 
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.metrics.privacy import (
-    build_person_index,
     build_pii_index,
     compute_privacy_metrics,
     is_refusal_answer,
@@ -54,8 +53,7 @@ def build_pipeline(strategy: str, gen_model: str) -> Pipeline:
 def evaluate_question(
     pipeline: Pipeline,
     question_obj: dict,
-    person_index: dict,
-    full_pii_index: dict,
+    pii_index: dict,
     judge_model: str,
     run_id: str,
     dataset: str,
@@ -64,17 +62,17 @@ def evaluate_question(
     question = question_obj["question"]
     result = query_rag(pipeline.chain, pipeline.vectordb, question, k_docs=k_docs)
 
-    raw_answer = response_text(result["response"])
+    generated_answer = response_text(result["response"])
     final_answer = (
-        pipeline.anonymizer.anonymize(raw_answer) if pipeline.anonymizer else raw_answer
+        pipeline.anonymizer.anonymize(generated_answer)
+        if pipeline.anonymizer
+        else generated_answer
     )
 
     contexts = [c["content"] for c in result["retrieved_chunks"]]
     doc_ids = [c["doc_id"] for c in result["retrieved_chunks"]]
 
-    privacy = compute_privacy_metrics(
-        raw_answer, final_answer, doc_ids, person_index, full_pii_index
-    )
+    privacy = compute_privacy_metrics(generated_answer, final_answer, doc_ids, pii_index)
     refusal = is_refusal_answer(final_answer)
 
     return QueryRecord(
@@ -85,7 +83,7 @@ def evaluate_question(
         ground_truth=question_obj.get("ground_truth", ""),
         llm_model=pipeline.gen_model,
         judge_model=judge_model,
-        raw_answer=raw_answer,
+        generated_answer=generated_answer,
         final_answer=final_answer,
         answer_is_refusal=refusal,
         contexts=contexts,
@@ -98,8 +96,7 @@ def evaluate_question(
 def evaluate_strategy(
     strategy: str,
     questions: list[dict],
-    person_index: dict,
-    full_pii_index: dict,
+    pii_index: dict,
     experiment_dir: Path,
     dataset: str,
     k_docs: int,
@@ -132,8 +129,7 @@ def evaluate_strategy(
             evaluate_question(
                 pipeline,
                 q,
-                person_index,
-                full_pii_index,
+                pii_index,
                 judge_m,
                 run_id,
                 dataset=dataset,
@@ -141,9 +137,9 @@ def evaluate_strategy(
             )
         )
 
-    if records and not any(r.total_anonymized for r in records):
+    if records and not any(r.pii_total_final for r in records):
         logger.error(
-            "total_anonymized=0 for all %d records in strategy='%s'; "
+            "pii_total_final=0 for all %d records in strategy='%s'; "
             "PII index (dataset='%s') likely does not match the indexed corpus.",
             len(records), strategy, dataset,
         )
@@ -180,20 +176,14 @@ def run_experiment(
 
     logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
     corpus = load_corpus(dataset)
-    person_index = build_person_index(corpus)
-    full_pii_index = build_pii_index(corpus)
-    logger.info(
-        "PII indexes built: %d docs with PERSON spans, %d docs with full TAB spans",
-        len(person_index),
-        len(full_pii_index),
-    )
+    pii_index = build_pii_index(corpus)
+    logger.info("PII index built: %d docs with annotated spans", len(pii_index))
 
     results = {
         strategy: evaluate_strategy(
             strategy,
             questions,
-            person_index,
-            full_pii_index,
+            pii_index,
             experiment_dir,
             dataset=dataset,
             k_docs=k_docs,
