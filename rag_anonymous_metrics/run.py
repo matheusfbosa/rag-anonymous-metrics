@@ -15,7 +15,12 @@ from rag_anonymous import (
 )
 
 from rag_anonymous_metrics.config import Settings
-from rag_anonymous_metrics.metrics.privacy import build_pii_index, compute_pii_leakage, is_refusal_answer
+from rag_anonymous_metrics.metrics.privacy import (
+    build_person_index,
+    build_pii_index,
+    compute_privacy_metrics,
+    is_refusal_answer,
+)
 from rag_anonymous_metrics.records import QueryRecord, StrategyResult
 
 logger = logging.getLogger(__name__)
@@ -49,7 +54,8 @@ def build_pipeline(strategy: str, gen_model: str) -> Pipeline:
 def evaluate_question(
     pipeline: Pipeline,
     question_obj: dict,
-    pii_index: dict,
+    person_index: dict,
+    full_pii_index: dict,
     judge_model: str,
     run_id: str,
     dataset: str,
@@ -66,7 +72,9 @@ def evaluate_question(
     contexts = [c["content"] for c in result["retrieved_chunks"]]
     doc_ids = [c["doc_id"] for c in result["retrieved_chunks"]]
 
-    privacy = compute_pii_leakage(final_answer, doc_ids, pii_index)
+    privacy = compute_privacy_metrics(
+        raw_answer, final_answer, doc_ids, person_index, full_pii_index
+    )
     refusal = is_refusal_answer(final_answer)
 
     return QueryRecord(
@@ -83,16 +91,15 @@ def evaluate_question(
         contexts=contexts,
         doc_ids=doc_ids,
         dataset=dataset,
-        total_pii=privacy["total_pii"],
-        leaked_pii=privacy["leaked_pii"],
-        leakage_rate=privacy["leakage_rate"],
+        **privacy,
     )
 
 
 def evaluate_strategy(
     strategy: str,
     questions: list[dict],
-    pii_index: dict,
+    person_index: dict,
+    full_pii_index: dict,
     experiment_dir: Path,
     dataset: str,
     k_docs: int,
@@ -122,12 +129,21 @@ def evaluate_strategy(
             width, idx, len(questions), q.get("id", "-"), q["question"],
         )
         records.append(
-            evaluate_question(pipeline, q, pii_index, judge_m, run_id, dataset=dataset, k_docs=k_docs)
+            evaluate_question(
+                pipeline,
+                q,
+                person_index,
+                full_pii_index,
+                judge_m,
+                run_id,
+                dataset=dataset,
+                k_docs=k_docs,
+            )
         )
 
-    if records and not any(r.total_pii for r in records):
+    if records and not any(r.total_anonymized for r in records):
         logger.error(
-            "total_pii=0 for all %d records in strategy='%s'; "
+            "total_anonymized=0 for all %d records in strategy='%s'; "
             "PII index (dataset='%s') likely does not match the indexed corpus.",
             len(records), strategy, dataset,
         )
@@ -164,14 +180,20 @@ def run_experiment(
 
     logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
     corpus = load_corpus(dataset)
-    pii_index = build_pii_index(corpus)
-    logger.info("PII index built: %d documents with sensitive spans", len(pii_index))
+    person_index = build_person_index(corpus)
+    full_pii_index = build_pii_index(corpus)
+    logger.info(
+        "PII indexes built: %d docs with PERSON spans, %d docs with full TAB spans",
+        len(person_index),
+        len(full_pii_index),
+    )
 
     results = {
         strategy: evaluate_strategy(
             strategy,
             questions,
-            pii_index,
+            person_index,
+            full_pii_index,
             experiment_dir,
             dataset=dataset,
             k_docs=k_docs,

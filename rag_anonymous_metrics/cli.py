@@ -60,16 +60,16 @@ def cmd_run_experiment() -> None:
         avg_ctx = _safe_mean(r.context_precision for r in records)
         avg_recall = _safe_mean(r.context_recall for r in records)
         avg_factual = _safe_mean(r.factual_correctness for r in records)
-        macro_avg_leak = _safe_mean(r.leakage_rate for r in records)
-        sum_leaked = sum(r.leaked_pii for r in records)
-        sum_total = sum(r.total_pii for r in records)
+        macro_avg_leak = _safe_mean(r.leakage_rate_anonymized for r in records)
+        sum_leaked = sum(r.leaked_anonymized for r in records)
+        sum_total = sum(r.total_anonymized for r in records)
         micro_avg_leak = sum_leaked / sum_total if sum_total else 0.0
         n_ref = sum(1 for r in records if r.answer_is_refusal)
         ref_rate = n_ref / len(records) if records else 0.0
 
         logger.info(
             "[%-8s] faith=%.3f ctx=%.3f recall=%.3f factual*=%.3f "
-            "leak_macro=%.3f leak_micro=%.3f (%d/%d pii) refusal=%.2f (%d/%d)",
+            "leak_macro=%.3f leak_micro=%.3f (%d/%d) refusal=%.2f (%d/%d)",
             strategy, avg_faith, avg_ctx, avg_recall, avg_factual,
             macro_avg_leak, micro_avg_leak, sum_leaked, sum_total, ref_rate, n_ref, len(records),
         )
@@ -79,7 +79,7 @@ def cmd_run_experiment() -> None:
         "(faith/ctx/recall are conditional on answering; "
         "factual* is end-to-end, counting refusals as 0; "
         "leak_macro=macro-avg of per-question rates, "
-        "leak_micro=micro-avg (total leaked / total pii across all questions))"
+        "leak_micro=micro-avg (total leaked / total across all questions))"
     )
 
     logger.info("")
