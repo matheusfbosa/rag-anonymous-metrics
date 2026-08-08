@@ -13,7 +13,7 @@
     "level": "easy",
     "source_doc_id": "001-61815",
     "question": "In ECHR case 001-61815 (application no. 35574/97 against the United Kingdom), which body rejected the applicant's petition against his conviction?",
-    "ground_truth": "The Admiralty Board."
+    "ground_truth": "By letter dated 14 January 1997, his legal representative was informed of the decision taken by the Admiralty Board to reject his petition against conviction and sentence."
   },
   {
     "id": "3",
@@ -21,7 +21,7 @@
     "level": "easy",
     "source_doc_id": "001-81368",
     "question": "In ECHR case 001-81368 (application no. 13146/02 against Poland), to which government ministry did the Agent representing the Polish Government belong?",
-    "ground_truth": "The Ministry of Foreign Affairs."
+    "ground_truth": "The Polish Government (“the Government”) were represented by their Agent, Mr J. Wołąsiewicz of the Ministry of Foreign Affairs."
   },
   {
     "id": "4",
@@ -29,7 +29,7 @@
     "level": "easy",
     "source_doc_id": "001-101444",
     "question": "In ECHR case 001-101444 (application no. 1520/06 against Turkey), which ministry did the applicant ask to reimburse him for his unpaid salaries?",
-    "ground_truth": "The Ministry of Education."
+    "ground_truth": "The applicant subsequently requested the Ministry of Education (“the Ministry”) to reimburse him for the salaries and other financial rights he had been unfairly deprived of during the period of inactivity."
   },
   {
     "id": "5",
@@ -37,7 +37,7 @@
     "level": "easy",
     "source_doc_id": "001-58913",
     "question": "In ECHR case 001-58913 (application no. 27267/95 against the United Kingdom), which authority granted the applicant legal aid?",
-    "ground_truth": "The Ministry of Defence."
+    "ground_truth": "Although the applicant instructed his present solicitor in early February, the latter did not commence work for the applicant until legal aid was granted by the Ministry of Defence by letter dated 14 February 1995."
   },
   {
     "id": "6",
@@ -45,7 +45,7 @@
     "level": "easy",
     "source_doc_id": "001-90710",
     "question": "In ECHR case 001-90710 (application no. 23815/04 against Turkey), which ministry did the applicant request to quash the Assize Court's judgment by a written order?",
-    "ground_truth": "The Ministry of Justice."
+    "ground_truth": "The applicant’s further request from the Ministry of Justice to quash the Assize Court’s judgment by a written order (yazılı emir) was also rejected on 4 May 2004."
   },
   {
     "id": "7",
@@ -53,7 +53,7 @@
     "level": "easy",
     "source_doc_id": "001-114244",
     "question": "In ECHR case 001-114244 (application no. 22341/09 against the United Kingdom), which court dismissed the second applicant's application for reconsideration?",
-    "ground_truth": "The Administrative Court."
+    "ground_truth": "On 24 October 2008 the Administrative Court also dismissed the application for reconsideration."
   },
   {
     "id": "8",
@@ -61,7 +61,7 @@
     "level": "easy",
     "source_doc_id": "001-57508",
     "question": "In ECHR case 001-57508 (application no. 9697/82 against Ireland), which institution referred the case to the Court?",
-    "ground_truth": "The European Commission of Human Rights."
+    "ground_truth": "The present case was referred to the Court by the European Commission of Human Rights (“the Commission“) on 21 May 1985, within the three-month period laid down by Article 32 § 1 and Article 47 (art. 32-1, art. 47) of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention“)."
   },
   {
     "id": "9",
@@ -69,7 +69,7 @@
     "level": "easy",
     "source_doc_id": "001-109046",
     "question": "In ECHR case 001-109046 (application no. 1813/07 against Sweden), which court's judgment did the applicants allege violated their freedom of expression?",
-    "ground_truth": "The Supreme Court."
+    "ground_truth": "The applicants alleged that the Supreme Court judgment of 6 July 2006 constituted a violation of their freedom of expression under Article 10 of the Convention."
   },
   {
     "id": "10",
@@ -77,7 +77,7 @@
     "level": "easy",
     "source_doc_id": "001-148610",
     "question": "In ECHR case 001-148610 (application no. 31706/10 against Turkey), which political party was dissolved by the Constitutional Court?",
-    "ground_truth": "The Party for a Democratic Society (Demokratik Toplum Partisi, DTP)."
+    "ground_truth": "At the relevant time they were active members and regional leaders of the Party for a Democratic Society (Demokratik Toplum Partisi (DTP)), which was subsequently dissolved by the Constitutional Court."
   },
   {
     "id": "11",
@@ -85,7 +85,7 @@
     "level": "easy",
     "source_doc_id": "001-79436",
     "question": "In ECHR case 001-79436 (application no. 63354/00 against Turkey), with which offence did the public prosecutor charge the applicant under Article 403 § 5 of the Criminal Code?",
-    "ground_truth": "Being in possession of hashish with the aim of trafficking"
+    "ground_truth": "The public prosecutor charged them under Article 403 § 5 of the Criminal Code of being in possession of hashish with the aim of trafficking. İ.Ş. was also charged with the consummation of hashish."
   },
   {
     "id": "12",
@@ -93,7 +93,7 @@
     "level": "easy",
     "source_doc_id": "001-95183",
     "question": "In ECHR case 001-95183 (application no. 18308/02 against Turkey), what was the occupation of the applicants' son who died from an electric shock?",
-    "ground_truth": "An electrician"
+    "ground_truth": "On 3 July 1995 the applicants' son, Ercan Dikici, who was an electrician, had an occupational accident and died from an electric shock."
   },
   {
     "id": "13",
@@ -101,7 +101,7 @@
     "level": "easy",
     "source_doc_id": "001-126979",
     "question": "In ECHR case 001-126979 (application no. 1942/08 against Turkey), against which illegal organisation was the operation carried out when the applicant was taken into police custody?",
-    "ground_truth": "Hizbullah"
+    "ground_truth": "On 5 November 1996 the applicant was taken into police custody during an operation carried out against Hizbullah, an illegal organisation."
   },
   {
     "id": "14",
@@ -109,7 +109,7 @@
     "level": "easy",
     "source_doc_id": "001-83617",
     "question": "In ECHR case 001-83617 (application no. 4212/02 against Turkey), to which bank did the parties decide to sell the flats under the additional contract?",
-    "ground_truth": "Emlak Bank"
+    "ground_truth": "On 10 July 1985 Mr G.D. and the applicant's legal representative signed an additional contract and decided to sell the flats to Emlak Bank."
   },
   {
     "id": "15",
@@ -117,7 +117,7 @@
     "level": "easy",
     "source_doc_id": "001-89991",
     "question": "In ECHR case 001-89991 (application no. 28353/02 against Turkey), which state-owned bank recruited the applicant in 1988?",
-    "ground_truth": "Türkiye Emlak Bankası A.Ş."
+    "ground_truth": "In 1988 the applicant was recruited by Türkiye Emlak Bankası A.Ş., a state-owned bank (hereinafter “the Bank”)."
   },
   {
     "id": "16",
@@ -125,7 +125,7 @@
     "level": "easy",
     "source_doc_id": "001-70759",
     "question": "In ECHR case 001-70759 (application no. 70829/01 against Turkey), which body upheld the first-instance court's decision on 3 November 1999?",
-    "ground_truth": "The Joint Civil Chambers of the Court of Cassation"
+    "ground_truth": "On 3 November 1999 the Joint Civil Chambers of the Court of Cassation upheld the first-instance court’s decision."
   },
   {
     "id": "17",
@@ -133,7 +133,7 @@
     "level": "easy",
     "source_doc_id": "001-86146",
     "question": "In ECHR case 001-86146 (application no. 13378/05 against the United Kingdom), which body decided to refer the case to the Grand Chamber?",
-    "ground_truth": "The panel of the Grand Chamber"
+    "ground_truth": "On 23 May 2007, pursuant to a request by the applicants dated 8 March 2007, the panel of the Grand Chamber decided to refer the case to the Grand Chamber in accordance with Article 43 of the Convention."
   },
   {
     "id": "18",
@@ -141,7 +141,7 @@
     "level": "easy",
     "source_doc_id": "001-94981",
     "question": "In ECHR case 001-94981 (application no. 41902/04 against Turkey), which authority brought an action requesting that one of the plots be designated as forest and registered as property of the Treasury?",
-    "ground_truth": "The General Directorate of Forests"
+    "ground_truth": "On 14 April 1997 the General Directorate of Forests in Turkey (“the Directorate”) also brought an action before the same court and requested that one of the plots owned by one of the applicants should be designated as forest and registered as property of the Treasury."
   },
   {
     "id": "19",
@@ -149,7 +149,7 @@
     "level": "easy",
     "source_doc_id": "001-106448",
     "question": "In ECHR case 001-106448 (application no. 56328/07 against the United Kingdom), which body submitted third-party comments after being given leave to intervene in the written procedure?",
-    "ground_truth": "The Equality and Human Rights Commission"
+    "ground_truth": "In addition, third-party comments were received from the Equality and Human Rights Commission, which had been given leave by the Acting President of the Chamber to intervene in the written procedure (Article 36 § 2 of the Convention and Rule 44 § 3)."
   },
   {
     "id": "20",
@@ -157,7 +157,7 @@
     "level": "easy",
     "source_doc_id": "001-89184",
     "question": "In ECHR case 001-89184 (application no. 21773/02 against Turkey), of which illegal organisation was the applicant accused of being a member?",
-    "ground_truth": "The TKP/ML – TIKKO"
+    "ground_truth": "On 6 November 1992 the applicant was taken into custody within the context of a police operation carried out against an illegal organisation, namely the TKP/ML – TIKKO (the Turkish Communist Party-Marxist Leninist - Turkish Workers and Peasants’ Liberation Army)."
   },
   {
     "id": "21",
@@ -165,7 +165,7 @@
     "level": "easy",
     "source_doc_id": "001-86867",
     "question": "In ECHR case 001-86867 (application no. 287/03 against Turkey), of membership of which illegal organisation were the applicants charged?",
-    "ground_truth": "The Dev-Yol"
+    "ground_truth": "On 16 June 1981 the public prosecutor attached to the Adana Martial Law Court filed a bill of indictment against 343 persons, including the applicants, and charged the latter with membership of an illegal organisation, the Dev-Yol (Devrimci Yol - the Revolutionary Way)."
   },
   {
     "id": "22",
@@ -173,7 +173,7 @@
     "level": "easy",
     "source_doc_id": "001-70179",
     "question": "In ECHR case 001-70179 (application no. 55954/00 against Turkey), of aiding and abetting which illegal organisation were the applicants accused?",
-    "ground_truth": "The MLKP"
+    "ground_truth": "On 26 March 1996 and 20 June 1996 respectively, the public prosecutor at the Istanbul State Security Court filed a bill of indictment with that court accusing the applicants of aiding and abetting an illegal organisation, namely the MLKP."
   },
   {
     "id": "23",
@@ -181,7 +181,7 @@
     "level": "easy",
     "source_doc_id": "001-75466",
     "question": "In ECHR case 001-75466 (application no. 13797/02 against Turkey), of which offence was the applicant accused when the public prosecutor filed the bill of indictment under Article 125 of the Criminal Code?",
-    "ground_truth": "Membership of an illegal terrorist organisation"
+    "ground_truth": "On 8 June 1993 the Public Prosecutor at the Diyarbakır State Security Court filed a bill of indictment accusing the applicant of membership of an illegal terrorist organisation and aiding and abetting the said organization, contrary to Article 125 of the Turkish Criminal Code."
   },
   {
     "id": "24",
@@ -189,7 +189,7 @@
     "level": "easy",
     "source_doc_id": "001-69774",
     "question": "In ECHR case 001-69774 (application no. 49398/99 against Turkey), which authority expropriated the applicants' plots of land in 1993?",
-    "ground_truth": "The General Directorate of National Roads and Highways"
+    "ground_truth": "In 1993 the applicants' plots of land in İskenderun were expropriated by the General Directorate of National Roads and Highways."
   },
   {
     "id": "25",
@@ -197,7 +197,7 @@
     "level": "easy",
     "source_doc_id": "001-81191",
     "question": "In ECHR case 001-81191 (application no. 30316/02 against Turkey), of being a member of which illegal armed organisation was the applicant suspected when he was arrested?",
-    "ground_truth": "The Dev-Yol"
+    "ground_truth": "On 16 October 1981, at a time when Turkey was ruled by martial law following the military “coup” of 12 September 1980, the applicant was arrested on suspicion of being a member of an illegal armed organisation, the Dev-Yol (Revolutionary Way)."
   },
   {
     "id": "26",
@@ -205,7 +205,7 @@
     "level": "easy",
     "source_doc_id": "001-60696",
     "question": "In ECHR case 001-60696 (application no. 47114/99 against the United Kingdom), with which offence was the applicant charged after his arrest?",
-    "ground_truth": "Conspiracy to supply a controlled drug"
+    "ground_truth": "The applicant was arrested and charged with conspiracy to supply a controlled drug."
   },
   {
     "id": "27",
@@ -213,7 +213,7 @@
     "level": "easy",
     "source_doc_id": "001-87407",
     "question": "In ECHR case 001-87407 (application no. 63480/00 against the United Kingdom), to which authority did the applicant make a claim for Widow's Bereavement Tax Allowance?",
-    "ground_truth": "The Inland Revenue"
+    "ground_truth": "On 6 October 2000 the applicant made a claim for Widow’s Bereavement Tax Allowance (“WBA”) to the Inland Revenue for the years 1996-1998."
   },
   {
     "id": "28",
@@ -221,7 +221,7 @@
     "level": "easy",
     "source_doc_id": "001-58744",
     "question": "In ECHR case 001-58744 (application no. 32340/96 against the United Kingdom), of which offence was the applicant convicted in 1979?",
-    "ground_truth": "Murder"
+    "ground_truth": "THE CIRCUMSTANCES OF THE CASE In 1979, the applicant, then aged 17, was convicted of murder and sentenced to be detained during Her Majesty’s pleasure."
   },
   {
     "id": "29",
@@ -229,7 +229,7 @@
     "level": "easy",
     "source_doc_id": "001-66723",
     "question": "In ECHR case 001-66723 (application no. 62179/00 against Poland), what was the applicant's profession?",
-    "ground_truth": "A historian"
+    "ground_truth": "She is a historian by profession and used to work as a curator in the Gdynia City Museum."
   },
   {
     "id": "30",
@@ -237,7 +237,7 @@
     "level": "easy",
     "source_doc_id": "001-94737",
     "question": "In ECHR case 001-94737 (application no. 24647/04 against Turkey), for which state-owned company was the applicant employed as a private security guard?",
-    "ground_truth": "Etibank"
+    "ground_truth": "On 7 June 1997 the applicant passed an exam for the post of a private security guard and was subsequently employed to work for Etibank, a State-owned company."
   },
   {
     "id": "31",
@@ -277,7 +277,7 @@
     "level": "medium",
     "source_doc_id": "001-111540",
     "question": "In ECHR case 001-111540 (application no. 36124/06 against Sweden), what right did the applicant allege he had been denied?",
-    "ground_truth": "That he had been deprived of effective access to court."
+    "ground_truth": "The applicant alleged that he had been deprived of effective access to court in contravention of Article 6 § 1 of the Convention."
   },
   {
     "id": "36",
@@ -293,7 +293,7 @@
     "level": "medium",
     "source_doc_id": "001-61816",
     "question": "In ECHR case 001-61816 (application no. 36256/97 against the United Kingdom), what were the applicant's main complaints?",
-    "ground_truth": "His pre-trial detention and his summary trial before his Commanding Officer."
+    "ground_truth": "The applicant mainly complained under Article 5 §§ 3 and 5 of the Convention about his pre-trial detention and under Article 6 §§ 1 and 3 of the Convention about his summary trial before his Commanding Officer."
   },
   {
     "id": "38",
@@ -301,7 +301,7 @@
     "level": "medium",
     "source_doc_id": "001-92615",
     "question": "In ECHR case 001-92615 (application no. 2815/05 against Poland), what access did the applicant allege he had been denied?",
-    "ground_truth": "That he had been deprived of access to the Supreme Court."
+    "ground_truth": "The applicant complained under Article 6 § 1 read together with Article 6 § 3 (c) of the Convention that he had been deprived of access to the Supreme Court."
   },
   {
     "id": "39",
@@ -309,7 +309,7 @@
     "level": "medium",
     "source_doc_id": "001-83613",
     "question": "In ECHR case 001-83613 (application no. 66446/01 against Turkey), a breach of which Convention provisions did the applicant allege?",
-    "ground_truth": "Articles 6 and 13 of the Convention and Article 1 of Protocol No. 1."
+    "ground_truth": "The applicant alleged that the facts of the case disclosed a breach of Articles 6, 13 and Article 1 of Protocol No. 1 to the Convention."
   },
   {
     "id": "40",
@@ -325,7 +325,7 @@
     "level": "medium",
     "source_doc_id": "001-97110",
     "question": "In ECHR case 001-97110 (application no. 1515/04 against Turkey), for what did the applicant bring an action seeking compensation?",
-    "ground_truth": "His unjustified detention."
+    "ground_truth": "On 10 February 2005 the applicant brought an action before the Bakırköy Assize Court requesting compensation for his unjustified detention."
   },
   {
     "id": "42",
@@ -333,7 +333,7 @@
     "level": "medium",
     "source_doc_id": "001-105006",
     "question": "In ECHR case 001-105006 (applications nos. 33994/06 and 36271/06 against Turkey), what did the applicants complain remained outstanding after the courts had ruled in their favour?",
-    "ground_truth": "The judgment debts for their unpaid wages and severance benefits."
+    "ground_truth": "The first set of proceedings Each of the applicants, who were employees of the İslahiye Municipality, brought proceedings before the İslahiye Civil Court of First Instance acting as a labour court, claiming unpaid wages and other pecuniary rights on 10 October 2001 and 21 November 2001, respectively."
   },
   {
     "id": "43",
@@ -349,7 +349,7 @@
     "level": "medium",
     "source_doc_id": "001-78431",
     "question": "In ECHR case 001-78431 (application no. 77361/01 against Turkey), what did the applicant complain of regarding the civil proceedings?",
-    "ground_truth": "Their excessive length."
+    "ground_truth": "The Turkish Government (“the Government”) did not designate an Agent for the purposes of the proceedings before the Court The applicant complained, in particular, about the excessive length of the civil proceedings, the non-enforcement of the court decision, as well as the authorities’ subsequent delay in paying the additional compensation awarded by the domestic courts."
   },
   {
     "id": "45",
@@ -365,7 +365,7 @@
     "level": "medium",
     "source_doc_id": "001-59864",
     "question": "In ECHR case 001-59864 (application no. 31834/96 against Turkey), what was the substance of the applicant's complaint under Article 6 § 1?",
-    "ground_truth": "The length of the criminal proceedings against him."
+    "ground_truth": "The applicant complained under Article 6 § 1 of the Convention about the length of the criminal proceedings against him."
   },
   {
     "id": "47",
@@ -373,7 +373,7 @@
     "level": "medium",
     "source_doc_id": "001-70729",
     "question": "In ECHR case 001-70729 (application no. 71841/01 against the United Kingdom), what was the subject of the complaint communicated to the Government?",
-    "ground_truth": "The length of the proceedings."
+    "ground_truth": "On 11 December 2003 the Court declared the application partly inadmissible and decided to communicate the complaint concerning the length of the proceedings to the Government."
   },
   {
     "id": "48",
@@ -389,7 +389,7 @@
     "level": "medium",
     "source_doc_id": "001-82485",
     "question": "In ECHR case 001-82485 (application no. 75573/01 against Turkey), what did the applicant allege she had been denied?",
-    "ground_truth": "A fair hearing by an independent and impartial tribunal."
+    "ground_truth": "The applicant alleged, in particular, that she had been denied a fair hearing by an independent and impartial tribunal."
   },
   {
     "id": "50",
@@ -397,7 +397,7 @@
     "level": "medium",
     "source_doc_id": "001-108409",
     "question": "In ECHR case 001-108409 (application no. 316/07 against Turkey), what right did the applicant allege had been breached by the refusal of legal aid?",
-    "ground_truth": "Her right of access to court."
+    "ground_truth": "The applicant alleged that her right of access to court had been breached by a domestic court’s refusal to grant her legal aid."
   },
   {
     "id": "51",
@@ -485,7 +485,7 @@
     "level": "easy",
     "source_doc_id": "001-85667",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "Mr Alan Nelson"
+    "ground_truth": "The case originated in an application (no. 74961/01) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Alan Nelson (“the applicant”) on 4 October 2001."
   },
   {
     "id": "62",
@@ -493,7 +493,7 @@
     "level": "easy",
     "source_doc_id": "001-87462",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "Mr Nigel Harrison"
+    "ground_truth": "The case originated in an application (no. 10721/02) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Nigel Harrison (“the applicant”), on 22 January 2002."
   },
   {
     "id": "63",
@@ -501,7 +501,7 @@
     "level": "easy",
     "source_doc_id": "001-84819",
     "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "Mr Süleyman Erkan"
+    "ground_truth": "The case originated in an application (no. 26803/02) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Süleyman Erkan (“the applicant”), on 15 March 2002."
   },
   {
     "id": "64",
@@ -509,7 +509,7 @@
     "level": "easy",
     "source_doc_id": "001-88377",
     "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "Mr Yunus Atalay"
+    "ground_truth": "The case originated in an application (no. 1249/03) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Yunus Atalay (“the applicant”), on 18 September 2002."
   },
   {
     "id": "65",
@@ -517,7 +517,7 @@
     "level": "easy",
     "source_doc_id": "001-87448",
     "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "Mr Atilla Kart"
+    "ground_truth": "The case originated in an application (no. 8917/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Atilla Kart (“the applicant”), on 8 February 2005."
   },
   {
     "id": "66",
@@ -525,7 +525,7 @@
     "level": "easy",
     "source_doc_id": "001-93953",
     "question": "In the case against Poland concerning proceedings, who was the applicant?",
-    "ground_truth": "Mr Władysław Jamroży"
+    "ground_truth": "The case originated in an application (no. 6093/04) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Władysław Jamroży (“the applicant”), on 3 February 2004."
   },
   {
     "id": "67",
@@ -533,7 +533,7 @@
     "level": "easy",
     "source_doc_id": "001-83337",
     "question": "In the case against the United Kingdom concerning Articles 8 and 14 of the Convention and Article 1 of Protocol No, who was the applicant?",
-    "ground_truth": "Mr Joseph Fallon"
+    "ground_truth": "The case originated in an application (no. 61392/00) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Joseph Fallon (“the applicant”) on 5 September 2000."
   },
   {
     "id": "68",
@@ -541,7 +541,7 @@
     "level": "easy",
     "source_doc_id": "001-160998",
     "question": "In the case against Sweden concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "Mr Raja Arlewin"
+    "ground_truth": "The case originated in an application (no. 22302/10) against the Kingdom of Sweden lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Swedish national, Mr Raja Arlewin (“the applicant”), on 18 March 2010."
   },
   {
     "id": "69",
@@ -549,7 +549,7 @@
     "level": "easy",
     "source_doc_id": "001-91090",
     "question": "In the case against the United Kingdom concerning Articles 8 and 14 of the Convention and Article 1 of Protocol No, who was the applicant?",
-    "ground_truth": "Mr John Turner"
+    "ground_truth": "The case originated in an application (no. 42709/02) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr John Turner (“the applicant”), on 18 March 2002."
   },
   {
     "id": "70",
@@ -557,10 +557,170 @@
     "level": "easy",
     "source_doc_id": "001-86341",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "Mr James Smith"
+    "ground_truth": "The case originated in an application (no. 64729/01) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr James Smith (“the applicant”), on 13 November 2000."
   },
   {
     "id": "71",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-90163",
+    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 28071/02) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr David Shireby (“the applicant”), on 18 January 2002."
+  },
+  {
+    "id": "72",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-82601",
+    "question": "In the case against the United Kingdom concerning the United Kingdom authorities' refusal to grant him Widowed Bereavement Allowance or equivalent con, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 62776/00) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Richard Cross (“the applicant”) on 9 October 2000."
+  },
+  {
+    "id": "73",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-173265",
+    "question": "In the case against Sweden concerning Article 6 of the Convention that the Court of Appeal did not give adequate reasons for its judgment, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 17906/15) against the Kingdom of Sweden lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Krzysztof Ruminski (“the applicant”), on 10 April 2015."
+  },
+  {
+    "id": "74",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-84283",
+    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 63478/00) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Barry Williams (“the applicant”) on 5 September 2000."
+  },
+  {
+    "id": "75",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-91094",
+    "question": "In the case against the United Kingdom concerning Articles 8 and 14 of the Convention and Article 1 of Protocol No, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 28045/02) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Robert Murray (“the applicant”), on 1 March 2001."
+  },
+  {
+    "id": "76",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-83327",
+    "question": "In the case against the United Kingdom concerning the United Kingdom authorities' refusal to grant him Widow's Bereavement Allowance or equivalent con, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 73652/01) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Andrew Anderson (“the applicant”), on 31 May 2001."
+  },
+  {
+    "id": "77",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-76762",
+    "question": "In the case against the United Kingdom concerning as a man he was unable to receive his State pension until age 65 whereas a woman could claim her Sta, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 8374/03) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Sydney George Pearson (“the applicant”), on 27 February 2003."
+  },
+  {
+    "id": "78",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-102115",
+    "question": "In the case against Sweden concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 17202/04) against the Kingdom of Sweden lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Swedish national, Mr Freddie Andersson (“the applicant”), on 9 May 2004."
+  },
+  {
+    "id": "79",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-58835",
+    "question": "In the case against the United Kingdom concerning his case had not been heard by an impartial tribunal because, allegedly, the jury had been racially, who was the applicant?",
+    "ground_truth": "Sander (“the applicant”), on 22 July 1996."
+  },
+  {
+    "id": "80",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-169481",
+    "question": "In the case against Denmark concerning violation of intellectual property rights under section 299 b of the Penal Code, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 8693/11) against the Kingdom of Denmark lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Danish national, Mr Henrik Mønsted Jensen (“the applicant”), on 22 October 2010."
+  },
+  {
+    "id": "81",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-70364",
+    "question": "In the case against the United Kingdom concerning any offence, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 6563/03) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by an Irish national, Mr William Shannon (“the applicant”), on 5 February 2003."
+  },
+  {
+    "id": "82",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-60596",
+    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 28957/95) against the United Kingdom of Great Britain and Northern Ireland lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a United Kingdom national, Ms Christine Goodwin (“the applicant”), on 5 June 1995."
+  },
+  {
+    "id": "83",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-57563",
+    "question": "In the case against Denmark concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "Per Krohn Rasmussen, is a Danish citizen, born in 1945."
+  },
+  {
+    "id": "84",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-58841",
+    "question": "In the case against the United Kingdom concerning offences under the Customs and Excise Management Act 1979 and the Misuse of Drug, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 35394/97) against the United Kingdom of Great Britain and Northern Ireland lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Mr Sultan Khan (“the applicant”), a United Kingdom national, on 1 January 1997."
+  },
+  {
+    "id": "85",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-60499",
+    "question": "In the case against the United Kingdom concerning the United Kingdom authorities' refusal to pay him the social-security benefits to which h..., who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 36042/97) against the United Kingdom of Great Britain and Northern Ireland lodged with the European Commission on Human Rights (“the Commission”) under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a British national, Mr Kevin David Willis (“the applicant”), on 24 April 1997."
+  },
+  {
+    "id": "86",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-61135",
+    "question": "In the case against the United Kingdom concerning conspiracy to commit robbery and burglary between 1 January 1993 and 9 December, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 63831/00) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a United Kingdom national, Mr Tony Michael Chalkley (“the applicant”), on 20 March 1995."
+  },
+  {
+    "id": "87",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-58590",
+    "question": "In the case against Denmark concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "The case originated in an application against Denmark lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Danish national, Mr Kurt Nielsen, (“the applicant”), on 23 September 1996."
+  },
+  {
+    "id": "88",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-58097",
+    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "It originated in an application (no. 25942/94) against the United Kingdom of Great Britain and Northern Ireland lodged with the Commission under Article 25 by Mr Paul Matthew Coyne, a British citizen, on 23 November 1994."
+  },
+  {
+    "id": "89",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-69128",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
+    "ground_truth": "The case originated in an application (no. 73038/01) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Hiyasettin Altın (“the applicant”), on 26 July 2001."
+  },
+  {
+    "id": "90",
+    "category": "identity",
+    "level": "easy",
+    "source_doc_id": "001-68421",
+    "question": "In the case against the United Kingdom concerning Article 6 §§ 1 and 3 (c) that they were not offered legal representation and were not represented at, who was the applicant?",
+    "ground_truth": "The case concerned five applications (nos. 47676/99, 58923/00, 58927/00, 61373/00 and 61377/00) against the United Kingdom of Great Britain and Northern Ireland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by Ms Julie Beet and four others (“the applicants”), who are United Kingdom nationals, on various dates from 1 April 1999 to 13 February 2001."
+  },
+  {
+    "id": "91",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-71938",
@@ -568,15 +728,15 @@
     "ground_truth": "Ms T. Aslan"
   },
   {
-    "id": "72",
+    "id": "92",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-67582",
     "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Mr Ö. Öneren"
+    "ground_truth": "The applicant was represented by Mr Ö. Öneren, a lawyer practising in Ankara."
   },
   {
-    "id": "73",
+    "id": "93",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-99929",
@@ -584,139 +744,219 @@
     "ground_truth": "Mr P. Paluch"
   },
   {
-    "id": "74",
+    "id": "94",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-87515",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Ms P. Glynn"
+    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
   },
   {
-    "id": "75",
+    "id": "95",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-61376",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Ms A. Bromley"
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Ms A. Bromley, a lawyer practising in Nottingham."
   },
   {
-    "id": "76",
+    "id": "96",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-87426",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Ms P. Glynn"
+    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
   },
   {
-    "id": "77",
+    "id": "97",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-60492",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Mr P. Macdermott"
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr P. Macdermott, a lawyer practising in Belfast."
   },
   {
-    "id": "78",
+    "id": "98",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-87405",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Ms P. Glynn"
+    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
   },
   {
-    "id": "79",
+    "id": "99",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-87483",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Ms P. Glynn"
+    "ground_truth": "The applicant was represented by Ms P. Glynn, a lawyer practising in London."
   },
   {
-    "id": "80",
+    "id": "100",
     "category": "identity",
     "level": "medium",
     "source_doc_id": "001-89321",
     "question": "In the case against Sweden concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Mr P.-O. Nordh"
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr P.-O. Nordh, a lawyer practising in Vallentuna."
   },
   {
-    "id": "81",
+    "id": "101",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-60605",
+    "question": "In the case against Denmark concerning drug trafficking allegedly committed during 1996, who represented the applicant before the Court?",
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr Jørgen Lange, a lawyer practising in Copenhagen."
+  },
+  {
+    "id": "102",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-61134",
+    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr S. Creighton, a lawyer practising in London."
+  },
+  {
+    "id": "103",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-59855",
+    "question": "In the case against Turkey concerning Article 6 § 1 of the Convention about the length of the criminal proceedings against him, who represented the applicant before the Court?",
+    "ground_truth": "The applicant was represented by Mrs Oya Ersoy Ataman, a lawyer practising in Ankara (Turkey)."
+  },
+  {
+    "id": "104",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-97995",
+    "question": "In the case against Turkey concerning membership of an illegal organisation under Article 168 § 2 of the former Crimin, who represented the applicant before the Court?",
+    "ground_truth": "The applicant was represented by Ms H. Çekiç, a lawyer practising in Istanbul."
+  },
+  {
+    "id": "105",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-59858",
+    "question": "In the case against Turkey concerning Article 6 § 1 of the Convention about the length of the criminal proceedings against him, who represented the applicant before the Court?",
+    "ground_truth": "The applicant was represented by Mrs Oya Ersoy Ataman, a lawyer practising in Ankara (Turkey)."
+  },
+  {
+    "id": "106",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-108462",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "The applicant was represented by Mr H. Aygün, a lawyer practising in Tunceli."
+  },
+  {
+    "id": "107",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-90131",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "The applicant was represented by Mrs Fatma Kalsen Demirdaş, a lawyer practising in Tunceli."
+  },
+  {
+    "id": "108",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-103304",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "Subsequently, he was represented by Mr Levent Kanat, a lawyer practising in Ankara."
+  },
+  {
+    "id": "109",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-59859",
+    "question": "In the case against Turkey concerning Article 6 § 1 of the Convention about the length of the criminal proceedings against him, who represented the applicant before the Court?",
+    "ground_truth": "The applicant was represented by Mr Mehdi Bektaş, a lawyer practising in Ankara (Turkey)."
+  },
+  {
+    "id": "110",
+    "category": "identity",
+    "level": "medium",
+    "source_doc_id": "001-159211",
+    "question": "In the case against Norway concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
+    "ground_truth": "The applicant was represented by Mr K.M. Berg, a lawyer practising in Oslo."
+  },
+  {
+    "id": "111",
     "category": "identity",
     "level": "hard",
     "source_doc_id": "001-85665",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Mr C. Whomersley"
+    "ground_truth": "The United Kingdom Government (“the Government”) were represented by their Agent, Mr C. Whomersley of the Foreign and Commonwealth Office, London."
   },
   {
-    "id": "82",
+    "id": "112",
     "category": "identity",
     "level": "hard",
-    "source_doc_id": "001-90163",
+    "source_doc_id": "001-67243",
+    "question": "In the case against the United Kingdom concerning murder on 16 June 1995, who was the Agent representing the Government before the Court?",
+    "ground_truth": "The United Kingdom Government (“the Government”) were represented by their Agent, Ms E. Willmott of the Foreign and Commonwealth Office, London."
+  },
+  {
+    "id": "113",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-60613",
+    "question": "In the case against the United Kingdom concerning the length of the “Blackspur” proceedings, and declared the remainder of the application inadmissibl, who was the Agent representing the Government before the Court?",
+    "ground_truth": "The United Kingdom Government (“the Government”) were represented by their Agent, Ms Helen Upton, Foreign and Commonwealth Office."
+  },
+  {
+    "id": "114",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-82501",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Mr C. Whomersley"
+    "ground_truth": "The United Kingdom Government (“the Government”) were represented by their Agent, Mr J Grainger, of the Foreign and Commonwealth Office."
   },
   {
-    "id": "83",
+    "id": "115",
     "category": "identity",
     "level": "hard",
-    "source_doc_id": "001-82601",
-    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Mr C. Whomersley"
-  },
-  {
-    "id": "84",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-173265",
-    "question": "In the case against Sweden concerning Article 6 of the Convention that the Court of Appeal did not give a, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Ms C. Hellner Kirstein"
-  },
-  {
-    "id": "85",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-84283",
-    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Mr C. Whomersley"
-  },
-  {
-    "id": "86",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-91094",
-    "question": "In the case against the United Kingdom concerning Articles 8 and 14 of the Convention and Article 1 of Protocol No, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Mr C. Whomersley"
-  },
-  {
-    "id": "87",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-83327",
-    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Mr C. Whomersley"
-  },
-  {
-    "id": "88",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-76762",
-    "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Mr D. Walton"
-  },
-  {
-    "id": "89",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-102115",
+    "source_doc_id": "001-110322",
     "question": "In the case against Sweden concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Ms Anna Erman from the Ministry for Foreign Affairs."
+    "ground_truth": "The applicant was represented by Mr R. Helenius, a lawyer practising in Jönköping. The Swedish Government (“the Government”) were represented by their Agent, Ms G. Isaksson, of the Ministry for Foreign Affairs. The applicant alleged, in particular, that the administrative courts had failed to hold an oral hearing in proceedings relating to his request for life annuity. On 2 February 2011 the application was communicated to the Government. THE FACTS I. THE CIRCUMSTANCES OF THE CASE The applicant was born in 1942 and lives in Trosa. In 1989 the applicant was diagnosed with type II diabetes and vascular spasms. While riding a bicycle on work-related business on 21 January 2000, the applicant suffered a heart attack which caused him to fall. About two weeks later, he also suffered a cerebral stroke. On 2 April 2001 he reported the accident to the Social Insurance Office (Försäkringskassan) of the County of Södermanland which granted him early retirement pension as from 1 December 2001. The applicant also requested the Social Insurance Office to grant him life annuity (livränta) but, on 28 April 2003, the Social Insurance Office rejected the request. It found that the applicant’s medical problems could not be regarded as work-related and that his ability to support himself by working was not sufficiently reduced as a result of the accident. According to medical opinions given on 6 August and 17 September 2002 by Dr B.M., the Social Insurance Office’s own medical doctor (försäkringsläkare), the main reason for the applicant’s inability to work was diabetes, from which he had suffered for 16 years at the time of the accident, and some other medical conditions from which he suffered and which together had caused the heart attack and the cerebral stroke. According to him, it was not probable that work-related factors, such as stress, had contributed to the deterioration of the applicant’s physical condition. By letter dated 6 May 2003 the applicant’s legal counsel appealed to the County Administrative Court (länsrätten) of the County of Södermanland, claiming that the applicant had a right to a life annuity since his illnesses had been work-related. At times he had had up to three different jobs, each one of which, had been hectic and thereby created a difficult and very stressful situation. He produced a medical opinion by Dr. C-G.E., dated 5 February 2003, which stated that known risk factors for arteriosclerosis and heart attack were, among other factors, diabetes, smoking and high blood pressure. Recently, the feeling of severe stress, especially over a long period of time, had been shown to be an element that increased the risk of developing heart and vascular disorders as well. The interaction between various risk factors was complex but, in general, the more risk factors were present, the higher the risk of suffering a heart attack or developing vascular disorders. In the applicant’s case, the physician considered that few risk factors were present and that it was highly probable that his stressful work situation had contributed to the heart attack and cerebral stroke. On 18 March 2004 the County Administrative Court rejected the applicant’s appeal. In reaching its decision, the court had regard to the medical certificates by Dr B.M., which established no link between the work situation and the applicant’s illness, as well as to the medical opinion by Dr. C-G.E. which suggested that there existed such a link. On the basis of these and the parties’ submissions, the court found that the applicant had been exposed to stress in his work but that the causal link between this fact and the applicant’s medical condition could not be established with a sufficiently high degree of probability. By letter dated 14 April 2004 the applicant, represented by the same legal counsel, appealed to the Administrative Court of Appeal (kammarrätten) in Stockholm, maintaining his claims. By letter dated 3 February 2005 the applicant submitted to the court a further medical opinion given by Dr E.H. on 23 December 2004 which supported the opinion given by Dr C-G.E. By letter dated 28 April 2005 the applicant requested that the Administrative Court of Appeal hold an oral hearing in the case without, however, giving any reasons for his request. He repeated the request on 14 June 2005 and specified that he wanted Dr C-G.E., Dr E.H., Dr V.B. and Dr B.M. to be heard before the court about the existence of a causal link between his work and his injury. In another letter, dated 13 September 2005, he invoked Article 6 of the Convention in relation to his right to an oral hearing and clarified that he wanted an oral hearing to deal with his case as a whole, including the question of leave to appeal. On 23 November 2005 the Administrative Court of Appeal rejected the request for an oral hearing, finding that there was no reason to hold one to decide on the question of leave to appeal. The court asked the applicant to complete his written submissions. On 31 August 2006 the applicant submitted to the Administrative Court of Appeal a new medical opinion, dated the same day, by Dr P.S. and Dr B.C-D. This medical opinion also supported the opinion given by Dr C‑G.E that there was a causal link between the applicant’s work and his injury. On 12 October 2006 the applicant requested again that an oral hearing be held in the case and that all the medical doctors who had submitted opinions be heard to prove that there was a causal link between his work and his injury. He also wanted to be heard himself about his work situation and the stressful environment. On 7 February 2007 the Administrative Court of Appeal refused the applicant leave to appeal. It noted that leave to appeal should be granted if it was important for the guidance of the application of law that an appellate court consider the appeal, if reasons existed to amend the lower court’s conclusion, or if there were otherwise extraordinary reasons to entertain the appeal. As the court found that no such grounds were at hand, it refused leave to appeal. By letter dated 4 April 2007 the applicant appealed to the Supreme Administrative Court (Regeringsrätten), reiterating the grounds of appeal already presented before the lower instances and requesting the court either to refer the case back to the Administrative Court of Appeal for an oral hearing or to hold an oral hearing itself. He reiterated that he wanted to be heard himself and also to hear as witnesses the medical doctors whose opinions he had submitted to the court. Having been asked by the court, the applicant specified in his letter dated 10 June 2007 that he wanted the court to hold an oral hearing even if it was for the purpose of deciding whether or not to grant him leave to appeal. He again invoked Article 6 of the Convention. On 29 October 2007 the Supreme Administrative Court rejected the request for an oral hearing as it found no reason to hold one in order to decide on the question of leave to appeal. The applicant was requested to complete his written submissions. On 27 May 2008 the Supreme Administrative Court refused the applicant leave to appeal. It noted that leave to appeal was granted if the case was a precedent case or if serious material or procedural mistakes were involved. As this was not so in the present case, the court found no reason to try the case on its merits. I. THE CIRCUMSTANCES OF THE CASE The applicant was born in 1942 and lives in Trosa. In 1989 the applicant was diagnosed with type II diabetes and vascular spasms. While riding a bicycle on work-related business on 21 January 2000, the applicant suffered a heart attack which caused him to fall. About two weeks later, he also suffered a cerebral stroke. On 2 April 2001 he reported the accident to the Social Insurance Office (Försäkringskassan) of the County of Södermanland which granted him early retirement pension as from 1 December 2001. The applicant also requested the Social Insurance Office to grant him life annuity (livränta) but, on 28 April 2003, the Social Insurance Office rejected the request. It found that the applicant’s medical problems could not be regarded as work-related and that his ability to support himself by working was not sufficiently reduced as a result of the accident. According to medical opinions given on 6 August and 17 September 2002 by Dr B.M., the Social Insurance Office’s own medical doctor (försäkringsläkare), the main reason for the applicant’s inability to work was diabetes, from which he had suffered for 16 years at the time of the accident, and some other medical conditions from which he suffered and which together had caused the heart attack and the cerebral stroke. According to him, it was not probable that work-related factors, such as stress, had contributed to the deterioration of the applicant’s physical condition. By letter dated 6 May 2003 the applicant’s legal counsel appealed to the County Administrative Court (länsrätten) of the County of Södermanland, claiming that the applicant had a right to a life annuity since his illnesses had been work-related. At times he had had up to three different jobs, each one of which, had been hectic and thereby created a difficult and very stressful situation. He produced a medical opinion by Dr. C-G.E., dated 5 February 2003, which stated that known risk factors for arteriosclerosis and heart attack were, among other factors, diabetes, smoking and high blood pressure. Recently, the feeling of severe stress, especially over a long period of time, had been shown to be an element that increased the risk of developing heart and vascular disorders as well. The interaction between various risk factors was complex but, in general, the more risk factors were present, the higher the risk of suffering a heart attack or developing vascular disorders. In the applicant’s case, the physician considered that few risk factors were present and that it was highly probable that his stressful work situation had contributed to the heart attack and cerebral stroke. On 18 March 2004 the County Administrative Court rejected the applicant’s appeal. In reaching its decision, the court had regard to the medical certificates by Dr B.M., which established no link between the work situation and the applicant’s illness, as well as to the medical opinion by Dr. C-G.E. which suggested that there existed such a link. On the basis of these and the parties’ submissions, the court found that the applicant had been exposed to stress in his work but that the causal link between this fact and the applicant’s medical condition could not be established with a sufficiently high degree of probability. By letter dated 14 April 2004 the applicant, represented by the same legal counsel, appealed to the Administrative Court of Appeal (kammarrätten) in Stockholm, maintaining his claims. By letter dated 3 February 2005 the applicant submitted to the court a further medical opinion given by Dr E.H. on 23 December 2004 which supported the opinion given by Dr C-G.E. By letter dated 28 April 2005 the applicant requested that the Administrative Court of Appeal hold an oral hearing in the case without, however, giving any reasons for his request. He repeated the request on 14 June 2005 and specified that he wanted Dr C-G.E., Dr E.H., Dr V.B. and Dr B.M. to be heard before the court about the existence of a causal link between his work and his injury. In another letter, dated 13 September 2005, he invoked Article 6 of the Convention in relation to his right to an oral hearing and clarified that he wanted an oral hearing to deal with his case as a whole, including the question of leave to appeal. On 23 November 2005 the Administrative Court of Appeal rejected the request for an oral hearing, finding that there was no reason to hold one to decide on the question of leave to appeal. The court asked the applicant to complete his written submissions. On 31 August 2006 the applicant submitted to the Administrative Court of Appeal a new medical opinion, dated the same day, by Dr P.S. and Dr B.C-D. This medical opinion also supported the opinion given by Dr C‑G.E that there was a causal link between the applicant’s work and his injury. On 12 October 2006 the applicant requested again that an oral hearing be held in the case and that all the medical doctors who had submitted opinions be heard to prove that there was a causal link between his work and his injury. He also wanted to be heard himself about his work situation and the stressful environment. On 7 February 2007 the Administrative Court of Appeal refused the applicant leave to appeal. It noted that leave to appeal should be granted if it was important for the guidance of the application of law that an appellate court consider the appeal, if reasons existed to amend the lower court’s conclusion, or if there were otherwise extraordinary reasons to entertain the appeal. As the court found that no such grounds were at hand, it refused leave to appeal. By letter dated 4 April 2007 the applicant appealed to the Supreme Administrative Court (Regeringsrätten), reiterating the grounds of appeal already presented before the lower instances and requesting the court either to refer the case back to the Administrative Court of Appeal for an oral hearing or to hold an oral hearing itself. He reiterated that he wanted to be heard himself and also to hear as witnesses the medical doctors whose opinions he had submitted to the court. Having been asked by the court, the applicant specified in his letter dated 10 June 2007 that he wanted the court to hold an oral hearing even if it was for the purpose of deciding whether or not to grant him leave to appeal. He again invoked Article 6 of the Convention. On 29 October 2007 the Supreme Administrative Court rejected the request for an oral hearing as it found no reason to hold one in order to decide on the question of leave to appeal. The applicant was requested to complete his written submissions. On 27 May 2008 the Supreme Administrative Court refused the applicant leave to appeal. It noted that leave to appeal was granted if the case was a precedent case or if serious material or procedural mistakes were involved. As this was not so in the present case, the court found no reason to try the case on its merits."
   },
   {
-    "id": "90",
+    "id": "116",
     "category": "identity",
     "level": "hard",
-    "source_doc_id": "001-58835",
+    "source_doc_id": "001-60884",
+    "question": "In the case against Sweden concerning another incident of aggravated drunken driving and driving without a driver’s li, who was the Agent representing the Government before the Court?",
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr I. Salmi, a lawyer practising in Gothenburg. The Swedish Government (“the Government”) were represented by their Agent, Ms I. Kalmerborn, Ministry for Foreign Affairs. The applicant alleged, in particular, that his rights under Article 6 of the Convention had been violated in criminal proceedings against him, as he had not been given a Finnish-speaking public defence counsel. The application was transmitted to the Court on 1 November 1998, when Protocol No. 11 to the Convention came into force (Article 5 § 2 of Protocol No. 11). The application was allocated to the First Section of the Court (Rule 52 § 1 of the Rules of Court). Within that Section, the Chamber that would consider the case (Article 27 § 1 of the Convention) was constituted as provided in Rule 26 § 1 of the Rules of Court. By a decision of 15 February 2000 the Court declared the application admissible. The Government, but not the applicant, filed observations on the merits (Rule 59 § 1). The Chamber having decided, after consulting the parties, that no hearing on the merits was required (Rule 59 § 2 in fine), the applicant replied in writing to the Government’s observations. On 1 November 2001 the Court changed the composition of its Sections (Rule 25 § 1). This case was assigned to the newly composed Fourth Section. THE FACTS I. THE CIRCUMSTANCES OF THE CASE The applicant, who was born in 1942, settled in Sweden in the second half of the 1980s. His mother tongue is Finnish. On 3 December 1991 the applicant was charged before the District Court (tingsrätten) of Gothenburg with aggravated drunken driving and driving without a driver’s licence. According to the record of the police investigation, he did not request the assistance of a public defence counsel. On 9 January 1992 the District Court, apparently of its own motion, appointed the lawyer H. as public defence counsel for the applicant. On 22 April 1992 the applicant was charged with another incident of aggravated drunken driving and driving without a driver’s licence. According to the record of the police investigation, he stated that he wished the lawyer S. to be appointed as public defence counsel. On 31 August 1992 the applicant was charged with yet another incident of aggravated drunken driving and driving without a driver’s licence. According to the record of the police investigation, he did not wish to be assisted by public defence counsel. On 22 December 1992 the applicant was charged with causing a traffic accident, leaving the scene of the accident and driving without a driver’s licence. According to the record of the police investigation, he did not wish to be assisted by public defence counsel. On 21 January 1993 the applicant was charged with possessing a knife in a public place. According to the record of the police investigation, he did not wish to be assisted by public defence counsel. On 22 January 1993 the public prosecutor applied for a detention order regarding the applicant, who was suspected of attempted aggravated assault. According to the prosecutor’s application, the applicant wished to have S. as public defence counsel. At the subsequent hearing, the lawyer P.S. replaced, with the District Court’s permission, H. as public defence counsel. According to the minutes from the hearing, the applicant requested that S., a Swedish lawyer who had previously assisted him and who knew Finnish, should be appointed as his public defence counsel, whereupon the judge informed him that he should give reasons for his request in writing. The court rejected the application for a detention order and released the applicant. Subsequently he did not submit a written request for a replacement of defence counsel. On 9 February 1993 the applicant was charged with attempted aggravated assault and possessing a knife in a public place. When scheduling the main hearing, the District Court had telephone contact with the applicant who reiterated his request to have S. appointed as his public defence counsel. The court asked the applicant to contact H. in the matter. Before the District Court the applicant apparently lodged some submissions independently of counsel H. It appears that these submissions were all in Finnish, the applicant invoking his right under the Nordic Language Convention (Nordiska språkkonventionen) to submit pleadings in his mother tongue. All the written submissions were translated into Swedish and entered into the case-file. At the main hearing on 10 May 1994 the applicant was assisted by H. as public defence counsel. Neither the minutes of the hearing nor the judgment delivered in the case contains any indication that the applicant at that time expressed a wish to have his public defence counsel replaced. In addition to counsel’s oral submissions, the applicant defended himself orally in Finnish via a court-appointed interpreter. He denied some of the offences he was charged with, confessed some and declared that he neither confessed nor denied the remainder of the charges. By a judgment of 24 May 1994 the applicant was convicted on all the above-mentioned counts and sentenced to 1 year and 2 months in prison. He was also ordered to pay 450 Swedish kronor (SEK) of the total litigation costs in the case. These included H.’s fees which amounted to SEK 10,395 for, inter alia, ten hours of work. The remainder of the costs was borne by the State. The applicant appealed against the judgment in respect of the charges he had denied. The prosecution also appealed, seeking a more severe sentence. The prosecution stated that the applicant was in great need of public counsel for his defence, although he clearly did not wish to be represented by H. On 23 August 1994, in the proceedings before the Court of Appeal (hovrätten) for Western Sweden, the applicant requested that counsel H. be replaced by S. The applicant reiterated that he had previously been assisted by S. and that he was able to communicate with him in Finnish. S. had declared that he was willing to assist the applicant as public defence counsel. On 6 September 1994 the applicant’s request was refused, the appellate court considering that sufficient reasons for counsel to be replaced had not been presented. On 30 November 1994 the Supreme Court (Högsta domstolen) refused the applicant leave to appeal against the Court of Appeal’s decision. As in the proceedings before the District Court, the applicant apparently lodged some submissions in Finnish before the appellate court, all of which were translated into Swedish and entered into the case-file. The Court of Appeal heard the case on 22 May 1995. H. attended the hearing as the applicant’s counsel. There is no indication in the minutes of the hearing that the applicant opposed H.’s presence. Having heard H.’s oral pleadings, the Court of Appeal gave the applicant the floor via a court-appointed interpreter. On 6 June 1995 the Court of Appeal upheld the applicant’s conviction and sentence. It also decided that the litigation costs in the appeal proceedings – including H.’s fees of SEK 3,455 – should be paid by the State. On 23 August 1995 the Supreme Court refused the applicant leave to appeal. I. THE CIRCUMSTANCES OF THE CASE The applicant, who was born in 1942, settled in Sweden in the second half of the 1980s. His mother tongue is Finnish. On 3 December 1991 the applicant was charged before the District Court (tingsrätten) of Gothenburg with aggravated drunken driving and driving without a driver’s licence. According to the record of the police investigation, he did not request the assistance of a public defence counsel. On 9 January 1992 the District Court, apparently of its own motion, appointed the lawyer H. as public defence counsel for the applicant. On 22 April 1992 the applicant was charged with another incident of aggravated drunken driving and driving without a driver’s licence. According to the record of the police investigation, he stated that he wished the lawyer S. to be appointed as public defence counsel. On 31 August 1992 the applicant was charged with yet another incident of aggravated drunken driving and driving without a driver’s licence. According to the record of the police investigation, he did not wish to be assisted by public defence counsel. On 22 December 1992 the applicant was charged with causing a traffic accident, leaving the scene of the accident and driving without a driver’s licence. According to the record of the police investigation, he did not wish to be assisted by public defence counsel. On 21 January 1993 the applicant was charged with possessing a knife in a public place. According to the record of the police investigation, he did not wish to be assisted by public defence counsel. On 22 January 1993 the public prosecutor applied for a detention order regarding the applicant, who was suspected of attempted aggravated assault. According to the prosecutor’s application, the applicant wished to have S. as public defence counsel. At the subsequent hearing, the lawyer P.S. replaced, with the District Court’s permission, H. as public defence counsel. According to the minutes from the hearing, the applicant requested that S., a Swedish lawyer who had previously assisted him and who knew Finnish, should be appointed as his public defence counsel, whereupon the judge informed him that he should give reasons for his request in writing. The court rejected the application for a detention order and released the applicant. Subsequently he did not submit a written request for a replacement of defence counsel. On 9 February 1993 the applicant was charged with attempted aggravated assault and possessing a knife in a public place. When scheduling the main hearing, the District Court had telephone contact with the applicant who reiterated his request to have S. appointed as his public defence counsel. The court asked the applicant to contact H. in the matter. Before the District Court the applicant apparently lodged some submissions independently of counsel H. It appears that these submissions were all in Finnish, the applicant invoking his right under the Nordic Language Convention (Nordiska språkkonventionen) to submit pleadings in his mother tongue. All the written submissions were translated into Swedish and entered into the case-file. At the main hearing on 10 May 1994 the applicant was assisted by H. as public defence counsel. Neither the minutes of the hearing nor the judgment delivered in the case contains any indication that the applicant at that time expressed a wish to have his public defence counsel replaced. In addition to counsel’s oral submissions, the applicant defended himself orally in Finnish via a court-appointed interpreter. He denied some of the offences he was charged with, confessed some and declared that he neither confessed nor denied the remainder of the charges. By a judgment of 24 May 1994 the applicant was convicted on all the above-mentioned counts and sentenced to 1 year and 2 months in prison. He was also ordered to pay 450 Swedish kronor (SEK) of the total litigation costs in the case. These included H.’s fees which amounted to SEK 10,395 for, inter alia, ten hours of work. The remainder of the costs was borne by the State. The applicant appealed against the judgment in respect of the charges he had denied. The prosecution also appealed, seeking a more severe sentence. The prosecution stated that the applicant was in great need of public counsel for his defence, although he clearly did not wish to be represented by H. On 23 August 1994, in the proceedings before the Court of Appeal (hovrätten) for Western Sweden, the applicant requested that counsel H. be replaced by S. The applicant reiterated that he had previously been assisted by S. and that he was able to communicate with him in Finnish. S. had declared that he was willing to assist the applicant as public defence counsel. On 6 September 1994 the applicant’s request was refused, the appellate court considering that sufficient reasons for counsel to be replaced had not been presented. On 30 November 1994 the Supreme Court (Högsta domstolen) refused the applicant leave to appeal against the Court of Appeal’s decision. As in the proceedings before the District Court, the applicant apparently lodged some submissions in Finnish before the appellate court, all of which were translated into Swedish and entered into the case-file. The Court of Appeal heard the case on 22 May 1995. H. attended the hearing as the applicant’s counsel. There is no indication in the minutes of the hearing that the applicant opposed H.’s presence. Having heard H.’s oral pleadings, the Court of Appeal gave the applicant the floor via a court-appointed interpreter. On 6 June 1995 the Court of Appeal upheld the applicant’s conviction and sentence. It also decided that the litigation costs in the appeal proceedings – including H.’s fees of SEK 3,455 – should be paid by the State. On 23 August 1995 the Supreme Court refused the applicant leave to appeal."
+  },
+  {
+    "id": "117",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-66845",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
+    "ground_truth": "The Polish Government (“the Government”) were represented by their Agent, Mr J. Wołąsiewicz of the Ministry of Foreign Affairs."
+  },
+  {
+    "id": "118",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-58284",
     "question": "In the case against the United Kingdom concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "Ms S. Langrish"
+    "ground_truth": "The Government were represented by their Agent, Mr H. Llewellyn, of the Foreign and Commonwealth Office, London."
+  },
+  {
+    "id": "119",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-95364",
+    "question": "In the case against the United Kingdom concerning his redundancy to the Industrial Tribunal, but his claim was rejected because the Industri..., who was the Agent representing the Government before the Court?",
+    "ground_truth": "The United Kingdom Government (“the Government”) were represented by their Agent, Ms H. Moynihan, Foreign and Commonwealth Office."
+  },
+  {
+    "id": "120",
+    "category": "identity",
+    "level": "hard",
+    "source_doc_id": "001-83979",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who were the applicants?",
+    "ground_truth": "The case originated in an application (no. 1206/03) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Turkish nationals, Mr Sait Uysal and Mr İskan Osal (“the applicants”), on 20 November 2002."
   }
 ]
