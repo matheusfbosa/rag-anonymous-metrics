@@ -12,7 +12,8 @@ from rag_anonymous import build_llm
 
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
-from rag_anonymous_metrics.questions_filter import apply_questions_filter
+from rag_anonymous_metrics.questions_filter import apply_category_filter, apply_id_range
+
 
 THRESHOLD = 0.9
 SEPARATION = 0.3
@@ -20,14 +21,33 @@ SEPARATION = 0.3
 
 def check_judge() -> int:
     cfg = Settings.load()
-    return asyncio.run(_run(cfg.judge_model, cfg.dataset, cfg.questions_filter))
+    if cfg.questions_category == "adversarial":
+        print(
+            "check-judge requires a benchmark category "
+            "(all|factual|identity), not adversarial."
+        )
+        return 2
+    return asyncio.run(
+        _run(
+            cfg.judge_model,
+            cfg.dataset,
+            cfg.questions_category,
+            cfg.questions_range,
+        )
+    )
 
 
-async def _run(judge, dataset, questions_filter):
+async def _run(judge, dataset, category, id_range):
     all_questions = load_questions(dataset=dataset)
-    questions = apply_questions_filter(all_questions, questions_filter)
+    if category == "all":
+        questions = apply_id_range(all_questions, id_range)
+    else:
+        questions = apply_id_range(
+            apply_category_filter(all_questions, category),
+            id_range,
+        )
     if not questions:
-        print(f"No questions in {dataset}.")
+        print(f"No questions match category={category} range={id_range} in {dataset}.")
         return 2
 
     print(f"Judge: {judge} | dataset: {dataset} | n: {len(questions)}\n")

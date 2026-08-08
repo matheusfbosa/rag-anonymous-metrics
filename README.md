@@ -9,12 +9,13 @@ This package evaluates two anonymization strategies against a benchmark question
 - **Offline:** the corpus is anonymized by Presidio before ingestion; the retriever and generator never see raw PII.
 - **On-Demand:** the raw corpus is ingested as-is; Presidio anonymizes only the generated answer at query time.
 
-For each question × strategy the evaluator:
+For each item × strategy the evaluator:
 
 1. Runs the full RAG pipeline (retrieval + generation + optional post-generation anonymization).
 2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
-3. Computes **utility metrics** (faithfulness, context precision, context recall, factual correctness) via a separate judge LLM once all answers are collected — refusals are skipped and recorded as `null`.
-4. Persists per-query results to JSONL.
+3. On the **benchmark** suite: computes **utility metrics** (faithfulness, context precision, context recall, factual correctness) via a separate judge LLM — refusals are skipped and recorded as `null`.
+4. On the **adversarial** suite: skips Ragas and reports **Attack Success Rate (ASR)** with Wilson 95% CI (no judge).
+5. Persists per-query results to JSONL.
 
 ```mermaid
 flowchart TD
@@ -48,17 +49,18 @@ rag-anonymous-metrics/
 │   ├── __init__.py
 │   ├── config.py           # Load env vars
 │   ├── cli.py              # rag-metrics run
-│   ├── corpus.py           # Load benchmark questions
+│   ├── corpus.py           # Load benchmark questions + adversarial attacks
 │   ├── records.py          # QueryRecord dataclass (JSONL schema)
 │   ├── run.py              # Pipeline per-question loop
 │   └── metrics/
+│       ├── adversarial.py  # ASR + Wilson CI
 │       ├── privacy.py      # PII leakage index/rate + refusal heuristics
 │       └── utility.py      # Ragas faithfulness + context precision (judge LLM)
 ├── data/
 │   ├── input/
-│   │   ├── benchmark_questions_dev.json
-│   │   ├── benchmark_questions_train.json
-│   │   └── benchmark_questions_test.json
+│   │   ├── adversarial_attacks_{dev,train,test}.json
+│   │   ├── benchmark_questions_{dev,train,test}.json
+│   │   └── …
 │   └── output/             # Results and metrics
 ├── notebooks/              # Jupyter Notebooks for analysis
 ├── Makefile
@@ -237,10 +239,10 @@ Verifies the judge LLM before trusting its scores: feeds each question's own gro
 
 ```sh
 make check-judge
-RAG_METRICS_JUDGE_MODEL=gemma4:12b RAG_METRICS_QUESTIONS_FILTER=1-5 make check-judge
+RAG_METRICS_JUDGE_MODEL=gemma4:12b RAG_METRICS_QUESTIONS_CATEGORY=all RAG_METRICS_QUESTIONS_RANGE=1-5 make check-judge
 ```
 
-It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, and `RAG_METRICS_QUESTIONS_FILTER`.
+It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, `RAG_METRICS_QUESTIONS_CATEGORY`, and `RAG_METRICS_QUESTIONS_RANGE`.
 
 ### Run full evaluation (Offline and On-Demand strategies)
 
@@ -248,56 +250,61 @@ It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, and `RAG_METRIC
 make run
 ```
 
+With `RAG_METRICS_QUESTIONS_CATEGORY=all`, the run evaluates the benchmark (utility + privacy) and then the adversarial suite (ASR only, no Ragas).
 
-
-### Run a single strategy or corpus dataset
+### Run a single strategy, dataset, category, or id range
 
 ```sh
-RAG_METRICS_EVAL_STRATEGY=offline make run
-RAG_METRICS_EVAL_STRATEGY=ondemand make run
+RAG_METRICS_STRATEGY=offline make run
+RAG_METRICS_STRATEGY=ondemand make run
 RAG_METRICS_CORPUS_DATASET=train make run
 RAG_METRICS_CORPUS_DATASET=test make run
-RAG_METRICS_QUESTIONS_FILTER=identity make run
-RAG_METRICS_QUESTIONS_FILTER=61-90 make run
+RAG_METRICS_QUESTIONS_CATEGORY=identity RAG_METRICS_QUESTIONS_RANGE=all make run
+RAG_METRICS_QUESTIONS_CATEGORY=all RAG_METRICS_QUESTIONS_RANGE=1-60 make run
+RAG_METRICS_QUESTIONS_CATEGORY=adversarial RAG_METRICS_QUESTIONS_RANGE=1-15 make run
 ```
 
-`RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching `data/input/benchmark_questions_<dataset>.json` file.
+`RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching input files (`benchmark_questions_<dataset>.json`, `adversarial_attacks_<dataset>.json`).
 
-`RAG_METRICS_QUESTIONS_FILTER` limits which benchmark questions are evaluated:
+`RAG_METRICS_QUESTIONS_CATEGORY` selects the evaluation suite:
 
-- unset or `all` — every question
-- `factual` / `identity` — filter by the question `category` field
-- `1-60`, `61-90`, … — 1-based inclusive range by position in the JSON file
+- `all` — benchmark + adversarial (range applies only to the benchmark)
+- `factual` / `identity` — benchmark filtered by `category`
+- `adversarial` — adversarial attacks only
+
+`RAG_METRICS_QUESTIONS_RANGE` recuts by numeric `id` (`all` or `START-END`).
 
 
 
 ## Output
 
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
-  - `results_offline.jsonl` and/or `results_ondemand.jsonl` (depending on `RAG_METRICS_EVAL_STRATEGY`) — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
+  - `results_offline.jsonl` and/or `results_ondemand.jsonl` (benchmark; depends on `RAG_METRICS_STRATEGY`) — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
+  - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields + ASR summary in the logs (no Ragas scores).
 
 
 
 ## Configuration
 
 
-| Variable                       | Default                                                    | Description                                                                                                                                                                       |
-| ------------------------------ | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RAG_ANON_CORPUS`              | TAB ECHR URL template                                      | Corpus source (URL or local path) with optional `{dataset}`, used by `rag_anonymous.load_corpus` to build the PII index. `{dataset}` is filled from `RAG_METRICS_CORPUS_DATASET`. |
-| `RAG_ANON_EMBEDDING_MODEL`     | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                                  |
-| `RAG_ANON_ES_URL`              | `http://localhost:9200`                                    | Elasticsearch base URL (shared with `rag-anonymous`)                                                                                                                              |
-| `RAG_ANON_LLM_MODEL`           | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
-| `RAG_ANON_LLM_REASONING`       | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |
-| `RAG_ANON_LLM_TEMPERATURE`     | `0.0`                                                      | Generation temperature                                                                                                                                                            |
-| `RAG_ANON_LOG_LEVEL`           | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                             |
-| `RAG_ANON_LOG_LEVEL_HTTP`      | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                    |
-| `RAG_ANON_LOG_LEVEL_PRESIDIO`  | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                              |
-| `RAG_ANON_OLLAMA_BASE_URL`     | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
-| `RAG_METRICS_CORPUS_DATASET`   | `dev`                                                      | TAB dataset (train/dev/test)                                                                                                                                                      |
-| `RAG_METRICS_EVAL_STRATEGY`    | `all`                                                      | `offline`, `ondemand`, or `all`                                                                                                                                                   |
-| `RAG_METRICS_JUDGE_MODEL`      | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for faithfulness / context precision only                                                                                                                               |
-| `RAG_METRICS_QUESTIONS_FILTER` | `all`                                                      | `all`, `factual`, `identity`, or a 1-based range (`1-60`, `61-90`, …)                                                                                                             |
-| `RAG_METRICS_RESULTS_DIR`      | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
-| `RAG_METRICS_RETRIEVAL_K_DOCS` | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
+| Variable                         | Default                                                    | Description                                                                                                                                                                       |
+| -------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RAG_ANON_CORPUS`                | TAB ECHR URL template                                      | Corpus source (URL or local path) with optional `{dataset}`, used by `rag_anonymous.load_corpus` to build the PII index. `{dataset}` is filled from `RAG_METRICS_CORPUS_DATASET`. |
+| `RAG_ANON_EMBEDDING_MODEL`       | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                                  |
+| `RAG_ANON_ES_URL`                | `http://localhost:9200`                                    | Elasticsearch base URL (shared with `rag-anonymous`)                                                                                                                              |
+| `RAG_ANON_LLM_MODEL`             | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
+| `RAG_ANON_LLM_REASONING`         | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |
+| `RAG_ANON_LLM_TEMPERATURE`       | `0.0`                                                      | Generation temperature                                                                                                                                                            |
+| `RAG_ANON_LOG_LEVEL`             | `INFO`                                                     | Application loggers / root level. Accepts `DEBUG`/`INFO`/`WARNING`/`ERROR`/`CRITICAL` or a numeric level. Inherited from the `rag-anonymous` package.                             |
+| `RAG_ANON_LOG_LEVEL_HTTP`        | `WARNING`                                                  | Level for HTTP client loggers (`httpx`, `httpcore`, `urllib3`). Default hides per-request lines; raise to `INFO` to inspect every Ollama call.                                    |
+| `RAG_ANON_LOG_LEVEL_PRESIDIO`    | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                              |
+| `RAG_ANON_OLLAMA_BASE_URL`       | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
+| `RAG_METRICS_CORPUS_DATASET`     | `dev`                                                      | TAB dataset (`train` / `dev` / `test`); required                                                                                                                                  |
+| `RAG_METRICS_JUDGE_MODEL`        | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for Ragas utility metrics                                                                                                                                               |
+| `RAG_METRICS_QUESTIONS_CATEGORY` | — (required)                                               | `all`, `factual`, `identity`, or `adversarial`                                                                                                                                    |
+| `RAG_METRICS_QUESTIONS_RANGE`    | — (required)                                               | `all` or `START-END` by numeric `id` (e.g. `1-60`)                                                                                                                                |
+| `RAG_METRICS_RESULTS_DIR`        | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
+| `RAG_METRICS_RETRIEVAL_K_DOCS`   | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
+| `RAG_METRICS_STRATEGY`    | — (required)                                               | `offline`, `ondemand`, or `all`                                                                                                                                                   |
 
 

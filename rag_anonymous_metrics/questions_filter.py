@@ -1,68 +1,90 @@
 from __future__ import annotations
 
 import re
-from typing import Literal, Sequence
+from typing import Literal, Sequence, cast
 
-CategoryFilter = Literal["factual", "identity"]
-FilterSpec = None | tuple[int, int] | CategoryFilter
+CategorySpec = Literal["all", "factual", "identity", "adversarial"]
+RangeSpec = Literal["all"] | tuple[int, int]
 
 _RANGE_RE = re.compile(r"^\s*(\d+)\s*-\s*(\d+)\s*$")
-_CATEGORY_FILTERS: frozenset[str] = frozenset({"factual", "identity"})
+_CATEGORIES: frozenset[str] = frozenset({"all", "factual", "identity", "adversarial"})
 
 
-def parse_questions_filter(raw: str | None) -> FilterSpec:
-    """Parse RAG_METRICS_QUESTIONS_FILTER.
-
-    Returns:
-        None — all questions (unset, empty, or ``all``)
-        ``factual`` / ``identity`` — filter by question ``category``
-        ``(start, end)`` — 1-based inclusive index range in the loaded list
-    """
+def parse_questions_category(raw: str | None) -> CategorySpec:
     if raw is None or not raw.strip():
-        return None
+        raise ValueError(
+            "RAG_METRICS_QUESTIONS_CATEGORY is required "
+            "(all|factual|identity|adversarial)"
+        )
+    trimmed = raw.strip().lower()
+    if trimmed not in _CATEGORIES:
+        raise ValueError(
+            "RAG_METRICS_QUESTIONS_CATEGORY must be "
+            f"'all', 'factual', 'identity', or 'adversarial', got {raw!r}"
+        )
+    return cast(CategorySpec, trimmed)
+
+
+def parse_questions_range(raw: str | None) -> RangeSpec:
+    if raw is None or not raw.strip():
+        raise ValueError(
+            "RAG_METRICS_QUESTIONS_RANGE is required (all or a range like '1-60')"
+        )
     trimmed = raw.strip().lower()
     if trimmed == "all":
-        return None
-    if trimmed in _CATEGORY_FILTERS:
-        return trimmed
+        return "all"
     match = _RANGE_RE.match(trimmed)
     if not match:
         raise ValueError(
-            "RAG_METRICS_QUESTIONS_FILTER must be 'all', 'factual', 'identity', "
-            f"or a range like '1-60', got {raw!r}"
+            "RAG_METRICS_QUESTIONS_RANGE must be 'all' or a range like '1-60', "
+            f"got {raw!r}"
         )
     start = int(match.group(1))
     end = int(match.group(2))
     if start <= 0 or end <= 0:
         raise ValueError(
-            f"RAG_METRICS_QUESTIONS_FILTER range must be positive, got {start}-{end}"
+            f"RAG_METRICS_QUESTIONS_RANGE bounds must be positive, got {start}-{end}"
         )
     if start > end:
         raise ValueError(
-            f"RAG_METRICS_QUESTIONS_FILTER start must be <= end, got {start}-{end}"
+            f"RAG_METRICS_QUESTIONS_RANGE start must be <= end, got {start}-{end}"
         )
     return (start, end)
 
 
-def apply_questions_filter(
-    questions: Sequence[dict],
-    filter_spec: FilterSpec,
+def apply_category_filter(
+    items: Sequence[dict],
+    category: CategorySpec,
 ) -> list[dict]:
-    if filter_spec is None:
-        return list(questions)
-    if filter_spec in _CATEGORY_FILTERS:
-        return [q for q in questions if q.get("category") == filter_spec]
-    start, end = filter_spec
-    if start > len(questions):
-        return []
-    slice_end = min(end, len(questions))
-    return list(questions[start - 1:slice_end])
+    if category == "all":
+        return list(items)
+    return [q for q in items if q.get("category") == category]
 
 
-def describe_questions_filter(filter_spec: FilterSpec) -> str:
-    if filter_spec is None:
+def apply_id_range(
+    items: Sequence[dict],
+    range_spec: RangeSpec,
+) -> list[dict]:
+    if range_spec == "all":
+        return list(items)
+    start, end = range_spec
+    selected: list[dict] = []
+    for item in items:
+        try:
+            item_id = int(str(item.get("id", "")).strip())
+        except ValueError:
+            continue
+        if start <= item_id <= end:
+            selected.append(item)
+    return selected
+
+
+def describe_category(category: CategorySpec) -> str:
+    return category
+
+
+def describe_range(range_spec: RangeSpec) -> str:
+    if range_spec == "all":
         return "all"
-    if isinstance(filter_spec, str):
-        return filter_spec
-    start, end = filter_spec
+    start, end = range_spec
     return f"{start}-{end}"

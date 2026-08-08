@@ -89,6 +89,8 @@ def evaluate_question(
         contexts=contexts,
         doc_ids=doc_ids,
         dataset=dataset,
+        item_type=question_obj.get("type"),
+        category=question_obj.get("category"),
         **privacy,
     )
 
@@ -102,10 +104,17 @@ def evaluate_strategy(
     k_docs: int,
     llm_model: str | None = None,
     judge_model: str | None = None,
+    *,
+    compute_utility: bool = True,
+    output_basename: str | None = None,
 ) -> StrategyResult:
     logger.info("")
     logger.info("=" * 60)
-    logger.info("Evaluating: strategy=%s", strategy)
+    logger.info(
+        "Evaluating: strategy=%s compute_utility=%s",
+        strategy,
+        compute_utility,
+    )
 
     cfg = Settings.load()
     gen_model = llm_model or cfg.llm_model
@@ -144,13 +153,14 @@ def evaluate_strategy(
             len(records), strategy, dataset,
         )
 
-    _attach_utility(records, judge_m)
+    if compute_utility:
+        _attach_utility(records, judge_m)
 
-    output_path = experiment_dir / f"results_{strategy}.jsonl"
+    basename = output_basename or f"results_{strategy}.jsonl"
+    output_path = experiment_dir / basename
     _save_jsonl(records, output_path)
 
     return StrategyResult(strategy=strategy, records=records, output_path=str(output_path))
-
 
 def response_text(raw):
     if hasattr(raw, "content"):
@@ -165,22 +175,35 @@ def run_experiment(
     k_docs: int,
     llm_model: str | None = None,
     judge_model: str | None = None,
+    *,
+    compute_utility: bool = True,
+    output_suffix: str = "",
+    experiment_dir: Path | None = None,
+    pii_index: dict | None = None,
 ) -> tuple[dict[str, StrategyResult], Path]:
     from rag_anonymous_metrics.corpus import load_corpus
 
     cfg = Settings.load()
-    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    experiment_dir = cfg.results_dir / stamp
-    experiment_dir.mkdir(parents=True, exist_ok=True)
-    logger.info("Experiment output directory: %s", experiment_dir)
+    if experiment_dir is None:
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        experiment_dir = cfg.results_dir / stamp
+        experiment_dir.mkdir(parents=True, exist_ok=True)
+        logger.info("Experiment output directory: %s", experiment_dir)
 
-    logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
-    corpus = load_corpus(dataset)
-    pii_index = build_pii_index(corpus)
-    logger.info("PII index built: %d docs with annotated spans", len(pii_index))
+    if pii_index is None:
+        logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
+        corpus = load_corpus(dataset)
+        pii_index = build_pii_index(corpus)
+        logger.info("PII index built: %d docs with annotated spans", len(pii_index))
 
-    results = {
-        strategy: evaluate_strategy(
+    results = {}
+    for strategy in strategies:
+        basename = (
+            f"results_{strategy}{output_suffix}.jsonl"
+            if output_suffix
+            else f"results_{strategy}.jsonl"
+        )
+        results[strategy] = evaluate_strategy(
             strategy,
             questions,
             pii_index,
@@ -189,11 +212,10 @@ def run_experiment(
             k_docs=k_docs,
             llm_model=llm_model,
             judge_model=judge_model,
+            compute_utility=compute_utility,
+            output_basename=basename,
         )
-        for strategy in strategies
-    }
     return results, experiment_dir
-
 
 def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
     from rag_anonymous_metrics.metrics.utility import UtilityScorer

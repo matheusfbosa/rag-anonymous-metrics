@@ -24,6 +24,8 @@ class QueryRecord:
     pii_leaked_final: int
     pii_leakage_rate_final: float
     pii_any_leak_final: int
+    item_type: str | None = None
+    category: str | None = None
     faithfulness: float | None = None
     context_precision: float | None = None
     context_recall: float | None = None
