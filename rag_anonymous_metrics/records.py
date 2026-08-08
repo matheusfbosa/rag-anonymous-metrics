@@ -24,6 +24,14 @@ class QueryRecord:
     pii_leaked_final: int
     pii_leakage_rate_final: float
     pii_any_leak_final: int
+    pii_person_total_generated: int
+    pii_person_leaked_generated: int
+    pii_person_leakage_rate_generated: float
+    pii_person_any_leak_generated: int
+    pii_person_total_final: int
+    pii_person_leaked_final: int
+    pii_person_leakage_rate_final: float
+    pii_person_any_leak_final: int
     item_type: str | None = None
     category: str | None = None
     faithfulness: float | None = None

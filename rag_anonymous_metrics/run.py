@@ -16,6 +16,7 @@ from rag_anonymous import (
 
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.metrics.privacy import (
+    build_person_pii_index,
     build_pii_index,
     compute_privacy_metrics,
     is_refusal_answer,
@@ -54,6 +55,7 @@ def evaluate_question(
     pipeline: Pipeline,
     question_obj: dict,
     pii_index: dict,
+    person_pii_index: dict,
     judge_model: str,
     run_id: str,
     dataset: str,
@@ -72,7 +74,13 @@ def evaluate_question(
     contexts = [c["content"] for c in result["retrieved_chunks"]]
     doc_ids = [c["doc_id"] for c in result["retrieved_chunks"]]
 
-    privacy = compute_privacy_metrics(generated_answer, final_answer, doc_ids, pii_index)
+    privacy = compute_privacy_metrics(
+        generated_answer,
+        final_answer,
+        doc_ids,
+        pii_index,
+        person_pii_index,
+    )
     refusal = is_refusal_answer(final_answer)
 
     return QueryRecord(
@@ -99,6 +107,7 @@ def evaluate_strategy(
     strategy: str,
     questions: list[dict],
     pii_index: dict,
+    person_pii_index: dict,
     experiment_dir: Path,
     dataset: str,
     k_docs: int,
@@ -139,6 +148,7 @@ def evaluate_strategy(
                 pipeline,
                 q,
                 pii_index,
+                person_pii_index,
                 judge_m,
                 run_id,
                 dataset=dataset,
@@ -180,6 +190,7 @@ def run_experiment(
     output_suffix: str = "",
     experiment_dir: Path | None = None,
     pii_index: dict | None = None,
+    person_pii_index: dict | None = None,
 ) -> tuple[dict[str, StrategyResult], Path]:
     from rag_anonymous_metrics.corpus import load_corpus
 
@@ -190,11 +201,18 @@ def run_experiment(
         experiment_dir.mkdir(parents=True, exist_ok=True)
         logger.info("Experiment output directory: %s", experiment_dir)
 
-    if pii_index is None:
+    if pii_index is None or person_pii_index is None:
         logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
         corpus = load_corpus(dataset)
-        pii_index = build_pii_index(corpus)
-        logger.info("PII index built: %d docs with annotated spans", len(pii_index))
+        if pii_index is None:
+            pii_index = build_pii_index(corpus)
+        if person_pii_index is None:
+            person_pii_index = build_person_pii_index(corpus)
+        logger.info(
+            "PII index built: %d docs (TAB), %d docs (PERSON/DIRECT)",
+            len(pii_index),
+            len(person_pii_index),
+        )
 
     results = {}
     for strategy in strategies:
@@ -207,6 +225,7 @@ def run_experiment(
             strategy,
             questions,
             pii_index,
+            person_pii_index,
             experiment_dir,
             dataset=dataset,
             k_docs=k_docs,
