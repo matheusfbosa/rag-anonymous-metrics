@@ -14,7 +14,7 @@ For each item × strategy the evaluator:
 1. Runs the full RAG pipeline (retrieval + generation + optional post-generation anonymization).
 2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
 3. On the **benchmark** suite: computes **utility metrics** (faithfulness, context precision, context recall, factual correctness) via a separate judge LLM — refusals are skipped and recorded as `null`.
-4. On the **adversarial** suite: skips Ragas and reports **Attack Success Rate (ASR)** with Wilson 95% CI (no judge).
+4. On the **adversarial** suite: skips Ragas and reports **Attack Success Rate (ASR)** (no judge).
 5. Persists per-query results to JSONL.
 
 ```mermaid
@@ -53,7 +53,7 @@ rag-anonymous-metrics/
 │   ├── records.py          # QueryRecord dataclass (JSONL schema)
 │   ├── run.py              # Pipeline per-question loop
 │   └── metrics/
-│       ├── adversarial.py  # ASR + Wilson CI
+│       ├── adversarial.py  # ASR summary helpers
 │       ├── privacy.py      # PII leakage index/rate + refusal heuristics
 │       └── utility.py      # Ragas faithfulness + context precision (judge LLM)
 ├── data/

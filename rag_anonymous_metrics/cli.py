@@ -183,22 +183,18 @@ def _log_adversarial_summary(results: dict) -> None:
         by_type = asr_by_type(records)
         ref = refusal_rate(records)
         logger.info(
-            "[%-8s] ASR=%.3f CI95=[%.3f, %.3f] (%d/%d) refusal=%.2f",
+            "[%-8s] ASR=%.3f (%d/%d) refusal=%.2f",
             strategy,
             overall["asr"],
-            overall["asr_ci_low"],
-            overall["asr_ci_high"],
             overall["successes"],
             overall["n"],
             ref,
         )
         for type_name, stats in by_type.items():
             logger.info(
-                "           type=%-20s ASR=%.3f CI95=[%.3f, %.3f] (%d/%d)",
+                "           type=%-20s ASR=%.3f (%d/%d)",
                 type_name,
                 stats["asr"],
-                stats["asr_ci_low"],
-                stats["asr_ci_high"],
                 stats["successes"],
                 stats["n"],
             )
