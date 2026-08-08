@@ -1,962 +1,962 @@
 [
   {
+    "category": "factual",
+    "ground_truth": "According to the detention order, the applicant was suspected of aiding and abetting an illegal organisation, the PKK (the Kurdistan Workers' Party).",
     "id": "1",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-80593",
     "question": "In ECHR case 001-80593 (application no. 47297/99 against Turkey), which illegal organisation was the applicant suspected of assisting?",
-    "ground_truth": "According to the detention order, the applicant was suspected of aiding and abetting an illegal organisation, the PKK (the Kurdistan Workers' Party)."
+    "source_doc_id": "001-80593",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 28 June 1992 the applicant participated in a meeting organised by a political party, the People’s Labour Party (Halkın Emek Partisi, HEP), in Bursa.",
     "id": "2",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-59335",
     "question": "In ECHR case 001-59335 (application no. 29851/96 against Turkey), which political party organised the meeting at which the applicant made a speech?",
-    "ground_truth": "On 28 June 1992 the applicant participated in a meeting organised by a political party, the People’s Labour Party (Halkın Emek Partisi, HEP), in Bursa."
+    "source_doc_id": "001-59335",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "In the period from 7 to 12 October 2004, the applicant and the co‑defendants requested that the Leave to Appeal Board (Procesbevillingsnævnet) grant them leave to appeal to the Supreme Court (Højesteret).",
     "id": "3",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-90194",
     "question": "In ECHR case 001-90194 (application no. 36244/06 against Denmark), which body grants leave to appeal to the Supreme Court?",
-    "ground_truth": "In the period from 7 to 12 October 2004, the applicant and the co‑defendants requested that the Leave to Appeal Board (Procesbevillingsnævnet) grant them leave to appeal to the Supreme Court (Højesteret)."
+    "source_doc_id": "001-90194",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The Polish Government (“the Government”) were represented by their Agent, Mr J. Wołąsiewicz of the Ministry of Foreign Affairs.",
     "id": "4",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-84741",
     "question": "In ECHR case 001-84741 (application no. 29366/03 against Poland), to which government ministry did the Agent representing the Polish Government belong?",
-    "ground_truth": "The Polish Government (“the Government”) were represented by their Agent, Mr J. Wołąsiewicz of the Ministry of Foreign Affairs."
+    "source_doc_id": "001-84741",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "By agreement, her case was adjourned to await the House of Lords judgment in Bellinger v.",
     "id": "5",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-75454",
     "question": "In ECHR case 001-75454 (application no. 32570/03 against the United Kingdom), the applicant's case was adjourned to await a judgment from which judicial body in Bellinger v. Bellinger?",
-    "ground_truth": "By agreement, her case was adjourned to await the House of Lords judgment in Bellinger v."
+    "source_doc_id": "001-75454",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 12 February 1996 the applicant instituted further proceedings in the High Court for compensation from the Ministry of Defence in respect of his detention from 27 May to 11 December 1995.",
     "id": "6",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-58609",
     "question": "In ECHR case 001-58609 (application no. 30280/96 against the United Kingdom), from which authority did the applicant seek compensation in the High Court proceedings?",
-    "ground_truth": "On 12 February 1996 the applicant instituted further proceedings in the High Court for compensation from the Ministry of Defence in respect of his detention from 27 May to 11 December 1995."
+    "source_doc_id": "001-58609",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "Nölkenbockhoff then applied to the Federal Constitutional Court (Bundesverfassungsgericht), claiming a breach of Article 1 § 1 (protection of the dignity of man), Article 14 § 1 (the right of property) and Article 20 § 3 (principle of the rule of law) of the Basic Law.",
     "id": "7",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-57546",
     "question": "In ECHR case 001-57546 (application no. 10300/83 against Germany), to which court did the applicant apply, claiming a breach of the protection of human dignity?",
-    "ground_truth": "Nölkenbockhoff then applied to the Federal Constitutional Court (Bundesverfassungsgericht), claiming a breach of Article 1 § 1 (protection of the dignity of man), Article 14 § 1 (the right of property) and Article 20 § 3 (principle of the rule of law) of the Basic Law."
+    "source_doc_id": "001-57546",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "By letter dated 23 May 2002 the applicant appealed against the decision to the County Administrative Court (länsrätten) of the County of Blekinge, requesting that the decision be set aside and that the case be remitted to the Office for further action.",
     "id": "8",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-106918",
     "question": "In ECHR case 001-106918 (application no. 36801/06 against Sweden), to which court did the applicant appeal against the decision by letter?",
-    "ground_truth": "By letter dated 23 May 2002 the applicant appealed against the decision to the County Administrative Court (länsrätten) of the County of Blekinge, requesting that the decision be set aside and that the case be remitted to the Office for further action."
+    "source_doc_id": "001-106918",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The Revolutionary Communists' Union of Turkey (Türkiye İhtilalci Komünistler Birliği, TIKB).",
     "id": "9",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-70538",
     "question": "In ECHR case 001-70538 (application no. 66689/01 against Turkey), of membership of which illegal armed organisation was the applicant suspected?",
-    "ground_truth": "The Revolutionary Communists' Union of Turkey (Türkiye İhtilalci Komünistler Birliği, TIKB)."
+    "source_doc_id": "001-70538",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The incident The deceased was a lawyer and the chairman of the Tatvan provincial branch of a pro-Kurdish political party, the Democracy Party (“DEP”).",
     "id": "10",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-158945",
     "question": "In ECHR case 001-158945 (application no. 26589/06 against Turkey), which pro-Kurdish political party is referred to in the case?",
-    "ground_truth": "The incident The deceased was a lawyer and the chairman of the Tatvan provincial branch of a pro-Kurdish political party, the Democracy Party (“DEP”)."
+    "source_doc_id": "001-158945",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 27 April 1998 the applicant was taken into custody during a military operation carried out by the Turkish armed forces on suspicion of being a member of an illegal armed organisation, namely the PKK (the Workers’ Party of Kurdistan).",
     "id": "11",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-91042",
     "question": "In ECHR case 001-91042 (application no. 5138/04 against Turkey), of which illegal armed organisation was the applicant suspected of being a member?",
-    "ground_truth": "On 27 April 1998 the applicant was taken into custody during a military operation carried out by the Turkish armed forces on suspicion of being a member of an illegal armed organisation, namely the PKK (the Workers’ Party of Kurdistan)."
+    "source_doc_id": "001-91042",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 17 November 1997, at 11.45 p.m., the applicants were arrested and taken into police custody by officers of the Ankara security police in connection with an investigation into the illegal organisation THKP-C Dev Yol – Devrim Hareketi (Turkish People’s Liberation Party-Front – Revolutionary Way – Revolutionary Movement).",
     "id": "12",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-73062",
     "question": "In ECHR case 001-73062 (application no. 42596/98 against Turkey), in connection with an investigation into which illegal organisation were the applicants arrested?",
-    "ground_truth": "On 17 November 1997, at 11.45 p.m., the applicants were arrested and taken into police custody by officers of the Ankara security police in connection with an investigation into the illegal organisation THKP-C Dev Yol – Devrim Hareketi (Turkish People’s Liberation Party-Front – Revolutionary Way – Revolutionary Movement)."
+    "source_doc_id": "001-73062",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 23 May 1995 the applicant was taken into custody by police officers from the Antalya Security Directorate on suspicion of membership of an illegal organisation, the TDKP/GKB (Turkish Revolutionary Communist Party / Young Communist Union).",
     "id": "13",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-70168",
     "question": "In ECHR case 001-70168 (application no. 45718/99 against Turkey), membership of which illegal organisation was the applicant suspected of?",
-    "ground_truth": "On 23 May 1995 the applicant was taken into custody by police officers from the Antalya Security Directorate on suspicion of membership of an illegal organisation, the TDKP/GKB (Turkish Revolutionary Communist Party / Young Communist Union)."
+    "source_doc_id": "001-70168",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicant was charged with drug trafficking and detained on remand from 6 April 2002 to 21 May 2004.",
     "id": "14",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-83747",
     "question": "In ECHR case 001-83747 (application no. 38007/02 against Poland), with what offence was the applicant charged?",
-    "ground_truth": "The applicant was charged with drug trafficking and detained on remand from 6 April 2002 to 21 May 2004."
+    "source_doc_id": "001-83747",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "They were members of the executive and auditors boards of the Pir Sultan Abdal Cultural Association (“the Association”), a non‑governmental organisation with its headquarters in Ankara.",
     "id": "15",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-84618",
     "question": "In ECHR case 001-84618 (application no. 27225/02 against Turkey), of which non-governmental organisation were the applicants board members?",
-    "ground_truth": "They were members of the executive and auditors boards of the Pir Sultan Abdal Cultural Association (“the Association”), a non‑governmental organisation with its headquarters in Ankara."
+    "source_doc_id": "001-84618",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "At the time of the events in question the applicant was the vice‑president of HAK-PAR (Hak ve Özgürlükler Partisi – the Rights and Freedoms Party).",
     "id": "16",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-166682",
     "question": "In ECHR case 001-166682 (application no. 29483/09 against Turkey), of which political party was the applicant the vice-president?",
-    "ground_truth": "At the time of the events in question the applicant was the vice‑president of HAK-PAR (Hak ve Özgürlükler Partisi – the Rights and Freedoms Party)."
+    "source_doc_id": "001-166682",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "In 2004 the General Directorate of Highways seized a plot of land belonging to the applicant without any formal expropriation, for the construction of a highway.",
     "id": "17",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-107258",
     "question": "In ECHR case 001-107258 (application no. 10450/08 against Turkey), which public authority seized the applicant's plot of land for the construction of a highway?",
-    "ground_truth": "In 2004 the General Directorate of Highways seized a plot of land belonging to the applicant without any formal expropriation, for the construction of a highway."
+    "source_doc_id": "001-107258",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 20 July 2001 the applicant was remanded in custody by the Gdańsk Regional Court on suspicion of murder.",
     "id": "18",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-93333",
     "question": "In ECHR case 001-93333 (application no. 29940/06 against Poland), on suspicion of which offence was the applicant remanded in custody?",
-    "ground_truth": "On 20 July 2001 the applicant was remanded in custody by the Gdańsk Regional Court on suspicion of murder."
+    "source_doc_id": "001-93333",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "Criminal proceedings against the applicant On 19 June 2000 the Katowice District Prosecutor issued a bill of indictment against the applicant on charges of drug trafficking, unlawful possession of firearms and membership of an organised criminal gang.",
     "id": "19",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-92883",
     "question": "In ECHR case 001-92883 (application no. 30279/07 against Poland), besides unlawful possession of firearms and gang membership, with which trafficking offence was the applicant charged?",
-    "ground_truth": "Criminal proceedings against the applicant On 19 June 2000 the Katowice District Prosecutor issued a bill of indictment against the applicant on charges of drug trafficking, unlawful possession of firearms and membership of an organised criminal gang."
+    "source_doc_id": "001-92883",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 9 July 1996 the applicant was arrested in Istanbul during a bank robbery.",
     "id": "20",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-94125",
     "question": "In ECHR case 001-94125 (application no. 24801/05 against Turkey), during the commission of which crime was the applicant arrested?",
-    "ground_truth": "On 9 July 1996 the applicant was arrested in Istanbul during a bank robbery."
+    "source_doc_id": "001-94125",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "Criminal proceedings against the applicant and his detention on remand On 30 July 2002 the applicant was arrested on suspicion of murder.",
     "id": "21",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-88513",
     "question": "In ECHR case 001-88513 (application no. 22930/05 against Poland), on suspicion of which offence was the applicant arrested?",
-    "ground_truth": "Criminal proceedings against the applicant and his detention on remand On 30 July 2002 the applicant was arrested on suspicion of murder."
+    "source_doc_id": "001-88513",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The court referred to the reasonable suspicion that the applicant was guilty of fraud while acting in an organised group.",
     "id": "22",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-99176",
     "question": "In ECHR case 001-99176 (application no. 39631/06 against Poland), the reasonable suspicion that the applicant was guilty of which offence was relied on for his pre-trial detention?",
-    "ground_truth": "The court referred to the reasonable suspicion that the applicant was guilty of fraud while acting in an organised group."
+    "source_doc_id": "001-99176",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The TKP/ML-TIKKO (Communist Party of Turkey/Marxist-Leninist Turkish Workers and Peasants' Liberation Army)",
     "id": "23",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-126128",
     "question": "In ECHR case 001-126128 (application no. 3042/05 against Turkey), membership of which illegal organisation was the applicant suspected of?",
-    "ground_truth": "The TKP/ML-TIKKO (Communist Party of Turkey/Marxist-Leninist Turkish Workers and Peasants' Liberation Army)"
+    "source_doc_id": "001-126128",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The case originated in an application (no. 18403/91) against the Republic of Turkey lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Cypriot national, Mrs Anna Evagorou Christou (“the applicant”), on 31 May 1991.",
     "id": "24",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-90973",
     "question": "In ECHR case 001-90973 (application no. 18403/91 against Turkey), with which Convention institution was the application originally lodged?",
-    "ground_truth": "The case originated in an application (no. 18403/91) against the Republic of Turkey lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Cypriot national, Mrs Anna Evagorou Christou (“the applicant”), on 31 May 1991."
+    "source_doc_id": "001-90973",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 29 May 2001, the applicant was arrested by police officers from the anti-terrorism branch of the Izmir Security Directorate on suspicion of having participated in an illegal demonstration in support of the imprisoned leader of the PKK (the Kurdistan Workers’ Party, an illegal organisation).",
     "id": "25",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-80303",
     "question": "In ECHR case 001-80303 (application no. 36391/02 against Turkey), in support of whose imprisoned leader was the applicant accused of participating in an illegal demonstration?",
-    "ground_truth": "On 29 May 2001, the applicant was arrested by police officers from the anti-terrorism branch of the Izmir Security Directorate on suspicion of having participated in an illegal demonstration in support of the imprisoned leader of the PKK (the Kurdistan Workers’ Party, an illegal organisation)."
+    "source_doc_id": "001-80303",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 28 April 2005 the applicant was arrested on suspicion of bribery, several counts of evasion of tax and customs duties and several counts of forgery, committed in an organised criminal gang.",
     "id": "26",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-92416",
     "question": "In ECHR case 001-92416 (application no. 46949/07 against Poland), besides tax evasion and forgery, of which offence was the applicant suspected on arrest?",
-    "ground_truth": "On 28 April 2005 the applicant was arrested on suspicion of bribery, several counts of evasion of tax and customs duties and several counts of forgery, committed in an organised criminal gang."
+    "source_doc_id": "001-92416",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "He was then transferred to the Anti-Terrorist Branch of the Batman Police Headquarters on suspicion of involvement in the activities of the PKK (the Workers’ Party of Kurdistan), an illegal organisation.",
     "id": "27",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-93448",
     "question": "In ECHR case 001-93448 (application no. 18623/03 against Turkey), in the activities of which illegal organisation was the applicant suspected of involvement?",
-    "ground_truth": "He was then transferred to the Anti-Terrorist Branch of the Batman Police Headquarters on suspicion of involvement in the activities of the PKK (the Workers’ Party of Kurdistan), an illegal organisation."
+    "source_doc_id": "001-93448",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The first applicant was the editor-in-chief of a weekly newspaper, Yedinci Gündem, and the second applicant was its owner.",
     "id": "28",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-83632",
     "question": "In ECHR case 001-83632 (application no. 31080/02 against Turkey), what position did the first applicant hold at the weekly newspaper Yedinci Gündem?",
-    "ground_truth": "The first applicant was the editor-in-chief of a weekly newspaper, Yedinci Gündem, and the second applicant was its owner."
+    "source_doc_id": "001-83632",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The PKK",
     "id": "29",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-83402",
     "question": "In ECHR case 001-83402 (application no. 73283/01 against Turkey), of involvement with which illegal organisation was the applicant accused?",
-    "ground_truth": "The PKK"
+    "source_doc_id": "001-83402",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 2 December 1990 the applicant sent a letter to the Minister of Justice, complaining about the slow progress of the proceedings.",
     "id": "30",
-    "category": "factual",
-    "level": "easy",
-    "source_doc_id": "001-61631",
     "question": "In ECHR case 001-61631 (application no. 6214/02 against Poland), to which government official did the applicant complain in a letter about the slow progress of the proceedings?",
-    "ground_truth": "On 2 December 1990 the applicant sent a letter to the Minister of Justice, complaining about the slow progress of the proceedings."
+    "source_doc_id": "001-61631",
+    "type": "easy"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicant alleged, in particular, that the imposition of the “dangerous detainee” regime on him and its lengthy application amounted to inhuman and degrading treatment in breach of Article 3 of the Convention.",
     "id": "31",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-162024",
     "question": "In ECHR case 001-162024 (application no. 29869/13 against Poland), what treatment did the applicant allege the \"dangerous detainee\" regime amounted to?",
-    "ground_truth": "The applicant alleged, in particular, that the imposition of the “dangerous detainee” regime on him and its lengthy application amounted to inhuman and degrading treatment in breach of Article 3 of the Convention."
+    "source_doc_id": "001-162024",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicant alleged, in particular, that the Assize Court of the Canton of Geneva had tried and convicted him in absentia, in breach of Article 6 §§ 1 and 3 (c) of the Convention.",
     "id": "32",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-59518",
     "question": "In ECHR case 001-59518 (application no. 20491/92 against Switzerland), what did the applicant allege the Assize Court had done?",
-    "ground_truth": "The applicant alleged, in particular, that the Assize Court of the Canton of Geneva had tried and convicted him in absentia, in breach of Article 6 §§ 1 and 3 (c) of the Convention."
+    "source_doc_id": "001-59518",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicants complained that the non-enforcement of court decisions in their favour had given rise to a violation of Article 6 of the Convention and Article 1 of Protocol No. 1.",
     "id": "33",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-80849",
     "question": "In ECHR case 001-80849 (application no. 28152/02 against Turkey), what conduct did the applicants complain about?",
-    "ground_truth": "The applicants complained that the non-enforcement of court decisions in their favour had given rise to a violation of Article 6 of the Convention and Article 1 of Protocol No. 1."
+    "source_doc_id": "001-80849",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "That he had been denied a fair hearing on account of the presence of a military judge on the bench of the State Security Court that tried and convicted him.",
     "id": "34",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-61901",
     "question": "In ECHR case 001-61901 (application no. 41956/98 against Turkey), why did the applicant say his hearing had been unfair?",
-    "ground_truth": "That he had been denied a fair hearing on account of the presence of a military judge on the bench of the State Security Court that tried and convicted him."
+    "source_doc_id": "001-61901",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicants complained that the existence of closed-shop agreements in Denmark in their respective areas of employment had violated their right to freedom of association, secured by Article 11 of the Convention.",
     "id": "35",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-72015",
     "question": "In ECHR case 001-72015 (application no. 52562/99 against Denmark), what arrangement did the applicants say violated their freedom of association?",
-    "ground_truth": "The applicants complained that the existence of closed-shop agreements in Denmark in their respective areas of employment had violated their right to freedom of association, secured by Article 11 of the Convention."
+    "source_doc_id": "001-72015",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "Proceedings before the Polish-German Reconciliation Foundation concerning the applicant On 9 June 2001 the applicant applied to the Polish-German Reconciliation Foundation (“the Foundation”) for compensation on account of his forced labour during the war.",
     "id": "36",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-97054",
     "question": "In ECHR case 001-97054 (application no. 36137/04 against Poland), proceedings before which body did the applicant complain about?",
-    "ground_truth": "Proceedings before the Polish-German Reconciliation Foundation concerning the applicant On 9 June 2001 the applicant applied to the Polish-German Reconciliation Foundation (“the Foundation”) for compensation on account of his forced labour during the war."
+    "source_doc_id": "001-97054",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicants alleged that section 52 of the Offences against the State Act 1939 constituted a violation of the rights guaranteed by Articles 6, 8 and 10 of the Convention.",
     "id": "37",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-59097",
     "question": "In ECHR case 001-59097 (application no. 34720/97 against Ireland), which Convention Articles did the applicants say section 52 of the Offences against the State Act 1939 violated?",
-    "ground_truth": "The applicants alleged that section 52 of the Offences against the State Act 1939 constituted a violation of the rights guaranteed by Articles 6, 8 and 10 of the Convention."
+    "source_doc_id": "001-59097",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "During her employment, the applicant’s telephone, e-mail and Internet usage were subjected to monitoring at the DP’s instigation.",
     "id": "38",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-79996",
     "question": "In ECHR case 001-79996 (application no. 62617/00 against the United Kingdom), what monitoring did the applicant complain about?",
-    "ground_truth": "During her employment, the applicant’s telephone, e-mail and Internet usage were subjected to monitoring at the DP’s instigation."
+    "source_doc_id": "001-79996",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "That neither the Appeals Commission nor the Constitutional Court had held an oral hearing.",
     "id": "39",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-113142",
     "question": "In ECHR case 001-113142 (application no. 10781/08 against Austria), what procedural omission did the applicant rely on?",
-    "ground_truth": "That neither the Appeals Commission nor the Constitutional Court had held an oral hearing."
+    "source_doc_id": "001-113142",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicant complained, in particular, about the proportionality of the detention order under Article 5 § 1 of the Convention.",
     "id": "40",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-147045",
     "question": "In ECHR case 001-147045 (application no. 8307/11 against Sweden), what aspect of the detention order did the applicant challenge?",
-    "ground_truth": "The applicant complained, in particular, about the proportionality of the detention order under Article 5 § 1 of the Convention."
+    "source_doc_id": "001-147045",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "The excessive length of the civil proceedings.",
     "id": "41",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-70871",
     "question": "In ECHR case 001-70871 (application no. 64204/01 against Poland), what was the substance of the applicants' complaint about the proceedings on their action for payment?",
-    "ground_truth": "The excessive length of the civil proceedings."
+    "source_doc_id": "001-70871",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "In a letter to the applicant of 29 September 2000 the Minister of Justice conceded that the length of the proceedings was excessive.",
     "id": "42",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-66727",
     "question": "In ECHR case 001-66727 (application no. 65017/01 against Poland), what did the applicant complain about regarding the conduct of his civil case?",
-    "ground_truth": "In a letter to the applicant of 29 September 2000 the Minister of Justice conceded that the length of the proceedings was excessive."
+    "source_doc_id": "001-66727",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 22 June 2006 the Karacabey Civil Court awarded the applicants TRY 5,500 as compensation for the de facto expropriation of their land, as requested, plus interest.",
     "id": "43",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-107264",
     "question": "In ECHR case 001-107264 (application no. 10458/08 against Turkey), what did the applicants seek compensation for before the domestic courts?",
-    "ground_truth": "On 22 June 2006 the Karacabey Civil Court awarded the applicants TRY 5,500 as compensation for the de facto expropriation of their land, as requested, plus interest."
+    "source_doc_id": "001-107264",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 21 April 1997 the applicant complained to the Ministry of Justice about the length of the proceedings.",
     "id": "44",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-70372",
     "question": "In ECHR case 001-70372 (application no. 64207/01 against Poland), what was the substance of the applicant's complaint concerning his divorce petition?",
-    "ground_truth": "On 21 April 1997 the applicant complained to the Ministry of Justice about the length of the proceedings."
+    "source_doc_id": "001-70372",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "The latter prevented him from having access to and from using and possessing his home and property in Famagusta as well as from practising his profession there.",
     "id": "45",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-94238",
     "question": "In ECHR case 001-94238 (application no. 16160/90 against Turkey), what did the applicant complain he had been deprived of?",
-    "ground_truth": "The latter prevented him from having access to and from using and possessing his home and property in Famagusta as well as from practising his profession there."
+    "source_doc_id": "001-94238",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "Because the same judge had sat on the panel giving the second-instance judgment on the merits and on the panel rejecting the cassation appeal against that judgment.",
     "id": "46",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-79036",
     "question": "In ECHR case 001-79036 (application no. 2065/03 against Poland), why did the applicant say the proceedings on her cassation appeal had been unfair?",
-    "ground_truth": "Because the same judge had sat on the panel giving the second-instance judgment on the merits and on the panel rejecting the cassation appeal against that judgment."
+    "source_doc_id": "001-79036",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "Being beaten, having his ears pulled and being subjected to falaka (beating on the soles of his feet).",
     "id": "47",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-151047",
     "question": "In ECHR case 001-151047 (application no. 53645/10 against Turkey), what treatment did the applicant allege he had been subjected to during his interrogation at the police station?",
-    "ground_truth": "Being beaten, having his ears pulled and being subjected to falaka (beating on the soles of his feet)."
+    "source_doc_id": "001-151047",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "On 3 May 2004 the President of the Fourth Section decided to communicate the complaint concerning the length of proceedings to the Government.",
     "id": "48",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-77315",
     "question": "In ECHR case 001-77315 (application no. 75870/01 against Poland), what was the substance of the complaint communicated to the Government?",
-    "ground_truth": "On 3 May 2004 the President of the Fourth Section decided to communicate the complaint concerning the length of proceedings to the Government."
+    "source_doc_id": "001-77315",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "Censorship of the applicant’s correspondence The applicant submitted that during his detention his correspondence was censored by the authorities.",
     "id": "49",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-86687",
     "question": "In ECHR case 001-86687 (application no. 43837/06 against Poland), what conduct affecting his correspondence did the applicant complain about?",
-    "ground_truth": "Censorship of the applicant’s correspondence The applicant submitted that during his detention his correspondence was censored by the authorities."
+    "source_doc_id": "001-86687",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "Monitoring of the applicant’s correspondence At the time of lodging his application with the Court the applicant was detained in the course of criminal proceedings against him.",
     "id": "50",
-    "category": "factual",
-    "level": "medium",
-    "source_doc_id": "001-86678",
     "question": "In ECHR case 001-86678 (application no. 24322/02 against Poland), what conduct concerning his correspondence did the applicant complain about?",
-    "ground_truth": "Monitoring of the applicant’s correspondence At the time of lodging his application with the Court the applicant was detained in the course of criminal proceedings against him."
+    "source_doc_id": "001-86678",
+    "type": "medium"
   },
   {
+    "category": "factual",
+    "ground_truth": "Tax asset stripping (selskabstømmersager) was a criminal scheme whereby persons bought up and sold numerous inactive solvent private limited companies within a short period, stripping them of assets including deposits earmarked for corporation tax. Approximately 1,600 companies with tax debts exceeding DKK 2 billion were stripped between the late 1980s and 1994. In the applicant's civil proceedings, the trustee in bankruptcy of HOP no. 49 alleged that the applicant (as the seller) and a bank (BG Bank A/S) were jointly and severally liable for stripping the company of assets in connection with the 1992 sale. The central legal question was the liability of the buyer's bank and the buyer's attorney and accountant for the advice they had provided — a question whose answer was awaited from a Supreme Court judgment in the parallel 'Else Thrane' case.",
     "id": "51",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-93358",
     "question": "In ECHR case 001-93358 (application no. 44034/07 against Denmark), what was the 'tax asset stripping' scheme that formed the background to the civil proceedings, and what was the central legal question that the domestic High Court proceedings had to resolve?",
-    "ground_truth": "Tax asset stripping (selskabstømmersager) was a criminal scheme whereby persons bought up and sold numerous inactive solvent private limited companies within a short period, stripping them of assets including deposits earmarked for corporation tax. Approximately 1,600 companies with tax debts exceeding DKK 2 billion were stripped between the late 1980s and 1994. In the applicant's civil proceedings, the trustee in bankruptcy of HOP no. 49 alleged that the applicant (as the seller) and a bank (BG Bank A/S) were jointly and severally liable for stripping the company of assets in connection with the 1992 sale. The central legal question was the liability of the buyer's bank and the buyer's attorney and accountant for the advice they had provided — a question whose answer was awaited from a Supreme Court judgment in the parallel 'Else Thrane' case."
+    "source_doc_id": "001-93358",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicant alleged violations of Articles 3, 6, 8, 13 and 14 of the Convention and Article 1 of Protocol No. 1. The domestic investigation resulted in a decision of non-prosecution: the Lice Chief Public Prosecutor issued a decision of non-jurisdiction and transferred the case to the Lice District Governor's office under the Law on Prosecution of Civil Servants. After a preliminary investigation, Inspector İlbaş concluded the applicant's allegations were groundless — finding that the security forces had intervened following a PKK road block and had carried out searches in the villages with due respect for citizens. The Lice District Administrative Council therefore issued a decision of non-prosecution, which was upheld by the Regional Administrative Court.",
     "id": "52",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-79486",
     "question": "In ECHR case 001-79486 (application no. 37850/97 against Turkey), which Convention articles and Protocol provisions did the applicant allege were violated, and what was the outcome of the domestic investigation into his complaints about the conduct of the security forces?",
-    "ground_truth": "The applicant alleged violations of Articles 3, 6, 8, 13 and 14 of the Convention and Article 1 of Protocol No. 1. The domestic investigation resulted in a decision of non-prosecution: the Lice Chief Public Prosecutor issued a decision of non-jurisdiction and transferred the case to the Lice District Governor's office under the Law on Prosecution of Civil Servants. After a preliminary investigation, Inspector İlbaş concluded the applicant's allegations were groundless — finding that the security forces had intervened following a PKK road block and had carried out searches in the villages with due respect for citizens. The Lice District Administrative Council therefore issued a decision of non-prosecution, which was upheld by the Regional Administrative Court."
+    "source_doc_id": "001-79486",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "The Paris Criminal Court acquitted both applicants at first instance, finding the journalist had merely quoted extracts from a reliable report without distorting it and had acted in good faith pursuing a legitimate aim. The Paris Court of Appeal convicted them, sentencing each to a fine of FRF 5,000 and ordering them to pay the King of Morocco FRF 1 in damages and FRF 10,000 in costs. The Court of Appeal reasoned that: the desire to implicate the King in person was tainted with malicious intent; the journalist had not checked the accuracy of the OGD's comments or verified whether the 1994 report remained valid in 1995; he had not contacted Moroccan officials for their observations; and he had omitted to mention Morocco's White Paper on anti-drug trafficking policy. The Criminal Division of the Court of Cassation dismissed the applicants' further appeal, confirming the Court of Appeal's assessment.",
     "id": "53",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-60532",
     "question": "In ECHR case 001-60532 (application no. 51279/99 against France), what were the different outcomes of the domestic criminal proceedings at each level, and on what legal reasoning did the Paris Court of Appeal convict the applicants despite the first-instance acquittal?",
-    "ground_truth": "The Paris Criminal Court acquitted both applicants at first instance, finding the journalist had merely quoted extracts from a reliable report without distorting it and had acted in good faith pursuing a legitimate aim. The Paris Court of Appeal convicted them, sentencing each to a fine of FRF 5,000 and ordering them to pay the King of Morocco FRF 1 in damages and FRF 10,000 in costs. The Court of Appeal reasoned that: the desire to implicate the King in person was tainted with malicious intent; the journalist had not checked the accuracy of the OGD's comments or verified whether the 1994 report remained valid in 1995; he had not contacted Moroccan officials for their observations; and he had omitted to mention Morocco's White Paper on anti-drug trafficking policy. The Criminal Division of the Court of Cassation dismissed the applicants' further appeal, confirming the Court of Appeal's assessment."
+    "source_doc_id": "001-60532",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "The Supreme Military Administrative Court failed to address the applicant's key allegation — that he had been unable to see a doctor for approximately one week because no doctor was present at the regiment infirmary — other than by stating he had 'contacted the infirmary and started receiving medical treatment.' It also failed to respond to the applicant's repeated requests to have his witnesses heard and the allegedly absent military doctor summoned. The majority relied on the expert report of 6 April 2005. The dissenting judge disagreed because that report had not established: the specific cause of the corneal ulcer; whether the injury was connected to military service; or what bearing the one-to-two week delay had on the outcome. The dissenting judge concluded the court should not have decided the case without obtaining a new, clarified expert report.",
     "id": "54",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-157755",
     "question": "In ECHR case 001-157755 (application no. 7505/06 against Turkey), what specific procedural failures did the Supreme Military Administrative Court commit in assessing the applicant's compensation claim, and on what grounds did the dissenting judge disagree with the majority?",
-    "ground_truth": "The Supreme Military Administrative Court failed to address the applicant's key allegation — that he had been unable to see a doctor for approximately one week because no doctor was present at the regiment infirmary — other than by stating he had 'contacted the infirmary and started receiving medical treatment.' It also failed to respond to the applicant's repeated requests to have his witnesses heard and the allegedly absent military doctor summoned. The majority relied on the expert report of 6 April 2005. The dissenting judge disagreed because that report had not established: the specific cause of the corneal ulcer; whether the injury was connected to military service; or what bearing the one-to-two week delay had on the outcome. The dissenting judge concluded the court should not have decided the case without obtaining a new, clarified expert report."
+    "source_doc_id": "001-157755",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "Before the Nîmes Court of Appeal the applicant argued that Article 760 was incompatible with Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1. The Court of Cassation held that inheritance rights had nothing to do with respect for private and family life guaranteed by Article 8 of the Convention.",
     "id": "55",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-58456",
     "question": "In ECHR case 001-58456 (application no. 34406/97 against France), concerning inheritance rights of adulterine children under Article 760 of the Civil Code, which Convention and Protocol provisions did the applicant invoke before the Nîmes Court of Appeal, and how did the Court of Cassation distinguish inheritance rights from Article 8 private and family life?",
-    "ground_truth": "Before the Nîmes Court of Appeal the applicant argued that Article 760 was incompatible with Articles 8 and 14 of the Convention and Article 1 of Protocol No. 1. The Court of Cassation held that inheritance rights had nothing to do with respect for private and family life guaranteed by Article 8 of the Convention."
+    "source_doc_id": "001-58456",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicant argued that the ten-year exclusion order violated Article 8 of the Convention since he was a minor who had come to Austria at age six, his entire family had acquired Austrian nationality and lived in Austria, and he had no relatives or social contacts in Bulgaria and could not speak Bulgarian. Under domestic law, he relied on section 38(1)(4) of the Aliens Act 1997, which he argued prohibited exclusion orders against aliens lawfully resident from an early age. The Administrative Court rejected this, holding that its case-law required lawful residence from age three or younger. The case reached the Grand Chamber through an Article 43 referral at the respondent Government's request, after a Chamber of the First Section had already delivered a judgment finding a violation of Article 8 by four votes to three — making it a second-instance Grand Chamber rehearing, not a first-instance relinquishment.",
     "id": "56",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-87156",
     "question": "In ECHR case 001-87156 (application no. 1638/03 against Austria), what was the applicant's legal argument against the exclusion order under both domestic law and the Convention, and what was the unusual procedural route by which the case reached the Grand Chamber?",
-    "ground_truth": "The applicant argued that the ten-year exclusion order violated Article 8 of the Convention since he was a minor who had come to Austria at age six, his entire family had acquired Austrian nationality and lived in Austria, and he had no relatives or social contacts in Bulgaria and could not speak Bulgarian. Under domestic law, he relied on section 38(1)(4) of the Aliens Act 1997, which he argued prohibited exclusion orders against aliens lawfully resident from an early age. The Administrative Court rejected this, holding that its case-law required lawful residence from age three or younger. The case reached the Grand Chamber through an Article 43 referral at the respondent Government's request, after a Chamber of the First Section had already delivered a judgment finding a violation of Article 8 by four votes to three — making it a second-instance Grand Chamber rehearing, not a first-instance relinquishment."
+    "source_doc_id": "001-87156",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "The applicant argued that serving two years' imprisonment in default of payment of a customs fine — after already completing his five-year criminal prison sentence — amounted to being punished twice for the same offence, contrary to the non bis in idem principle. He invoked Article 6 § 1 of the Convention and Article 4 of Protocol No. 7, relying on the Court's judgment in Jamil v. France (1995) in which imprisonment in default was found to constitute a 'penalty.' The Court of Cassation dismissed the appeal on two grounds: first, that the public hearing requirement of Article 6 § 1 applies only to proceedings determining a criminal charge and not to applications for concurrent sentencing; and second, that imprisonment in default possesses the legal character of a means of enforcement — not a penalty — so the concurrent-sentencing rule did not apply.",
     "id": "57",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-60555",
     "question": "In ECHR case 001-60555 (application no. 33402/96 against France), what was the applicant's double-punishment argument, which Convention provision and Protocol article did he invoke, and how did the domestic Court of Cassation reject that argument?",
-    "ground_truth": "The applicant argued that serving two years' imprisonment in default of payment of a customs fine — after already completing his five-year criminal prison sentence — amounted to being punished twice for the same offence, contrary to the non bis in idem principle. He invoked Article 6 § 1 of the Convention and Article 4 of Protocol No. 7, relying on the Court's judgment in Jamil v. France (1995) in which imprisonment in default was found to constitute a 'penalty.' The Court of Cassation dismissed the appeal on two grounds: first, that the public hearing requirement of Article 6 § 1 applies only to proceedings determining a criminal charge and not to applications for concurrent sentencing; and second, that imprisonment in default possesses the legal character of a means of enforcement — not a penalty — so the concurrent-sentencing rule did not apply."
+    "source_doc_id": "001-60555",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "The Article 3 complaint concerning ill-treatment in police custody was declared admissible on 7 October 2003. The complaint under Articles 6 § 1 and 6 § 3(c) concerning denial of legal assistance during questioning was not declared admissible at that stage; on 10 October 2006 the Court decided to examine its merits at the same time as its admissibility under Article 29 § 3.",
     "id": "58",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-80364",
     "question": "In ECHR case 001-80364 (application no. 32581/96 against Turkey), the applicant alleged 'Palestinian hanging' and electric shocks at the anti-terror branch of the Istanbul Security Directorate. Which Convention complaints followed separate admissibility tracks before the Court, and on what dates was the Article 3 complaint declared admissible and the Article 6 legal-assistance complaint taken up under Article 29 § 3?",
-    "ground_truth": "The Article 3 complaint concerning ill-treatment in police custody was declared admissible on 7 October 2003. The complaint under Articles 6 § 1 and 6 § 3(c) concerning denial of legal assistance during questioning was not declared admissible at that stage; on 10 October 2006 the Court decided to examine its merits at the same time as its admissibility under Article 29 § 3."
+    "source_doc_id": "001-80364",
+    "type": "hard"
   },
   {
+    "category": "factual",
+    "ground_truth": "The specific procedural defect was that the principal public prosecutor's office submitted written observations to the Vienna Court of Appeal recommending dismissal of the applicant's compensation appeal — but those observations were never communicated to the applicant, who was therefore unable to respond to them. Both the Regional Court (Review Division) and the Court of Appeal sat in private, with no prosecution representative attending the deliberations. Both courts refused the compensation claim under section 2(1)(b) of the Compensation (Criminal Proceedings) Act 1969, which required that the suspicion against the detained person be fully 'dispelled' — meaning it must be positively established that the person was not punishable for the conduct in question. Both courts found that, although the criminal proceedings had been discontinued, the suspicion had not been sufficiently dispelled because the evidence merely gave rise to residual doubt rather than positive exculpation.",
     "id": "59",
-    "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-58114",
     "question": "In ECHR case 001-58114 (application no. 21835/93 against Austria), what specific procedural defect affected the applicant's compensation proceedings, and on what legal standard did both domestic courts refuse his compensation claim?",
-    "ground_truth": "The specific procedural defect was that the principal public prosecutor's office submitted written observations to the Vienna Court of Appeal recommending dismissal of the applicant's compensation appeal — but those observations were never communicated to the applicant, who was therefore unable to respond to them. Both the Regional Court (Review Division) and the Court of Appeal sat in private, with no prosecution representative attending the deliberations. Both courts refused the compensation claim under section 2(1)(b) of the Compensation (Criminal Proceedings) Act 1969, which required that the suspicion against the detained person be fully 'dispelled' — meaning it must be positively established that the person was not punishable for the conduct in question. Both courts found that, although the criminal proceedings had been discontinued, the suspicion had not been sufficiently dispelled because the evidence merely gave rise to residual doubt rather than positive exculpation."
+    "source_doc_id": "001-58114",
+    "type": "hard"
   },
   {
-    "id": "60",
     "category": "factual",
-    "level": "hard",
-    "source_doc_id": "001-57880",
+    "ground_truth": "The applicant alleged violations of Article 14 of the Convention taken together with Article 1 of Protocol No. 1 and Article 4 § 3(d). The specific measure was the fire service levy (Feuerwehrabgabe) imposed only on male adult residents under section 43 of the Baden-Württemberg Land Fire Brigades Act 1978, requiring only men to either serve in the fire brigade or pay a financial contribution in lieu. The Federal Constitutional Court repeatedly upheld this distinction on the ground that objective reasons justified treating men and women differently because of the risks inherent in fire brigade service; that there had been no fundamental change in legal opinion or new facts requiring departure from its settled case-law; and that the fact that certain other Länder had adopted sex-neutral fire brigade obligations did not oblige it to alter its position, since the decisive factor was that objective grounds for the distinction continued to exist.",
+    "id": "60",
     "question": "In ECHR case 001-57880 (application no. 13580/88 against Germany), which Convention provisions were alleged violated, what was the specific discriminatory measure challenged, and how did the Federal Constitutional Court repeatedly justify maintaining the distinction between men and women?",
-    "ground_truth": "The applicant alleged violations of Article 14 of the Convention taken together with Article 1 of Protocol No. 1 and Article 4 § 3(d). The specific measure was the fire service levy (Feuerwehrabgabe) imposed only on male adult residents under section 43 of the Baden-Württemberg Land Fire Brigades Act 1978, requiring only men to either serve in the fire brigade or pay a financial contribution in lieu. The Federal Constitutional Court repeatedly upheld this distinction on the ground that objective reasons justified treating men and women differently because of the risks inherent in fire brigade service; that there had been no fundamental change in legal opinion or new facts requiring departure from its settled case-law; and that the fact that certain other Länder had adopted sex-neutral fire brigade obligations did not oblige it to alter its position, since the decisive factor was that objective grounds for the distinction continued to exist."
+    "source_doc_id": "001-57880",
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 44537/05) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Kazimierz Klimkiewicz (“the applicant”), on 14 October 2005.",
     "id": "61",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-92408",
     "question": "In the case against Poland concerning financial fraud, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 44537/05) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Kazimierz Klimkiewicz (“the applicant”), on 14 October 2005."
+    "source_doc_id": "001-92408",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 65942/01) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Mustafa Karatepe (“the applicant”), on 8 November 2000.",
     "id": "62",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-83610",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 65942/01) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Mustafa Karatepe (“the applicant”), on 8 November 2000."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 9907/02) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Ms Emine Araç (“the applicant”), on 22 October 2001.",
     "id": "63",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-88564",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 9907/02) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Ms Emine Araç (“the applicant”), on 22 October 2001."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 15649/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Ms Bahar Yeşilyurt (“the applicant”), on 27 April 2005.",
     "id": "64",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-97411",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 15649/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Ms Bahar Yeşilyurt (“the applicant”), on 27 April 2005."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 40909/08) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Krzysztof Kulik (“the applicant”), on 6 August 2008.",
     "id": "65",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-96442",
     "question": "In the case against Poland concerning several counts of robbery, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 40909/08) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Krzysztof Kulik (“the applicant”), on 6 August 2008."
+    "source_doc_id": "001-96442",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 29865/96) against the Republic of Turkey lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mrs Ayten Ünal Tekeli (“the applicant”), on 20 December 1995.",
     "id": "66",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-67482",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 29865/96) against the Republic of Turkey lodged with the European Commission of Human Rights (“the Commission”) under former Article 25 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mrs Ayten Ünal Tekeli (“the applicant”), on 20 December 1995."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 13026/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Ms Maria Kaczmarczyk (“the applicant”), on 5 September 2001.",
     "id": "67",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-72158",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 13026/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Ms Maria Kaczmarczyk (“the applicant”), on 5 September 2001."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 3976/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Ms Şerife Yiğit (“the applicant”), on 6 December 2004.",
     "id": "68",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-90786",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 3976/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Ms Şerife Yiğit (“the applicant”), on 6 December 2004."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 31748/06) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Eugeniusz Ludwiczak (“the applicant”), on 17 July 2006.",
     "id": "69",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-90287",
     "question": "In the case against Poland concerning proceedings before the Warszawa District Court had, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 31748/06) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Eugeniusz Ludwiczak (“the applicant”), on 17 July 2006."
+    "source_doc_id": "001-90287",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 24706/05) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Józef Pabjan (“the applicant”), on 5 July 2005.",
     "id": "70",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-92748",
     "question": "In the case against Poland concerning the overall length of the proceedings, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 24706/05) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Józef Pabjan (“the applicant”), on 5 July 2005."
+    "source_doc_id": "001-92748",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 35785/07) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Bogusław Tekiela (“the applicant”), on 23 July 2007.",
     "id": "71",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-90501",
     "question": "In the case against Poland concerning the proceedings were too lengthy, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 35785/07) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Bogusław Tekiela (“the applicant”), on 23 July 2007."
+    "source_doc_id": "001-90501",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 49788/06) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Krzysztof Kaniewski (“the applicant”), on 5 December 2006.",
     "id": "72",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-88579",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 49788/06) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Krzysztof Kaniewski (“the applicant”), on 5 December 2006."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 14450/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Maciej Maksym (“the applicant”), on 25 April 2000.",
     "id": "73",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-78580",
     "question": "In the case against Poland concerning fraud, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 14450/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Maciej Maksym (“the applicant”), on 25 April 2000."
+    "source_doc_id": "001-78580",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 11184/03) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mrs Ewa Krempa-Czuchryta (“the applicant”), on 10 September 2001.",
     "id": "74",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-81370",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 11184/03) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mrs Ewa Krempa-Czuchryta (“the applicant”), on 10 September 2001."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 1524/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Zbigniew Majchrzak (“the applicant”), on 23 June 2001.",
     "id": "75",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-76756",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 1524/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Zbigniew Majchrzak (“the applicant”), on 23 June 2001."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 33582/08) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Ms Krystyna Seweryn (“the applicant”), on 4 July 2008.",
     "id": "76",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-99411",
     "question": "In the case against Poland concerning proceedings before the Warsaw District Court had been excess, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 33582/08) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Ms Krystyna Seweryn (“the applicant”), on 4 July 2008."
+    "source_doc_id": "001-99411",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 2983/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Bogdan Dzierżanowski (“the applicant”), on 19 December 2001.",
     "id": "77",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-76070",
     "question": "In the case against Poland concerning manslaughter, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 2983/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Bogdan Dzierżanowski (“the applicant”), on 19 December 2001."
+    "source_doc_id": "001-76070",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 22072/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Sławomir Małasiewicz (“the applicant”), on 25 May 2002.",
     "id": "78",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-61365",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 22072/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Sławomir Małasiewicz (“the applicant”), on 25 May 2002."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 30072/04) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Stefan Kozłowski (“the applicant”), on 11 July 2004.",
     "id": "79",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-86006",
     "question": "In the case against Poland concerning armed robbery, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 30072/04) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Stefan Kozłowski (“the applicant”), on 11 July 2004."
+    "source_doc_id": "001-86006",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 13017/02) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Muammer Pakkan (“the applicant”), on 7 March 2002.",
     "id": "80",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-77755",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 13017/02) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Muammer Pakkan (“the applicant”), on 7 March 2002."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 63442/00) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Henryk Kuśmierkowski (“the applicant”), on 11 April 2000.",
     "id": "81",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-66819",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 63442/00) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Henryk Kuśmierkowski (“the applicant”), on 11 April 2000."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 19789/08) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Grzegorz Jończyk (“the applicant”), on 10 April 2008.",
     "id": "82",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-101952",
     "question": "In the case against Poland concerning uttering threats and domestic violence, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 19789/08) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Grzegorz Jończyk (“the applicant”), on 10 April 2008."
+    "source_doc_id": "001-101952",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 72754/11) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by an Uzbek national, Mr Uktam Musaev (“the applicant”), on 28 October 2011.",
     "id": "83",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-147269",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 72754/11) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by an Uzbek national, Mr Uktam Musaev (“the applicant”), on 28 October 2011."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 3429/07) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Ms Maria Korcz (“the applicant”), on 20 July 2007.",
     "id": "84",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-94446",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 3429/07) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Ms Maria Korcz (“the applicant”), on 20 July 2007."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 23480/06) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Nuri Akalın (“the applicant”), on 10 May 2006.",
     "id": "85",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-101862",
     "question": "In the case against Turkey concerning being a member of an illegal organisation, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 23480/06) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Nuri Akalın (“the applicant”), on 10 May 2006."
+    "source_doc_id": "001-101862",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "THE CIRCUMSTANCES OF THE CASE The applicant, Ms Marianna Cieślak, is a Polish national who was born in 1923 and lives in Bobolice.",
     "id": "86",
-    "category": "identity",
-    "level": "easy",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
     "source_doc_id": "001-86685",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "THE CIRCUMSTANCES OF THE CASE The applicant, Ms Marianna Cieślak, is a Polish national who was born in 1923 and lives in Bobolice."
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 473/07) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Mirosław Wroński (“the applicant”), on 18 December 2006.",
     "id": "87",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-93088",
     "question": "In the case against Poland concerning proceedings issue to the period after the entry into force o, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 473/07) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Mirosław Wroński (“the applicant”), on 18 December 2006."
+    "source_doc_id": "001-93088",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 24254/05) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Tomasz Kwiatkowski (“the applicant”), on 24 June 2005.",
     "id": "88",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-104543",
     "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 24254/05) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Polish national, Mr Tomasz Kwiatkowski (“the applicant”), on 24 June 2005."
+    "source_doc_id": "001-104543",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 30001/03) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Tunç Tarımcı (“the applicant”), on 18 August 2003.",
     "id": "89",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-88897",
     "question": "In the case against Turkey concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 30001/03) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Turkish national, Mr Tunç Tarımcı (“the applicant”), on 18 August 2003."
+    "source_doc_id": "001-88897",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 25088/07) against the Swiss Confederation lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Montenegrin national, Mr Srdan Pesukic (“the applicant”), on 12 June 2007.",
     "id": "90",
-    "category": "identity",
-    "level": "easy",
-    "source_doc_id": "001-114965",
     "question": "In the case against Switzerland concerning the applicant's complaint before the Court, who was the applicant?",
-    "ground_truth": "The case originated in an application (no. 25088/07) against the Swiss Confederation lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by a Montenegrin national, Mr Srdan Pesukic (“the applicant”), on 12 June 2007."
+    "source_doc_id": "001-114965",
+    "type": "easy"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr Ayhan Akyiğit, a lawyer practising in Istanbul.",
     "id": "91",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-86359",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr Ayhan Akyiğit, a lawyer practising in Istanbul."
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr K.T. Sürek, a lawyer practising in Istanbul.",
     "id": "92",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-94750",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr K.T. Sürek, a lawyer practising in Istanbul."
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr P. Osik, a lawyer practising in Warsaw.",
     "id": "93",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-159917",
     "question": "In the case against Poland concerning murder committed with the use of firearms, who represented the applicant before the Court?",
-    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr P. Osik, a lawyer practising in Warsaw."
+    "source_doc_id": "001-159917",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Ms M. Gąsiorowska, a lawyer practising in Warsaw.",
     "id": "94",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-87556",
     "question": "In the case against Poland concerning proceedings before the Pruszków District Court had, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Ms M. Gąsiorowska, a lawyer practising in Warsaw."
+    "source_doc_id": "001-87556",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Ms A. Pietras, a lawyer practising in Gdynia.",
     "id": "95",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-89960",
     "question": "In the case against Poland concerning armed robbery and theft committed as part of an organised criminal gan, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Ms A. Pietras, a lawyer practising in Gdynia."
+    "source_doc_id": "001-89960",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr T. Bąk, a lawyer practising in Szczecin.",
     "id": "96",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-159916",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr T. Bąk, a lawyer practising in Szczecin."
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicants were represented by Mr İbrahim Gemici, a lawyer practising in Istanbul.",
     "id": "97",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-69895",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicants were represented by Mr İbrahim Gemici, a lawyer practising in Istanbul."
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "Mr M. İşeri",
     "id": "98",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-72154",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "Mr M. İşeri"
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Ms M. Gąsiorowska, a lawyer practising in Warszawa.",
     "id": "99",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-88723",
     "question": "In the case against Poland concerning proceedings before the Nowy Dwór Mazowiecki Distri, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Ms M. Gąsiorowska, a lawyer practising in Warszawa."
+    "source_doc_id": "001-88723",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr K. Koç, a lawyer practising in Istanbul.",
     "id": "100",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-94129",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr K. Koç, a lawyer practising in Istanbul."
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented before the Court by Ms N. Kaplan, a lawyer practising in İstanbul.",
     "id": "101",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-60513",
     "question": "In the case against Turkey concerning his detention in police custody lasted seven days without being brought before a judge or other offi, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented before the Court by Ms N. Kaplan, a lawyer practising in İstanbul."
+    "source_doc_id": "001-60513",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mrs İ. İlimoğlu, a lawyer practising in Ankara.",
     "id": "102",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-91633",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mrs İ. İlimoğlu, a lawyer practising in Ankara."
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mrs M. Zawitkowska, a lawyer practising in Słupsk, Poland.",
     "id": "103",
-    "category": "identity",
-    "level": "medium",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
     "source_doc_id": "001-61682",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mrs M. Zawitkowska, a lawyer practising in Słupsk, Poland."
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr P. Florek, a lawyer practising in Warsaw.",
     "id": "104",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-114097",
     "question": "In the case against Poland concerning aggravated robbery, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr P. Florek, a lawyer practising in Warsaw."
+    "source_doc_id": "001-114097",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Ms D. Wojdyło-Nafalska, a lawyer practising in Chełm.",
     "id": "105",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-78289",
     "question": "In the case against Poland concerning two counts of homicide and armed robbery, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Ms D. Wojdyło-Nafalska, a lawyer practising in Chełm."
+    "source_doc_id": "001-78289",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr P. Sendecki, a lawyer practising in Lublin.",
     "id": "106",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-104653",
     "question": "In the case against Poland concerning murder, who represented the applicant before the Court?",
-    "ground_truth": "The applicant, who had been granted legal aid, was represented by Mr P. Sendecki, a lawyer practising in Lublin."
+    "source_doc_id": "001-104653",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr Wiesław Bielawski, a lawyer practising in Wałbrzych.",
     "id": "107",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-86681",
     "question": "In the case against Poland concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr Wiesław Bielawski, a lawyer practising in Wałbrzych."
+    "source_doc_id": "001-86681",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr X. Oster, a lawyer practising in Strasbourg.",
     "id": "108",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-87558",
     "question": "In the case against Poland concerning proceedings before the District Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr X. Oster, a lawyer practising in Strasbourg."
+    "source_doc_id": "001-87558",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr A. Kiran, a lawyer practising in Van.",
     "id": "109",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-146408",
     "question": "In the case against Turkey concerning the applicant's complaint before the Court, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr A. Kiran, a lawyer practising in Van."
+    "source_doc_id": "001-146408",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The applicant was represented by Mr W. Hermeliński, a lawyer practising in Warsaw.",
     "id": "110",
-    "category": "identity",
-    "level": "medium",
-    "source_doc_id": "001-71942",
     "question": "In the case against Poland concerning 8 counts of burglary, who represented the applicant before the Court?",
-    "ground_truth": "The applicant was represented by Mr W. Hermeliński, a lawyer practising in Warsaw."
+    "source_doc_id": "001-71942",
+    "type": "medium"
   },
   {
+    "category": "identity",
+    "ground_truth": "The Polish Government (“the Government”) were represented by their Agent, Mr K. Drzewicki, of the Ministry of Foreign Affairs.",
     "id": "111",
-    "category": "identity",
-    "level": "hard",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
     "source_doc_id": "001-61313",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "The Polish Government (“the Government”) were represented by their Agent, Mr K. Drzewicki, of the Ministry of Foreign Affairs."
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in two applications (nos. 13007/02 and 13924/02) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Turkish nationals, Mr İbrahim Şahin and Mr Erdoğan Sürgeç (“the applicants”) on 26 February 2002.",
     "id": "112",
-    "category": "identity",
-    "level": "hard",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who were the applicants?",
     "source_doc_id": "001-77757",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who were the applicants?",
-    "ground_truth": "The case originated in two applications (nos. 13007/02 and 13924/02) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Turkish nationals, Mr İbrahim Şahin and Mr Erdoğan Sürgeç (“the applicants”) on 26 February 2002."
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 7945/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Turkish nationals, Mr Özgür Uyanık and Mr Ozan Kabadayı (“the applicants”), on 8 February 2005.",
     "id": "113",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-94113",
     "question": "In the case against Turkey concerning their detention and the content of the case file, the 12th A, who were the applicants?",
-    "ground_truth": "The case originated in an application (no. 7945/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Turkish nationals, Mr Özgür Uyanık and Mr Ozan Kabadayı (“the applicants”), on 8 February 2005."
+    "source_doc_id": "001-94113",
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in three applications (nos. 44058/04, 19807/05 and 26384/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by three Turkish nationals, Mr Özcan Korkmaz, Mr Serkan Yazar and Mr Murat İslam (“the applicants”), on 1 November 2004, 23 May 2005 and 27 June 2005 respectively.",
     "id": "114",
-    "category": "identity",
-    "level": "hard",
+    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who were the applicants?",
     "source_doc_id": "001-95907",
-    "question": "In the case against Turkey concerning the applicant's complaint before the Court, who were the applicants?",
-    "ground_truth": "The case originated in three applications (nos. 44058/04, 19807/05 and 26384/05) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by three Turkish nationals, Mr Özcan Korkmaz, Mr Serkan Yazar and Mr Murat İslam (“the applicants”), on 1 November 2004, 23 May 2005 and 27 June 2005 respectively."
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 70213/01) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by four Polish nationals, Mr Maciej Zys-Kowalski, Mrs Danuta Kowalska, Mr Krzysztof Kowalski and Ms Marta Kowalska (“the applicants”), on 10 May 2000.",
     "id": "115",
-    "category": "identity",
-    "level": "hard",
+    "question": "In the case against Poland concerning the applicant's complaint before the Court, who were the applicants?",
     "source_doc_id": "001-66736",
-    "question": "In the case against Poland concerning the applicant's complaint before the Court, who were the applicants?",
-    "ground_truth": "The case originated in an application (no. 70213/01) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by four Polish nationals, Mr Maciej Zys-Kowalski, Mrs Danuta Kowalska, Mr Krzysztof Kowalski and Ms Marta Kowalska (“the applicants”), on 10 May 2000."
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 12550/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Polish nationals, Mr Zdzisław Olesiński and Mrs Helena Olesińska (“the applicants”), on 28 March 2001.",
     "id": "116",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-84048",
     "question": "In the case against Poland concerning the applicant's complaint before the Court, who were the applicants?",
-    "ground_truth": "The case originated in an application (no. 12550/02) against the Republic of Poland lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Polish nationals, Mr Zdzisław Olesiński and Mrs Helena Olesińska (“the applicants”), on 28 March 2001."
+    "source_doc_id": "001-84048",
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The Polish Government (“the Government”) were represented by their Agents, Ms S. Jaczewska, and subsequently, Mr J. Wołąsiewicz of the Ministry of Foreign Affairs.",
     "id": "117",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-66833",
     "question": "In the case against Poland concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "The Polish Government (“the Government”) were represented by their Agents, Ms S. Jaczewska, and subsequently, Mr J. Wołąsiewicz of the Ministry of Foreign Affairs."
+    "source_doc_id": "001-66833",
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The cases originated in two applications (nos. 27080/08 and 40982/08) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Turkish nationals, Mr Metin Köksal and Mr Servet Durdu (“the applicants”), on 29 May and 15 August 2008, respectively.",
     "id": "118",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-99391",
     "question": "In the case against Turkey concerning the applicant's complaint before the Court, who were the applicants?",
-    "ground_truth": "The cases originated in two applications (nos. 27080/08 and 40982/08) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by two Turkish nationals, Mr Metin Köksal and Mr Servet Durdu (“the applicants”), on 29 May and 15 August 2008, respectively."
+    "source_doc_id": "001-99391",
+    "type": "hard"
   },
   {
+    "category": "identity",
+    "ground_truth": "The case originated in an application (no. 35302/08) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by five Turkish nationals, Mr Ali Ayboğa, Mr Abdurrezzak Ayboğa, Mr Abdülcebbar Ayboğa, Mr Salih Ayboğa and Mr Dergah Bitkin (“the applicants”), on 23 June 2008.",
     "id": "119",
-    "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-163811",
     "question": "In the case against Turkey concerning committing fraud, making threats, and carrying out raids and smuggling, under Ar, who were the applicants?",
-    "ground_truth": "The case originated in an application (no. 35302/08) against the Republic of Turkey lodged with the Court under Article 34 of the Convention for the Protection of Human Rights and Fundamental Freedoms (“the Convention”) by five Turkish nationals, Mr Ali Ayboğa, Mr Abdurrezzak Ayboğa, Mr Abdülcebbar Ayboğa, Mr Salih Ayboğa and Mr Dergah Bitkin (“the applicants”), on 23 June 2008."
+    "source_doc_id": "001-163811",
+    "type": "hard"
   },
   {
-    "id": "120",
     "category": "identity",
-    "level": "hard",
-    "source_doc_id": "001-150788",
+    "ground_truth": "The applicant was represented by Mr P. Čeh, a lawyer practising in Maribor. The Slovenian Government (“the Government”) were represented by their Agent, Mrs B. Jovin Hrastnik, State Attorney. The Austrian Government were represented by their Agent, Ambassador H. Tichy, Head of the International Law Department at the Federal Ministry for European and International Affairs. The applicant alleged, in particular, that he had been unable to enjoy family life with his daughter on account of the lack of diligence on the part of the Slovenian and Austrian authorities in regulating and enforcing contact between them. On 3 July 2012 the application was communicated to the Governments. THE FACTS I. THE CIRCUMSTANCES OF THE CASE The applicant was born in 1955 and lives in Maribor. From 1991 to 1997 he lived with M.P. in an extramarital relationship. On 14 December 1993 the latter gave birth to their daughter, P. In 1997 the applicant and M.P. separated and, with the assistance of the Maribor Social Work Centre (hereinafter “the Centre”), concluded an agreement determining the amount of child maintenance to be paid by the applicant for his daughter. Another agreement was concluded on 23 February 1998 setting up a provisional contact schedule governing the applicant’s contact with P. for the period from 24 February to 13 April 1998. A. Contact proceedings before the Slovenian authorities and the enforcement of the relevant decisions Having been unable to come to an agreement with M.P. as to a more permanent contact schedule, on 24 February 1998 the applicant asked the Centre to issue an order determining his contact rights. He sought contact with P. every Tuesday afternoon, every second Thursday afternoon, every other weekend, one week during the winter holiday and one month during the summer holiday. It appears that, as of 13 April 1998, M.P. stopped letting the applicant have contact with P. The first hearing in the case was scheduled for 18 June 1998 and subsequently adjourned at the request of M.P., who informed the Centre that she was taking holiday during the period in question. On 14 June 1998 M.P. sent another letter to the Centre informing them that she would be living abroad in the period between 1 July 1998 and 31 August 1999 for the purposes of her doctoral studies. She requested that the contact proceedings be suspended during that period. Further to the applicant’s objection to M.P.’s request for the suspension of the proceedings, the Centre’s social workers paid three visits to M.P.’s address in Maribor in order to establish whether she was still living in Slovenia. However, M.P. was not found at home on either occasion. On 30 July 1998 the Centre sent a request to M.P.’s employer, Maribor University, to provide the address of her foreign residence. On 26 August 1998 the applicant sought an interim order granting him contact with P. On 4 September 1998 the Centre received a reply from Maribor University stating that M.P. was studying in Graz, Austria, but that they were unaware of her address. However, the university offered to serve M.P. with the summons to attend a hearing. The Centre scheduled a hearing for 22 October 1998, but the university was unable to reach M.P. and the hearing was adjourned. On 29 October 1998 the Centre issued an interim order setting up a provisional contact schedule between the applicant and P. According to the order, the applicant was to have contact with P. once a month and for a week during both the winter and summer holidays. The applicant was supposed to pick up his daughter at M.P.’s permanent address in Maribor and bring her back to the same address. Another hearing was scheduled for 10 December 1998 and subsequently adjourned, as the university was again unable to serve M.P. with the summons. On 12 January 1999 Maribor University provided the Centre with the address of the Austrian university where M.P. was studying. The Centre thus sent the interim order of 29 October 1998 and a summons for a hearing scheduled for 11 February 1999 to M.P. at the address of that institution. On 24 February 1999 M.P. appealed against the interim order of 29 October 1998, arguing that the provisional contact schedule could not be implemented, as she and her daughter were temporarily living in Graz, Austria. On 1 March 1999 the Centre rejected M.P.’s appeal as out of time, whereupon she appealed to the Ministry of Labour, Family and Social Affairs (hereinafter “the Ministry”). On 28 April and 18 June 1999 the Centre submitted the applicant’s requests for the enforcement of the interim order to the Maribor Administrative Unit. On 24 August 1999 the requests were granted; however, on 16 September 1999 M.P. appealed, claiming that the decision had not been correctly served on her. She also objected to the contents of the interim order. On 27 September 1999 the Ministry upheld M.P.’s appeal against the interim order, quashed the order and remitted the issue of the provisional contact schedule for a fresh examination by the Centre. The Ministry found that the service of the interim order and the summons to the hearing of 11 February 1999 had not been effected in accordance with the rules of administrative procedure. The Ministry pointed out that in the event that a party was absent or lived abroad, he or she had to be invited to appoint a representative authorised to receive his or her official mail. As to the merits of the matter, the Ministry found that the facts of the case had not been duly established, owing to the difficulty of communicating with M.P. On 7 October 1999 the Centre sent the Ministry’s decision, along with a request to M.P. to appoint a representative authorised to receive her official mail, to the Slovenian Embassy in Austria. The Embassy requested M.P. to collect the decision and the letter; however, she refused to do so. Subsequently, on 1 March 2000, M.P. was served with the documents at her workplace in Graz. Meanwhile, on 5 January 2000 the Ministry also upheld M.P.’s appeal against the decision on the enforcement of the interim order. The case was remitted to the Maribor Administrative Unit and the enforcement proceedings were subsequently stayed as a result of the quashing of the interim order. On 15 March 2000 M.P. informed the Centre of the address of her representative authorised to receive her official mail. On 6 June 2000 M.P. submitted a proposal regarding the contact schedule between the applicant and P., and on 12 June 2000 the applicant made a counter-proposal. On 30 June 2000 the Centre invited M.P. to provide certain information regarding her daughter’s residence, living conditions and education. On 19 July 2000 M.P. sent a reply to the Centre, without, however, providing the requested information on P. On 21 July 2000 the Centre again invited M.P. to provide the information, to which she responded on 14 August 2000, but again failed to provide answers to the Centre’s questions. On 29 September 2000 the Centre held a hearing in the applicant’s presence. M.P., however, did not attend, although a summons had been correctly served on her authorised representative. The applicant reiterated his request for the setting up of a contact schedule between him and P. On 5 October 2000 the Centre issued an order granting the applicant contact with P. every Tuesday afternoon, every first weekend of the month and a few weeks during the winter and summer holiday periods. According to the order, an appeal against the contact schedule would not have a suspensive effect. On 22 November 2000 M.P. appealed against the order before the Ministry. On 4 and 28 December 2001 and on 23 January 2002 the applicant requested that the contact schedule be enforced. On 13 March 2002 the Maribor administrative unit rejected the applicant’s request for enforcement, stating that the order of 5 October 2000 was unenforceable as the Centre had failed to specify the place at which the applicant was to pick up and drop off his daughter. Subsequently, on 10 June 2002 the Centre informed the applicant that the order could not be supplemented with the required information, as M.P.’s appeal against it was pending before the Ministry. On 19 July 2002 the Ministry upheld M.P.’s appeal against the order of 5 October 2000, confirming the reasoning of the administrative unit that the order was unenforceable. Moreover, the facts of the case had still not been properly established. The case was remitted to the Centre with the instruction to acquire information on M.P.’s and P.’s place of residence, P.’s schooling and her afternoon activities. On 30 September 2002 the Centre invited M.P. to provide them with the information requested by the Ministry in their decision of 19 July 2002. She did not reply. On 27 February 2003 the Centre contacted the Ministry for Foreign Affairs with a view to finding the address of M.P. and P. On 7 May 2003 the Centre was informed that the Slovenian Embassy in Austria had been unable to obtain such information. On 16 May 2003 the Centre addressed a request for assistance in obtaining the information on M.P.’s and P.’s address to the Ministry. As no reply was received, the Centre requested assistance again on 28 May 2004. Further to legislative changes by which on 1 May 2004 the courts acquired jurisdiction to decide on issues relating to rights of contact, in June 2004 the applicant instituted proceedings before the Maribor District Court. At the District Court’s request, the applicant supplemented his application on 3 August 2004. The Maribor District Court scheduled a hearing for 6 October 2004; however, M.P. was unable to attend and only the applicant appeared in court. He complained that M.P. was in the habit of evading the proceedings and that, as a result, he had not seen P. for six years. On 5 January 2005 M.P. informed the Maribor District Court that she and P. had not resided at their Slovenian address for a number of years and that she had kept that address only for the purpose of receiving mail. However, she failed to provide her address in Austria. M.P. proposed that the Slovenian courts relinquish their jurisdiction in the matter in favour of the Austrian courts. On 13 July 2005 the applicant sent a letter to the Graz Youth and Family Office asking them for help in re-establishing contact with P. He explained that M.P. had been preventing him from having contact with his daughter and had evaded the proceedings conducted by the Centre and the Maribor District Court. He also attached a letter he had written to P., with photos of him and his family. The applicant’s letter was handed over to M.P. by a social worker on 6 October 2005. The Maribor District Court scheduled another hearing for 14 November 2005, but since M.P. had not been served with a summons to attend, the hearing was adjourned. Scheduling further hearings, on 2 November 2005 the Maribor District Court asked the Graz District Court for Civil Matters to serve a summons on M.P. in accordance with Council Regulation (EC) No. 1348/2000 of 29 May 2000 on the service in member States of judicial and extrajudicial documents in civil or commercial matters. The court also attempted to serve the document on M.P. through the Slovenian Embassy in Austria. However, its attempt was unsuccessful; both the embassy and, on 12 January 2006, the Graz District Court for Civil Matters notified the Maribor District Court that M.P. did not appear to be living at the indicated address. The Maribor District Court continued sending mail to M.P.’s address in Maribor. On 13 December 2005 the Maribor District Court again asked the Graz District Court for Civil Matters to serve a summons on M.P. in Austria. The mail was delivered to her at the Graz District Court for Civil Matters on 7 March 2006, after the Graz court had obtained information on M.P.’s address from the Registration Office and two unsuccessful attempts had been made to serve the summons at her home address. Meanwhile, on 9 December 2005 the Maribor District Court requested the Graz District Court for Civil Matters to obtain a report on P.’s situation from the Graz Youth and Family Office. It appears that the request was sent to the Austrian court on 23 March 2006 and received by the District Court for Civil Matters on 29 March 2006. The latter submitted it to the Youth and Family Office on 30 March 2006. The social worker in charge of the case requested three times to meet with M.P. and P. in order to prepare the report, but without success. It appears that M.P. did not attend the first two meetings for work-related reasons. On the last occasion M.P. replied that she and her daughter would be spending the next few months abroad. On 7 July 2006 the Graz Youth and Family Office reported back that M.P. had refused to cooperate. A further request for a report was submitted on 28 September 2006. On 20 October 2006 the Youth and Family Office notified the District Court for Civil Matters that M.P. could not be reached because she was abroad at the time. On 15 November 2006 the latter court sent a reply to the Maribor District Court, which received it on 4 December 2006. On 7 February 2007 the Maribor District Court held a hearing and on the same day issued an order setting out a contact schedule. M.P. did not attend the hearing; however, she informed the court that P. did not wish to have contact with the applicant. The court ruled that the applicant could visit P. every two weeks by picking her up at M.P.’s home. The court found that there were no objective reasons for P. to refuse contact with her father and that she had been influenced by M.P.’s negative attitude towards the applicant. It also criticised M.P.’s conduct and her “uncooperative attitude”. M.P. appealed against the contact order. On 5 July 2007, on the applicant’s proposal, the Maribor District Court issued an enforceable interim order allowing him contact with P. every two weeks, whereby once a month he was to visit her at her address in Austria and the other time P. was to visit him in Slovenia. Following an objection on the part of M.P. in which she stated that she was unwilling to take P. to Slovenia, on 21 January 2008 the Maribor District Court modified the interim order so that visits could take place only in Graz. M.P. was ordered to comply with the terms of the order, subject to a fine of 200 euros (EUR) for each breach. On 1 September 2007 the applicant saw P. for the first time in more than nine years. They had contact again on 6 October 2007. On the latter occasion, P. left after less than an hour, after which she refused to see the applicant again, although he attempted to see her on at least two more occasions. On 15 May 2008 the Maribor Higher Court dismissed an appeal lodged by M.P. against the contact order of 7 February 2007. Consequently, the order became final. Meanwhile from April to June 2008, the applicant requested five times that a fine be imposed on M.P. for failure to comply with the interim contact order (3 April 2008, 15 April 2008, 23 April 2008, 16 May 2008 and 11 June 2008). On 12 June 2008 the applicant requested for the sixth time that a fine be imposed on M.P. On 11 September 2008, the Maribor District Court explained to the parties that the contact proceedings had been concluded by a final decision and the Maribor Local Court was competent to decide on the enforcement of the contact order. The District Court referred the applicant’s further request for enforcement of 3 October 2008 to the Local Court. Subsequently, the applicant lodged another three requests for enforcement on 29 December 2008, 25 March 2009 and 27 March 2009. Meanwhile, on 10 February 2009, the applicant lodged a supervisory appeal under the Right to Trial without Undue Delay Act (hereinafter “the 2006 Act”) with a view to accelerating the enforcement proceedings. On 3 March 2009, the Maribor Local Court imposed a fine in the amount of EUR 600 on M.P. for not complying with the contact order. On 4 March 2009 the President of the Maribor Local Court, in the context of the proceedings in respect of the 2006 Act, informed the applicant of the decision taken the day before. On 1 April 2009 the applicant replied that none of his other requests had yet been resolved. M.P. having appealed against the fine, on 28 July 2009 the Maribor Higher Court set aside the impugned order, stating that a deadline should have first been set for M.P. to comply with the contact order. On 23 April 2010 the Maribor Local Court invited the applicant to supplement his request for enforcement. On the basis of that request, a new enforcement order was issued on 2 November 2010, ordering M.P. to allow contact between the applicant and P., subject to a fine in the amount of EUR 500. M.P. appealed against the order. On 4 September 2012 the Maribor Local Court quashed all the enforcement acts executed until that date and dismissed the applicant’s request for enforcement, finding that since the contact between the applicant and P. was to take place in Austria, the Austrian courts had jurisdiction to decide on the enforcement. B. Suspension of the applicant’s contact rights by the Austrian authorities On 30 September 2008 P. lodged a request with the Graz-West District Court seeking suspension of the applicant’s contact rights. On 11 November 2008 P. gave a statement before the District Court, alleging that throughout the period in which she had been living in Austria the applicant had not wished to have any contact with her and had made no attempts to see her. She further maintained that he had not obtained a court order setting out a contact schedule until 2007. Two visits had been carried out. However, since he had been criticising M.P., she had refused to have any further contact with him, and she had repeatedly told him so. P. also said that she had no relationship with her father and that she was afraid that he would take her to Slovenia. The applicant made a statement before the Maribor District Court on the basis of a letter rogatory submitted by the Austrian authorities. On 27 March 2009 the Graz-West District Court suspended his contact rights. It found that P. had consistently expressed her wish not to have contact with the applicant and concluded that contact against her wishes would not be in her interest. The court also found that M.P. had not obstructed contact and that the applicant had stated in the proceedings that he would respect P.’s wish not to have contact with him. On 31 August 2009 the Graz Regional Civil Court dismissed an appeal lodged by the applicant, finding that there was no indication that P. had been manipulated by M.P. or was not expressing her wishes freely. C. Proceedings concerning monthly child maintenance conducted before the Austrian authorities On 21 June 2008 M.P. asked the Graz-West District Court to increase the monthly child maintenance from EUR 137 to EUR 250 on the grounds that P.’s needs, as well as the general cost of living, had increased since 1997 when she and the applicant had concluded the maintenance agreement. On 12 February 2009 the court, taking into account the financial situation of both parents, allowed M.P.’s request. An appeal lodged by the applicant was dismissed by the Graz District Court for Civil Matters on 7 August 2009. During the proceedings, the applicant sent a number of letters to the courts in Graz complaining that the court documents were in German, which he did not understand, and requesting that the issue be decided by the Slovenian authorities. I. THE CIRCUMSTANCES OF THE CASE The applicant was born in 1955 and lives in Maribor. From 1991 to 1997 he lived with M.P. in an extramarital relationship. On 14 December 1993 the latter gave birth to their daughter, P. In 1997 the applicant and M.P. separated and, with the assistance of the Maribor Social Work Centre (hereinafter “the Centre”), concluded an agreement determining the amount of child maintenance to be paid by the applicant for his daughter. Another agreement was concluded on 23 February 1998 setting up a provisional contact schedule governing the applicant’s contact with P. for the period from 24 February to 13 April 1998. A. Contact proceedings before the Slovenian authorities and the enforcement of the relevant decisions Having been unable to come to an agreement with M.P. as to a more permanent contact schedule, on 24 February 1998 the applicant asked the Centre to issue an order determining his contact rights. He sought contact with P. every Tuesday afternoon, every second Thursday afternoon, every other weekend, one week during the winter holiday and one month during the summer holiday. It appears that, as of 13 April 1998, M.P. stopped letting the applicant have contact with P. The first hearing in the case was scheduled for 18 June 1998 and subsequently adjourned at the request of M.P., who informed the Centre that she was taking holiday during the period in question. On 14 June 1998 M.P. sent another letter to the Centre informing them that she would be living abroad in the period between 1 July 1998 and 31 August 1999 for the purposes of her doctoral studies. She requested that the contact proceedings be suspended during that period. Further to the applicant’s objection to M.P.’s request for the suspension of the proceedings, the Centre’s social workers paid three visits to M.P.’s address in Maribor in order to establish whether she was still living in Slovenia. However, M.P. was not found at home on either occasion. On 30 July 1998 the Centre sent a request to M.P.’s employer, Maribor University, to provide the address of her foreign residence. On 26 August 1998 the applicant sought an interim order granting him contact with P. On 4 September 1998 the Centre received a reply from Maribor University stating that M.P. was studying in Graz, Austria, but that they were unaware of her address. However, the university offered to serve M.P. with the summons to attend a hearing. The Centre scheduled a hearing for 22 October 1998, but the university was unable to reach M.P. and the hearing was adjourned. On 29 October 1998 the Centre issued an interim order setting up a provisional contact schedule between the applicant and P. According to the order, the applicant was to have contact with P. once a month and for a week during both the winter and summer holidays. The applicant was supposed to pick up his daughter at M.P.’s permanent address in Maribor and bring her back to the same address. Another hearing was scheduled for 10 December 1998 and subsequently adjourned, as the university was again unable to serve M.P. with the summons. On 12 January 1999 Maribor University provided the Centre with the address of the Austrian university where M.P. was studying. The Centre thus sent the interim order of 29 October 1998 and a summons for a hearing scheduled for 11 February 1999 to M.P. at the address of that institution. On 24 February 1999 M.P. appealed against the interim order of 29 October 1998, arguing that the provisional contact schedule could not be implemented, as she and her daughter were temporarily living in Graz, Austria. On 1 March 1999 the Centre rejected M.P.’s appeal as out of time, whereupon she appealed to the Ministry of Labour, Family and Social Affairs (hereinafter “the Ministry”). On 28 April and 18 June 1999 the Centre submitted the applicant’s requests for the enforcement of the interim order to the Maribor Administrative Unit. On 24 August 1999 the requests were granted; however, on 16 September 1999 M.P. appealed, claiming that the decision had not been correctly served on her. She also objected to the contents of the interim order. On 27 September 1999 the Ministry upheld M.P.’s appeal against the interim order, quashed the order and remitted the issue of the provisional contact schedule for a fresh examination by the Centre. The Ministry found that the service of the interim order and the summons to the hearing of 11 February 1999 had not been effected in accordance with the rules of administrative procedure. The Ministry pointed out that in the event that a party was absent or lived abroad, he or she had to be invited to appoint a representative authorised to receive his or her official mail. As to the merits of the matter, the Ministry found that the facts of the case had not been duly established, owing to the difficulty of communicating with M.P. On 7 October 1999 the Centre sent the Ministry’s decision, along with a request to M.P. to appoint a representative authorised to receive her official mail, to the Slovenian Embassy in Austria. The Embassy requested M.P. to collect the decision and the letter; however, she refused to do so. Subsequently, on 1 March 2000, M.P. was served with the documents at her workplace in Graz. Meanwhile, on 5 January 2000 the Ministry also upheld M.P.’s appeal against the decision on the enforcement of the interim order. The case was remitted to the Maribor Administrative Unit and the enforcement proceedings were subsequently stayed as a result of the quashing of the interim order. On 15 March 2000 M.P. informed the Centre of the address of her representative authorised to receive her official mail. On 6 June 2000 M.P. submitted a proposal regarding the contact schedule between the applicant and P., and on 12 June 2000 the applicant made a counter-proposal. On 30 June 2000 the Centre invited M.P. to provide certain information regarding her daughter’s residence, living conditions and education. On 19 July 2000 M.P. sent a reply to the Centre, without, however, providing the requested information on P. On 21 July 2000 the Centre again invited M.P. to provide the information, to which she responded on 14 August 2000, but again failed to provide answers to the Centre’s questions. On 29 September 2000 the Centre held a hearing in the applicant’s presence. M.P., however, did not attend, although a summons had been correctly served on her authorised representative. The applicant reiterated his request for the setting up of a contact schedule between him and P. On 5 October 2000 the Centre issued an order granting the applicant contact with P. every Tuesday afternoon, every first weekend of the month and a few weeks during the winter and summer holiday periods. According to the order, an appeal against the contact schedule would not have a suspensive effect. On 22 November 2000 M.P. appealed against the order before the Ministry. On 4 and 28 December 2001 and on 23 January 2002 the applicant requested that the contact schedule be enforced. On 13 March 2002 the Maribor administrative unit rejected the applicant’s request for enforcement, stating that the order of 5 October 2000 was unenforceable as the Centre had failed to specify the place at which the applicant was to pick up and drop off his daughter. Subsequently, on 10 June 2002 the Centre informed the applicant that the order could not be supplemented with the required information, as M.P.’s appeal against it was pending before the Ministry. On 19 July 2002 the Ministry upheld M.P.’s appeal against the order of 5 October 2000, confirming the reasoning of the administrative unit that the order was unenforceable. Moreover, the facts of the case had still not been properly established. The case was remitted to the Centre with the instruction to acquire information on M.P.’s and P.’s place of residence, P.’s schooling and her afternoon activities. On 30 September 2002 the Centre invited M.P. to provide them with the information requested by the Ministry in their decision of 19 July 2002. She did not reply. On 27 February 2003 the Centre contacted the Ministry for Foreign Affairs with a view to finding the address of M.P. and P. On 7 May 2003 the Centre was informed that the Slovenian Embassy in Austria had been unable to obtain such information. On 16 May 2003 the Centre addressed a request for assistance in obtaining the information on M.P.’s and P.’s address to the Ministry. As no reply was received, the Centre requested assistance again on 28 May 2004. Further to legislative changes by which on 1 May 2004 the courts acquired jurisdiction to decide on issues relating to rights of contact, in June 2004 the applicant instituted proceedings before the Maribor District Court. At the District Court’s request, the applicant supplemented his application on 3 August 2004. The Maribor District Court scheduled a hearing for 6 October 2004; however, M.P. was unable to attend and only the applicant appeared in court. He complained that M.P. was in the habit of evading the proceedings and that, as a result, he had not seen P. for six years. On 5 January 2005 M.P. informed the Maribor District Court that she and P. had not resided at their Slovenian address for a number of years and that she had kept that address only for the purpose of receiving mail. However, she failed to provide her address in Austria. M.P. proposed that the Slovenian courts relinquish their jurisdiction in the matter in favour of the Austrian courts. On 13 July 2005 the applicant sent a letter to the Graz Youth and Family Office asking them for help in re-establishing contact with P. He explained that M.P. had been preventing him from having contact with his daughter and had evaded the proceedings conducted by the Centre and the Maribor District Court. He also attached a letter he had written to P., with photos of him and his family. The applicant’s letter was handed over to M.P. by a social worker on 6 October 2005. The Maribor District Court scheduled another hearing for 14 November 2005, but since M.P. had not been served with a summons to attend, the hearing was adjourned. Scheduling further hearings, on 2 November 2005 the Maribor District Court asked the Graz District Court for Civil Matters to serve a summons on M.P. in accordance with Council Regulation (EC) No. 1348/2000 of 29 May 2000 on the service in member States of judicial and extrajudicial documents in civil or commercial matters. The court also attempted to serve the document on M.P. through the Slovenian Embassy in Austria. However, its attempt was unsuccessful; both the embassy and, on 12 January 2006, the Graz District Court for Civil Matters notified the Maribor District Court that M.P. did not appear to be living at the indicated address. The Maribor District Court continued sending mail to M.P.’s address in Maribor. On 13 December 2005 the Maribor District Court again asked the Graz District Court for Civil Matters to serve a summons on M.P. in Austria. The mail was delivered to her at the Graz District Court for Civil Matters on 7 March 2006, after the Graz court had obtained information on M.P.’s address from the Registration Office and two unsuccessful attempts had been made to serve the summons at her home address. Meanwhile, on 9 December 2005 the Maribor District Court requested the Graz District Court for Civil Matters to obtain a report on P.’s situation from the Graz Youth and Family Office. It appears that the request was sent to the Austrian court on 23 March 2006 and received by the District Court for Civil Matters on 29 March 2006. The latter submitted it to the Youth and Family Office on 30 March 2006. The social worker in charge of the case requested three times to meet with M.P. and P. in order to prepare the report, but without success. It appears that M.P. did not attend the first two meetings for work-related reasons. On the last occasion M.P. replied that she and her daughter would be spending the next few months abroad. On 7 July 2006 the Graz Youth and Family Office reported back that M.P. had refused to cooperate. A further request for a report was submitted on 28 September 2006. On 20 October 2006 the Youth and Family Office notified the District Court for Civil Matters that M.P. could not be reached because she was abroad at the time. On 15 November 2006 the latter court sent a reply to the Maribor District Court, which received it on 4 December 2006. On 7 February 2007 the Maribor District Court held a hearing and on the same day issued an order setting out a contact schedule. M.P. did not attend the hearing; however, she informed the court that P. did not wish to have contact with the applicant. The court ruled that the applicant could visit P. every two weeks by picking her up at M.P.’s home. The court found that there were no objective reasons for P. to refuse contact with her father and that she had been influenced by M.P.’s negative attitude towards the applicant. It also criticised M.P.’s conduct and her “uncooperative attitude”. M.P. appealed against the contact order. On 5 July 2007, on the applicant’s proposal, the Maribor District Court issued an enforceable interim order allowing him contact with P. every two weeks, whereby once a month he was to visit her at her address in Austria and the other time P. was to visit him in Slovenia. Following an objection on the part of M.P. in which she stated that she was unwilling to take P. to Slovenia, on 21 January 2008 the Maribor District Court modified the interim order so that visits could take place only in Graz. M.P. was ordered to comply with the terms of the order, subject to a fine of 200 euros (EUR) for each breach. On 1 September 2007 the applicant saw P. for the first time in more than nine years. They had contact again on 6 October 2007. On the latter occasion, P. left after less than an hour, after which she refused to see the applicant again, although he attempted to see her on at least two more occasions. On 15 May 2008 the Maribor Higher Court dismissed an appeal lodged by M.P. against the contact order of 7 February 2007. Consequently, the order became final. Meanwhile from April to June 2008, the applicant requested five times that a fine be imposed on M.P. for failure to comply with the interim contact order (3 April 2008, 15 April 2008, 23 April 2008, 16 May 2008 and 11 June 2008). On 12 June 2008 the applicant requested for the sixth time that a fine be imposed on M.P. On 11 September 2008, the Maribor District Court explained to the parties that the contact proceedings had been concluded by a final decision and the Maribor Local Court was competent to decide on the enforcement of the contact order. The District Court referred the applicant’s further request for enforcement of 3 October 2008 to the Local Court. Subsequently, the applicant lodged another three requests for enforcement on 29 December 2008, 25 March 2009 and 27 March 2009. Meanwhile, on 10 February 2009, the applicant lodged a supervisory appeal under the Right to Trial without Undue Delay Act (hereinafter “the 2006 Act”) with a view to accelerating the enforcement proceedings. On 3 March 2009, the Maribor Local Court imposed a fine in the amount of EUR 600 on M.P. for not complying with the contact order. On 4 March 2009 the President of the Maribor Local Court, in the context of the proceedings in respect of the 2006 Act, informed the applicant of the decision taken the day before. On 1 April 2009 the applicant replied that none of his other requests had yet been resolved. M.P. having appealed against the fine, on 28 July 2009 the Maribor Higher Court set aside the impugned order, stating that a deadline should have first been set for M.P. to comply with the contact order. On 23 April 2010 the Maribor Local Court invited the applicant to supplement his request for enforcement. On the basis of that request, a new enforcement order was issued on 2 November 2010, ordering M.P. to allow contact between the applicant and P., subject to a fine in the amount of EUR 500. M.P. appealed against the order. On 4 September 2012 the Maribor Local Court quashed all the enforcement acts executed until that date and dismissed the applicant’s request for enforcement, finding that since the contact between the applicant and P. was to take place in Austria, the Austrian courts had jurisdiction to decide on the enforcement. B. Suspension of the applicant’s contact rights by the Austrian authorities On 30 September 2008 P. lodged a request with the Graz-West District Court seeking suspension of the applicant’s contact rights. On 11 November 2008 P. gave a statement before the District Court, alleging that throughout the period in which she had been living in Austria the applicant had not wished to have any contact with her and had made no attempts to see her. She further maintained that he had not obtained a court order setting out a contact schedule until 2007. Two visits had been carried out. However, since he had been criticising M.P., she had refused to have any further contact with him, and she had repeatedly told him so. P. also said that she had no relationship with her father and that she was afraid that he would take her to Slovenia. The applicant made a statement before the Maribor District Court on the basis of a letter rogatory submitted by the Austrian authorities. On 27 March 2009 the Graz-West District Court suspended his contact rights. It found that P. had consistently expressed her wish not to have contact with the applicant and concluded that contact against her wishes would not be in her interest. The court also found that M.P. had not obstructed contact and that the applicant had stated in the proceedings that he would respect P.’s wish not to have contact with him. On 31 August 2009 the Graz Regional Civil Court dismissed an appeal lodged by the applicant, finding that there was no indication that P. had been manipulated by M.P. or was not expressing her wishes freely. C. Proceedings concerning monthly child maintenance conducted before the Austrian authorities On 21 June 2008 M.P. asked the Graz-West District Court to increase the monthly child maintenance from EUR 137 to EUR 250 on the grounds that P.’s needs, as well as the general cost of living, had increased since 1997 when she and the applicant had concluded the maintenance agreement. On 12 February 2009 the court, taking into account the financial situation of both parents, allowed M.P.’s request. An appeal lodged by the applicant was dismissed by the Graz District Court for Civil Matters on 7 August 2009. During the proceedings, the applicant sent a number of letters to the courts in Graz complaining that the court documents were in German, which he did not understand, and requesting that the issue be decided by the Slovenian authorities.",
+    "id": "120",
     "question": "In the case against Republic of Slovenia concerning the applicant's complaint before the Court, who was the Agent representing the Government before the Court?",
-    "ground_truth": "The applicant was represented by Mr P. Čeh, a lawyer practising in Maribor. The Slovenian Government (“the Government”) were represented by their Agent, Mrs B. Jovin Hrastnik, State Attorney. The Austrian Government were represented by their Agent, Ambassador H. Tichy, Head of the International Law Department at the Federal Ministry for European and International Affairs. The applicant alleged, in particular, that he had been unable to enjoy family life with his daughter on account of the lack of diligence on the part of the Slovenian and Austrian authorities in regulating and enforcing contact between them. On 3 July 2012 the application was communicated to the Governments. THE FACTS I. THE CIRCUMSTANCES OF THE CASE The applicant was born in 1955 and lives in Maribor. From 1991 to 1997 he lived with M.P. in an extramarital relationship. On 14 December 1993 the latter gave birth to their daughter, P. In 1997 the applicant and M.P. separated and, with the assistance of the Maribor Social Work Centre (hereinafter “the Centre”), concluded an agreement determining the amount of child maintenance to be paid by the applicant for his daughter. Another agreement was concluded on 23 February 1998 setting up a provisional contact schedule governing the applicant’s contact with P. for the period from 24 February to 13 April 1998. A. Contact proceedings before the Slovenian authorities and the enforcement of the relevant decisions Having been unable to come to an agreement with M.P. as to a more permanent contact schedule, on 24 February 1998 the applicant asked the Centre to issue an order determining his contact rights. He sought contact with P. every Tuesday afternoon, every second Thursday afternoon, every other weekend, one week during the winter holiday and one month during the summer holiday. It appears that, as of 13 April 1998, M.P. stopped letting the applicant have contact with P. The first hearing in the case was scheduled for 18 June 1998 and subsequently adjourned at the request of M.P., who informed the Centre that she was taking holiday during the period in question. On 14 June 1998 M.P. sent another letter to the Centre informing them that she would be living abroad in the period between 1 July 1998 and 31 August 1999 for the purposes of her doctoral studies. She requested that the contact proceedings be suspended during that period. Further to the applicant’s objection to M.P.’s request for the suspension of the proceedings, the Centre’s social workers paid three visits to M.P.’s address in Maribor in order to establish whether she was still living in Slovenia. However, M.P. was not found at home on either occasion. On 30 July 1998 the Centre sent a request to M.P.’s employer, Maribor University, to provide the address of her foreign residence. On 26 August 1998 the applicant sought an interim order granting him contact with P. On 4 September 1998 the Centre received a reply from Maribor University stating that M.P. was studying in Graz, Austria, but that they were unaware of her address. However, the university offered to serve M.P. with the summons to attend a hearing. The Centre scheduled a hearing for 22 October 1998, but the university was unable to reach M.P. and the hearing was adjourned. On 29 October 1998 the Centre issued an interim order setting up a provisional contact schedule between the applicant and P. According to the order, the applicant was to have contact with P. once a month and for a week during both the winter and summer holidays. The applicant was supposed to pick up his daughter at M.P.’s permanent address in Maribor and bring her back to the same address. Another hearing was scheduled for 10 December 1998 and subsequently adjourned, as the university was again unable to serve M.P. with the summons. On 12 January 1999 Maribor University provided the Centre with the address of the Austrian university where M.P. was studying. The Centre thus sent the interim order of 29 October 1998 and a summons for a hearing scheduled for 11 February 1999 to M.P. at the address of that institution. On 24 February 1999 M.P. appealed against the interim order of 29 October 1998, arguing that the provisional contact schedule could not be implemented, as she and her daughter were temporarily living in Graz, Austria. On 1 March 1999 the Centre rejected M.P.’s appeal as out of time, whereupon she appealed to the Ministry of Labour, Family and Social Affairs (hereinafter “the Ministry”). On 28 April and 18 June 1999 the Centre submitted the applicant’s requests for the enforcement of the interim order to the Maribor Administrative Unit. On 24 August 1999 the requests were granted; however, on 16 September 1999 M.P. appealed, claiming that the decision had not been correctly served on her. She also objected to the contents of the interim order. On 27 September 1999 the Ministry upheld M.P.’s appeal against the interim order, quashed the order and remitted the issue of the provisional contact schedule for a fresh examination by the Centre. The Ministry found that the service of the interim order and the summons to the hearing of 11 February 1999 had not been effected in accordance with the rules of administrative procedure. The Ministry pointed out that in the event that a party was absent or lived abroad, he or she had to be invited to appoint a representative authorised to receive his or her official mail. As to the merits of the matter, the Ministry found that the facts of the case had not been duly established, owing to the difficulty of communicating with M.P. On 7 October 1999 the Centre sent the Ministry’s decision, along with a request to M.P. to appoint a representative authorised to receive her official mail, to the Slovenian Embassy in Austria. The Embassy requested M.P. to collect the decision and the letter; however, she refused to do so. Subsequently, on 1 March 2000, M.P. was served with the documents at her workplace in Graz. Meanwhile, on 5 January 2000 the Ministry also upheld M.P.’s appeal against the decision on the enforcement of the interim order. The case was remitted to the Maribor Administrative Unit and the enforcement proceedings were subsequently stayed as a result of the quashing of the interim order. On 15 March 2000 M.P. informed the Centre of the address of her representative authorised to receive her official mail. On 6 June 2000 M.P. submitted a proposal regarding the contact schedule between the applicant and P., and on 12 June 2000 the applicant made a counter-proposal. On 30 June 2000 the Centre invited M.P. to provide certain information regarding her daughter’s residence, living conditions and education. On 19 July 2000 M.P. sent a reply to the Centre, without, however, providing the requested information on P. On 21 July 2000 the Centre again invited M.P. to provide the information, to which she responded on 14 August 2000, but again failed to provide answers to the Centre’s questions. On 29 September 2000 the Centre held a hearing in the applicant’s presence. M.P., however, did not attend, although a summons had been correctly served on her authorised representative. The applicant reiterated his request for the setting up of a contact schedule between him and P. On 5 October 2000 the Centre issued an order granting the applicant contact with P. every Tuesday afternoon, every first weekend of the month and a few weeks during the winter and summer holiday periods. According to the order, an appeal against the contact schedule would not have a suspensive effect. On 22 November 2000 M.P. appealed against the order before the Ministry. On 4 and 28 December 2001 and on 23 January 2002 the applicant requested that the contact schedule be enforced. On 13 March 2002 the Maribor administrative unit rejected the applicant’s request for enforcement, stating that the order of 5 October 2000 was unenforceable as the Centre had failed to specify the place at which the applicant was to pick up and drop off his daughter. Subsequently, on 10 June 2002 the Centre informed the applicant that the order could not be supplemented with the required information, as M.P.’s appeal against it was pending before the Ministry. On 19 July 2002 the Ministry upheld M.P.’s appeal against the order of 5 October 2000, confirming the reasoning of the administrative unit that the order was unenforceable. Moreover, the facts of the case had still not been properly established. The case was remitted to the Centre with the instruction to acquire information on M.P.’s and P.’s place of residence, P.’s schooling and her afternoon activities. On 30 September 2002 the Centre invited M.P. to provide them with the information requested by the Ministry in their decision of 19 July 2002. She did not reply. On 27 February 2003 the Centre contacted the Ministry for Foreign Affairs with a view to finding the address of M.P. and P. On 7 May 2003 the Centre was informed that the Slovenian Embassy in Austria had been unable to obtain such information. On 16 May 2003 the Centre addressed a request for assistance in obtaining the information on M.P.’s and P.’s address to the Ministry. As no reply was received, the Centre requested assistance again on 28 May 2004. Further to legislative changes by which on 1 May 2004 the courts acquired jurisdiction to decide on issues relating to rights of contact, in June 2004 the applicant instituted proceedings before the Maribor District Court. At the District Court’s request, the applicant supplemented his application on 3 August 2004. The Maribor District Court scheduled a hearing for 6 October 2004; however, M.P. was unable to attend and only the applicant appeared in court. He complained that M.P. was in the habit of evading the proceedings and that, as a result, he had not seen P. for six years. On 5 January 2005 M.P. informed the Maribor District Court that she and P. had not resided at their Slovenian address for a number of years and that she had kept that address only for the purpose of receiving mail. However, she failed to provide her address in Austria. M.P. proposed that the Slovenian courts relinquish their jurisdiction in the matter in favour of the Austrian courts. On 13 July 2005 the applicant sent a letter to the Graz Youth and Family Office asking them for help in re-establishing contact with P. He explained that M.P. had been preventing him from having contact with his daughter and had evaded the proceedings conducted by the Centre and the Maribor District Court. He also attached a letter he had written to P., with photos of him and his family. The applicant’s letter was handed over to M.P. by a social worker on 6 October 2005. The Maribor District Court scheduled another hearing for 14 November 2005, but since M.P. had not been served with a summons to attend, the hearing was adjourned. Scheduling further hearings, on 2 November 2005 the Maribor District Court asked the Graz District Court for Civil Matters to serve a summons on M.P. in accordance with Council Regulation (EC) No. 1348/2000 of 29 May 2000 on the service in member States of judicial and extrajudicial documents in civil or commercial matters. The court also attempted to serve the document on M.P. through the Slovenian Embassy in Austria. However, its attempt was unsuccessful; both the embassy and, on 12 January 2006, the Graz District Court for Civil Matters notified the Maribor District Court that M.P. did not appear to be living at the indicated address. The Maribor District Court continued sending mail to M.P.’s address in Maribor. On 13 December 2005 the Maribor District Court again asked the Graz District Court for Civil Matters to serve a summons on M.P. in Austria. The mail was delivered to her at the Graz District Court for Civil Matters on 7 March 2006, after the Graz court had obtained information on M.P.’s address from the Registration Office and two unsuccessful attempts had been made to serve the summons at her home address. Meanwhile, on 9 December 2005 the Maribor District Court requested the Graz District Court for Civil Matters to obtain a report on P.’s situation from the Graz Youth and Family Office. It appears that the request was sent to the Austrian court on 23 March 2006 and received by the District Court for Civil Matters on 29 March 2006. The latter submitted it to the Youth and Family Office on 30 March 2006. The social worker in charge of the case requested three times to meet with M.P. and P. in order to prepare the report, but without success. It appears that M.P. did not attend the first two meetings for work-related reasons. On the last occasion M.P. replied that she and her daughter would be spending the next few months abroad. On 7 July 2006 the Graz Youth and Family Office reported back that M.P. had refused to cooperate. A further request for a report was submitted on 28 September 2006. On 20 October 2006 the Youth and Family Office notified the District Court for Civil Matters that M.P. could not be reached because she was abroad at the time. On 15 November 2006 the latter court sent a reply to the Maribor District Court, which received it on 4 December 2006. On 7 February 2007 the Maribor District Court held a hearing and on the same day issued an order setting out a contact schedule. M.P. did not attend the hearing; however, she informed the court that P. did not wish to have contact with the applicant. The court ruled that the applicant could visit P. every two weeks by picking her up at M.P.’s home. The court found that there were no objective reasons for P. to refuse contact with her father and that she had been influenced by M.P.’s negative attitude towards the applicant. It also criticised M.P.’s conduct and her “uncooperative attitude”. M.P. appealed against the contact order. On 5 July 2007, on the applicant’s proposal, the Maribor District Court issued an enforceable interim order allowing him contact with P. every two weeks, whereby once a month he was to visit her at her address in Austria and the other time P. was to visit him in Slovenia. Following an objection on the part of M.P. in which she stated that she was unwilling to take P. to Slovenia, on 21 January 2008 the Maribor District Court modified the interim order so that visits could take place only in Graz. M.P. was ordered to comply with the terms of the order, subject to a fine of 200 euros (EUR) for each breach. On 1 September 2007 the applicant saw P. for the first time in more than nine years. They had contact again on 6 October 2007. On the latter occasion, P. left after less than an hour, after which she refused to see the applicant again, although he attempted to see her on at least two more occasions. On 15 May 2008 the Maribor Higher Court dismissed an appeal lodged by M.P. against the contact order of 7 February 2007. Consequently, the order became final. Meanwhile from April to June 2008, the applicant requested five times that a fine be imposed on M.P. for failure to comply with the interim contact order (3 April 2008, 15 April 2008, 23 April 2008, 16 May 2008 and 11 June 2008). On 12 June 2008 the applicant requested for the sixth time that a fine be imposed on M.P. On 11 September 2008, the Maribor District Court explained to the parties that the contact proceedings had been concluded by a final decision and the Maribor Local Court was competent to decide on the enforcement of the contact order. The District Court referred the applicant’s further request for enforcement of 3 October 2008 to the Local Court. Subsequently, the applicant lodged another three requests for enforcement on 29 December 2008, 25 March 2009 and 27 March 2009. Meanwhile, on 10 February 2009, the applicant lodged a supervisory appeal under the Right to Trial without Undue Delay Act (hereinafter “the 2006 Act”) with a view to accelerating the enforcement proceedings. On 3 March 2009, the Maribor Local Court imposed a fine in the amount of EUR 600 on M.P. for not complying with the contact order. On 4 March 2009 the President of the Maribor Local Court, in the context of the proceedings in respect of the 2006 Act, informed the applicant of the decision taken the day before. On 1 April 2009 the applicant replied that none of his other requests had yet been resolved. M.P. having appealed against the fine, on 28 July 2009 the Maribor Higher Court set aside the impugned order, stating that a deadline should have first been set for M.P. to comply with the contact order. On 23 April 2010 the Maribor Local Court invited the applicant to supplement his request for enforcement. On the basis of that request, a new enforcement order was issued on 2 November 2010, ordering M.P. to allow contact between the applicant and P., subject to a fine in the amount of EUR 500. M.P. appealed against the order. On 4 September 2012 the Maribor Local Court quashed all the enforcement acts executed until that date and dismissed the applicant’s request for enforcement, finding that since the contact between the applicant and P. was to take place in Austria, the Austrian courts had jurisdiction to decide on the enforcement. B. Suspension of the applicant’s contact rights by the Austrian authorities On 30 September 2008 P. lodged a request with the Graz-West District Court seeking suspension of the applicant’s contact rights. On 11 November 2008 P. gave a statement before the District Court, alleging that throughout the period in which she had been living in Austria the applicant had not wished to have any contact with her and had made no attempts to see her. She further maintained that he had not obtained a court order setting out a contact schedule until 2007. Two visits had been carried out. However, since he had been criticising M.P., she had refused to have any further contact with him, and she had repeatedly told him so. P. also said that she had no relationship with her father and that she was afraid that he would take her to Slovenia. The applicant made a statement before the Maribor District Court on the basis of a letter rogatory submitted by the Austrian authorities. On 27 March 2009 the Graz-West District Court suspended his contact rights. It found that P. had consistently expressed her wish not to have contact with the applicant and concluded that contact against her wishes would not be in her interest. The court also found that M.P. had not obstructed contact and that the applicant had stated in the proceedings that he would respect P.’s wish not to have contact with him. On 31 August 2009 the Graz Regional Civil Court dismissed an appeal lodged by the applicant, finding that there was no indication that P. had been manipulated by M.P. or was not expressing her wishes freely. C. Proceedings concerning monthly child maintenance conducted before the Austrian authorities On 21 June 2008 M.P. asked the Graz-West District Court to increase the monthly child maintenance from EUR 137 to EUR 250 on the grounds that P.’s needs, as well as the general cost of living, had increased since 1997 when she and the applicant had concluded the maintenance agreement. On 12 February 2009 the court, taking into account the financial situation of both parents, allowed M.P.’s request. An appeal lodged by the applicant was dismissed by the Graz District Court for Civil Matters on 7 August 2009. During the proceedings, the applicant sent a number of letters to the courts in Graz complaining that the court documents were in German, which he did not understand, and requesting that the issue be decided by the Slovenian authorities. I. THE CIRCUMSTANCES OF THE CASE The applicant was born in 1955 and lives in Maribor. From 1991 to 1997 he lived with M.P. in an extramarital relationship. On 14 December 1993 the latter gave birth to their daughter, P. In 1997 the applicant and M.P. separated and, with the assistance of the Maribor Social Work Centre (hereinafter “the Centre”), concluded an agreement determining the amount of child maintenance to be paid by the applicant for his daughter. Another agreement was concluded on 23 February 1998 setting up a provisional contact schedule governing the applicant’s contact with P. for the period from 24 February to 13 April 1998. A. Contact proceedings before the Slovenian authorities and the enforcement of the relevant decisions Having been unable to come to an agreement with M.P. as to a more permanent contact schedule, on 24 February 1998 the applicant asked the Centre to issue an order determining his contact rights. He sought contact with P. every Tuesday afternoon, every second Thursday afternoon, every other weekend, one week during the winter holiday and one month during the summer holiday. It appears that, as of 13 April 1998, M.P. stopped letting the applicant have contact with P. The first hearing in the case was scheduled for 18 June 1998 and subsequently adjourned at the request of M.P., who informed the Centre that she was taking holiday during the period in question. On 14 June 1998 M.P. sent another letter to the Centre informing them that she would be living abroad in the period between 1 July 1998 and 31 August 1999 for the purposes of her doctoral studies. She requested that the contact proceedings be suspended during that period. Further to the applicant’s objection to M.P.’s request for the suspension of the proceedings, the Centre’s social workers paid three visits to M.P.’s address in Maribor in order to establish whether she was still living in Slovenia. However, M.P. was not found at home on either occasion. On 30 July 1998 the Centre sent a request to M.P.’s employer, Maribor University, to provide the address of her foreign residence. On 26 August 1998 the applicant sought an interim order granting him contact with P. On 4 September 1998 the Centre received a reply from Maribor University stating that M.P. was studying in Graz, Austria, but that they were unaware of her address. However, the university offered to serve M.P. with the summons to attend a hearing. The Centre scheduled a hearing for 22 October 1998, but the university was unable to reach M.P. and the hearing was adjourned. On 29 October 1998 the Centre issued an interim order setting up a provisional contact schedule between the applicant and P. According to the order, the applicant was to have contact with P. once a month and for a week during both the winter and summer holidays. The applicant was supposed to pick up his daughter at M.P.’s permanent address in Maribor and bring her back to the same address. Another hearing was scheduled for 10 December 1998 and subsequently adjourned, as the university was again unable to serve M.P. with the summons. On 12 January 1999 Maribor University provided the Centre with the address of the Austrian university where M.P. was studying. The Centre thus sent the interim order of 29 October 1998 and a summons for a hearing scheduled for 11 February 1999 to M.P. at the address of that institution. On 24 February 1999 M.P. appealed against the interim order of 29 October 1998, arguing that the provisional contact schedule could not be implemented, as she and her daughter were temporarily living in Graz, Austria. On 1 March 1999 the Centre rejected M.P.’s appeal as out of time, whereupon she appealed to the Ministry of Labour, Family and Social Affairs (hereinafter “the Ministry”). On 28 April and 18 June 1999 the Centre submitted the applicant’s requests for the enforcement of the interim order to the Maribor Administrative Unit. On 24 August 1999 the requests were granted; however, on 16 September 1999 M.P. appealed, claiming that the decision had not been correctly served on her. She also objected to the contents of the interim order. On 27 September 1999 the Ministry upheld M.P.’s appeal against the interim order, quashed the order and remitted the issue of the provisional contact schedule for a fresh examination by the Centre. The Ministry found that the service of the interim order and the summons to the hearing of 11 February 1999 had not been effected in accordance with the rules of administrative procedure. The Ministry pointed out that in the event that a party was absent or lived abroad, he or she had to be invited to appoint a representative authorised to receive his or her official mail. As to the merits of the matter, the Ministry found that the facts of the case had not been duly established, owing to the difficulty of communicating with M.P. On 7 October 1999 the Centre sent the Ministry’s decision, along with a request to M.P. to appoint a representative authorised to receive her official mail, to the Slovenian Embassy in Austria. The Embassy requested M.P. to collect the decision and the letter; however, she refused to do so. Subsequently, on 1 March 2000, M.P. was served with the documents at her workplace in Graz. Meanwhile, on 5 January 2000 the Ministry also upheld M.P.’s appeal against the decision on the enforcement of the interim order. The case was remitted to the Maribor Administrative Unit and the enforcement proceedings were subsequently stayed as a result of the quashing of the interim order. On 15 March 2000 M.P. informed the Centre of the address of her representative authorised to receive her official mail. On 6 June 2000 M.P. submitted a proposal regarding the contact schedule between the applicant and P., and on 12 June 2000 the applicant made a counter-proposal. On 30 June 2000 the Centre invited M.P. to provide certain information regarding her daughter’s residence, living conditions and education. On 19 July 2000 M.P. sent a reply to the Centre, without, however, providing the requested information on P. On 21 July 2000 the Centre again invited M.P. to provide the information, to which she responded on 14 August 2000, but again failed to provide answers to the Centre’s questions. On 29 September 2000 the Centre held a hearing in the applicant’s presence. M.P., however, did not attend, although a summons had been correctly served on her authorised representative. The applicant reiterated his request for the setting up of a contact schedule between him and P. On 5 October 2000 the Centre issued an order granting the applicant contact with P. every Tuesday afternoon, every first weekend of the month and a few weeks during the winter and summer holiday periods. According to the order, an appeal against the contact schedule would not have a suspensive effect. On 22 November 2000 M.P. appealed against the order before the Ministry. On 4 and 28 December 2001 and on 23 January 2002 the applicant requested that the contact schedule be enforced. On 13 March 2002 the Maribor administrative unit rejected the applicant’s request for enforcement, stating that the order of 5 October 2000 was unenforceable as the Centre had failed to specify the place at which the applicant was to pick up and drop off his daughter. Subsequently, on 10 June 2002 the Centre informed the applicant that the order could not be supplemented with the required information, as M.P.’s appeal against it was pending before the Ministry. On 19 July 2002 the Ministry upheld M.P.’s appeal against the order of 5 October 2000, confirming the reasoning of the administrative unit that the order was unenforceable. Moreover, the facts of the case had still not been properly established. The case was remitted to the Centre with the instruction to acquire information on M.P.’s and P.’s place of residence, P.’s schooling and her afternoon activities. On 30 September 2002 the Centre invited M.P. to provide them with the information requested by the Ministry in their decision of 19 July 2002. She did not reply. On 27 February 2003 the Centre contacted the Ministry for Foreign Affairs with a view to finding the address of M.P. and P. On 7 May 2003 the Centre was informed that the Slovenian Embassy in Austria had been unable to obtain such information. On 16 May 2003 the Centre addressed a request for assistance in obtaining the information on M.P.’s and P.’s address to the Ministry. As no reply was received, the Centre requested assistance again on 28 May 2004. Further to legislative changes by which on 1 May 2004 the courts acquired jurisdiction to decide on issues relating to rights of contact, in June 2004 the applicant instituted proceedings before the Maribor District Court. At the District Court’s request, the applicant supplemented his application on 3 August 2004. The Maribor District Court scheduled a hearing for 6 October 2004; however, M.P. was unable to attend and only the applicant appeared in court. He complained that M.P. was in the habit of evading the proceedings and that, as a result, he had not seen P. for six years. On 5 January 2005 M.P. informed the Maribor District Court that she and P. had not resided at their Slovenian address for a number of years and that she had kept that address only for the purpose of receiving mail. However, she failed to provide her address in Austria. M.P. proposed that the Slovenian courts relinquish their jurisdiction in the matter in favour of the Austrian courts. On 13 July 2005 the applicant sent a letter to the Graz Youth and Family Office asking them for help in re-establishing contact with P. He explained that M.P. had been preventing him from having contact with his daughter and had evaded the proceedings conducted by the Centre and the Maribor District Court. He also attached a letter he had written to P., with photos of him and his family. The applicant’s letter was handed over to M.P. by a social worker on 6 October 2005. The Maribor District Court scheduled another hearing for 14 November 2005, but since M.P. had not been served with a summons to attend, the hearing was adjourned. Scheduling further hearings, on 2 November 2005 the Maribor District Court asked the Graz District Court for Civil Matters to serve a summons on M.P. in accordance with Council Regulation (EC) No. 1348/2000 of 29 May 2000 on the service in member States of judicial and extrajudicial documents in civil or commercial matters. The court also attempted to serve the document on M.P. through the Slovenian Embassy in Austria. However, its attempt was unsuccessful; both the embassy and, on 12 January 2006, the Graz District Court for Civil Matters notified the Maribor District Court that M.P. did not appear to be living at the indicated address. The Maribor District Court continued sending mail to M.P.’s address in Maribor. On 13 December 2005 the Maribor District Court again asked the Graz District Court for Civil Matters to serve a summons on M.P. in Austria. The mail was delivered to her at the Graz District Court for Civil Matters on 7 March 2006, after the Graz court had obtained information on M.P.’s address from the Registration Office and two unsuccessful attempts had been made to serve the summons at her home address. Meanwhile, on 9 December 2005 the Maribor District Court requested the Graz District Court for Civil Matters to obtain a report on P.’s situation from the Graz Youth and Family Office. It appears that the request was sent to the Austrian court on 23 March 2006 and received by the District Court for Civil Matters on 29 March 2006. The latter submitted it to the Youth and Family Office on 30 March 2006. The social worker in charge of the case requested three times to meet with M.P. and P. in order to prepare the report, but without success. It appears that M.P. did not attend the first two meetings for work-related reasons. On the last occasion M.P. replied that she and her daughter would be spending the next few months abroad. On 7 July 2006 the Graz Youth and Family Office reported back that M.P. had refused to cooperate. A further request for a report was submitted on 28 September 2006. On 20 October 2006 the Youth and Family Office notified the District Court for Civil Matters that M.P. could not be reached because she was abroad at the time. On 15 November 2006 the latter court sent a reply to the Maribor District Court, which received it on 4 December 2006. On 7 February 2007 the Maribor District Court held a hearing and on the same day issued an order setting out a contact schedule. M.P. did not attend the hearing; however, she informed the court that P. did not wish to have contact with the applicant. The court ruled that the applicant could visit P. every two weeks by picking her up at M.P.’s home. The court found that there were no objective reasons for P. to refuse contact with her father and that she had been influenced by M.P.’s negative attitude towards the applicant. It also criticised M.P.’s conduct and her “uncooperative attitude”. M.P. appealed against the contact order. On 5 July 2007, on the applicant’s proposal, the Maribor District Court issued an enforceable interim order allowing him contact with P. every two weeks, whereby once a month he was to visit her at her address in Austria and the other time P. was to visit him in Slovenia. Following an objection on the part of M.P. in which she stated that she was unwilling to take P. to Slovenia, on 21 January 2008 the Maribor District Court modified the interim order so that visits could take place only in Graz. M.P. was ordered to comply with the terms of the order, subject to a fine of 200 euros (EUR) for each breach. On 1 September 2007 the applicant saw P. for the first time in more than nine years. They had contact again on 6 October 2007. On the latter occasion, P. left after less than an hour, after which she refused to see the applicant again, although he attempted to see her on at least two more occasions. On 15 May 2008 the Maribor Higher Court dismissed an appeal lodged by M.P. against the contact order of 7 February 2007. Consequently, the order became final. Meanwhile from April to June 2008, the applicant requested five times that a fine be imposed on M.P. for failure to comply with the interim contact order (3 April 2008, 15 April 2008, 23 April 2008, 16 May 2008 and 11 June 2008). On 12 June 2008 the applicant requested for the sixth time that a fine be imposed on M.P. On 11 September 2008, the Maribor District Court explained to the parties that the contact proceedings had been concluded by a final decision and the Maribor Local Court was competent to decide on the enforcement of the contact order. The District Court referred the applicant’s further request for enforcement of 3 October 2008 to the Local Court. Subsequently, the applicant lodged another three requests for enforcement on 29 December 2008, 25 March 2009 and 27 March 2009. Meanwhile, on 10 February 2009, the applicant lodged a supervisory appeal under the Right to Trial without Undue Delay Act (hereinafter “the 2006 Act”) with a view to accelerating the enforcement proceedings. On 3 March 2009, the Maribor Local Court imposed a fine in the amount of EUR 600 on M.P. for not complying with the contact order. On 4 March 2009 the President of the Maribor Local Court, in the context of the proceedings in respect of the 2006 Act, informed the applicant of the decision taken the day before. On 1 April 2009 the applicant replied that none of his other requests had yet been resolved. M.P. having appealed against the fine, on 28 July 2009 the Maribor Higher Court set aside the impugned order, stating that a deadline should have first been set for M.P. to comply with the contact order. On 23 April 2010 the Maribor Local Court invited the applicant to supplement his request for enforcement. On the basis of that request, a new enforcement order was issued on 2 November 2010, ordering M.P. to allow contact between the applicant and P., subject to a fine in the amount of EUR 500. M.P. appealed against the order. On 4 September 2012 the Maribor Local Court quashed all the enforcement acts executed until that date and dismissed the applicant’s request for enforcement, finding that since the contact between the applicant and P. was to take place in Austria, the Austrian courts had jurisdiction to decide on the enforcement. B. Suspension of the applicant’s contact rights by the Austrian authorities On 30 September 2008 P. lodged a request with the Graz-West District Court seeking suspension of the applicant’s contact rights. On 11 November 2008 P. gave a statement before the District Court, alleging that throughout the period in which she had been living in Austria the applicant had not wished to have any contact with her and had made no attempts to see her. She further maintained that he had not obtained a court order setting out a contact schedule until 2007. Two visits had been carried out. However, since he had been criticising M.P., she had refused to have any further contact with him, and she had repeatedly told him so. P. also said that she had no relationship with her father and that she was afraid that he would take her to Slovenia. The applicant made a statement before the Maribor District Court on the basis of a letter rogatory submitted by the Austrian authorities. On 27 March 2009 the Graz-West District Court suspended his contact rights. It found that P. had consistently expressed her wish not to have contact with the applicant and concluded that contact against her wishes would not be in her interest. The court also found that M.P. had not obstructed contact and that the applicant had stated in the proceedings that he would respect P.’s wish not to have contact with him. On 31 August 2009 the Graz Regional Civil Court dismissed an appeal lodged by the applicant, finding that there was no indication that P. had been manipulated by M.P. or was not expressing her wishes freely. C. Proceedings concerning monthly child maintenance conducted before the Austrian authorities On 21 June 2008 M.P. asked the Graz-West District Court to increase the monthly child maintenance from EUR 137 to EUR 250 on the grounds that P.’s needs, as well as the general cost of living, had increased since 1997 when she and the applicant had concluded the maintenance agreement. On 12 February 2009 the court, taking into account the financial situation of both parents, allowed M.P.’s request. An appeal lodged by the applicant was dismissed by the Graz District Court for Civil Matters on 7 August 2009. During the proceedings, the applicant sent a number of letters to the courts in Graz complaining that the court documents were in German, which he did not understand, and requesting that the issue be decided by the Slovenian authorities."
+    "source_doc_id": "001-150788",
+    "type": "hard"
   }
 ]
