@@ -194,17 +194,31 @@ The pipeline talks to Ollama over its HTTP API at `RAG_ANON_OLLAMA_BASE_URL` (de
 
 ```sh
 ollama serve                      # or just launch the Ollama desktop app
-make ollama-pull-models           # pull models via the host CLI
+cd ../rag-anonymous && make ollama-pull-models
+cd ../rag-anonymous && make docker-up   # Elasticsearch only
 ```
 
 Both paths expose the same API on port `11434`, so the rest of the pipeline doesn't need to know which one is running. **Don't run both at once** — they'll race for the port and the second one will fail to bind.
 
-**Option B — Docker** (uses `[docker-compose.yml](./docker-compose.yml)`):
+**Option B — Docker** (from `rag-anonymous/`, `ollama` compose profile):
 
 ```sh
-make docker-up                    # start the ollama container
+cd ../rag-anonymous
+make docker-up-ollama             # Ollama + Elasticsearch
 make docker-ollama-pull-models    # pull models inside the container
-make docker-down                  # stop the container when done
+```
+
+Docker Compose targets (run from `rag-anonymous/`):
+
+```sh
+make docker-up                    # Elasticsearch only
+make docker-up-ollama             # + Ollama
+make docker-up-kibana             # + Kibana (http://localhost:5601)
+make docker-up-all                # Elasticsearch + Ollama + Kibana
+
+make docker-ollama-down           # stop Ollama only
+make docker-kibana-down           # stop Kibana only
+make docker-down                  # stop and remove all running compose services
 ```
 
 
