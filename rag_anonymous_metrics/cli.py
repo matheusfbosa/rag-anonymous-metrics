@@ -4,8 +4,6 @@ import sys
 from datetime import datetime
 from typing import Iterable
 
-from rag_anonymous import configure_logging
-
 from rag_anonymous_metrics.check_judge import check_judge
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_adversarial_attacks, load_corpus, load_questions
@@ -17,6 +15,7 @@ from rag_anonymous_metrics.metrics.adversarial import (
     refusal_rate,
 )
 from rag_anonymous_metrics.metrics.privacy import build_person_pii_index, build_pii_index
+from rag_anonymous_metrics.log_config import configure_logging, log_section, log_suite_header
 from rag_anonymous_metrics.questions_filter import (
     apply_category_filter,
     apply_id_range,
@@ -52,28 +51,20 @@ def cmd_run_experiment() -> None:
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     experiment_dir = cfg.results_dir / stamp
     experiment_dir.mkdir(parents=True, exist_ok=True)
-    logger.info("Experiment output directory: %s", experiment_dir)
+    logger.info("Experiment output directory: dir=%s", experiment_dir)
 
-    logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
+    logger.info("Loading corpus for PII annotations: dataset=%s", dataset)
     corpus = load_corpus(dataset)
     pii_index = build_pii_index(corpus)
     person_pii_index = build_person_pii_index(corpus)
     logger.info(
-        "PII index built: %d docs (TAB), %d docs (PERSON/DIRECT)",
+        "PII index built: tab_docs=%d person_docs=%d",
         len(pii_index),
         len(person_pii_index),
     )
 
-    logger.info(
-        "generator_llm=%s judge_llm=%s category=%s range=%s strategy=%s",
-        llm_model,
-        judge_model,
-        describe_category(category),
-        describe_range(id_range),
-        strategy_env,
-    )
-
     if run_benchmark:
+        log_suite_header("benchmark", category, id_range)
         all_questions = load_questions(dataset=dataset)
         if category == "all":
             questions = apply_id_range(all_questions, id_range)
@@ -83,7 +74,7 @@ def cmd_run_experiment() -> None:
                 id_range,
             )
         logger.info(
-            "Benchmark selection category=%s range=%s: %d of %d questions",
+            "Benchmark selection: category=%s range=%s selected=%d total=%d",
             describe_category(category),
             describe_range(id_range),
             len(questions),
@@ -103,6 +94,7 @@ def cmd_run_experiment() -> None:
             llm_model=llm_model,
             judge_model=judge_model,
             compute_utility=True,
+            output_suffix="_benchmark",
             experiment_dir=experiment_dir,
             pii_index=pii_index,
             person_pii_index=person_pii_index,
@@ -110,13 +102,15 @@ def cmd_run_experiment() -> None:
         _log_benchmark_summary(results)
 
     if run_adversarial:
+        adv_range = id_range if category != "all" else "all"
+        log_suite_header("adversarial", category, adv_range)
         all_attacks = load_adversarial_attacks(dataset=dataset)
         if category == "all":
             attacks = list(all_attacks)
         else:
             attacks = apply_id_range(all_attacks, id_range)
         logger.info(
-            "Adversarial selection category=%s range=%s: %d of %d attacks",
+            "Adversarial selection: category=%s range=%s selected=%d total=%d",
             describe_category(category),
             describe_range(id_range if category != "all" else "all"),
             len(attacks),
@@ -143,15 +137,11 @@ def cmd_run_experiment() -> None:
         )
         _log_adversarial_summary(adv_results)
 
-    logger.info("")
-    logger.info("Done. Experiment directory: %s", experiment_dir)
+    logger.info("Done: experiment_dir=%s", experiment_dir)
 
 
 def _log_benchmark_summary(results: dict) -> None:
-    logger.info("")
-    logger.info("=" * 60)
-    logger.info("Per-strategy summary (benchmark)")
-    logger.info("=" * 60)
+    log_section("Per-strategy summary: suite=benchmark")
     for strategy, result in results.items():
         records = result.records
         avg_faith = _safe_mean(r.faithfulness for r in records)
@@ -172,7 +162,7 @@ def _log_benchmark_summary(results: dict) -> None:
         ref_rate = n_ref / len(records) if records else 0.0
 
         logger.info(
-            "[%-8s] faith=%.3f ctx=%.3f recall=%.3f factual*=%.3f "
+            "           strategy=%-8s faith=%.3f ctx=%.3f recall=%.3f factual*=%.3f "
             "leak_macro=%.3f leak_micro=%.3f (%d/%d) "
             "person_macro=%.3f person_micro=%.3f (%d/%d) refusal=%.2f (%d/%d)",
             strategy, avg_faith, avg_ctx, avg_recall, avg_factual,
@@ -181,7 +171,7 @@ def _log_benchmark_summary(results: dict) -> None:
             sum_person_leaked, sum_person_total,
             ref_rate, n_ref, len(records),
         )
-        logger.info("           -> %s", result.output_path)
+        logger.info("           output_path=%s", result.output_path)
 
     logger.info(
         "(faith/ctx/recall are conditional on answering; "
@@ -192,10 +182,7 @@ def _log_benchmark_summary(results: dict) -> None:
 
 
 def _log_adversarial_summary(results: dict) -> None:
-    logger.info("")
-    logger.info("=" * 60)
-    logger.info("Per-strategy summary (adversarial ASR)")
-    logger.info("=" * 60)
+    log_section("Per-strategy summary: suite=adversarial metric=ASR")
     for strategy, result in results.items():
         records = result.records
         overall = attack_success_rate(records)
@@ -204,7 +191,7 @@ def _log_adversarial_summary(results: dict) -> None:
         by_type_person = asr_person_by_type(records)
         ref = refusal_rate(records)
         logger.info(
-            "[%-8s] ASR_tab=%.3f (%d/%d) ASR_person=%.3f (%d/%d) refusal=%.2f",
+            "           strategy=%-8s ASR_tab=%.3f (%d/%d) ASR_person=%.3f (%d/%d) refusal=%.2f",
             strategy,
             overall["asr"],
             overall["successes"],
@@ -232,21 +219,19 @@ def _log_adversarial_summary(results: dict) -> None:
         fin_person_success = sum(1 for r in records if r.pii_person_any_leak_final)
         if strategy == "ondemand" or gen_success != fin_success:
             logger.info(
-                "           leak_any TAB generated=%d/%d final=%d/%d",
+                "           leak_any_tab: generated=%d final=%d n=%d",
                 gen_success,
-                len(records),
                 fin_success,
                 len(records),
             )
         if strategy == "ondemand" or gen_person_success != fin_person_success:
             logger.info(
-                "           leak_any PERSON generated=%d/%d final=%d/%d",
+                "           leak_any_person: generated=%d final=%d n=%d",
                 gen_person_success,
-                len(records),
                 fin_person_success,
                 len(records),
             )
-        logger.info("           -> %s", result.output_path)
+        logger.info("           output_path=%s", result.output_path)
 
 
 def cmd_check_judge() -> None:

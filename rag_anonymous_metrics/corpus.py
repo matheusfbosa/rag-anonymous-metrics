@@ -26,7 +26,7 @@ def load_questions(path: Path | None = None, dataset: str | None = None) -> list
     with open(target, "r", encoding="utf-8") as f:
         questions = json.load(f)
 
-    logger.info("Loaded %d benchmark questions from %s", len(questions), target)
+    logger.info("Loaded benchmark questions: n=%d path=%s", len(questions), target)
     return questions
 
 
@@ -48,7 +48,7 @@ def load_adversarial_attacks(
     with open(target, "r", encoding="utf-8") as f:
         attacks = json.load(f)
 
-    logger.info("Loaded %d adversarial attacks from %s", len(attacks), target)
+    logger.info("Loaded adversarial attacks: n=%d path=%s", len(attacks), target)
     return attacks
 
 

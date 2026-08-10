@@ -15,6 +15,7 @@ from rag_anonymous import (
 )
 
 from rag_anonymous_metrics.config import Settings
+from rag_anonymous_metrics.log_config import log_item_progress, log_section
 from rag_anonymous_metrics.metrics.privacy import (
     build_person_pii_index,
     build_pii_index,
@@ -117,13 +118,7 @@ def evaluate_strategy(
     compute_utility: bool = True,
     output_basename: str | None = None,
 ) -> StrategyResult:
-    logger.info("")
-    logger.info("=" * 60)
-    logger.info(
-        "Evaluating: strategy=%s compute_utility=%s",
-        strategy,
-        compute_utility,
-    )
+    log_section(f"Evaluating: strategy={strategy} compute_utility={compute_utility}")
 
     cfg = Settings.load()
     gen_model = llm_model or cfg.llm_model
@@ -132,16 +127,22 @@ def evaluate_strategy(
     pipeline = build_pipeline(strategy, gen_model)
     run_id = str(uuid.uuid4())[:8]
     records: list[QueryRecord] = []
-    width = len(str(len(questions)))
 
-    logger.info(
-        "Generating answers (LLM=%s) and computing privacy metrics for %d records...",
-        gen_model, len(questions),
-    )
-    for idx, q in enumerate(questions, 1):
+    if compute_utility:
         logger.info(
-            "  [%*d/%d] %s: %.80s",
-            width, idx, len(questions), q.get("id", "-"), q["question"],
+            "Running benchmark: llm=%s n=%d",
+            gen_model,
+            len(questions),
+        )
+    else:
+        logger.info(
+            "Running adversarial attacks: llm=%s n=%d",
+            gen_model,
+            len(questions),
+        )
+    for idx, q in enumerate(questions, 1):
+        log_item_progress(
+            logger, idx, len(questions), str(q.get("id", "-")), q["question"],
         )
         records.append(
             evaluate_question(
@@ -158,9 +159,10 @@ def evaluate_strategy(
 
     if records and not any(r.pii_total_final for r in records):
         logger.error(
-            "pii_total_final=0 for all %d records in strategy='%s'; "
-            "PII index (dataset='%s') likely does not match the indexed corpus.",
-            len(records), strategy, dataset,
+            "PII index mismatch: strategy=%s dataset=%s n=%d",
+            strategy,
+            dataset,
+            len(records),
         )
 
     if compute_utility:
@@ -199,28 +201,24 @@ def run_experiment(
         stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         experiment_dir = cfg.results_dir / stamp
         experiment_dir.mkdir(parents=True, exist_ok=True)
-        logger.info("Experiment output directory: %s", experiment_dir)
+        logger.info("Experiment output directory: dir=%s", experiment_dir)
 
     if pii_index is None or person_pii_index is None:
-        logger.info("Loading corpus (dataset=%s) for PII annotations...", dataset)
+        logger.info("Loading corpus for PII annotations: dataset=%s", dataset)
         corpus = load_corpus(dataset)
         if pii_index is None:
             pii_index = build_pii_index(corpus)
         if person_pii_index is None:
             person_pii_index = build_person_pii_index(corpus)
         logger.info(
-            "PII index built: %d docs (TAB), %d docs (PERSON/DIRECT)",
+            "PII index built: tab_docs=%d person_docs=%d",
             len(pii_index),
             len(person_pii_index),
         )
 
     results = {}
     for strategy in strategies:
-        basename = (
-            f"results_{strategy}{output_suffix}.jsonl"
-            if output_suffix
-            else f"results_{strategy}.jsonl"
-        )
+        basename = f"results_{strategy}{output_suffix}.jsonl"
         results[strategy] = evaluate_strategy(
             strategy,
             questions,
@@ -240,21 +238,25 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
     from rag_anonymous_metrics.metrics.utility import UtilityScorer
 
     logger.info(
-        "Computing utility metrics (judge=%s) for %d records...",
-        judge_model, len(records),
+        "Computing utility metrics: judge=%s n=%d",
+        judge_model,
+        len(records),
     )
     scorer = UtilityScorer(judge_model)
     width = len(str(len(records)))
 
     for idx, record in enumerate(records, 1):
-        logger.info(
-            "  [%*d/%d] %s: %.80s",
-            width, idx, len(records), record.question_id or "-", record.question,
+        log_item_progress(
+            logger,
+            idx,
+            len(records),
+            record.question_id or "-",
+            record.question,
         )
 
         if record.answer_is_refusal or is_refusal_answer(record.final_answer):
             logger.info(
-                "  [%*d/%d] skipping judge: refusal / non-answer",
+                "  [%*d/%d] Skipping judge: reason=refusal",
                 width, idx, len(records),
             )
             record.factual_correctness = 0.0
@@ -274,4 +276,4 @@ def _save_jsonl(records: list[QueryRecord], path: Path) -> None:
     with open(path, "w", encoding="utf-8") as f:
         for record in records:
             f.write(json.dumps(asdict(record), ensure_ascii=False) + "\n")
-    logger.info("Saved %d records to %s", len(records), path)
+    logger.info("Saved records: n=%d path=%s", len(records), path)

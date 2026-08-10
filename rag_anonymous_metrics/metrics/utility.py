@@ -74,7 +74,11 @@ class UtilityScorer:
         try:
             score = await metric.single_turn_ascore(sample)
         except Exception as exc:
-            logger.warning("Ragas %s failed: %s", name, exc.__class__.__name__)
+            logger.warning(
+                "Ragas metric failed: metric=%s error=%s",
+                name,
+                exc.__class__.__name__,
+            )
             logger.debug("Ragas %s traceback", name, exc_info=True)
             return None
         if score is None or math.isnan(score):
