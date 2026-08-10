@@ -10,7 +10,7 @@ from rag_anonymous import (
     Anonymizer,
     build_llm,
     create_chain,
-    load_vectordb,
+    load_retriever,
     query_rag,
 )
 
@@ -32,7 +32,7 @@ class Pipeline:
     strategy: str
     gen_model: str
     chain: Any
-    vectordb: Any
+    retrieval_store: Any
     anonymizer: Anonymizer | None
 
 
@@ -40,14 +40,14 @@ STRATEGIES = ["offline", "ondemand"]
 
 
 def build_pipeline(strategy: str, gen_model: str) -> Pipeline:
-    vectordb = load_vectordb(collection_name=strategy)
+    retrieval_store = load_retriever(collection_name=strategy)
     chain = create_chain(build_llm(gen_model))
     anonymizer = Anonymizer() if strategy == "ondemand" else None
     return Pipeline(
         strategy=strategy,
         gen_model=gen_model,
         chain=chain,
-        vectordb=vectordb,
+        retrieval_store=retrieval_store,
         anonymizer=anonymizer,
     )
 
@@ -63,7 +63,7 @@ def evaluate_question(
     k_docs: int,
 ) -> QueryRecord:
     question = question_obj["question"]
-    result = query_rag(pipeline.chain, pipeline.vectordb, question, k_docs=k_docs)
+    result = query_rag(pipeline.chain, pipeline.retrieval_store, question, k_docs=k_docs)
 
     generated_answer = response_text(result["response"])
     final_answer = (
