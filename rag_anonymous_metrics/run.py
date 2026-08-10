@@ -118,7 +118,8 @@ def evaluate_strategy(
     compute_utility: bool = True,
     output_basename: str | None = None,
 ) -> StrategyResult:
-    log_section(f"Evaluating: strategy={strategy} compute_utility={compute_utility}")
+    suite = "benchmark" if compute_utility else "adversarial"
+    log_section(f"Evaluating: strategy={strategy} suite={suite}")
 
     cfg = Settings.load()
     gen_model = llm_model or cfg.llm_model
