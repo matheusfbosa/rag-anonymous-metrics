@@ -29,6 +29,8 @@ class Settings:
     retrieval_k_docs: int
     llm_model: str
     judge_model: str
+    judge_num_predict: int
+    judge_timeout_sec: float
     results_dir: Path
     questions_category: CategorySpec
     questions_range: RangeSpec
@@ -63,6 +65,12 @@ class Settings:
             retrieval_k_docs=int(os.getenv("RAG_METRICS_RETRIEVAL_K_DOCS", "5")),
             llm_model=llm,
             judge_model=judge,
+            judge_num_predict=int(
+                os.getenv("RAG_METRICS_JUDGE_NUM_PREDICT", "1536")
+            ),
+            judge_timeout_sec=float(
+                os.getenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", "1200")
+            ),
             results_dir=PROJECT_ROOT / results_rel,
             questions_category=parse_questions_category(
                 os.getenv("RAG_METRICS_QUESTIONS_CATEGORY")

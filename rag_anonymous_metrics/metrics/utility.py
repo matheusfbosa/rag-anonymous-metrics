@@ -13,12 +13,21 @@ from ragas.metrics import (
 
 from rag_anonymous import build_llm
 
+from rag_anonymous_metrics.config import Settings
+
 logger = logging.getLogger(__name__)
 
 
 class UtilityScorer:
     def __init__(self, judge_model: str):
-        llm = LangchainLLMWrapper(build_llm(judge_model))
+        cfg = Settings.load()
+        llm = LangchainLLMWrapper(
+            build_llm(
+                judge_model,
+                num_predict=cfg.judge_num_predict,
+                timeout=cfg.judge_timeout_sec,
+            )
+        )
         self._faithfulness = Faithfulness(llm=llm)
         self._context_precision = LLMContextPrecisionWithoutReference(llm=llm)
         self._context_recall = LLMContextRecall(llm=llm)
