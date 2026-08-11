@@ -27,17 +27,14 @@ def check_judge() -> int:
             "(all|factual|identity), not adversarial."
         )
         return 2
-    return asyncio.run(
-        _run(
-            cfg.judge_model,
-            cfg.dataset,
-            cfg.questions_category,
-            cfg.questions_range,
-        )
-    )
+    return asyncio.run(_run(cfg))
 
 
-async def _run(judge, dataset, category, id_range):
+async def _run(cfg: Settings):
+    dataset = cfg.dataset
+    category = cfg.questions_category
+    id_range = cfg.questions_range
+    judge = cfg.judge_model
     all_questions = load_questions(dataset=dataset)
     if category == "all":
         questions = apply_id_range(all_questions, id_range)
@@ -51,7 +48,15 @@ async def _run(judge, dataset, category, id_range):
         return 2
 
     print(f"Judge: {judge} | dataset: {dataset} | n: {len(questions)}\n")
-    metric = FactualCorrectness(llm=LangchainLLMWrapper(build_llm(judge)))
+    metric = FactualCorrectness(
+        llm=LangchainLLMWrapper(
+            build_llm(
+                judge,
+                num_predict=cfg.judge_num_predict,
+                timeout=cfg.judge_timeout_sec,
+            )
+        )
+    )
 
     positives = []
     negatives = []
