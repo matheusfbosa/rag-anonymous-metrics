@@ -27,7 +27,7 @@ from rag_anonymous_metrics.questions_filter import (
     describe_category,
     describe_range,
 )
-from rag_anonymous_metrics.run import STRATEGIES, run_experiment
+from rag_anonymous_metrics.run import run_experiment
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ def cmd_run_experiment(experiment_dir: Path) -> None:
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
 
-    strategy_env = cfg.strategy
+    strategy = cfg.strategy
     dataset = cfg.dataset
     k_docs = cfg.retrieval_k_docs
     llm_model = cfg.llm_model
@@ -48,7 +48,7 @@ def cmd_run_experiment(experiment_dir: Path) -> None:
     category = cfg.questions_category
     id_range = cfg.questions_range
 
-    strategies = STRATEGIES if strategy_env == "all" else [strategy_env]
+    strategies = [strategy]
 
     run_benchmark = category in {"all", "factual", "identity"}
     run_adversarial = category in {"all", "adversarial"}
@@ -251,7 +251,13 @@ def main() -> None:
         raise SystemExit(str(exc)) from exc
 
     log_name = "check_judge.log" if command == "check-judge" else "run.log"
-    experiment_dir = init_command_output(cfg.results_dir, log_name)
+    reuse_dir = cfg.experiment_dir
+    experiment_dir = init_command_output(
+        cfg.results_dir,
+        log_name,
+        experiment_dir=reuse_dir,
+        append_log=reuse_dir is not None and reuse_dir.exists(),
+    )
     configure_logging()
 
     if command in ("run", "evaluate"):

@@ -245,9 +245,7 @@ cp .env.example .env
 
 1. Offline and On-Demand strategies ingested for the dataset you will evaluate (`dev`, `train`, or `test`):
   ```sh
-   cd ../rag-anonymous
-   RAG_ANON_ANONYMIZER_STRATEGY=offline RAG_ANON_CORPUS_DATASET=dev make ingest
-   RAG_ANON_ANONYMIZER_STRATEGY=ondemand RAG_ANON_CORPUS_DATASET=dev make ingest
+   make ingest-dev-prereq    # or: make ingest-train-prereq / make ingest-test-prereq
   ```
 2. Sanity-check the judge
 
@@ -255,29 +253,49 @@ Verifies the judge LLM before trusting its scores: feeds each question's own gro
 
 ```sh
 make check-judge
-RAG_METRICS_JUDGE_MODEL=gemma4:12b RAG_METRICS_QUESTIONS_CATEGORY=all RAG_METRICS_QUESTIONS_RANGE=1-5 make check-judge
+make check-judge-smoke           # RANGE_SMOKE (default 1-5)
+make check-judge-dev
+RAG_METRICS_JUDGE_MODEL=gemma4:12b make check-judge RANGE=1-5
 ```
 
 It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, `RAG_METRICS_QUESTIONS_CATEGORY`, and `RAG_METRICS_QUESTIONS_RANGE`.
 
 ### Run full evaluation (Offline and On-Demand strategies)
 
+Run both strategies into the same experiment folder (unload Ollama models between runs to avoid VRAM OOM):
+
 ```sh
-make run
+make run-strategies              # default dataset (dev)
+make run-dev-strategies          # or train / test
+make run-smoke-strategies        # both strategies, RANGE_SMOKE (default 1-5)
+make run-all                     # dev + train + test (heavy; unloads between datasets)
 ```
 
-With `RAG_METRICS_QUESTIONS_CATEGORY=all`, the run evaluates the benchmark (utility + privacy) and then the adversarial suite (ASR only, no Ragas).
+With `RAG_METRICS_QUESTIONS_CATEGORY=all`, each strategy run evaluates the benchmark (utility + privacy) and then the adversarial suite (ASR only, no Ragas).
+
+`make run-strategies` calls `ollama-unload` between strategies. By default it auto-detects Docker (`container_name: ollama` from `rag-anonymous/docker-compose.yml`) and runs `docker exec ollama ollama stop …`; otherwise it uses the host `ollama` CLI with `OLLAMA_HOST` / `RAG_ANON_OLLAMA_BASE_URL`. Override with `OLLAMA_VIA_DOCKER=1` (force Docker) or `OLLAMA_VIA_DOCKER=0` (force host CLI).
+
+### Prerequisites (ingest)
+
+```sh
+make ingest-dev-prereq           # offline + ondemand indices in rag-anonymous
+```
 
 ### Run a single strategy, dataset, category, or id range
 
 ```sh
-RAG_METRICS_STRATEGY=offline make run
-RAG_METRICS_STRATEGY=ondemand make run
-RAG_METRICS_CORPUS_DATASET=train make run
-RAG_METRICS_CORPUS_DATASET=test make run
-RAG_METRICS_QUESTIONS_CATEGORY=identity RAG_METRICS_QUESTIONS_RANGE=all make run
-RAG_METRICS_QUESTIONS_CATEGORY=all RAG_METRICS_QUESTIONS_RANGE=1-60 make run
-RAG_METRICS_QUESTIONS_CATEGORY=adversarial RAG_METRICS_QUESTIONS_RANGE=1-15 make run
+make run
+make run STRATEGY=ondemand
+make run-offline
+make run-ondemand
+make run-dev
+make run-train
+make run-test
+make run-factual
+make run-identity
+make run-adversarial
+make run-smoke                   # RANGE_SMOKE (default 1-5)
+make run RANGE=1-60
 ```
 
 `RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching input files (`benchmark_questions_<dataset>.json`, `adversarial_attacks_<dataset>.json`).
@@ -295,7 +313,7 @@ RAG_METRICS_QUESTIONS_CATEGORY=adversarial RAG_METRICS_QUESTIONS_RANGE=1-15 make
 ## Output
 
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
-  - `results_offline_benchmark.jsonl` and/or `results_ondemand_benchmark.jsonl` (benchmark; depends on `RAG_METRICS_STRATEGY`) — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
+  - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
   - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields (`pii_*`, `pii_person_*`) + `ASR_tab` / `ASR_person` summary in the logs (no Ragas scores).
 
 
@@ -319,6 +337,7 @@ RAG_METRICS_QUESTIONS_CATEGORY=adversarial RAG_METRICS_QUESTIONS_RANGE=1-15 make
 | `RAG_ANON_LOG_LEVEL_PRESIDIO`    | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                              |
 | `RAG_ANON_OLLAMA_BASE_URL`       | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
 | `RAG_METRICS_CORPUS_DATASET`     | `dev`                                                      | TAB dataset (`train` / `dev` / `test`); required                                                                                                                                  |
+| `RAG_METRICS_EXPERIMENT_DIR`     | —                                                          | Optional timestamp or path under `RAG_METRICS_RESULTS_DIR`. Reuse the same folder across strategy runs (e.g. `make run-strategies`).                                               |
 | `RAG_METRICS_JUDGE_MODEL`        | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for Ragas utility metrics                                                                                                                                               |
 | `RAG_METRICS_JUDGE_NUM_PREDICT`  | `1536`                                                     | Max tokens per judge call (Ragas classifications / JSON).                                                                                                                         |
 | `RAG_METRICS_JUDGE_TIMEOUT_SEC`  | `1800`                                                     | HTTP timeout (seconds) per judge call during the utility phase.                                                                                                                   |
@@ -326,6 +345,6 @@ RAG_METRICS_QUESTIONS_CATEGORY=adversarial RAG_METRICS_QUESTIONS_RANGE=1-15 make
 | `RAG_METRICS_QUESTIONS_RANGE`    | — (required)                                               | `all` or `START-END` by numeric `id` (e.g. `1-60`)                                                                                                                                |
 | `RAG_METRICS_RESULTS_DIR`        | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
 | `RAG_METRICS_RETRIEVAL_K_DOCS`   | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
-| `RAG_METRICS_STRATEGY`           | — (required)                                               | `offline`, `ondemand`, or `all`                                                                                                                                                   |
+| `RAG_METRICS_STRATEGY`           | — (required)                                               | `offline` or `ondemand` (one per `rag-metrics run`; use `make run-strategies` for both)                                                                                           |
 
 

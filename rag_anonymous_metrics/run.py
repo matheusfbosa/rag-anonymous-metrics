@@ -36,9 +36,6 @@ class Pipeline:
     anonymizer: Anonymizer | None
 
 
-STRATEGIES = ["offline", "ondemand"]
-
-
 def build_pipeline(strategy: str, gen_model: str, dataset: str) -> Pipeline:
     retrieval_store = load_retriever(collection_name=strategy, dataset=dataset)
     chain = create_chain(build_llm(gen_model))

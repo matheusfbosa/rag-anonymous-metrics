@@ -19,7 +19,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv()
 load_dotenv(PROJECT_ROOT / ".env")
 
-StrategySpec = Literal["offline", "ondemand", "all"]
+StrategySpec = Literal["offline", "ondemand"]
 
 
 @dataclass(frozen=True)
@@ -34,6 +34,7 @@ class Settings:
     results_dir: Path
     questions_category: CategorySpec
     questions_range: RangeSpec
+    experiment_dir: Path | None
 
     @classmethod
     def load(cls) -> Settings:
@@ -44,12 +45,12 @@ class Settings:
         strategy_raw = os.getenv("RAG_METRICS_STRATEGY")
         if strategy_raw is None or not strategy_raw.strip():
             raise ValueError(
-                "RAG_METRICS_STRATEGY is required (offline|ondemand|all)"
+                "RAG_METRICS_STRATEGY is required (offline|ondemand)"
             )
         strategy = strategy_raw.strip().lower()
-        if strategy not in {"offline", "ondemand", "all"}:
+        if strategy not in {"offline", "ondemand"}:
             raise ValueError(
-                "RAG_METRICS_STRATEGY must be 'offline', 'ondemand', or 'all', "
+                "RAG_METRICS_STRATEGY must be 'offline' or 'ondemand', "
                 f"got {strategy_raw!r}"
             )
 
@@ -58,6 +59,12 @@ class Settings:
             raise ValueError(
                 "RAG_METRICS_CORPUS_DATASET is required (dev|train|test)"
             )
+
+        results_dir = PROJECT_ROOT / results_rel
+        experiment_dir = _resolve_experiment_dir(
+            os.getenv("RAG_METRICS_EXPERIMENT_DIR"),
+            results_dir,
+        )
 
         return cls(
             strategy=cast(StrategySpec, strategy),
@@ -71,14 +78,26 @@ class Settings:
             judge_timeout_sec=float(
                 os.getenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", "1800")
             ),
-            results_dir=PROJECT_ROOT / results_rel,
+            results_dir=results_dir,
             questions_category=parse_questions_category(
                 os.getenv("RAG_METRICS_QUESTIONS_CATEGORY")
             ),
             questions_range=parse_questions_range(
                 os.getenv("RAG_METRICS_QUESTIONS_RANGE")
             ),
+            experiment_dir=experiment_dir,
         )
+
+
+def _resolve_experiment_dir(raw: str | None, results_dir: Path) -> Path | None:
+    if raw is None or not raw.strip():
+        return None
+    path = Path(raw.strip())
+    if path.is_absolute():
+        return path
+    if len(path.parts) == 1:
+        return results_dir / path
+    return PROJECT_ROOT / path
 
 
 __all__ = ["PROJECT_ROOT", "Settings"]

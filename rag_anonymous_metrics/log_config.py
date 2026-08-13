@@ -11,12 +11,20 @@ SECTION_WIDTH = 60
 ITEM_PREVIEW_LEN = 80
 
 
-def init_command_output(results_dir: Path, log_name: str) -> Path:
-    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    experiment_dir = results_dir / stamp
+def init_command_output(
+    results_dir: Path,
+    log_name: str,
+    *,
+    experiment_dir: Path | None = None,
+    append_log: bool = False,
+) -> Path:
+    if experiment_dir is None:
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        experiment_dir = results_dir / stamp
     experiment_dir.mkdir(parents=True, exist_ok=True)
     log_path = experiment_dir / log_name
-    log_file = log_path.open("w", encoding="utf-8")
+    mode = "a" if append_log else "w"
+    log_file = log_path.open(mode, encoding="utf-8")
     sys.stdout = _Tee(sys.__stdout__, log_file)
     sys.stderr = _Tee(sys.__stderr__, log_file)
     return experiment_dir
