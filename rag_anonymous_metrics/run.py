@@ -39,8 +39,8 @@ class Pipeline:
 STRATEGIES = ["offline", "ondemand"]
 
 
-def build_pipeline(strategy: str, gen_model: str) -> Pipeline:
-    retrieval_store = load_retriever(collection_name=strategy)
+def build_pipeline(strategy: str, gen_model: str, dataset: str) -> Pipeline:
+    retrieval_store = load_retriever(collection_name=strategy, dataset=dataset)
     chain = create_chain(build_llm(gen_model))
     anonymizer = Anonymizer() if strategy == "ondemand" else None
     return Pipeline(
@@ -125,7 +125,7 @@ def evaluate_strategy(
     gen_model = llm_model or cfg.llm_model
     judge_m = judge_model or cfg.judge_model
 
-    pipeline = build_pipeline(strategy, gen_model)
+    pipeline = build_pipeline(strategy, gen_model, dataset)
     run_id = str(uuid.uuid4())[:8]
     records: list[QueryRecord] = []
 

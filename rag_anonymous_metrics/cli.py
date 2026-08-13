@@ -1,7 +1,7 @@
 import logging
 import statistics
 import sys
-from datetime import datetime
+from pathlib import Path
 from typing import Iterable
 
 from rag_anonymous_metrics.check_judge import check_judge
@@ -15,7 +15,12 @@ from rag_anonymous_metrics.metrics.adversarial import (
     refusal_rate,
 )
 from rag_anonymous_metrics.metrics.privacy import build_person_pii_index, build_pii_index
-from rag_anonymous_metrics.log_config import configure_logging, log_section, log_suite_header
+from rag_anonymous_metrics.log_config import (
+    configure_logging,
+    init_command_output,
+    log_section,
+    log_suite_header,
+)
 from rag_anonymous_metrics.questions_filter import (
     apply_category_filter,
     apply_id_range,
@@ -29,7 +34,7 @@ logger = logging.getLogger(__name__)
 USAGE = "Usage: rag-metrics {run|check-judge}"
 
 
-def cmd_run_experiment() -> None:
+def cmd_run_experiment(experiment_dir: Path) -> None:
     try:
         cfg = Settings.load()
     except ValueError as exc:
@@ -48,9 +53,6 @@ def cmd_run_experiment() -> None:
     run_benchmark = category in {"all", "factual", "identity"}
     run_adversarial = category in {"all", "adversarial"}
 
-    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    experiment_dir = cfg.results_dir / stamp
-    experiment_dir.mkdir(parents=True, exist_ok=True)
     logger.info("Experiment output directory: dir=%s", experiment_dir)
 
     logger.info("Loading corpus for PII annotations: dataset=%s", dataset)
@@ -238,20 +240,24 @@ def cmd_check_judge() -> None:
     raise SystemExit(check_judge())
 
 
-COMMANDS = {
-    "run": cmd_run_experiment,
-    "evaluate": cmd_run_experiment,
-    "check-judge": cmd_check_judge,
-}
-
-
 def main() -> None:
-    configure_logging()
-
-    if len(sys.argv) != 2 or sys.argv[1] not in COMMANDS:
+    if len(sys.argv) != 2 or sys.argv[1] not in ("run", "evaluate", "check-judge"):
         raise SystemExit(USAGE)
 
-    COMMANDS[sys.argv[1]]()
+    command = sys.argv[1]
+    try:
+        cfg = Settings.load()
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+
+    log_name = "check_judge.log" if command == "check-judge" else "run.log"
+    experiment_dir = init_command_output(cfg.results_dir, log_name)
+    configure_logging()
+
+    if command in ("run", "evaluate"):
+        cmd_run_experiment(experiment_dir)
+    else:
+        cmd_check_judge()
 
 
 def _safe_mean(values: Iterable[float | None]) -> float:

@@ -1,11 +1,25 @@
 from __future__ import annotations
 
 import logging
+import sys
+from datetime import datetime
+from pathlib import Path
 
 from rag_anonymous.log_config import configure_logging as _configure_base_logging
 
 SECTION_WIDTH = 60
 ITEM_PREVIEW_LEN = 80
+
+
+def init_command_output(results_dir: Path, log_name: str) -> Path:
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    experiment_dir = results_dir / stamp
+    experiment_dir.mkdir(parents=True, exist_ok=True)
+    log_path = experiment_dir / log_name
+    log_file = log_path.open("w", encoding="utf-8")
+    sys.stdout = _Tee(sys.__stdout__, log_file)
+    sys.stderr = _Tee(sys.__stderr__, log_file)
+    return experiment_dir
 
 
 def configure_logging() -> None:
@@ -46,3 +60,21 @@ def log_item_progress(
         ITEM_PREVIEW_LEN,
         question,
     )
+
+
+class _Tee:
+    def __init__(self, *streams):
+        self._streams = streams
+
+    def write(self, data):
+        for stream in self._streams:
+            stream.write(data)
+
+    def flush(self):
+        for stream in self._streams:
+            stream.flush()
+
+    def isatty(self):
+        primary = self._streams[0]
+        isatty = getattr(primary, "isatty", None)
+        return isatty() if isatty else False
