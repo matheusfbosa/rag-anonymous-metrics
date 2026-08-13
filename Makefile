@@ -116,8 +116,8 @@ ollama-unload:
 run-strategies:
 	@stamp=$$(date +%Y%m%d_%H%M%S); \
 	echo "Experiment dir: data/output/$$stamp"; \
-	$(MAKE) run STRATEGY=offline DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp; \
-	$(MAKE) ollama-unload; \
+	$(MAKE) run STRATEGY=offline DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp && \
+	$(MAKE) ollama-unload && \
 	$(MAKE) run STRATEGY=ondemand DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp
 
 run-dev-strategies:
