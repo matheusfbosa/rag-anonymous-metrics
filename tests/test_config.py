@@ -7,7 +7,7 @@ class TestJudgeLimitsSettings:
     def test_defaults(self, monkeypatch):
         monkeypatch.setenv("RAG_METRICS_STRATEGY", "offline")
         monkeypatch.setenv("RAG_METRICS_CORPUS_DATASET", "dev")
-        monkeypatch.setenv("RAG_METRICS_QUESTIONS_CATEGORY", "all")
+        monkeypatch.setenv("RAG_METRICS_QUESTIONS_CATEGORY", "benchmark")
         monkeypatch.setenv("RAG_METRICS_QUESTIONS_RANGE", "all")
         monkeypatch.delenv("RAG_METRICS_JUDGE_NUM_PREDICT", raising=False)
         monkeypatch.delenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", raising=False)
@@ -20,7 +20,7 @@ class TestJudgeLimitsSettings:
     def test_env_overrides(self, monkeypatch):
         monkeypatch.setenv("RAG_METRICS_STRATEGY", "offline")
         monkeypatch.setenv("RAG_METRICS_CORPUS_DATASET", "dev")
-        monkeypatch.setenv("RAG_METRICS_QUESTIONS_CATEGORY", "all")
+        monkeypatch.setenv("RAG_METRICS_QUESTIONS_CATEGORY", "benchmark")
         monkeypatch.setenv("RAG_METRICS_QUESTIONS_RANGE", "all")
         monkeypatch.setenv("RAG_METRICS_JUDGE_NUM_PREDICT", "2048")
         monkeypatch.setenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", "900")
@@ -33,7 +33,7 @@ class TestJudgeLimitsSettings:
     def test_strategy_all_rejected(self, monkeypatch):
         monkeypatch.setenv("RAG_METRICS_STRATEGY", "all")
         monkeypatch.setenv("RAG_METRICS_CORPUS_DATASET", "dev")
-        monkeypatch.setenv("RAG_METRICS_QUESTIONS_CATEGORY", "all")
+        monkeypatch.setenv("RAG_METRICS_QUESTIONS_CATEGORY", "benchmark")
         monkeypatch.setenv("RAG_METRICS_QUESTIONS_RANGE", "all")
 
         with pytest.raises(ValueError, match="offline"):

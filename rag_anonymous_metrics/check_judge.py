@@ -32,7 +32,7 @@ def check_judge() -> int:
     if cfg.questions_category == "adversarial":
         logger.error(
             "Invalid category: suite=check-judge category=adversarial "
-            "allowed=all|factual|identity"
+            "allowed=benchmark|factual|identity"
         )
         return 2
     return asyncio.run(_run(cfg))
@@ -44,7 +44,7 @@ async def _run(cfg: Settings):
     id_range = cfg.questions_range
     judge = cfg.judge_model
     all_questions = load_questions(dataset=dataset)
-    if category == "all":
+    if category == "benchmark":
         questions = apply_id_range(all_questions, id_range)
     else:
         questions = apply_id_range(

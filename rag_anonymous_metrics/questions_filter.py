@@ -3,24 +3,27 @@ from __future__ import annotations
 import re
 from typing import Literal, Sequence, cast
 
-CategorySpec = Literal["all", "factual", "identity", "adversarial"]
+CategorySpec = Literal["benchmark", "factual", "identity", "adversarial"]
 RangeSpec = Literal["all"] | tuple[int, int]
 
 _RANGE_RE = re.compile(r"^\s*(\d+)\s*-\s*(\d+)\s*$")
-_CATEGORIES: frozenset[str] = frozenset({"all", "factual", "identity", "adversarial"})
+_CATEGORIES: frozenset[str] = frozenset(
+    {"benchmark", "factual", "identity", "adversarial"}
+)
 
 
 def parse_questions_category(raw: str | None) -> CategorySpec:
     if raw is None or not raw.strip():
         raise ValueError(
             "RAG_METRICS_QUESTIONS_CATEGORY is required "
-            "(all|factual|identity|adversarial)"
+            "(benchmark|factual|identity|adversarial)"
         )
     trimmed = raw.strip().lower()
     if trimmed not in _CATEGORIES:
         raise ValueError(
             "RAG_METRICS_QUESTIONS_CATEGORY must be "
-            f"'all', 'factual', 'identity', or 'adversarial', got {raw!r}"
+            "'benchmark', 'factual', 'identity', or 'adversarial', "
+            f"got {raw!r}"
         )
     return cast(CategorySpec, trimmed)
 
@@ -56,7 +59,7 @@ def apply_category_filter(
     items: Sequence[dict],
     category: CategorySpec,
 ) -> list[dict]:
-    if category == "all":
+    if category == "benchmark":
         return list(items)
     return [q for q in items if q.get("category") == category]
 

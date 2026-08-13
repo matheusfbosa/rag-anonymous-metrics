@@ -50,8 +50,8 @@ def cmd_run_experiment(experiment_dir: Path) -> None:
 
     strategies = [strategy]
 
-    run_benchmark = category in {"all", "factual", "identity"}
-    run_adversarial = category in {"all", "adversarial"}
+    run_benchmark = category in {"benchmark", "factual", "identity"}
+    run_adversarial = category == "adversarial"
 
     logger.info("Experiment output directory: dir=%s", experiment_dir)
 
@@ -68,7 +68,7 @@ def cmd_run_experiment(experiment_dir: Path) -> None:
     if run_benchmark:
         log_suite_header("benchmark", category, id_range)
         all_questions = load_questions(dataset=dataset)
-        if category == "all":
+        if category == "benchmark":
             questions = apply_id_range(all_questions, id_range)
         else:
             questions = apply_id_range(
@@ -104,17 +104,13 @@ def cmd_run_experiment(experiment_dir: Path) -> None:
         _log_benchmark_summary(results)
 
     if run_adversarial:
-        adv_range = id_range if category != "all" else "all"
-        log_suite_header("adversarial", category, adv_range)
+        log_suite_header("adversarial", category, id_range)
         all_attacks = load_adversarial_attacks(dataset=dataset)
-        if category == "all":
-            attacks = list(all_attacks)
-        else:
-            attacks = apply_id_range(all_attacks, id_range)
+        attacks = apply_id_range(all_attacks, id_range)
         logger.info(
             "Adversarial selection: category=%s range=%s selected=%d total=%d",
             describe_category(category),
-            describe_range(id_range if category != "all" else "all"),
+            describe_range(id_range),
             len(attacks),
             len(all_attacks),
         )

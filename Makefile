@@ -1,4 +1,4 @@
-CATEGORY ?= all
+CATEGORY ?= benchmark
 DATASET  ?= dev
 EXPERIMENT_DIR ?=
 OLLAMA_DOCKER_CONTAINER ?= ollama
@@ -73,6 +73,9 @@ run-train:
 run-test:
 	$(MAKE) run DATASET=test
 
+run-benchmark:
+	$(MAKE) run CATEGORY=benchmark
+
 run-factual:
 	$(MAKE) run CATEGORY=factual
 
@@ -113,12 +116,21 @@ ollama-unload:
 	_ollama_stop "$$RAG_ANON_LLM_MODEL"; \
 	_ollama_stop "$$RAG_ANON_EMBEDDING_MODEL"
 
+run-strategy-suite:
+	@if [ "$(CATEGORY)" = "benchmark" ]; then \
+	  $(MAKE) run STRATEGY=$(STRATEGY) DATASET=$(DATASET) CATEGORY=benchmark RANGE=$(RANGE) EXPERIMENT_DIR=$(EXPERIMENT_DIR) && \
+	  $(MAKE) ollama-unload && \
+	  $(MAKE) run STRATEGY=$(STRATEGY) DATASET=$(DATASET) CATEGORY=adversarial RANGE=$(RANGE) EXPERIMENT_DIR=$(EXPERIMENT_DIR); \
+	else \
+	  $(MAKE) run STRATEGY=$(STRATEGY) DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$(EXPERIMENT_DIR); \
+	fi
+
 run-strategies:
 	@stamp=$$(date +%Y%m%d_%H%M%S); \
 	echo "Experiment dir: data/output/$$stamp"; \
-	$(MAKE) run STRATEGY=offline DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp && \
+	$(MAKE) run-strategy-suite STRATEGY=offline DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp && \
 	$(MAKE) ollama-unload && \
-	$(MAKE) run STRATEGY=ondemand DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp
+	$(MAKE) run-strategy-suite STRATEGY=ondemand DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp
 
 run-dev-strategies:
 	$(MAKE) run-strategies DATASET=dev
