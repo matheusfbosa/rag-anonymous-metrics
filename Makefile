@@ -13,6 +13,41 @@ STRATEGY ?= offline
 test:
 	pytest -q
 
+# Prerequisites
+
+ingest-prereq:
+	$(MAKE) -C $(RAG_ANON_DIR) ingest-$(DATASET)-strategies
+
+ingest-dev-prereq:
+	$(MAKE) ingest-prereq DATASET=dev
+
+ingest-train-prereq:
+	$(MAKE) ingest-prereq DATASET=train
+
+ingest-test-prereq:
+	$(MAKE) ingest-prereq DATASET=test
+
+# Judge sanity check
+
+check-judge:
+	RAG_METRICS_STRATEGY=$(STRATEGY) \
+	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
+	RAG_METRICS_QUESTIONS_CATEGORY=$(CATEGORY) \
+	RAG_METRICS_QUESTIONS_RANGE=$(RANGE) \
+	rag-metrics check-judge
+
+check-judge-dev:
+	$(MAKE) check-judge DATASET=dev
+
+check-judge-train:
+	$(MAKE) check-judge DATASET=train
+
+check-judge-test:
+	$(MAKE) check-judge DATASET=test
+
+check-judge-smoke:
+	$(MAKE) check-judge RANGE=$(RANGE_SMOKE)
+
 # Run
 
 run:
@@ -103,38 +138,3 @@ run-all:
 	$(MAKE) run-train-strategies
 	$(MAKE) ollama-unload
 	$(MAKE) run-test-strategies
-
-# Prerequisites
-
-ingest-prereq:
-	$(MAKE) -C $(RAG_ANON_DIR) ingest-$(DATASET)-strategies
-
-ingest-dev-prereq:
-	$(MAKE) ingest-prereq DATASET=dev
-
-ingest-train-prereq:
-	$(MAKE) ingest-prereq DATASET=train
-
-ingest-test-prereq:
-	$(MAKE) ingest-prereq DATASET=test
-
-# Judge sanity check
-
-check-judge:
-	RAG_METRICS_STRATEGY=$(STRATEGY) \
-	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
-	RAG_METRICS_QUESTIONS_CATEGORY=$(CATEGORY) \
-	RAG_METRICS_QUESTIONS_RANGE=$(RANGE) \
-	rag-metrics check-judge
-
-check-judge-dev:
-	$(MAKE) check-judge DATASET=dev
-
-check-judge-train:
-	$(MAKE) check-judge DATASET=train
-
-check-judge-test:
-	$(MAKE) check-judge DATASET=test
-
-check-judge-smoke:
-	$(MAKE) check-judge RANGE=$(RANGE_SMOKE)

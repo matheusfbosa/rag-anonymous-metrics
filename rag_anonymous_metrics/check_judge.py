@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 import math
 import statistics
 
@@ -12,8 +13,15 @@ from rag_anonymous import build_llm
 
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
-from rag_anonymous_metrics.questions_filter import apply_category_filter, apply_id_range
+from rag_anonymous_metrics.log_config import log_item_progress, log_section, log_suite_header
+from rag_anonymous_metrics.questions_filter import (
+    apply_category_filter,
+    apply_id_range,
+    describe_category,
+    describe_range,
+)
 
+logger = logging.getLogger(__name__)
 
 THRESHOLD = 0.9
 SEPARATION = 0.3
@@ -22,9 +30,9 @@ SEPARATION = 0.3
 def check_judge() -> int:
     cfg = Settings.load()
     if cfg.questions_category == "adversarial":
-        print(
-            "check-judge requires a benchmark category "
-            "(all|factual|identity), not adversarial."
+        logger.error(
+            "Invalid category: suite=check-judge category=adversarial "
+            "allowed=all|factual|identity"
         )
         return 2
     return asyncio.run(_run(cfg))
@@ -44,10 +52,24 @@ async def _run(cfg: Settings):
             id_range,
         )
     if not questions:
-        print(f"No questions match category={category} range={id_range} in {dataset}.")
+        logger.error(
+            "No questions match: dataset=%s category=%s range=%s",
+            dataset,
+            describe_category(category),
+            describe_range(id_range),
+        )
         return 2
 
-    print(f"Judge: {judge} | dataset: {dataset} | n: {len(questions)}\n")
+    log_suite_header("check-judge", category, id_range)
+    logger.info(
+        "Benchmark selection: category=%s range=%s selected=%d total=%d",
+        describe_category(category),
+        describe_range(id_range),
+        len(questions),
+        len(all_questions),
+    )
+    logger.info("Running judge check: judge=%s n=%d", judge, len(questions))
+
     metric = FactualCorrectness(
         llm=LangchainLLMWrapper(
             build_llm(
@@ -60,15 +82,30 @@ async def _run(cfg: Settings):
 
     positives = []
     negatives = []
-    for index, question in enumerate(questions):
+    width = len(str(len(questions)))
+    for index, question in enumerate(questions, 1):
         reference = question["ground_truth"].strip()
-        other = questions[(index + 1) % len(questions)]["ground_truth"].strip()
+        other = questions[index % len(questions)]["ground_truth"].strip()
 
+        log_item_progress(
+            logger,
+            index,
+            len(questions),
+            str(question.get("id", "-")),
+            question["question"],
+        )
         positive = await _factual_correctness(metric, question["question"], reference, reference)
         negative = await _factual_correctness(metric, question["question"], other, reference)
         positives.append(positive)
         negatives.append(negative)
-        print(f"[{index + 1:>2}/{len(questions)}] {question['id']}: POS fc={_fmt(positive)} | NEG fc={_fmt(negative)}")
+        logger.info(
+            "  [%*d/%d] Scores: pos_fc=%s neg_fc=%s",
+            width,
+            index,
+            len(questions),
+            _fmt(positive),
+            _fmt(negative),
+        )
 
     return _report(judge, positives, negatives)
 
@@ -80,25 +117,35 @@ def _report(judge, positives, negatives):
     negative_mean = statistics.fmean(scored_negatives) if scored_negatives else 0.0
     positive_failures = positives.count(None)
     above_threshold = sum(1 for s in scored_positives if s >= THRESHOLD)
+    separation = positive_mean - negative_mean
 
-    print("\n" + "=" * 60)
-    print(f"Summary — judge {judge}")
-    print("=" * 60)
-    print(f"POSITIVE (response = ground truth): mean fc = {positive_mean:.3f}")
-    print(f"  fc >= {THRESHOLD:.2f}: {above_threshold}/{len(positives)} | failures: {positive_failures}/{len(positives)}")
-    print(f"NEGATIVE (response = other ground truth): mean fc = {negative_mean:.3f}")
+    log_section(f"Summary: suite=check-judge judge={judge}")
+    logger.info(
+        "Positive scores: mean_fc=%.3f threshold=%.2f above=%d/%d failures=%d/%d",
+        positive_mean,
+        THRESHOLD,
+        above_threshold,
+        len(positives),
+        positive_failures,
+        len(positives),
+    )
+    logger.info("Negative scores: mean_fc=%.3f", negative_mean)
+    logger.info(
+        "Score separation: delta=%.3f required=%.3f",
+        separation,
+        SEPARATION,
+    )
 
     reliable = (
         bool(scored_positives)
         and positive_mean >= THRESHOLD
         and positive_failures == 0
-        and (positive_mean - negative_mean) >= SEPARATION
+        and separation >= SEPARATION
     )
-    print("\nVerdict:")
     if reliable:
-        print("  RELIABLE — judge scores ~1.0 on ground truth and separates positive from negative.")
+        logger.info("Verdict: status=RELIABLE")
         return 0
-    print("  UNRELIABLE — metrics are contaminated; replace the judge.")
+    logger.info("Verdict: status=UNRELIABLE")
     return 1
 
 
@@ -107,7 +154,7 @@ async def _factual_correctness(metric, question, response, reference):
     try:
         score = await metric.single_turn_ascore(sample)
     except Exception as exc:
-        print(f"    judge failed: {exc.__class__.__name__}")
+        logger.warning("Judge failed: error=%s", exc.__class__.__name__)
         return None
     if score is None or math.isnan(score):
         return None
