@@ -13,7 +13,7 @@ class TestJudgeLimitsSettings:
         s = Settings.load()
 
         assert s.judge_num_predict == 1536
-        assert s.judge_timeout_sec == 1200.0
+        assert s.judge_timeout_sec == 1800.0
 
     def test_env_overrides(self, monkeypatch):
         monkeypatch.setenv("RAG_METRICS_STRATEGY", "offline")

@@ -62,14 +62,14 @@ class Settings:
         return cls(
             strategy=cast(StrategySpec, strategy),
             dataset=dataset.strip(),
-            retrieval_k_docs=int(os.getenv("RAG_METRICS_RETRIEVAL_K_DOCS", "5")),
+            retrieval_k_docs=int(os.getenv("RAG_METRICS_RETRIEVAL_K_DOCS", "3")),
             llm_model=llm,
             judge_model=judge,
             judge_num_predict=int(
                 os.getenv("RAG_METRICS_JUDGE_NUM_PREDICT", "1536")
             ),
             judge_timeout_sec=float(
-                os.getenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", "1200")
+                os.getenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", "1800")
             ),
             results_dir=PROJECT_ROOT / results_rel,
             questions_category=parse_questions_category(
