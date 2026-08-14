@@ -411,8 +411,8 @@
     "id": "52",
     "category": "factual",
     "type": "hard",
-    "question": "In ECHR case 001-57899 (application no. 18711/91 against the United Kingdom), what sequence of events led to the applicant being denied legal aid for his criminal appeal, and what was the outcome when he argued the appeal without legal representation?",
-    "ground_truth": "After conviction, new solicitors briefed counsel who twice stated he lacked sufficient material to assess prospects and ultimately concluded he could not support the appeal; the solicitors accordingly withdrew. The Scottish Legal Aid Board refused legal aid, finding no substantial grounds for appeal and that granting legal aid would not be reasonable. Despite this advice the applicant proceeded alone. On 24 January 1991 he presented the appeal himself before the High Court of Justiciary — with no legal knowledge and no assistance — while the Crown was represented by counsel. The court addressed only the first two grounds (concerning the witness Mrs G.) and found them ill-founded; as the applicant did not address the remaining grounds they were not considered. The appeal against conviction was unanimously dismissed, although the court did examine other points raised by the applicant and concluded there had been no miscarriage of justice.",
+    "question": "In ECHR case 001-57899 (application no. 18711/91 against the United Kingdom), on what grounds did the Scottish Legal Aid Board refuse legal aid for the applicant's criminal appeal?",
+    "ground_truth": "After new solicitors briefed counsel, counsel concluded he could not support the appeal and the solicitors withdrew. The Scottish Legal Aid Board refused legal aid, finding no substantial grounds for appeal and that granting legal aid would not be reasonable.",
     "source_doc_id": "001-57899"
   },
   {
@@ -451,8 +451,8 @@
     "id": "57",
     "category": "factual",
     "type": "hard",
-    "question": "In ECHR case 001-60735 (application no. 38629/97 against Sweden), how did the County Administrative Court and the Administrative Court of Appeal differ in their treatment of the disability benefits claim, and what additional procedural complaint did the applicant raise about the appellate proceedings?",
-    "ground_truth": "The County Administrative Court gave judgment in the applicant's favour: it found the Social Insurance Office's original 1987 decision had been based on insufficient information, held the Office should have reviewed it at the applicant's request, and granted disability benefits as from July 1986. The Administrative Court of Appeal reversed this by 3 votes to 2, without holding an oral hearing, and confirmed the Office's rejection — finding no basis for a review of the original decision. The dissenting judges would have upheld the disability allowance. Beyond the denial of an oral hearing, the applicant raised an additional procedural complaint: the Administrative Court of Appeal refused to order the National Social Insurance Board to clarify or explain the reasons for its appeal, even though the Board had failed to adequately explain its position. When the applicant posed specific questions to the Board, the court merely forwarded these to the Board rather than compelling a substantive reply. The applicant relied on this failure, together with the refusal to hold a hearing, as grounds for questioning the impartiality of the proceedings.",
+    "question": "In ECHR case 001-60735 (application no. 38629/97 against Sweden), how did the Administrative Court of Appeal's decision on disability benefits differ from that of the County Administrative Court?",
+    "ground_truth": "The County Administrative Court granted disability benefits from July 1986, finding the Social Insurance Office's 1987 decision was based on insufficient information. The Administrative Court of Appeal reversed that judgment by three votes to two and confirmed the Office's rejection, finding no basis to review the original decision.",
     "source_doc_id": "001-60735"
   },
   {
@@ -467,8 +467,8 @@
     "id": "59",
     "category": "factual",
     "type": "hard",
-    "question": "In ECHR case 001-57901 (application no. 18949/91 against the United Kingdom), what was the sequence of failed legal representation attempts before the appeal hearing, and how did the High Court of Justiciary address the applicant's grounds when he argued the case in person?",
-    "ground_truth": "After conviction, trial counsel advised there were no grounds for appeal; a first new firm of solicitors also found no basis for appeal and withdrew. A second new firm obtained an adjournment but could find no counsel willing to present the appeal and also withdrew; a third adjournment was granted. A third firm applied for legal aid: freshly consulted counsel concluded there was 'no ground of appeal against conviction and no prospects of appealing successfully against sentence.' The Scottish Legal Aid Board refused legal aid on those grounds; the third firm also withdrew. After yet another adjournment, the applicant argued his own appeal on 21 March 1991 before a three-judge bench presided over by the Lord Justice Clerk — one of the two most senior judges in Scotland — while the Crown was represented by counsel who did not apparently intervene. The Lord Justice Clerk gave detailed consideration to each ground the applicant had formulated himself — including alleged fabricated evidence, false witness testimony, uncalled witnesses, insufficient evidence of permanent disfigurement, and disregard of his instructions by legal advisers — but found none had substance and concluded there had been no miscarriage of justice, dismissing the appeal.",
+    "question": "In ECHR case 001-57901 (application no. 18949/91 against the United Kingdom), what was the outcome when the applicant argued his criminal appeal in person before the High Court of Justiciary?",
+    "ground_truth": "The Lord Justice Clerk gave detailed consideration to each ground the applicant had formulated himself but found none had substance, concluded there had been no miscarriage of justice, and dismissed the appeal.",
     "source_doc_id": "001-57901"
   },
   {
