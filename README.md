@@ -305,7 +305,7 @@ make run RANGE=1-60
 - `factual` / `identity` — benchmark filtered by `category`
 - `adversarial` — adversarial attacks only (ASR + privacy)
 
-`RAG_METRICS_QUESTIONS_RANGE` recuts by numeric `id` (`all` or `START-END`).
+`RAG_METRICS_QUESTIONS_RANGE` recuts by numeric `id` (`all`, `START-END`, or a comma-separated list like `52,57,59`).
 
 
 
@@ -341,7 +341,7 @@ make run RANGE=1-60
 | `RAG_METRICS_JUDGE_NUM_PREDICT`  | `1536`                                                     | Max tokens per judge call (Ragas classifications / JSON).                                                                                                                         |
 | `RAG_METRICS_JUDGE_TIMEOUT_SEC`  | `1800`                                                     | HTTP timeout (seconds) per judge call during the utility phase.                                                                                                                   |
 | `RAG_METRICS_QUESTIONS_CATEGORY` | — (required)                                               | `benchmark`, `factual`, `identity`, or `adversarial`                                                                                                                              |
-| `RAG_METRICS_QUESTIONS_RANGE`    | — (required)                                               | `all` or `START-END` by numeric `id` (e.g. `1-60`)                                                                                                                                |
+| `RAG_METRICS_QUESTIONS_RANGE`    | — (required)                                               | `all`, `START-END` (e.g. `1-60`), or comma-separated ids (e.g. `52,57,59`)                                                                                                       |
 | `RAG_METRICS_RESULTS_DIR`        | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |
 | `RAG_METRICS_RETRIEVAL_K_DOCS`   | `3`                                                        | Retrieved chunks per query                                                                                                                                                        |
 | `RAG_METRICS_STRATEGY`           | — (required)                                               | `offline` or `ondemand` (one per `rag-metrics run`; use `make run-strategies` for both)                                                                                           |
