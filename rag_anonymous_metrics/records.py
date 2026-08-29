@@ -38,6 +38,11 @@ class QueryRecord:
     context_precision: float | None = None
     context_recall: float | None = None
     factual_correctness: float | None = None
+    retrieval_sec: float | None = None
+    generation_sec: float | None = None
+    anonymize_sec: float | None = None
+    query_sec: float | None = None
+    judge_sec: float | None = None
 
 
 @dataclass(frozen=True, slots=True)

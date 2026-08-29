@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 import uuid
 from dataclasses import asdict, dataclass, fields
 from datetime import datetime
@@ -63,10 +64,23 @@ def evaluate_question(
     result = query_rag(pipeline.chain, pipeline.retrieval_store, question, k_docs=k_docs)
 
     generated_answer = response_text(result["response"])
-    final_answer = (
-        pipeline.anonymizer.anonymize(generated_answer)
-        if pipeline.anonymizer
-        else generated_answer
+    anonymize_sec = 0.0
+    if pipeline.anonymizer:
+        started = time.perf_counter()
+        final_answer = pipeline.anonymizer.anonymize(generated_answer)
+        anonymize_sec = time.perf_counter() - started
+    else:
+        final_answer = generated_answer
+
+    retrieval_sec = float(result["retrieval_sec"])
+    generation_sec = float(result["generation_sec"])
+    query_sec = retrieval_sec + generation_sec + anonymize_sec
+    logger.info(
+        "  query=%.2fs retrieval=%.2fs generation=%.2fs anonymize=%.3fs",
+        query_sec,
+        retrieval_sec,
+        generation_sec,
+        anonymize_sec,
     )
 
     contexts = [c["content"] for c in result["retrieved_chunks"]]
@@ -97,6 +111,10 @@ def evaluate_question(
         dataset=dataset,
         item_type=question_obj.get("type"),
         category=question_obj.get("category"),
+        retrieval_sec=retrieval_sec,
+        generation_sec=generation_sec,
+        anonymize_sec=anonymize_sec,
+        query_sec=query_sec,
         **privacy,
     )
 
@@ -315,17 +333,21 @@ def _attach_utility(
                 width, idx, len(records),
             )
             record.factual_correctness = 0.0
+            record.judge_sec = 0.0
             _upsert_jsonl(output_path, records)
             continue
 
         assert scorer is not None
+        started = time.perf_counter()
         scores = scorer.score(
             record.question, record.final_answer, record.contexts, record.ground_truth,
         )
+        record.judge_sec = time.perf_counter() - started
         record.faithfulness = scores["faithfulness"]
         record.context_precision = scores["context_precision"]
         record.context_recall = scores["context_recall"]
         record.factual_correctness = scores["factual_correctness"]
+        logger.info("  judge=%.1fs", record.judge_sec)
         _upsert_jsonl(output_path, records)
 
 

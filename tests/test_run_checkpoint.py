@@ -90,6 +90,29 @@ def test_load_jsonl_skips_corrupt_line(tmp_path: Path):
     assert [r.question_id for r in loaded] == ["1"]
 
 
+def test_load_jsonl_missing_timing_fields_default_to_none(tmp_path: Path):
+    path = tmp_path / "results.jsonl"
+    payload = asdict_safe(_record(question_id="1"))
+    for key in (
+        "retrieval_sec",
+        "generation_sec",
+        "anonymize_sec",
+        "query_sec",
+        "judge_sec",
+    ):
+        payload.pop(key, None)
+    path.write_text(json.dumps(payload, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    loaded = _load_jsonl(path)[0]
+
+    assert loaded.question_id == "1"
+    assert loaded.retrieval_sec is None
+    assert loaded.generation_sec is None
+    assert loaded.anonymize_sec is None
+    assert loaded.query_sec is None
+    assert loaded.judge_sec is None
+
+
 def asdict_safe(record: QueryRecord) -> dict:
     from dataclasses import asdict
 
@@ -223,6 +246,9 @@ def test_evaluate_strategy_scores_only_unscored_records(
     by_id = {r.question_id: r for r in result.records}
     assert by_id["1"].faithfulness == 0.1
     assert by_id["2"].faithfulness == 0.9
+    assert by_id["1"].judge_sec is None
+    assert by_id["2"].judge_sec is not None
+    assert by_id["2"].judge_sec >= 0.0
 
 
 def test_evaluate_strategy_skips_judge_for_refusal(
@@ -262,8 +288,10 @@ def test_evaluate_strategy_skips_judge_for_refusal(
     )
 
     assert result.records[0].factual_correctness == 0.0
+    assert result.records[0].judge_sec == 0.0
     loaded = _load_jsonl(tmp_path / "results_offline_benchmark.jsonl")
     assert loaded[0].factual_correctness == 0.0
+    assert loaded[0].judge_sec == 0.0
 
 
 def test_evaluate_strategy_overwrite_reruns_everything(
@@ -308,3 +336,40 @@ def test_evaluate_strategy_overwrite_reruns_everything(
 
     assert rag_ids == ["1"]
     assert result.records[0].generated_answer == "new"
+    assert result.records[0].judge_sec is not None
+
+
+def test_evaluate_strategy_records_judge_wall_clock(
+    tmp_path: Path, monkeypatch, metrics_env
+):
+    pending = _record(question_id="1", question="first")
+    _save_jsonl([pending], tmp_path / "results_offline_benchmark.jsonl")
+
+    ticks = iter([10.0, 22.5])
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.time.perf_counter", lambda: next(ticks)
+    )
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.build_pipeline",
+        lambda *a, **k: (_ for _ in ()).throw(AssertionError("RAG should be skipped")),
+    )
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.metrics.utility.UtilityScorer",
+        FakeScorer,
+    )
+
+    result = evaluate_strategy(
+        "offline",
+        [{"id": "1", "question": "first", "ground_truth": "gt"}],
+        pii_index={"d1": set()},
+        person_pii_index={},
+        experiment_dir=tmp_path,
+        dataset="dev",
+        k_docs=3,
+        compute_utility=True,
+        output_basename="results_offline_benchmark.jsonl",
+    )
+
+    assert result.records[0].judge_sec == pytest.approx(12.5)
+    loaded = _load_jsonl(tmp_path / "results_offline_benchmark.jsonl")
+    assert loaded[0].judge_sec == pytest.approx(12.5)

@@ -159,6 +159,11 @@ def _log_benchmark_summary(results: dict) -> None:
         n_ref = sum(1 for r in records if r.answer_is_refusal)
         ref_rate = n_ref / len(records) if records else 0.0
 
+        avg_query = _safe_mean(r.query_sec for r in records)
+        avg_retrieval = _safe_mean(r.retrieval_sec for r in records)
+        avg_generation = _safe_mean(r.generation_sec for r in records)
+        avg_anonymize = _safe_mean(r.anonymize_sec for r in records)
+
         logger.info(
             "           strategy=%-8s faith=%.3f ctx=%.3f recall=%.3f factual*=%.3f "
             "leak_macro=%.3f leak_micro=%.3f (%d/%d) "
@@ -168,6 +173,16 @@ def _log_benchmark_summary(results: dict) -> None:
             macro_avg_person_leak, micro_avg_person_leak,
             sum_person_leaked, sum_person_total,
             ref_rate, n_ref, len(records),
+        )
+        logger.info(
+            "           strategy=%-8s query=%.1fs retrieval=%.2fs generation=%.1fs "
+            "anonymize=%.3fs judge=%.1fs",
+            strategy,
+            avg_query,
+            avg_retrieval,
+            avg_generation,
+            avg_anonymize,
+            _safe_mean(r.judge_sec for r in records),
         )
         logger.info("           output_path=%s", result.output_path)
 
@@ -198,6 +213,15 @@ def _log_adversarial_summary(results: dict) -> None:
             overall_person["successes"],
             overall_person["n"],
             ref,
+        )
+        logger.info(
+            "           strategy=%-8s query=%.1fs retrieval=%.2fs generation=%.1fs "
+            "anonymize=%.3fs",
+            strategy,
+            _safe_mean(r.query_sec for r in records),
+            _safe_mean(r.retrieval_sec for r in records),
+            _safe_mean(r.generation_sec for r in records),
+            _safe_mean(r.anonymize_sec for r in records),
         )
         for type_name, stats in by_type.items():
             person_stats = by_type_person.get(type_name, {"asr": 0.0, "successes": 0, "n": 0})

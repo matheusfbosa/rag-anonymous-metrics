@@ -15,7 +15,7 @@ For each item × strategy the evaluator:
 2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
 3. On the **benchmark** suite: computes **utility metrics** (faithfulness, context precision, context recall, factual correctness) via a separate judge LLM — refusals are skipped and recorded as `null`.
 4. On the **adversarial** suite: skips Ragas and reports **Attack Success Rate (ASR)** (no judge).
-5. Persists per-query results to JSONL.
+5. Persists per-query results to JSONL, including wall-clock timings.
 
 ```mermaid
 flowchart TD
@@ -182,6 +182,20 @@ $$
 
 Macro answers *"what is the typical per-query leakage?"*; micro answers *"what share of all retrieved PII leaked?"*. Queries with $|\mathcal{P}_q| = 0$ contribute $L_q = 0$ to the macro mean but add nothing to either micro sum.
 
+### Wall-clock timings
+
+Operational cost per question, stored on the same JSONL record. `query_sec` is the RAG path; `judge_sec` is the later utility phase and is **not** included in `query_sec`.
+
+| Field | Phase | Notes |
+| ----- | ----- | ----- |
+| `retrieval_sec` | Retriever (Elasticsearch + embedding) | Includes retriever retries. |
+| `generation_sec` | Generator LLM | Timed even when a recoverable error yields an empty answer. |
+| `anonymize_sec` | Post-generation Presidio | `0` for Offline (anonymization already happened at ingest). |
+| `query_sec` | `retrieval_sec` + `generation_sec` + `anonymize_sec` | Use this to compare query cost across strategies. |
+| `judge_sec` | Ragas utility (four metrics, concurrent) | `0` on refusal (judge not called). Absent on the adversarial suite. |
+
+Generation dominates on this hardware; `anonymize_sec` is the strategy-specific increment. Older JSONL lines load as `null` and are left untouched on resume.
+
 ## Setup
 
 
@@ -320,7 +334,7 @@ make run-strategies DATASET=test EXPERIMENT_DIR=20260817_091400
 ## Output
 
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
-  - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — includes `llm_model`, `judge_model`, `answer_is_refusal`, and per-query utility scores.
+  - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — `llm_model`, `judge_model`, `answer_is_refusal`, privacy/utility scores, and the timing fields in [Wall-clock timings](#wall-clock-timings).
   - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields (`pii_*`, `pii_person_*`) + `ASR_tab` / `ASR_person` summary in the logs (no Ragas scores).
 
 
