@@ -307,7 +307,15 @@ make run RANGE=1-60
 
 `RAG_METRICS_QUESTIONS_RANGE` recuts by numeric `id` (`all`, `START-END`, or a comma-separated list like `52,57,59`).
 
+### Resume after a crash
 
+Each question is checkpointed to JSONL as soon as RAG finishes; the judge then updates the same file per item. Re-run the **same** command with the **same** folder — already saved `question_id`s are skipped:
+
+```sh
+make run-strategies DATASET=test EXPERIMENT_DIR=20260817_091400
+```
+
+`RANGE` / `CATEGORY` still work to recut a run; they are not required for resume. To force a full redo of a JSONL, pass `OVERWRITE=1` (sets `RAG_METRICS_OVERWRITE`).
 
 ## Output
 
@@ -336,7 +344,8 @@ make run RANGE=1-60
 | `RAG_ANON_LOG_LEVEL_PRESIDIO`    | `ERROR`                                                    | Level for `presidio-analyzer` / `presidio-anonymizer`. Default suppresses the recognizer startup banner; raise to `INFO` to debug recognizer issues.                              |
 | `RAG_ANON_OLLAMA_BASE_URL`       | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
 | `RAG_METRICS_CORPUS_DATASET`     | `dev`                                                      | TAB dataset (`train` / `dev` / `test`); required                                                                                                                                  |
-| `RAG_METRICS_EXPERIMENT_DIR`     | —                                                          | Optional timestamp or path under `RAG_METRICS_RESULTS_DIR`. Reuse the same folder across strategy runs (e.g. `make run-strategies`).                                               |
+| `RAG_METRICS_EXPERIMENT_DIR`     | —                                                          | Optional timestamp or path under `RAG_METRICS_RESULTS_DIR`. Reuse the same folder across strategy runs (e.g. `make run-strategies`). Honored by `make run-strategies` so a crash can resume in-place. |
+| `RAG_METRICS_OVERWRITE`          | —                                                          | If `1` / `true` / `yes`, ignore existing JSONL and re-run every question in the current filter. `make … OVERWRITE=1`.                                                              |
 | `RAG_METRICS_JUDGE_MODEL`        | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for Ragas utility metrics                                                                                                                                               |
 | `RAG_METRICS_JUDGE_NUM_PREDICT`  | `1536`                                                     | Max tokens per judge call (Ragas classifications / JSON).                                                                                                                         |
 | `RAG_METRICS_JUDGE_TIMEOUT_SEC`  | `1800`                                                     | HTTP timeout (seconds) per judge call during the utility phase.                                                                                                                   |

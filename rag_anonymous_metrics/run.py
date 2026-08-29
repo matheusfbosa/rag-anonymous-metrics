@@ -1,7 +1,7 @@
 import json
 import logging
 import uuid
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -122,38 +122,78 @@ def evaluate_strategy(
     gen_model = llm_model or cfg.llm_model
     judge_m = judge_model or cfg.judge_model
 
-    pipeline = build_pipeline(strategy, gen_model, dataset)
-    run_id = str(uuid.uuid4())[:8]
-    records: list[QueryRecord] = []
+    basename = output_basename or f"results_{strategy}.jsonl"
+    output_path = experiment_dir / basename
 
-    if compute_utility:
-        logger.info(
-            "Running benchmark: llm=%s n=%d",
-            gen_model,
-            len(questions),
-        )
+    existing_by_id: dict[str, QueryRecord] = {}
+    if cfg.overwrite:
+        if output_path.exists():
+            logger.info("Overwrite enabled: replacing path=%s", output_path)
+            output_path.unlink()
+    else:
+        for rec in _load_jsonl(output_path):
+            qid = rec.question_id.strip()
+            if qid:
+                existing_by_id[qid] = rec
+        if existing_by_id:
+            logger.info(
+                "Resuming from checkpoint: path=%s saved=%d",
+                output_path,
+                len(existing_by_id),
+            )
+
+    missing = [q for q in questions if _question_id(q) not in existing_by_id]
+    pipeline = None
+    run_id = str(uuid.uuid4())[:8]
+    if missing:
+        pipeline = build_pipeline(strategy, gen_model, dataset)
+        if compute_utility:
+            logger.info(
+                "Running benchmark: llm=%s n=%d skipped=%d",
+                gen_model,
+                len(missing),
+                len(questions) - len(missing),
+            )
+        else:
+            logger.info(
+                "Running adversarial attacks: llm=%s n=%d skipped=%d",
+                gen_model,
+                len(missing),
+                len(questions) - len(missing),
+            )
     else:
         logger.info(
-            "Running adversarial attacks: llm=%s n=%d",
-            gen_model,
+            "Skipping RAG: all %d questions already saved path=%s",
             len(questions),
+            output_path,
         )
+
+    records: list[QueryRecord] = []
     for idx, q in enumerate(questions, 1):
+        qid = _question_id(q)
         log_item_progress(
-            logger, idx, len(questions), str(q.get("id", "-")), q["question"],
+            logger, idx, len(questions), qid or "-", q["question"],
         )
-        records.append(
-            evaluate_question(
-                pipeline,
-                q,
-                pii_index,
-                person_pii_index,
-                judge_m,
-                run_id,
-                dataset=dataset,
-                k_docs=k_docs,
-            )
+        if qid in existing_by_id:
+            logger.info("  skipping RAG: question_id=%s already saved", qid)
+            records.append(existing_by_id[qid])
+            continue
+        if pipeline is None:
+            pipeline = build_pipeline(strategy, gen_model, dataset)
+        record = evaluate_question(
+            pipeline,
+            q,
+            pii_index,
+            person_pii_index,
+            judge_m,
+            run_id,
+            dataset=dataset,
+            k_docs=k_docs,
         )
+        records.append(record)
+        if qid:
+            existing_by_id[qid] = record
+        _append_jsonl(record, output_path)
 
     if records and not any(r.pii_total_final for r in records):
         logger.error(
@@ -164,11 +204,9 @@ def evaluate_strategy(
         )
 
     if compute_utility:
-        _attach_utility(records, judge_m)
-
-    basename = output_basename or f"results_{strategy}.jsonl"
-    output_path = experiment_dir / basename
-    _save_jsonl(records, output_path)
+        _attach_utility(records, judge_m, output_path)
+    else:
+        _upsert_jsonl(output_path, records)
 
     return StrategyResult(strategy=strategy, records=records, output_path=str(output_path))
 
@@ -232,15 +270,27 @@ def run_experiment(
         )
     return results, experiment_dir
 
-def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
+def _attach_utility(
+    records: list[QueryRecord],
+    judge_model: str,
+    output_path: Path,
+) -> None:
     from rag_anonymous_metrics.metrics.utility import UtilityScorer
 
+    pending = [r for r in records if _needs_utility(r)]
+    if not pending:
+        logger.info("Utility metrics already complete: n=%d", len(records))
+        _upsert_jsonl(output_path, records)
+        return
+
+    need_judge = any(not _is_refusal(r) for r in pending)
+    scorer = UtilityScorer(judge_model) if need_judge else None
     logger.info(
-        "Computing utility metrics: judge=%s n=%d",
+        "Computing utility metrics: judge=%s pending=%d n=%d",
         judge_model,
+        len(pending),
         len(records),
     )
-    scorer = UtilityScorer(judge_model)
     width = len(str(len(records)))
 
     for idx, record in enumerate(records, 1):
@@ -252,14 +302,23 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
             record.question,
         )
 
-        if record.answer_is_refusal or is_refusal_answer(record.final_answer):
+        if not _needs_utility(record):
+            logger.info(
+                "  [%*d/%d] Skipping judge: already scored",
+                width, idx, len(records),
+            )
+            continue
+
+        if _is_refusal(record):
             logger.info(
                 "  [%*d/%d] Skipping judge: reason=refusal",
                 width, idx, len(records),
             )
             record.factual_correctness = 0.0
+            _upsert_jsonl(output_path, records)
             continue
 
+        assert scorer is not None
         scores = scorer.score(
             record.question, record.final_answer, record.contexts, record.ground_truth,
         )
@@ -267,6 +326,61 @@ def _attach_utility(records: list[QueryRecord], judge_model: str) -> None:
         record.context_precision = scores["context_precision"]
         record.context_recall = scores["context_recall"]
         record.factual_correctness = scores["factual_correctness"]
+        _upsert_jsonl(output_path, records)
+
+
+def _is_refusal(record: QueryRecord) -> bool:
+    return record.answer_is_refusal or is_refusal_answer(record.final_answer)
+
+
+def _needs_utility(record: QueryRecord) -> bool:
+    if _is_refusal(record):
+        return record.factual_correctness is None
+    return (
+        record.faithfulness is None
+        and record.context_precision is None
+        and record.context_recall is None
+        and record.factual_correctness is None
+    )
+
+
+def _question_id(question_obj: dict) -> str:
+    return str(question_obj.get("id", "")).strip()
+
+
+def _record_from_dict(data: dict[str, Any]) -> QueryRecord:
+    names = {f.name for f in fields(QueryRecord)}
+    return QueryRecord(**{k: v for k, v in data.items() if k in names})
+
+
+def _load_jsonl(path: Path) -> list[QueryRecord]:
+    if not path.exists():
+        return []
+    records: list[QueryRecord] = []
+    with open(path, encoding="utf-8") as f:
+        for line_no, line in enumerate(f, 1):
+            stripped = line.strip()
+            if not stripped:
+                continue
+            try:
+                data = json.loads(stripped)
+            except json.JSONDecodeError:
+                logger.warning(
+                    "Skipping corrupt JSONL line: path=%s line=%d",
+                    path,
+                    line_no,
+                )
+                continue
+            records.append(_record_from_dict(data))
+    return records
+
+
+def _append_jsonl(record: QueryRecord, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(asdict(record), ensure_ascii=False) + "\n")
+        f.flush()
+    logger.debug("Appended record: question_id=%s path=%s", record.question_id, path)
 
 
 def _save_jsonl(records: list[QueryRecord], path: Path) -> None:
@@ -274,4 +388,30 @@ def _save_jsonl(records: list[QueryRecord], path: Path) -> None:
     with open(path, "w", encoding="utf-8") as f:
         for record in records:
             f.write(json.dumps(asdict(record), ensure_ascii=False) + "\n")
+        f.flush()
     logger.info("Saved records: n=%d path=%s", len(records), path)
+
+
+def _upsert_jsonl(path: Path, records: list[QueryRecord]) -> None:
+    existing = _load_jsonl(path)
+    by_id = {r.question_id: r for r in existing if r.question_id}
+    incoming_ids: list[str] = []
+    for rec in records:
+        if rec.question_id and rec.question_id not in by_id:
+            incoming_ids.append(rec.question_id)
+        if rec.question_id:
+            by_id[rec.question_id] = rec
+    ordered_ids: list[str] = []
+    seen: set[str] = set()
+    for rec in existing:
+        qid = rec.question_id
+        if qid and qid not in seen and qid in by_id:
+            ordered_ids.append(qid)
+            seen.add(qid)
+    for qid in incoming_ids:
+        if qid not in seen:
+            ordered_ids.append(qid)
+            seen.add(qid)
+    merged = [by_id[qid] for qid in ordered_ids]
+    extras = [r for r in records if not r.question_id]
+    _save_jsonl(merged + extras, path)

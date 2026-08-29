@@ -35,6 +35,7 @@ class Settings:
     questions_category: CategorySpec
     questions_range: RangeSpec
     experiment_dir: Path | None
+    overwrite: bool
 
     @classmethod
     def load(cls) -> Settings:
@@ -86,7 +87,15 @@ class Settings:
                 os.getenv("RAG_METRICS_QUESTIONS_RANGE")
             ),
             experiment_dir=experiment_dir,
+            overwrite=_env_flag("RAG_METRICS_OVERWRITE"),
         )
+
+
+def _env_flag(name: str) -> bool:
+    raw = os.getenv(name)
+    if raw is None or not raw.strip():
+        return False
+    return raw.strip().lower() in {"1", "true", "yes", "on"}
 
 
 def _resolve_experiment_dir(raw: str | None, results_dir: Path) -> Path | None:
