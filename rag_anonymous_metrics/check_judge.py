@@ -41,7 +41,7 @@ def check_judge() -> int:
     return asyncio.run(_run(cfg))
 
 
-async def _run(cfg: Settings):
+async def _run(cfg: Settings) -> int:
     dataset = cfg.dataset
     category = cfg.questions_category
     id_range = cfg.questions_range
@@ -117,7 +117,9 @@ async def _run(cfg: Settings):
     return _report(judge, positives, negatives)
 
 
-def _report(judge, positives, negatives):
+def _report(
+    judge: str, positives: list[float | None], negatives: list[float | None]
+) -> int:
     scored_positives = [s for s in positives if s is not None]
     scored_negatives = [s for s in negatives if s is not None]
     positive_mean = statistics.fmean(scored_positives) if scored_positives else 0.0
@@ -156,7 +158,9 @@ def _report(judge, positives, negatives):
     return 1
 
 
-async def _factual_correctness(metric, question, response, reference):
+async def _factual_correctness(
+    metric: object, question: str, response: str, reference: str
+) -> float | None:
     sample = SingleTurnSample(
         user_input=question, response=response, reference=reference
     )
@@ -170,5 +174,5 @@ async def _factual_correctness(metric, question, response, reference):
     return float(score)
 
 
-def _fmt(score):
+def _fmt(score: float | None) -> str:
     return "FAIL" if score is None else f"{score:.2f}"

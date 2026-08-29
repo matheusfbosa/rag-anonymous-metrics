@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class UtilityScorer:
-    def __init__(self, judge_model: str):
+    def __init__(self, judge_model: str) -> None:
         cfg = Settings.load()
         llm = LangchainLLMWrapper(
             build_llm(
@@ -72,7 +72,9 @@ class UtilityScorer:
         }
 
     @staticmethod
-    async def _safe(metric, sample: SingleTurnSample, name: str) -> float | None:
+    async def _safe(
+        metric: object, sample: SingleTurnSample, name: str
+    ) -> float | None:
         try:
             score = await metric.single_turn_ascore(sample)
         except Exception as exc:

@@ -238,7 +238,7 @@ def evaluate_strategy(
     )
 
 
-def response_text(raw):
+def response_text(raw: object) -> str:
     if hasattr(raw, "content"):
         return raw.content
     return raw if isinstance(raw, str) else str(raw)

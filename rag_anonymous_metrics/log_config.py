@@ -71,18 +71,18 @@ def log_item_progress(
 
 
 class _Tee:
-    def __init__(self, *streams):
+    def __init__(self, *streams: object) -> None:
         self._streams = streams
 
-    def write(self, data):
+    def write(self, data: str) -> None:
         for stream in self._streams:
             stream.write(data)
 
-    def flush(self):
+    def flush(self) -> None:
         for stream in self._streams:
             stream.flush()
 
-    def isatty(self):
+    def isatty(self) -> bool:
         primary = self._streams[0]
         isatty = getattr(primary, "isatty", None)
         return isatty() if isatty else False
