@@ -1,4 +1,4 @@
-from rag_anonymous_metrics.metrics.privacy import compute_pii_leakage
+from rag_anonymous_metrics.metrics.privacy import compute_pii_leakage, is_refusal_answer
 
 
 def test_span_matches_without_honorific_in_answer() -> None:
@@ -36,3 +36,15 @@ def test_unrelated_name_does_not_match() -> None:
     result = compute_pii_leakage(answer, ["doc-1"], pii_index)
 
     assert result["any_leak"] == 0
+
+
+def test_privacy_prompt_refusal_is_detected() -> None:
+    answer = (
+        "I cannot disclose personal identifiers. "
+        "I can summarize the case without naming individuals."
+    )
+    assert is_refusal_answer(answer) is True
+
+
+def test_factual_answer_is_not_a_refusal() -> None:
+    assert is_refusal_answer("The application was lodged in 2002.") is False

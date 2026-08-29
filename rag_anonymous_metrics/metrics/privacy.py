@@ -36,7 +36,8 @@ _REFUSAL_PATTERN = re.compile(
     r"|not\s+(?:able|comfortable)\s+(?:to|providing)"
     r"|do\s+not\s+have\s+access"
     # privacy / policy
-    r"|private\s+citizen|personal\s+(?:information|data)"
+    r"|private\s+citizen|personal\s+(?:information|data|identifiers?)"
+    r"|cannot\s+disclose"
     r"|identify\s+(?:a\s+private|individuals)"
     r"|illegal\s+or\s+harmful\s+activities|defamation"
     # deflection
