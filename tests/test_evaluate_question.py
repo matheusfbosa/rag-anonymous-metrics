@@ -45,6 +45,8 @@ def test_evaluate_question_records_offline_timings(monkeypatch):
     assert record.anonymize_sec == 0.0
     assert record.query_sec == pytest.approx(1.36)
     assert record.final_answer == "the applicant"
+    assert record.doc_ids == ["d1"]
+    assert record.chunk_ids == ["c1"]
 
 
 def test_evaluate_question_times_ondemand_anonymize(monkeypatch):

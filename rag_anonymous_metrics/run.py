@@ -85,6 +85,7 @@ def evaluate_question(
 
     contexts = [c["content"] for c in result["retrieved_chunks"]]
     doc_ids = [c["doc_id"] for c in result["retrieved_chunks"]]
+    chunk_ids = [c.get("chunk_id") for c in result["retrieved_chunks"]]
 
     privacy = compute_privacy_metrics(
         generated_answer,
@@ -115,6 +116,7 @@ def evaluate_question(
         generation_sec=generation_sec,
         anonymize_sec=anonymize_sec,
         query_sec=query_sec,
+        chunk_ids=chunk_ids,
         **privacy,
     )
 

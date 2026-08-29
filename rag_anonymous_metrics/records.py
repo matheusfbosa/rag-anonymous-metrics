@@ -43,6 +43,7 @@ class QueryRecord:
     anonymize_sec: float | None = None
     query_sec: float | None = None
     judge_sec: float | None = None
+    chunk_ids: list[str] | None = None
 
 
 @dataclass(frozen=True, slots=True)

@@ -99,6 +99,7 @@ def test_load_jsonl_missing_timing_fields_default_to_none(tmp_path: Path):
         "anonymize_sec",
         "query_sec",
         "judge_sec",
+        "chunk_ids",
     ):
         payload.pop(key, None)
     path.write_text(json.dumps(payload, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -111,6 +112,7 @@ def test_load_jsonl_missing_timing_fields_default_to_none(tmp_path: Path):
     assert loaded.anonymize_sec is None
     assert loaded.query_sec is None
     assert loaded.judge_sec is None
+    assert loaded.chunk_ids is None
 
 
 def asdict_safe(record: QueryRecord) -> dict:

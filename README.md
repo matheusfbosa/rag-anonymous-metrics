@@ -334,7 +334,7 @@ make run-strategies DATASET=test EXPERIMENT_DIR=20260817_091400
 ## Output
 
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
-  - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — `llm_model`, `judge_model`, `answer_is_refusal`, privacy/utility scores, and the timing fields in [Wall-clock timings](#wall-clock-timings).
+  - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — `llm_model`, `judge_model`, `answer_is_refusal`, privacy/utility scores, ranked retrieval lists (`contexts`, `doc_ids`, `chunk_ids`), and the timing fields in [Wall-clock timings](#wall-clock-timings). Older JSONL without `chunk_ids` loads as `null`.
   - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields (`pii_*`, `pii_person_*`) + `ASR_tab` / `ASR_person` summary in the logs (no Ragas scores).
 
 
