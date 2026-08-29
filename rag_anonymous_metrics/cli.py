@@ -1,12 +1,22 @@
 import logging
 import statistics
 import sys
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from rag_anonymous_metrics.check_judge import check_judge
 from rag_anonymous_metrics.config import Settings
-from rag_anonymous_metrics.corpus import load_adversarial_attacks, load_corpus, load_questions
+from rag_anonymous_metrics.corpus import (
+    load_adversarial_attacks,
+    load_corpus,
+    load_questions,
+)
+from rag_anonymous_metrics.log_config import (
+    configure_logging,
+    init_command_output,
+    log_section,
+    log_suite_header,
+)
 from rag_anonymous_metrics.metrics.adversarial import (
     asr_by_type,
     asr_person_by_type,
@@ -14,12 +24,9 @@ from rag_anonymous_metrics.metrics.adversarial import (
     attack_success_rate_person,
     refusal_rate,
 )
-from rag_anonymous_metrics.metrics.privacy import build_person_pii_index, build_pii_index
-from rag_anonymous_metrics.log_config import (
-    configure_logging,
-    init_command_output,
-    log_section,
-    log_suite_header,
+from rag_anonymous_metrics.metrics.privacy import (
+    build_person_pii_index,
+    build_pii_index,
 )
 from rag_anonymous_metrics.questions_filter import (
     apply_category_filter,
@@ -147,7 +154,9 @@ def _log_benchmark_summary(results: dict) -> None:
         avg_recall = _safe_mean(r.context_recall for r in records)
         avg_factual = _safe_mean(r.factual_correctness for r in records)
         macro_avg_leak = _safe_mean(r.pii_leakage_rate_final for r in records)
-        macro_avg_person_leak = _safe_mean(r.pii_person_leakage_rate_final for r in records)
+        macro_avg_person_leak = _safe_mean(
+            r.pii_person_leakage_rate_final for r in records
+        )
         sum_leaked = sum(r.pii_leaked_final for r in records)
         sum_total = sum(r.pii_total_final for r in records)
         sum_person_leaked = sum(r.pii_person_leaked_final for r in records)
@@ -168,11 +177,22 @@ def _log_benchmark_summary(results: dict) -> None:
             "           strategy=%-8s faith=%.3f ctx=%.3f recall=%.3f factual*=%.3f "
             "leak_macro=%.3f leak_micro=%.3f (%d/%d) "
             "person_macro=%.3f person_micro=%.3f (%d/%d) refusal=%.2f (%d/%d)",
-            strategy, avg_faith, avg_ctx, avg_recall, avg_factual,
-            macro_avg_leak, micro_avg_leak, sum_leaked, sum_total,
-            macro_avg_person_leak, micro_avg_person_leak,
-            sum_person_leaked, sum_person_total,
-            ref_rate, n_ref, len(records),
+            strategy,
+            avg_faith,
+            avg_ctx,
+            avg_recall,
+            avg_factual,
+            macro_avg_leak,
+            micro_avg_leak,
+            sum_leaked,
+            sum_total,
+            macro_avg_person_leak,
+            micro_avg_person_leak,
+            sum_person_leaked,
+            sum_person_total,
+            ref_rate,
+            n_ref,
+            len(records),
         )
         logger.info(
             "           strategy=%-8s query=%.1fs retrieval=%.2fs generation=%.1fs "
@@ -224,7 +244,9 @@ def _log_adversarial_summary(results: dict) -> None:
             _safe_mean(r.anonymize_sec for r in records),
         )
         for type_name, stats in by_type.items():
-            person_stats = by_type_person.get(type_name, {"asr": 0.0, "successes": 0, "n": 0})
+            person_stats = by_type_person.get(
+                type_name, {"asr": 0.0, "successes": 0, "n": 0}
+            )
             logger.info(
                 "           type=%-20s ASR_tab=%.3f (%d/%d) ASR_person=%.3f (%d/%d)",
                 type_name,

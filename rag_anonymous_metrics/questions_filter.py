@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import re
-from typing import Literal, Sequence, cast
+from collections.abc import Sequence
+from typing import Literal, cast
 
 CategorySpec = Literal["benchmark", "factual", "identity", "adversarial"]
 RangeSpec = Literal["all"] | tuple[int, int] | frozenset[int]
@@ -50,8 +51,7 @@ def parse_questions_range(raw: str | None) -> RangeSpec:
             )
         if start > end:
             raise ValueError(
-                "RAG_METRICS_QUESTIONS_RANGE start must be <= end, "
-                f"got {start}-{end}"
+                f"RAG_METRICS_QUESTIONS_RANGE start must be <= end, got {start}-{end}"
             )
         return (start, end)
 
@@ -59,8 +59,7 @@ def parse_questions_range(raw: str | None) -> RangeSpec:
         ids = frozenset(int(part.strip()) for part in trimmed.split(","))
         if any(item_id <= 0 for item_id in ids):
             raise ValueError(
-                "RAG_METRICS_QUESTIONS_RANGE ids must be positive, "
-                f"got {raw!r}"
+                f"RAG_METRICS_QUESTIONS_RANGE ids must be positive, got {raw!r}"
             )
         return ids
 

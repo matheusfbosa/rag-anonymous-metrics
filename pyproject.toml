@@ -22,6 +22,11 @@ rag-metrics = "rag_anonymous_metrics.cli:main"
 test = [
     "pytest>=8",
 ]
+dev = [
+    "rag-anonymous-metrics[test]",
+    "pre-commit>=4.0",
+    "ruff>=0.12",
+]
 notebook = [
     "ipykernel>=6.29",
     "jupyter>=1.0,<2",
@@ -33,3 +38,27 @@ notebook = [
 
 [tool.setuptools.packages.find]
 include = ["rag_anonymous_metrics*"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+src = ["rag_anonymous_metrics"]
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "UP",
+    "B",
+    "SIM",
+    "RUF",
+]
+ignore = [
+    "E501",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["rag_anonymous", "rag_anonymous_metrics"]

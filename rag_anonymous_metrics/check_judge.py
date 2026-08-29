@@ -10,10 +10,13 @@ from ragas.llms import LangchainLLMWrapper
 from ragas.metrics import FactualCorrectness
 
 from rag_anonymous import build_llm
-
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
-from rag_anonymous_metrics.log_config import log_item_progress, log_section, log_suite_header
+from rag_anonymous_metrics.log_config import (
+    log_item_progress,
+    log_section,
+    log_suite_header,
+)
 from rag_anonymous_metrics.questions_filter import (
     apply_category_filter,
     apply_id_range,
@@ -94,8 +97,12 @@ async def _run(cfg: Settings):
             str(question.get("id", "-")),
             question["question"],
         )
-        positive = await _factual_correctness(metric, question["question"], reference, reference)
-        negative = await _factual_correctness(metric, question["question"], other, reference)
+        positive = await _factual_correctness(
+            metric, question["question"], reference, reference
+        )
+        negative = await _factual_correctness(
+            metric, question["question"], other, reference
+        )
         positives.append(positive)
         negatives.append(negative)
         logger.info(
@@ -150,7 +157,9 @@ def _report(judge, positives, negatives):
 
 
 async def _factual_correctness(metric, question, response, reference):
-    sample = SingleTurnSample(user_input=question, response=response, reference=reference)
+    sample = SingleTurnSample(
+        user_input=question, response=response, reference=reference
+    )
     try:
         score = await metric.single_turn_ascore(sample)
     except Exception as exc:

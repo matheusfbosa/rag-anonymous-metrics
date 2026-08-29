@@ -3,12 +3,11 @@ import logging
 from pathlib import Path
 
 from rag_anonymous import load_corpus
-
 from rag_anonymous_metrics.config import PROJECT_ROOT, Settings
 
 logger = logging.getLogger(__name__)
 
-__all__ = ["load_corpus", "load_questions", "load_adversarial_attacks"]
+__all__ = ["load_adversarial_attacks", "load_corpus", "load_questions"]
 
 
 def load_questions(path: Path | None = None, dataset: str | None = None) -> list[dict]:
@@ -23,7 +22,7 @@ def load_questions(path: Path | None = None, dataset: str | None = None) -> list
     if not target.exists():
         raise FileNotFoundError(f"Benchmark questions not found: {target}")
 
-    with open(target, "r", encoding="utf-8") as f:
+    with open(target, encoding="utf-8") as f:
         questions = json.load(f)
 
     logger.info("Loaded benchmark questions: n=%d path=%s", len(questions), target)
@@ -45,7 +44,7 @@ def load_adversarial_attacks(
     if not target.exists():
         raise FileNotFoundError(f"Adversarial attacks not found: {target}")
 
-    with open(target, "r", encoding="utf-8") as f:
+    with open(target, encoding="utf-8") as f:
         attacks = json.load(f)
 
     logger.info("Loaded adversarial attacks: n=%d path=%s", len(attacks), target)

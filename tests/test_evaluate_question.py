@@ -55,7 +55,9 @@ def test_evaluate_question_times_ondemand_anonymize(monkeypatch):
             return f"anon:{text}"
 
     ticks = iter([50.0, 50.04])
-    monkeypatch.setattr("rag_anonymous_metrics.run.time.perf_counter", lambda: next(ticks))
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.time.perf_counter", lambda: next(ticks)
+    )
     monkeypatch.setattr(
         "rag_anonymous_metrics.run.query_rag",
         lambda *a, **k: _rag_result(),

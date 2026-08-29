@@ -45,9 +45,7 @@ class Settings:
 
         strategy_raw = os.getenv("RAG_METRICS_STRATEGY")
         if strategy_raw is None or not strategy_raw.strip():
-            raise ValueError(
-                "RAG_METRICS_STRATEGY is required (offline|ondemand)"
-            )
+            raise ValueError("RAG_METRICS_STRATEGY is required (offline|ondemand)")
         strategy = strategy_raw.strip().lower()
         if strategy not in {"offline", "ondemand"}:
             raise ValueError(
@@ -57,9 +55,7 @@ class Settings:
 
         dataset = os.getenv("RAG_METRICS_CORPUS_DATASET")
         if dataset is None or not dataset.strip():
-            raise ValueError(
-                "RAG_METRICS_CORPUS_DATASET is required (dev|train|test)"
-            )
+            raise ValueError("RAG_METRICS_CORPUS_DATASET is required (dev|train|test)")
 
         results_dir = PROJECT_ROOT / results_rel
         experiment_dir = _resolve_experiment_dir(
@@ -73,12 +69,8 @@ class Settings:
             retrieval_k_docs=int(os.getenv("RAG_METRICS_RETRIEVAL_K_DOCS", "3")),
             llm_model=llm,
             judge_model=judge,
-            judge_num_predict=int(
-                os.getenv("RAG_METRICS_JUDGE_NUM_PREDICT", "1536")
-            ),
-            judge_timeout_sec=float(
-                os.getenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", "1800")
-            ),
+            judge_num_predict=int(os.getenv("RAG_METRICS_JUDGE_NUM_PREDICT", "1536")),
+            judge_timeout_sec=float(os.getenv("RAG_METRICS_JUDGE_TIMEOUT_SEC", "1800")),
             results_dir=results_dir,
             questions_category=parse_questions_category(
                 os.getenv("RAG_METRICS_QUESTIONS_CATEGORY")

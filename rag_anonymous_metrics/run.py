@@ -14,7 +14,6 @@ from rag_anonymous import (
     load_retriever,
     query_rag,
 )
-
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.log_config import log_item_progress, log_section
 from rag_anonymous_metrics.metrics.privacy import (
@@ -61,7 +60,9 @@ def evaluate_question(
     k_docs: int,
 ) -> QueryRecord:
     question = question_obj["question"]
-    result = query_rag(pipeline.chain, pipeline.retrieval_store, question, k_docs=k_docs)
+    result = query_rag(
+        pipeline.chain, pipeline.retrieval_store, question, k_docs=k_docs
+    )
 
     generated_answer = response_text(result["response"])
     anonymize_sec = 0.0
@@ -192,7 +193,11 @@ def evaluate_strategy(
     for idx, q in enumerate(questions, 1):
         qid = _question_id(q)
         log_item_progress(
-            logger, idx, len(questions), qid or "-", q["question"],
+            logger,
+            idx,
+            len(questions),
+            qid or "-",
+            q["question"],
         )
         if qid in existing_by_id:
             logger.info("  skipping RAG: question_id=%s already saved", qid)
@@ -228,7 +233,10 @@ def evaluate_strategy(
     else:
         _upsert_jsonl(output_path, records)
 
-    return StrategyResult(strategy=strategy, records=records, output_path=str(output_path))
+    return StrategyResult(
+        strategy=strategy, records=records, output_path=str(output_path)
+    )
+
 
 def response_text(raw):
     if hasattr(raw, "content"):
@@ -290,6 +298,7 @@ def run_experiment(
         )
     return results, experiment_dir
 
+
 def _attach_utility(
     records: list[QueryRecord],
     judge_model: str,
@@ -325,14 +334,18 @@ def _attach_utility(
         if not _needs_utility(record):
             logger.info(
                 "  [%*d/%d] Skipping judge: already scored",
-                width, idx, len(records),
+                width,
+                idx,
+                len(records),
             )
             continue
 
         if _is_refusal(record):
             logger.info(
                 "  [%*d/%d] Skipping judge: reason=refusal",
-                width, idx, len(records),
+                width,
+                idx,
+                len(records),
             )
             record.factual_correctness = 0.0
             record.judge_sec = 0.0
@@ -342,7 +355,10 @@ def _attach_utility(
         assert scorer is not None
         started = time.perf_counter()
         scores = scorer.score(
-            record.question, record.final_answer, record.contexts, record.ground_truth,
+            record.question,
+            record.final_answer,
+            record.contexts,
+            record.ground_truth,
         )
         record.judge_sec = time.perf_counter() - started
         record.faithfulness = scores["faithfulness"]

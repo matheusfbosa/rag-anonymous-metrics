@@ -17,7 +17,9 @@ _APOSTROPHE_VARIANTS = (
 
 _MARKDOWN_EMPHASIS = {ord(ch): None for ch in "*_`"}
 
-_HONORIFIC_PREFIX = re.compile(r"^(?:mr|mrs|ms|miss|dr|prof|sir|lord)\.?\s+", re.IGNORECASE)
+_HONORIFIC_PREFIX = re.compile(
+    r"^(?:mr|mrs|ms|miss|dr|prof|sir|lord)\.?\s+", re.IGNORECASE
+)
 
 _REFUSAL_PATTERN = re.compile(
     # abstentions
@@ -61,7 +63,10 @@ def build_pii_index(
             for mention in layer.get("entity_mentions", []):
                 if mention.get("identifier_type") not in allowed_identifier_types:
                     continue
-                if entity_type is not None and mention.get("entity_type") != entity_type:
+                if (
+                    entity_type is not None
+                    and mention.get("entity_type") != entity_type
+                ):
                     continue
                 span_text = mention.get("span_text", "").strip()
                 if len(span_text) >= MIN_SPAN_LENGTH:

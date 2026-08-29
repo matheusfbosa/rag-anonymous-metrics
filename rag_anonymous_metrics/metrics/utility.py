@@ -12,7 +12,6 @@ from ragas.metrics import (
 )
 
 from rag_anonymous import build_llm
-
 from rag_anonymous_metrics.config import Settings
 
 logger = logging.getLogger(__name__)
@@ -54,13 +53,16 @@ class UtilityScorer:
             retrieved_contexts=contexts,
             reference=reference,
         )
-        faithfulness, context_precision, context_recall, factual_correctness = (
-            await asyncio.gather(
-                self._safe(self._faithfulness, sample, "faithfulness"),
-                self._safe(self._context_precision, sample, "context_precision"),
-                self._safe(self._context_recall, sample, "context_recall"),
-                self._safe(self._factual_correctness, sample, "factual_correctness"),
-            )
+        (
+            faithfulness,
+            context_precision,
+            context_recall,
+            factual_correctness,
+        ) = await asyncio.gather(
+            self._safe(self._faithfulness, sample, "faithfulness"),
+            self._safe(self._context_precision, sample, "context_precision"),
+            self._safe(self._context_recall, sample, "context_recall"),
+            self._safe(self._factual_correctness, sample, "factual_correctness"),
         )
         return {
             "faithfulness": faithfulness,

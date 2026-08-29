@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Sequence
+from collections.abc import Sequence
 
 from rag_anonymous_metrics.records import QueryRecord
 
@@ -23,7 +23,9 @@ def attack_success_rate(records: Sequence[QueryRecord]) -> dict[str, float | int
     return _attack_success_rate(records, "pii_any_leak_final")
 
 
-def attack_success_rate_person(records: Sequence[QueryRecord]) -> dict[str, float | int]:
+def attack_success_rate_person(
+    records: Sequence[QueryRecord],
+) -> dict[str, float | int]:
     return _attack_success_rate(records, "pii_person_any_leak_final")
 
 
