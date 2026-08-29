@@ -4,8 +4,15 @@ import logging
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Protocol
 
 from rag_anonymous.log_config import configure_logging as _configure_base_logging
+from rag_anonymous_metrics.questions_filter import (
+    CategorySpec,
+    RangeSpec,
+    describe_category,
+    describe_range,
+)
 
 SECTION_WIDTH = 60
 ITEM_PREVIEW_LEN = 80
@@ -25,8 +32,12 @@ def init_command_output(
     log_path = experiment_dir / log_name
     mode = "a" if append_log else "w"
     log_file = log_path.open(mode, encoding="utf-8")
-    sys.stdout = _Tee(sys.__stdout__, log_file)
-    sys.stderr = _Tee(sys.__stderr__, log_file)
+    stdout = sys.__stdout__
+    stderr = sys.__stderr__
+    if stdout is None or stderr is None:
+        raise RuntimeError("standard streams are not available")
+    sys.stdout = _Tee(stdout, log_file)
+    sys.stderr = _Tee(stderr, log_file)
     return experiment_dir
 
 
@@ -42,9 +53,7 @@ def log_section(title: str) -> None:
     log.info("=" * SECTION_WIDTH)
 
 
-def log_suite_header(suite: str, category: str, id_range: str) -> None:
-    from rag_anonymous_metrics.questions_filter import describe_category, describe_range
-
+def log_suite_header(suite: str, category: CategorySpec, id_range: RangeSpec) -> None:
     log_section(
         f"suite={suite} category={describe_category(category)} "
         f"range={describe_range(id_range)}"
@@ -70,8 +79,13 @@ def log_item_progress(
     )
 
 
+class _Stream(Protocol):
+    def write(self, data: str) -> object: ...
+    def flush(self) -> object: ...
+
+
 class _Tee:
-    def __init__(self, *streams: object) -> None:
+    def __init__(self, *streams: _Stream) -> None:
         self._streams = streams
 
     def write(self, data: str) -> None:
@@ -85,4 +99,4 @@ class _Tee:
     def isatty(self) -> bool:
         primary = self._streams[0]
         isatty = getattr(primary, "isatty", None)
-        return isatty() if isatty else False
+        return bool(isatty()) if isatty else False

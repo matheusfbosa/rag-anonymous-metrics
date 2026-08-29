@@ -13,6 +13,7 @@ from ragas.metrics import (
 
 from rag_anonymous import build_llm
 from rag_anonymous_metrics.config import Settings
+from rag_anonymous_metrics.types import SingleTurnMetric
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +74,7 @@ class UtilityScorer:
 
     @staticmethod
     async def _safe(
-        metric: object, sample: SingleTurnSample, name: str
+        metric: SingleTurnMetric, sample: SingleTurnSample, name: str
     ) -> float | None:
         try:
             score = await metric.single_turn_ascore(sample)

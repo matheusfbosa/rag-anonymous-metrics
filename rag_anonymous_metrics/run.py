@@ -2,10 +2,11 @@ import json
 import logging
 import time
 import uuid
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass, fields
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from rag_anonymous import (
     Anonymizer,
@@ -85,8 +86,8 @@ def evaluate_question(
     )
 
     contexts = [c["content"] for c in result["retrieved_chunks"]]
-    doc_ids = [c["doc_id"] for c in result["retrieved_chunks"]]
-    chunk_ids = [c.get("chunk_id") for c in result["retrieved_chunks"]]
+    doc_ids = [c["doc_id"] or "" for c in result["retrieved_chunks"]]
+    chunk_ids = [c["chunk_id"] or "" for c in result["retrieved_chunks"]]
 
     privacy = compute_privacy_metrics(
         generated_answer,
@@ -118,7 +119,7 @@ def evaluate_question(
         anonymize_sec=anonymize_sec,
         query_sec=query_sec,
         chunk_ids=chunk_ids,
-        **privacy,
+        **cast(dict[str, Any], privacy),
     )
 
 
@@ -239,13 +240,14 @@ def evaluate_strategy(
 
 
 def response_text(raw: object) -> str:
-    if hasattr(raw, "content"):
-        return raw.content
+    content = getattr(raw, "content", None)
+    if isinstance(content, str):
+        return content
     return raw if isinstance(raw, str) else str(raw)
 
 
 def run_experiment(
-    strategies: list[str],
+    strategies: Sequence[str],
     questions: list[dict],
     dataset: str,
     k_docs: int,

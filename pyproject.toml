@@ -24,6 +24,7 @@ test = [
 ]
 dev = [
     "rag-anonymous-metrics[test]",
+    "mypy>=1.14",
     "pre-commit>=4.0",
     "ruff>=0.12",
 ]
@@ -59,6 +60,7 @@ select = [
 ]
 ignore = [
     "E501",
+    "ANN401",
 ]
 
 [tool.ruff.lint.per-file-ignores]
@@ -66,3 +68,17 @@ ignore = [
 
 [tool.ruff.lint.isort]
 known-first-party = ["rag_anonymous", "rag_anonymous_metrics"]
+
+[tool.mypy]
+python_version = "3.12"
+packages = ["rag_anonymous_metrics"]
+mypy_path = "../rag-anonymous"
+warn_unused_ignores = true
+warn_redundant_casts = true
+explicit_package_bases = true
+
+[[tool.mypy.overrides]]
+module = [
+    "ragas.*",
+]
+ignore_missing_imports = true

@@ -23,6 +23,7 @@ from rag_anonymous_metrics.questions_filter import (
     describe_category,
     describe_range,
 )
+from rag_anonymous_metrics.types import SingleTurnMetric
 
 logger = logging.getLogger(__name__)
 
@@ -159,7 +160,7 @@ def _report(
 
 
 async def _factual_correctness(
-    metric: object, question: str, response: str, reference: str
+    metric: SingleTurnMetric, question: str, response: str, reference: str
 ) -> float | None:
     sample = SingleTurnSample(
         user_input=question, response=response, reference=reference

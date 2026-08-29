@@ -34,6 +34,7 @@ from rag_anonymous_metrics.questions_filter import (
     describe_category,
     describe_range,
 )
+from rag_anonymous_metrics.records import StrategyResult
 from rag_anonymous_metrics.run import run_experiment
 
 logger = logging.getLogger(__name__)
@@ -145,7 +146,7 @@ def cmd_run_experiment(experiment_dir: Path) -> None:
     logger.info("Done: experiment_dir=%s", experiment_dir)
 
 
-def _log_benchmark_summary(results: dict) -> None:
+def _log_benchmark_summary(results: dict[str, StrategyResult]) -> None:
     log_section("Per-strategy summary: suite=benchmark")
     for strategy, result in results.items():
         records = result.records
@@ -214,7 +215,7 @@ def _log_benchmark_summary(results: dict) -> None:
     )
 
 
-def _log_adversarial_summary(results: dict) -> None:
+def _log_adversarial_summary(results: dict[str, StrategyResult]) -> None:
     log_section("Per-strategy summary: suite=adversarial metric=ASR")
     for strategy, result in results.items():
         records = result.records
