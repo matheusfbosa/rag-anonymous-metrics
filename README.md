@@ -2,6 +2,10 @@
 
 Computes **Utility** and **Privacy** metrics to quantify the trade-off between information quality and PII protection across Offline/On-Demand anonymization.
 
+<p align="center">
+  <img src="rag-anon-metrics.png" alt="rag-anonymous-metrics" width="280">
+</p>
+
 ## Overview
 
 This package evaluates two anonymization strategies against a benchmark question set drawn from the *[Text Anonymization Benchmark* (TAB) corpus](https://github.com/NorskRegnesentral/text-anonymization-benchmark):
