@@ -130,12 +130,22 @@ def test_append_jsonl_keeps_distinct_ids(tmp_path: Path):
 
 
 def test_needs_utility_false_when_scored():
-    rec = _record(faithfulness=0.5, factual_correctness=0.4)
+    rec = _record(
+        faithfulness=0.5,
+        context_precision=0.4,
+        context_recall=0.3,
+        factual_correctness=0.2,
+    )
     assert _needs_utility(rec) is False
 
 
 def test_needs_utility_true_when_unscored():
     rec = _record()
+    assert _needs_utility(rec) is True
+
+
+def test_needs_utility_true_when_partially_scored():
+    rec = _record(faithfulness=0.5, context_precision=0.4)
     assert _needs_utility(rec) is True
 
 
@@ -375,3 +385,112 @@ def test_evaluate_strategy_records_judge_wall_clock(
     assert result.records[0].judge_sec == pytest.approx(12.5)
     loaded = _load_jsonl(tmp_path / "results_offline_benchmark.jsonl")
     assert loaded[0].judge_sec == pytest.approx(12.5)
+
+
+def test_evaluate_strategy_rescores_partial_utility(
+    tmp_path: Path, monkeypatch, metrics_env
+):
+    partial = _record(
+        question_id="1",
+        question="first",
+        faithfulness=0.1,
+        context_precision=0.2,
+    )
+    _save_jsonl([partial], tmp_path / "results_offline_benchmark.jsonl")
+
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.build_pipeline",
+        lambda *a, **k: (_ for _ in ()).throw(AssertionError("RAG should be skipped")),
+    )
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.metrics.utility.UtilityScorer",
+        FakeScorer,
+    )
+
+    result = evaluate_strategy(
+        "offline",
+        [{"id": "1", "question": "first", "ground_truth": "gt"}],
+        pii_index={"d1": set()},
+        person_pii_index={},
+        experiment_dir=tmp_path,
+        dataset="dev",
+        k_docs=3,
+        compute_utility=True,
+        output_basename="results_offline_benchmark.jsonl",
+    )
+
+    rec = result.records[0]
+    assert rec.faithfulness == 0.1
+    assert rec.context_precision == 0.2
+    assert rec.context_recall == 0.7
+    assert rec.factual_correctness == 0.6
+
+
+def test_evaluate_strategy_skips_empty_generation(
+    tmp_path: Path, monkeypatch, metrics_env
+):
+    def fake_evaluate(pipeline, question_obj, *args, **kwargs):
+        return _record(
+            question_id=str(question_obj["id"]),
+            generated_answer="   ",
+            final_answer="",
+        )
+
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.build_pipeline",
+        lambda *a, **k: object(),
+    )
+    monkeypatch.setattr("rag_anonymous_metrics.run.evaluate_question", fake_evaluate)
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.metrics.utility.UtilityScorer",
+        FakeScorer,
+    )
+
+    result = evaluate_strategy(
+        "offline",
+        [{"id": "1", "question": "first", "ground_truth": "gt"}],
+        pii_index={"d1": set()},
+        person_pii_index={},
+        experiment_dir=tmp_path,
+        dataset="dev",
+        k_docs=3,
+        compute_utility=True,
+        output_basename="results_offline_benchmark.jsonl",
+    )
+
+    assert result.records == []
+    path = tmp_path / "results_offline_benchmark.jsonl"
+    assert _load_jsonl(path) == []
+
+
+def test_evaluate_strategy_skips_rag_exception(
+    tmp_path: Path, monkeypatch, metrics_env
+):
+    def fake_evaluate(pipeline, question_obj, *args, **kwargs):
+        raise RuntimeError("ollama down")
+
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.build_pipeline",
+        lambda *a, **k: object(),
+    )
+    monkeypatch.setattr("rag_anonymous_metrics.run.evaluate_question", fake_evaluate)
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.metrics.utility.UtilityScorer",
+        FakeScorer,
+    )
+
+    result = evaluate_strategy(
+        "offline",
+        [{"id": "1", "question": "first", "ground_truth": "gt"}],
+        pii_index={"d1": set()},
+        person_pii_index={},
+        experiment_dir=tmp_path,
+        dataset="dev",
+        k_docs=3,
+        compute_utility=True,
+        output_basename="results_offline_benchmark.jsonl",
+    )
+
+    assert result.records == []
+    path = tmp_path / "results_offline_benchmark.jsonl"
+    assert _load_jsonl(path) == []

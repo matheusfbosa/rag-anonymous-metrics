@@ -206,16 +206,29 @@ def evaluate_strategy(
             continue
         if pipeline is None:
             pipeline = build_pipeline(strategy, gen_model, dataset)
-        record = evaluate_question(
-            pipeline,
-            q,
-            pii_index,
-            person_pii_index,
-            judge_m,
-            run_id,
-            dataset=dataset,
-            k_docs=k_docs,
-        )
+        try:
+            record = evaluate_question(
+                pipeline,
+                q,
+                pii_index,
+                person_pii_index,
+                judge_m,
+                run_id,
+                dataset=dataset,
+                k_docs=k_docs,
+            )
+        except Exception:
+            logger.exception(
+                "Skipping RAG failure: question_id=%s — retry on resume",
+                qid or "-",
+            )
+            continue
+        if not str(record.generated_answer).strip():
+            logger.warning(
+                "Skipping empty generation: question_id=%s — retry on resume",
+                qid or "-",
+            )
+            continue
         records.append(record)
         if qid:
             existing_by_id[qid] = record
@@ -356,17 +369,28 @@ def _attach_utility(
 
         assert scorer is not None
         started = time.perf_counter()
-        scores = scorer.score(
-            record.question,
-            record.final_answer,
-            record.contexts,
-            record.ground_truth,
-        )
+        try:
+            scores = scorer.score(
+                record.question,
+                record.final_answer,
+                record.contexts,
+                record.ground_truth,
+            )
+        except Exception:
+            logger.exception(
+                "Skipping judge failure: question_id=%s — retry on resume",
+                record.question_id or "-",
+            )
+            continue
         record.judge_sec = time.perf_counter() - started
-        record.faithfulness = scores["faithfulness"]
-        record.context_precision = scores["context_precision"]
-        record.context_recall = scores["context_recall"]
-        record.factual_correctness = scores["factual_correctness"]
+        if record.faithfulness is None:
+            record.faithfulness = scores["faithfulness"]
+        if record.context_precision is None:
+            record.context_precision = scores["context_precision"]
+        if record.context_recall is None:
+            record.context_recall = scores["context_recall"]
+        if record.factual_correctness is None:
+            record.factual_correctness = scores["factual_correctness"]
         logger.info("  judge=%.1fs", record.judge_sec)
         _upsert_jsonl(output_path, records)
 
@@ -380,9 +404,9 @@ def _needs_utility(record: QueryRecord) -> bool:
         return record.factual_correctness is None
     return (
         record.faithfulness is None
-        and record.context_precision is None
-        and record.context_recall is None
-        and record.factual_correctness is None
+        or record.context_precision is None
+        or record.context_recall is None
+        or record.factual_correctness is None
     )
 
 
