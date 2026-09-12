@@ -8,6 +8,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, cast
 
+from rag_anonymous_metrics.config import Settings
 from rag_anonymous import (
     Anonymizer,
     build_llm,
@@ -15,7 +16,6 @@ from rag_anonymous import (
     load_retriever,
     query_rag,
 )
-from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.log_config import log_item_progress, log_section
 from rag_anonymous_metrics.metrics.privacy import (
     build_person_pii_index,
