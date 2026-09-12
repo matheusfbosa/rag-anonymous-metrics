@@ -9,8 +9,8 @@ from ragas.dataset_schema import SingleTurnSample
 from ragas.llms import LangchainLLMWrapper
 from ragas.metrics import FactualCorrectness
 
-from rag_anonymous_metrics.config import Settings
 from rag_anonymous import build_llm
+from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import load_questions
 from rag_anonymous_metrics.log_config import (
     log_item_progress,

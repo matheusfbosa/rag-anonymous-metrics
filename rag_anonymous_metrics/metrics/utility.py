@@ -11,9 +11,9 @@ from ragas.metrics import (
     LLMContextRecall,
 )
 
+from rag_anonymous import build_llm
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.types import SingleTurnMetric
-from rag_anonymous import build_llm
 
 logger = logging.getLogger(__name__)
 

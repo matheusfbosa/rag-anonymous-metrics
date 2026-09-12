@@ -4,8 +4,8 @@ import sys
 from collections.abc import Iterable
 from pathlib import Path
 
-from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.check_judge import check_judge
+from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import (
     load_adversarial_attacks,
     load_corpus,
