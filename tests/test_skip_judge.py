@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from tests.test_run_checkpoint import FakeScorer, _record, metrics_env  # noqa: F401
+from test_run_checkpoint import FakeScorer, _record, metrics_env  # noqa: F401
 
 from rag_anonymous_metrics.run import _load_jsonl, evaluate_strategy
 

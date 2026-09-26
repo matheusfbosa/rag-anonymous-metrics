@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from tests.test_run_checkpoint import FakeScorer, _record
+from test_run_checkpoint import FakeScorer, _record
 
 from rag_anonymous_metrics.run import _load_jsonl, _save_jsonl, rejudge_experiment
 
