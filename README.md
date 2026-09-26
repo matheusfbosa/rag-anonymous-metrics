@@ -133,7 +133,7 @@ Unlike the other utility metrics, factual correctness is **not censored on refus
 
 ### Answer refusal rate
 
-Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics (including the privacy-prompt refusal “I cannot disclose personal identifiers…”, ADR 11).
+Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics (including the privacy-prompt refusal “I cannot disclose personal identifiers…”).
 
 Over $N$ benchmark items, the **refusal rate** is
 
@@ -353,7 +353,7 @@ make run-strategies DATASET=test EXPERIMENT_DIR=20260817_091400
 | `RAG_ANON_ES_URL`                | `http://localhost:9200`                                    | Elasticsearch base URL (shared with `rag-anonymous`)                                                                                                                              |
 | `RAG_ANON_LLM_MODEL`             | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
 | `RAG_ANON_PRIVACY_PROMPT`        | `true`                                                     | Zhang et al. (2024) goal-prioritization on the generator (`rag-anonymous`), adapted to `PERSON`. Set `false` only for ablation against the legacy template.          |
-| `RAG_ANON_LLM_NUM_CTX`           | `8192`                                                     | Ollama context window for the generator (and judge `num_ctx`). See [ADR 06](../docs/adrs/06-modelos-ollama.md).                                                                   |
+| `RAG_ANON_LLM_NUM_CTX`           | `8192`                                                     | Ollama context window for the generator (and judge `num_ctx`). Caps total tokens (prompt + generated output). Increase if retrieved chunks + prompt exceed the default; lower to reduce VRAM usage. |
 | `RAG_ANON_LLM_NUM_PREDICT`       | `512`                                                      | Max tokens generated per RAG call. Shared by generator and adversarial runs.                                                                                                      |
 | `RAG_ANON_LLM_REASONING`         | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |
 | `RAG_ANON_LLM_TEMPERATURE`       | `0.0`                                                      | Generation temperature                                                                                                                                                            |
