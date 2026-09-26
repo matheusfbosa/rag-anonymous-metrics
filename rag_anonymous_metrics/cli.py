@@ -35,11 +35,11 @@ from rag_anonymous_metrics.questions_filter import (
     describe_range,
 )
 from rag_anonymous_metrics.records import StrategyResult
-from rag_anonymous_metrics.run import run_experiment
+from rag_anonymous_metrics.run import rejudge_experiment, run_experiment
 
 logger = logging.getLogger(__name__)
 
-USAGE = "Usage: rag-metrics {run|check-judge}"
+USAGE = "Usage: rag-metrics {run|rejudge|check-judge}"
 
 
 def cmd_run_experiment(experiment_dir: Path) -> None:
@@ -283,8 +283,29 @@ def cmd_check_judge() -> None:
     raise SystemExit(check_judge())
 
 
+def cmd_rejudge(experiment_dir: Path) -> None:
+    cfg = Settings.load()
+    if cfg.judge_source_dir is None:
+        raise SystemExit("RAG_METRICS_JUDGE_SOURCE_DIR is required for rejudge")
+    logger.info(
+        "Rejudge: source=%s output=%s judge=%s",
+        cfg.judge_source_dir,
+        experiment_dir,
+        cfg.judge_model,
+    )
+    try:
+        results = rejudge_experiment(
+            cfg.judge_source_dir, experiment_dir, cfg.judge_model
+        )
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    _log_benchmark_summary(results)
+    logger.info("Done: experiment_dir=%s", experiment_dir)
+
+
 def main() -> None:
-    if len(sys.argv) != 2 or sys.argv[1] not in ("run", "evaluate", "check-judge"):
+    commands = ("run", "evaluate", "rejudge", "check-judge")
+    if len(sys.argv) != 2 or sys.argv[1] not in commands:
         raise SystemExit(USAGE)
 
     command = sys.argv[1]
@@ -305,6 +326,8 @@ def main() -> None:
 
     if command in ("run", "evaluate"):
         cmd_run_experiment(experiment_dir)
+    elif command == "rejudge":
+        cmd_rejudge(experiment_dir)
     else:
         cmd_check_judge()
 

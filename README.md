@@ -257,83 +257,59 @@ cp .env.example .env
 
 ## Usage
 
+`make` (or `make help`) lists every target. Models and dataset come from `.env`; `DATASET` defaults to `RAG_METRICS_CORPUS_DATASET`. Common variables: `DATASET`, `CATEGORY` (`benchmark` | `factual` | `identity` | `adversarial`), `RANGE` (`all`, `1-60`, `52,57,59`), `STRATEGY` (`offline` | `ondemand`), `EXPERIMENT_DIR` (folder under `data/output/`).
 
-
-### Prerequisites
-
-1. Offline and On-Demand strategies ingested for the dataset you will evaluate (`dev`, `train`, or `test`):
-  ```sh
-   make ingest-dev-prereq    # or: make ingest-train-prereq / make ingest-test-prereq
-  ```
-2. Sanity-check the judge
-
-Verifies the judge LLM before trusting its scores: feeds each question's own ground truth as the answer (`factual_correctness` should be ~1.0) and another question's ground truth as a control (should be ~0.0). Exits non-zero if the judge is unreliable.
+### 1. Prerequisites
 
 ```sh
-make check-judge
-make check-judge-smoke           # RANGE_SMOKE (default 1-5)
-make check-judge-dev
-RAG_METRICS_JUDGE_MODEL=gemma4:12b make check-judge RANGE=1-5
+make ingest              # offline + ondemand indices in rag-anonymous
+make check-judge-smoke   # judge sanity check on RANGE_SMOKE (default 1-5)
 ```
 
-It uses `RAG_METRICS_JUDGE_MODEL`, `RAG_METRICS_CORPUS_DATASET`, `RAG_METRICS_QUESTIONS_CATEGORY`, and `RAG_METRICS_QUESTIONS_RANGE`.
+`check-judge` feeds each question's own ground truth as the answer (`factual_correctness` ≈ 1.0) and another question's as a control (≈ 0.0); it exits non-zero if the judge is unreliable.
 
-### Run full evaluation (Offline and On-Demand strategies)
-
-Run both strategies into the same experiment folder (unload Ollama models between runs to avoid VRAM OOM):
+### 2. End to end
 
 ```sh
-make run-strategies              # default dataset (dev)
-make run-dev-strategies          # or train / test
-make run-smoke-strategies        # both strategies, RANGE_SMOKE (default 1-5)
-make run-all                     # dev + train + test (heavy; unloads between datasets)
+make run-strategies            # both strategies into one new folder
+make run-smoke-strategies      # same, on RANGE_SMOKE
 ```
 
-With `CATEGORY=benchmark` (default), each strategy runs the benchmark suite, unloads Ollama models, then runs the adversarial suite (ASR only, no Ragas). `make run-strategies` also unloads between strategies. By default it auto-detects Docker (`container_name: ollama` from `rag-anonymous/docker-compose.yml`) and runs `docker exec ollama ollama stop …`; otherwise it uses the host `ollama` CLI with `OLLAMA_HOST` / `RAG_ANON_OLLAMA_BASE_URL`. Override with `OLLAMA_VIA_DOCKER=1` (force Docker) or `OLLAMA_VIA_DOCKER=0` (force host CLI).
+Runs in two phases so the generator and the judge are never loaded together:
 
-### Prerequisites (ingest)
+1. **Generate** — per strategy: retrieval, generation, Presidio (On-Demand), privacy metrics; with `CATEGORY=benchmark` also the adversarial suite. No judge.
+2. **Judge** — Ollama models are unloaded, then Ragas scores the saved answers of both strategies.
+
+### 3. Run phases separately
 
 ```sh
-make ingest-dev-prereq           # offline + ondemand indices in rag-anonymous
+make generate-strategies                              # phase 1 only (prints the folder)
+make judge-strategies EXPERIMENT_DIR=20260926_101500  # phase 2 on that folder
 ```
 
-### Run a single strategy, dataset, category, or id range
+For one strategy: `make generate STRATEGY=ondemand`, `make judge STRATEGY=ondemand EXPERIMENT_DIR=…`, or `make run STRATEGY=ondemand CATEGORY=identity` (single category, generate + judge).
+
+### 4. Resume after a crash
+
+Every question is checkpointed to JSONL. Re-run the same target with the same folder; saved answers and scores are skipped:
 
 ```sh
-make run
-make run STRATEGY=ondemand
-make run-offline
-make run-ondemand
-make run-dev
-make run-train
-make run-test
-make run-factual
-make run-identity
-make run-benchmark
-make run-adversarial
-make run-smoke                   # RANGE_SMOKE (default 1-5)
-make run RANGE=1-60
+make run-strategies EXPERIMENT_DIR=20260926_101500
 ```
 
-`RAG_METRICS_CORPUS_DATASET` selects both the TAB JSON used for the PII index and the matching input files (`benchmark_questions_<dataset>.json`, `adversarial_attacks_<dataset>.json`).
+`OVERWRITE=1` redoes the generation from scratch (the judge phase never overwrites).
 
-`RAG_METRICS_QUESTIONS_CATEGORY` selects the evaluation suite:
+### 5. Rejudge with another judge
 
-- `benchmark` — full benchmark (utility + privacy); does not include adversarial
-- `factual` / `identity` — benchmark filtered by `category`
-- `adversarial` — adversarial attacks only (ASR + privacy)
-
-`RAG_METRICS_QUESTIONS_RANGE` recuts by numeric `id` (`all`, `START-END`, or a comma-separated list like `52,57,59`).
-
-### Resume after a crash
-
-Each question is checkpointed to JSONL as soon as RAG finishes; the judge then updates the same file per item. Re-run the **same** command with the **same** folder — already saved `question_id`s are skipped:
+Rescores the same saved answers with `RAG_METRICS_JUDGE_MODEL` into a new folder; no retrieval or generation, source folder untouched, adversarial files copied as is:
 
 ```sh
-make run-strategies DATASET=test EXPERIMENT_DIR=20260817_091400
+RAG_METRICS_JUDGE_MODEL=llama3.3:70b make rejudge SOURCE_DIR=20260912_142811
 ```
 
-`RANGE` / `CATEGORY` still work to recut a run; they are not required for resume. To force a full redo of a JSONL, pass `OVERWRITE=1` (sets `RAG_METRICS_OVERWRITE`).
+Resume with `EXPERIMENT_DIR=<output folder>`. Point the notebook's `RUN_FOLDER` at the output folder to analyze it.
+
+Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollama`) or uses the host `ollama` CLI; force with `OLLAMA_VIA_DOCKER=1|0`.
 
 ## Output
 
@@ -365,6 +341,8 @@ make run-strategies DATASET=test EXPERIMENT_DIR=20260817_091400
 | `RAG_METRICS_CORPUS_DATASET`     | `dev`                                                      | TAB dataset (`train` / `dev` / `test`); required                                                                                                                                  |
 | `RAG_METRICS_EXPERIMENT_DIR`     | —                                                          | Optional timestamp or path under `RAG_METRICS_RESULTS_DIR`. Reuse the same folder across strategy runs (e.g. `make run-strategies`). Honored by `make run-strategies` so a crash can resume in-place. |
 | `RAG_METRICS_OVERWRITE`          | —                                                          | If `1` / `true` / `yes`, ignore existing JSONL and re-run every question in the current filter. `make … OVERWRITE=1`.                                                              |
+| `RAG_METRICS_SKIP_JUDGE`         | —                                                          | If `1` / `true` / `yes`, `rag-metrics run` saves answers and privacy metrics but skips Ragas. Set by `make generate`; re-run without it to judge. |
+| `RAG_METRICS_JUDGE_SOURCE_DIR`   | —                                                          | Source run folder for `rag-metrics rejudge` (`make rejudge SOURCE_DIR=…`); timestamp or path, like `RAG_METRICS_EXPERIMENT_DIR`. |
 | `RAG_METRICS_JUDGE_MODEL`        | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for Ragas utility metrics                                                                                                                                               |
 | `RAG_METRICS_JUDGE_NUM_PREDICT`  | `1536`                                                     | Max tokens per judge call (Ragas classifications / JSON).                                                                                                                         |
 | `RAG_METRICS_JUDGE_TIMEOUT_SEC`  | `1800`                                                     | HTTP timeout (seconds) per judge call during the utility phase.                                                                                                                   |

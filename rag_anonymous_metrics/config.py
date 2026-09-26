@@ -35,7 +35,9 @@ class Settings:
     questions_category: CategorySpec
     questions_range: RangeSpec
     experiment_dir: Path | None
+    judge_source_dir: Path | None
     overwrite: bool
+    skip_judge: bool
 
     @classmethod
     def load(cls) -> Settings:
@@ -79,7 +81,12 @@ class Settings:
                 os.getenv("RAG_METRICS_QUESTIONS_RANGE")
             ),
             experiment_dir=experiment_dir,
+            judge_source_dir=_resolve_experiment_dir(
+                os.getenv("RAG_METRICS_JUDGE_SOURCE_DIR"),
+                results_dir,
+            ),
             overwrite=_env_flag("RAG_METRICS_OVERWRITE"),
+            skip_judge=_env_flag("RAG_METRICS_SKIP_JUDGE"),
         )
 
 

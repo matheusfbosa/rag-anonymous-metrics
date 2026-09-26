@@ -1,5 +1,5 @@
 CATEGORY ?= benchmark
-DATASET  ?= dev
+DATASET  ?= $(or $(RAG_METRICS_CORPUS_DATASET),$(shell sed -n 's/^RAG_METRICS_CORPUS_DATASET=//p' .env 2>/dev/null),dev)
 EXPERIMENT_DIR ?=
 OLLAMA_DOCKER_CONTAINER ?= ollama
 OLLAMA_VIA_DOCKER ?=
@@ -7,107 +7,100 @@ OVERWRITE ?=
 RAG_ANON_DIR ?= ../rag-anonymous
 RANGE    ?= all
 RANGE_SMOKE ?= 1-5
+SKIP_JUDGE ?=
+SOURCE_DIR ?=
 STRATEGY ?= offline
 
-# Lint / format
+RUN_ENV = RAG_METRICS_STRATEGY=$(STRATEGY) \
+	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
+	RAG_METRICS_QUESTIONS_CATEGORY=$(CATEGORY) \
+	RAG_METRICS_QUESTIONS_RANGE=$(RANGE) \
+	RAG_METRICS_EXPERIMENT_DIR=$(EXPERIMENT_DIR) \
+	RAG_METRICS_OVERWRITE=$(OVERWRITE) \
+	RAG_METRICS_SKIP_JUDGE=$(SKIP_JUDGE)
 
-.PHONY: format lint test hooks
-format:
-	ruff format .
-	ruff check --fix .
+STAMP := $(or $(EXPERIMENT_DIR),$(shell date +%Y%m%d_%H%M%S))
 
-lint:
-	ruff check .
-	ruff format --check .
-	mypy
+require = @test -n "$($(1))" || { echo "$@: set $(1)=<run folder under data/output>" >&2; exit 1; }
 
-hooks:
-	pre-commit install
+.DEFAULT_GOAL := help
+.PHONY: help format lint test hooks ingest check-judge check-judge-smoke \
+	run-strategies generate-strategies judge-strategies run-smoke-strategies run-all \
+	run generate judge rejudge ollama-unload
 
-# Test
+help: ## List targets
+	@awk 'BEGIN {FS = ":.*## "} /^[a-z-]+:.*## / {printf "  %-22s %s\n", $$1, $$2} /^## / {printf "\n%s\n", substr($$0, 4)}' $(MAKEFILE_LIST)
+	@printf "\nVariables: DATASET=%s CATEGORY=%s RANGE=%s STRATEGY=%s EXPERIMENT_DIR=%s\n" "$(DATASET)" "$(CATEGORY)" "$(RANGE)" "$(STRATEGY)" "$(EXPERIMENT_DIR)"
 
-test:
-	pytest -q
+## Setup
 
-# Prerequisites
-
-ingest-prereq:
+ingest: ## Build offline + ondemand indices in rag-anonymous for DATASET
 	$(MAKE) -C $(RAG_ANON_DIR) ingest-$(DATASET)-strategies
 
-ingest-dev-prereq:
-	$(MAKE) ingest-prereq DATASET=dev
-
-ingest-train-prereq:
-	$(MAKE) ingest-prereq DATASET=train
-
-ingest-test-prereq:
-	$(MAKE) ingest-prereq DATASET=test
-
-# Judge sanity check
-
-check-judge:
+check-judge: ## Sanity-check RAG_METRICS_JUDGE_MODEL (own vs foreign ground truth)
 	RAG_METRICS_STRATEGY=$(STRATEGY) \
 	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
 	RAG_METRICS_QUESTIONS_CATEGORY=$(CATEGORY) \
 	RAG_METRICS_QUESTIONS_RANGE=$(RANGE) \
 	rag-metrics check-judge
 
-check-judge-dev:
-	$(MAKE) check-judge DATASET=dev
-
-check-judge-train:
-	$(MAKE) check-judge DATASET=train
-
-check-judge-test:
-	$(MAKE) check-judge DATASET=test
-
-check-judge-smoke:
+check-judge-smoke: ## check-judge on RANGE_SMOKE
 	$(MAKE) check-judge RANGE=$(RANGE_SMOKE)
 
-# Run
+## Experiment: both strategies in one folder
 
-run:
+run-strategies: ## End to end: generate both strategies, unload, then judge both
+	$(MAKE) generate-strategies EXPERIMENT_DIR=$(STAMP)
+	$(MAKE) ollama-unload
+	$(MAKE) judge-strategies EXPERIMENT_DIR=$(STAMP)
+
+generate-strategies: ## Phase 1: retrieval + generation + privacy, no judge
+	@echo "Experiment dir: data/output/$(STAMP)"
+	$(MAKE) generate STRATEGY=offline EXPERIMENT_DIR=$(STAMP)
+	$(MAKE) generate STRATEGY=ondemand EXPERIMENT_DIR=$(STAMP)
+
+judge-strategies: ## Phase 2: Ragas utility on a generated folder (EXPERIMENT_DIR)
+	$(call require,EXPERIMENT_DIR)
+	$(MAKE) judge STRATEGY=offline
+	$(MAKE) judge STRATEGY=ondemand
+
+run-smoke-strategies: ## run-strategies on RANGE_SMOKE
+	$(MAKE) run-strategies RANGE=$(RANGE_SMOKE)
+
+run-all: ## run-strategies for dev, train and test
+	$(MAKE) run-strategies DATASET=dev
+	$(MAKE) ollama-unload
+	$(MAKE) run-strategies DATASET=train
+	$(MAKE) ollama-unload
+	$(MAKE) run-strategies DATASET=test
+
+## Pieces: one strategy (STRATEGY=offline|ondemand)
+
+run: ## One CATEGORY, generate + judge (resumes a folder given EXPERIMENT_DIR)
+	$(RUN_ENV) rag-metrics run
+
+generate: ## Generation only; CATEGORY=benchmark also runs the adversarial suite
+	$(MAKE) run SKIP_JUDGE=1
+	$(if $(filter benchmark,$(CATEGORY)),$(MAKE) run SKIP_JUDGE=1 CATEGORY=adversarial)
+
+judge: ## Judge only, on answers already in EXPERIMENT_DIR
+	$(call require,EXPERIMENT_DIR)
+	$(MAKE) run SKIP_JUDGE= OVERWRITE=
+
+## Rejudge: same answers, another judge, new folder
+
+rejudge: ## Rescore SOURCE_DIR with RAG_METRICS_JUDGE_MODEL into a new folder
+	$(call require,SOURCE_DIR)
 	RAG_METRICS_STRATEGY=$(STRATEGY) \
 	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
-	RAG_METRICS_QUESTIONS_CATEGORY=$(CATEGORY) \
-	RAG_METRICS_QUESTIONS_RANGE=$(RANGE) \
+	RAG_METRICS_JUDGE_SOURCE_DIR=$(SOURCE_DIR) \
 	RAG_METRICS_EXPERIMENT_DIR=$(EXPERIMENT_DIR) \
-	RAG_METRICS_OVERWRITE=$(OVERWRITE) \
-	rag-metrics run
+	rag-metrics rejudge
 
-run-offline:
-	$(MAKE) run STRATEGY=offline
+## Utilities
 
-run-ondemand:
-	$(MAKE) run STRATEGY=ondemand
-
-run-dev:
-	$(MAKE) run DATASET=dev
-
-run-train:
-	$(MAKE) run DATASET=train
-
-run-test:
-	$(MAKE) run DATASET=test
-
-run-benchmark:
-	$(MAKE) run CATEGORY=benchmark
-
-run-factual:
-	$(MAKE) run CATEGORY=factual
-
-run-identity:
-	$(MAKE) run CATEGORY=identity
-
-run-adversarial:
-	$(MAKE) run CATEGORY=adversarial
-
-run-smoke:
-	$(MAKE) run RANGE=$(RANGE_SMOKE)
-
-# Unload Ollama models between strategy runs
 # OLLAMA_VIA_DOCKER: 1 = force docker exec, 0 = force host CLI, unset = auto
-ollama-unload:
+ollama-unload: ## Unload judge, generator and embedding models from Ollama
 	@set -a; [ -f .env ] && . ./.env; set +a; \
 	OLLAMA_VIA_DOCKER="$(OLLAMA_VIA_DOCKER)"; \
 	_use_docker() { \
@@ -133,37 +126,17 @@ ollama-unload:
 	_ollama_stop "$$RAG_ANON_LLM_MODEL"; \
 	_ollama_stop "$$RAG_ANON_EMBEDDING_MODEL"
 
-run-strategy-suite:
-	@if [ "$(CATEGORY)" = "benchmark" ]; then \
-	  $(MAKE) run STRATEGY=$(STRATEGY) DATASET=$(DATASET) CATEGORY=benchmark RANGE=$(RANGE) EXPERIMENT_DIR=$(EXPERIMENT_DIR) OVERWRITE=$(OVERWRITE) && \
-	  $(MAKE) ollama-unload && \
-	  $(MAKE) run STRATEGY=$(STRATEGY) DATASET=$(DATASET) CATEGORY=adversarial RANGE=$(RANGE) EXPERIMENT_DIR=$(EXPERIMENT_DIR) OVERWRITE=$(OVERWRITE); \
-	else \
-	  $(MAKE) run STRATEGY=$(STRATEGY) DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$(EXPERIMENT_DIR) OVERWRITE=$(OVERWRITE); \
-	fi
+format: ## ruff format + fix
+	ruff format .
+	ruff check --fix .
 
-run-strategies:
-	@stamp="$(if $(EXPERIMENT_DIR),$(EXPERIMENT_DIR),$$(date +%Y%m%d_%H%M%S))"; \
-	echo "Experiment dir: data/output/$$stamp"; \
-	$(MAKE) run-strategy-suite STRATEGY=offline DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp OVERWRITE=$(OVERWRITE) && \
-	$(MAKE) ollama-unload && \
-	$(MAKE) run-strategy-suite STRATEGY=ondemand DATASET=$(DATASET) CATEGORY=$(CATEGORY) RANGE=$(RANGE) EXPERIMENT_DIR=$$stamp OVERWRITE=$(OVERWRITE)
+lint: ## ruff + mypy
+	ruff check .
+	ruff format --check .
+	mypy
 
-run-dev-strategies:
-	$(MAKE) run-strategies DATASET=dev
+test: ## pytest
+	pytest -q
 
-run-train-strategies:
-	$(MAKE) run-strategies DATASET=train
-
-run-test-strategies:
-	$(MAKE) run-strategies DATASET=test
-
-run-smoke-strategies:
-	$(MAKE) run-strategies RANGE=$(RANGE_SMOKE)
-
-run-all:
-	$(MAKE) run-dev-strategies
-	$(MAKE) ollama-unload
-	$(MAKE) run-train-strategies
-	$(MAKE) ollama-unload
-	$(MAKE) run-test-strategies
+hooks: ## Install pre-commit hooks
+	pre-commit install

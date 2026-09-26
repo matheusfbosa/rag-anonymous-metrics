@@ -3,7 +3,7 @@ import logging
 import time
 import uuid
 from collections.abc import Sequence
-from dataclasses import asdict, dataclass, fields
+from dataclasses import asdict, dataclass, fields, replace
 from datetime import datetime
 from pathlib import Path
 from typing import Any, cast
@@ -242,9 +242,11 @@ def evaluate_strategy(
             len(records),
         )
 
-    if compute_utility:
+    if compute_utility and not cfg.skip_judge:
         _attach_utility(records, judge_m, output_path)
     else:
+        if compute_utility:
+            logger.info("Skipping judge: RAG_METRICS_SKIP_JUDGE set")
         _upsert_jsonl(output_path, records)
 
     return StrategyResult(
@@ -314,6 +316,51 @@ def run_experiment(
     return results, experiment_dir
 
 
+def rejudge_experiment(
+    source_dir: Path,
+    output_dir: Path,
+    judge_model: str,
+) -> dict[str, StrategyResult]:
+    if source_dir.resolve() == output_dir.resolve():
+        raise ValueError(f"Rejudge output must differ from source: dir={source_dir}")
+    sources = sorted(source_dir.glob("results_*_benchmark.jsonl"))
+    if not sources:
+        raise ValueError(f"No results_*_benchmark.jsonl in {source_dir}")
+
+    for adversarial in sorted(source_dir.glob("results_*_adversarial.jsonl")):
+        target = output_dir / adversarial.name
+        if not target.exists():
+            _save_jsonl(_load_jsonl(adversarial), target)
+
+    results = {}
+    for source in sources:
+        output_path = output_dir / source.name
+        if output_path.exists():
+            records = _load_jsonl(output_path)
+            logger.info("Resuming rejudge: path=%s n=%d", output_path, len(records))
+        else:
+            records = [_reset_utility(r) for r in _load_jsonl(source)]
+            _save_jsonl(records, output_path)
+        log_section(f"Rejudging: source={source} judge={judge_model}")
+        _attach_utility(records, judge_model, output_path)
+        strategy = records[0].strategy if records else source.stem
+        results[strategy] = StrategyResult(
+            strategy=strategy, records=records, output_path=str(output_path)
+        )
+    return results
+
+
+def _reset_utility(record: QueryRecord) -> QueryRecord:
+    return replace(
+        record,
+        faithfulness=None,
+        context_precision=None,
+        context_recall=None,
+        factual_correctness=None,
+        judge_sec=None,
+    )
+
+
 def _attach_utility(
     records: list[QueryRecord],
     judge_model: str,
@@ -362,6 +409,7 @@ def _attach_utility(
                 idx,
                 len(records),
             )
+            record.judge_model = judge_model
             record.factual_correctness = 0.0
             record.judge_sec = 0.0
             _upsert_jsonl(output_path, records)
@@ -382,6 +430,7 @@ def _attach_utility(
                 record.question_id or "-",
             )
             continue
+        record.judge_model = judge_model
         record.judge_sec = time.perf_counter() - started
         if record.faithfulness is None:
             record.faithfulness = scores["faithfulness"]
