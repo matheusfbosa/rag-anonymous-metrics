@@ -81,3 +81,16 @@ def test_judge_after_skip_reuses_answers(tmp_path: Path, monkeypatch):
     assert scorers[0].scored_questions == ["first", "second"]
     assert all(r.faithfulness == 0.9 for r in records)
     assert all(r.judge_model == "llama" for r in records)
+
+
+def test_resume_does_not_log_saved_items(tmp_path: Path, monkeypatch, caplog):
+    _patch(monkeypatch, [], [])
+    _evaluate(tmp_path)
+
+    caplog.clear()
+    with caplog.at_level("INFO"):
+        _evaluate(tmp_path)
+
+    assert "Skipping RAG: all 2 questions already saved" in caplog.text
+    assert "Utility metrics already complete" in caplog.text
+    assert "preview=" not in caplog.text

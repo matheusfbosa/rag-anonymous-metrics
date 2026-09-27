@@ -193,6 +193,9 @@ def evaluate_strategy(
     records: list[QueryRecord] = []
     for idx, q in enumerate(questions, 1):
         qid = _question_id(q)
+        if qid in existing_by_id:
+            records.append(existing_by_id[qid])
+            continue
         log_item_progress(
             logger,
             idx,
@@ -200,10 +203,6 @@ def evaluate_strategy(
             qid or "-",
             q["question"],
         )
-        if qid in existing_by_id:
-            logger.info("  skipping RAG: question_id=%s already saved", qid)
-            records.append(existing_by_id[qid])
-            continue
         if pipeline is None:
             pipeline = build_pipeline(strategy, gen_model, dataset)
         try:
@@ -385,6 +384,8 @@ def _attach_utility(
     width = len(str(len(records)))
 
     for idx, record in enumerate(records, 1):
+        if not _needs_utility(record):
+            continue
         log_item_progress(
             logger,
             idx,
@@ -392,15 +393,6 @@ def _attach_utility(
             record.question_id or "-",
             record.question,
         )
-
-        if not _needs_utility(record):
-            logger.info(
-                "  [%*d/%d] Skipping judge: already scored",
-                width,
-                idx,
-                len(records),
-            )
-            continue
 
         if _is_refusal(record):
             logger.info(
