@@ -13,36 +13,39 @@ This package evaluates two anonymization strategies against a benchmark question
 - **Offline:** the corpus is anonymized by Presidio before ingestion; the retriever and generator never see raw PII.
 - **On-Demand:** the raw corpus is ingested as-is; Presidio anonymizes only the generated answer at query time.
 
-For each item × strategy the evaluator:
+Each experiment runs in two phases, into one folder per generator:
 
-1. Runs the full RAG pipeline (retrieval + generation + optional post-generation anonymization).
-2. Computes **privacy metrics** (PII leakage rate, answer refusal) immediately from the final answer.
-3. On the **benchmark** suite: computes **utility metrics** (faithfulness, context precision, context recall, factual correctness) via a separate judge LLM — refusals are skipped and recorded as `null`.
-4. On the **adversarial** suite: skips Ragas and reports **Attack Success Rate (ASR)** (no judge).
-5. Persists per-query results to JSONL, including wall-clock timings.
+1. **Generate** — per question × strategy: retrieval, generation (with privacy system prompt), Presidio on the answer (On-Demand only) and **privacy metrics** (PII leakage on `generated_answer` and `final_answer`, refusal). Covers the **benchmark** and the **adversarial** suites; saved to JSONL with wall-clock timings.
+2. **Judge** — Ollama models are unloaded; the judge LLM scores the saved **benchmark** answers with Ragas (faithfulness, context precision, context recall, factual correctness). Refusals: `null` for the first three, `0` for factual correctness. The adversarial suite has no judge; it reports **Attack Success Rate (ASR)**.
+
+`rejudge` repeats phase 2 with another judge over the same saved answers, into a new folder.
 
 ```mermaid
 flowchart TD
-    corpus["Corpus (dataset)"] --> pii_index["PII Index\n(per doc_id)"]
-    questions["Benchmark Questions"] --> rag
+    corpus["Corpus (dataset)"] --> pii_index["PII index\n(per doc_id)"]
+    questions["Benchmark + adversarial\nquestions"] --> retriever
 
-    subgraph rag [RAG Pipeline · per question × strategy]
-        retriever["Retriever\n(Elasticsearch, k chunks)"] --> generator["Generator LLM\n(+ privacy system prompt)"] --> anon["Anonymizer\n(offline: no-op | on-demand: Presidio)"] --> final_answer["final_answer"]
+    subgraph gen ["Phase 1 · Generate (per question × strategy)"]
+        retriever["Retriever\n(Elasticsearch, k chunks)"] --> generator["Generator LLM\n(+ privacy system prompt)"]
         generator --> generated_answer["generated_answer"]
+        generated_answer --> anon["Anonymizer\n(offline: no-op · on-demand: Presidio)"] --> final_answer["final_answer"]
+        pii_index --> privacy["Privacy\n(PII leakage generated/final, refusal)"]
+        generated_answer --> privacy
+        final_answer --> privacy
     end
 
-    pii_index --> privacy
-    final_answer --> privacy["Privacy\n(PII leakage + refusal)"]
-    final_answer --> utility["Utility · Judge LLM via Ragas\n(faithfulness, context precision/recall,\nfactual correctness — null if refusal)"]
-    ground_truth["ground_truth"] --> utility
+    privacy --> jsonl[("JSONL per strategy × suite")]
+    retriever -. contexts .-> jsonl
+    final_answer --> jsonl
 
-    privacy --> jsonl["JSONL per run"]
+    subgraph judge ["Phase 2 · Judge (benchmark only)"]
+        utility["Judge LLM via Ragas\n(faithfulness, context precision/recall,\nfactual correctness)"]
+    end
+
+    jsonl --> utility
+    ground_truth["ground_truth"] --> utility
     utility --> jsonl
 ```
-
-
-
-
 
 ## Project structure
 
