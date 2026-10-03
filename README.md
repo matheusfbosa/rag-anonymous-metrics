@@ -307,7 +307,7 @@ make run-strategies EXPERIMENT_DIR=20260926_101500
 Rescores the same saved answers with `RAG_METRICS_JUDGE_MODEL` into a new folder; no retrieval or generation, source folder untouched, adversarial files copied as is:
 
 ```sh
-RAG_METRICS_JUDGE_MODEL=llama3.3:70b make rejudge SOURCE_DIR=20260912_142811
+RAG_METRICS_JUDGE_MODEL=gemma4:31b make rejudge SOURCE_DIR=20260912_142811
 ```
 
 Resume with `EXPERIMENT_DIR=<output folder>`. Point the notebook's `RUN_FOLDER` at the output folder to analyze it.
