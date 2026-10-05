@@ -2,18 +2,12 @@ from pathlib import Path
 
 import pytest
 from ragas.prompt.pydantic_prompt import PydanticPrompt
-from test_run_checkpoint import _record
+from test_run_checkpoint import _record, metrics_env  # noqa: F401
 
 from rag_anonymous_metrics.judge_prompts import _capture_prompts, dump_judge_prompts
 from rag_anonymous_metrics.run import _save_jsonl
 
 pytestmark = pytest.mark.usefixtures("metrics_env")
-
-
-@pytest.fixture
-def metrics_env(monkeypatch):
-    monkeypatch.setenv("RAG_METRICS_STRATEGY", "offline")
-    monkeypatch.setenv("RAG_METRICS_CORPUS_DATASET", "dev")
 
 
 @pytest.fixture

@@ -314,7 +314,7 @@ Resume with `EXPERIMENT_DIR=<output folder>`. Point the notebook's `RUN_FOLDER` 
 
 ### 6. Inspect the judge prompts
 
-Saves the exact prompts Ragas would send to the judge (Ragas defaults, filled with the saved question, answer, contexts and `ground_truth`), one file per call, without calling any LLM:
+Saves the exact prompts Ragas would send to the judge, one file per call, without calling any LLM. They are the Ragas default prompts, rendered with `to_string()` as described in [Modifying prompts in metrics](https://docs.ragas.io/en/stable/howtos/customizations/metrics/modifying-prompts-metrics/), filled with the saved question, answer, contexts and `ground_truth`:
 
 ```sh
 make judge-prompts SOURCE_DIR=20260926_201638 RANGE=1
