@@ -11,6 +11,7 @@ from rag_anonymous_metrics.corpus import (
     load_corpus,
     load_questions,
 )
+from rag_anonymous_metrics.judge_prompts import dump_judge_prompts
 from rag_anonymous_metrics.log_config import (
     configure_logging,
     init_command_output,
@@ -39,7 +40,7 @@ from rag_anonymous_metrics.run import rejudge_experiment, run_experiment
 
 logger = logging.getLogger(__name__)
 
-USAGE = "Usage: rag-metrics {run|rejudge|check-judge}"
+USAGE = "Usage: rag-metrics {run|rejudge|judge-prompts|check-judge}"
 
 
 def cmd_run_experiment(experiment_dir: Path) -> None:
@@ -303,8 +304,24 @@ def cmd_rejudge(experiment_dir: Path) -> None:
     logger.info("Done: experiment_dir=%s", experiment_dir)
 
 
+def cmd_judge_prompts(experiment_dir: Path) -> None:
+    cfg = Settings.load()
+    if cfg.judge_source_dir is None:
+        raise SystemExit("RAG_METRICS_JUDGE_SOURCE_DIR is required for judge-prompts")
+    try:
+        written = dump_judge_prompts(
+            cfg.judge_source_dir,
+            experiment_dir,
+            cfg.judge_model,
+            cfg.questions_range,
+        )
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    logger.info("Done: prompts=%d experiment_dir=%s", len(written), experiment_dir)
+
+
 def main() -> None:
-    commands = ("run", "evaluate", "rejudge", "check-judge")
+    commands = ("run", "evaluate", "rejudge", "judge-prompts", "check-judge")
     if len(sys.argv) != 2 or sys.argv[1] not in commands:
         raise SystemExit(USAGE)
 
@@ -328,6 +345,8 @@ def main() -> None:
         cmd_run_experiment(experiment_dir)
     elif command == "rejudge":
         cmd_rejudge(experiment_dir)
+    elif command == "judge-prompts":
+        cmd_judge_prompts(experiment_dir)
     else:
         cmd_check_judge()
 

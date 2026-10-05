@@ -26,7 +26,7 @@ require = @test -n "$($(1))" || { echo "$@: set $(1)=<run folder under data/outp
 .DEFAULT_GOAL := help
 .PHONY: help format lint test hooks ingest check-judge check-judge-smoke \
 	run-strategies generate-strategies judge-strategies run-smoke-strategies run-all \
-	run generate judge rejudge ollama-unload
+	run generate judge rejudge judge-prompts ollama-unload
 
 help: ## List targets
 	@awk 'BEGIN {FS = ":.*## "} /^[a-z-]+:.*## / {printf "  %-22s %s\n", $$1, $$2} /^## / {printf "\n%s\n", substr($$0, 4)}' $(MAKEFILE_LIST)
@@ -96,6 +96,15 @@ rejudge: ## Rescore SOURCE_DIR with RAG_METRICS_JUDGE_MODEL into a new folder
 	RAG_METRICS_JUDGE_SOURCE_DIR=$(SOURCE_DIR) \
 	RAG_METRICS_EXPERIMENT_DIR=$(EXPERIMENT_DIR) \
 	rag-metrics rejudge
+
+judge-prompts: ## Save the exact Ragas judge prompts for RANGE of SOURCE_DIR (no LLM call)
+	$(call require,SOURCE_DIR)
+	RAG_METRICS_STRATEGY=$(STRATEGY) \
+	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
+	RAG_METRICS_JUDGE_SOURCE_DIR=$(SOURCE_DIR) \
+	RAG_METRICS_QUESTIONS_RANGE=$(RANGE) \
+	RAG_METRICS_EXPERIMENT_DIR=$(EXPERIMENT_DIR) \
+	rag-metrics judge-prompts
 
 ## Utilities
 

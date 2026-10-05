@@ -312,6 +312,16 @@ RAG_METRICS_JUDGE_MODEL=gemma4:31b make rejudge SOURCE_DIR=20260912_142811
 
 Resume with `EXPERIMENT_DIR=<output folder>`. Point the notebook's `RUN_FOLDER` at the output folder to analyze it.
 
+### 6. Inspect the judge prompts
+
+Saves the exact prompts Ragas would send to the judge (Ragas defaults, filled with the saved question, answer, contexts and `ground_truth`), one file per call, without calling any LLM:
+
+```sh
+make judge-prompts SOURCE_DIR=20260926_201638 RANGE=1
+```
+
+Output: `data/output/<new folder>/judge_prompts/<strategy>_q<id>/NN_<Prompt>.txt`. Steps that depend on an earlier judge output (e.g. statement verification) are filled with the prompt's own few-shot example, so their content is illustrative but their size is representative.
+
 Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollama`) or uses the host `ollama` CLI; force with `OLLAMA_VIA_DOCKER=1|0`.
 
 ## Output
@@ -345,7 +355,7 @@ Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollam
 | `RAG_METRICS_EXPERIMENT_DIR`     | —                                                          | Optional timestamp or path under `RAG_METRICS_RESULTS_DIR`. Reuse the same folder across strategy runs (e.g. `make run-strategies`). Honored by `make run-strategies` so a crash can resume in-place. |
 | `RAG_METRICS_OVERWRITE`          | —                                                          | If `1` / `true` / `yes`, ignore existing JSONL and re-run every question in the current filter. `make … OVERWRITE=1`.                                                              |
 | `RAG_METRICS_SKIP_JUDGE`         | —                                                          | If `1` / `true` / `yes`, `rag-metrics run` saves answers and privacy metrics but skips Ragas. Set by `make generate`; re-run without it to judge. |
-| `RAG_METRICS_JUDGE_SOURCE_DIR`   | —                                                          | Source run folder for `rag-metrics rejudge` (`make rejudge SOURCE_DIR=…`); timestamp or path, like `RAG_METRICS_EXPERIMENT_DIR`. |
+| `RAG_METRICS_JUDGE_SOURCE_DIR`   | —                                                          | Source run folder for `rag-metrics rejudge` and `judge-prompts` (`make rejudge SOURCE_DIR=…`); timestamp or path, like `RAG_METRICS_EXPERIMENT_DIR`. |
 | `RAG_METRICS_JUDGE_MODEL`        | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for Ragas utility metrics                                                                                                                                               |
 | `RAG_METRICS_JUDGE_NUM_PREDICT`  | `1536`                                                     | Max tokens per judge call (Ragas classifications / JSON).                                                                                                                         |
 | `RAG_METRICS_JUDGE_TIMEOUT_SEC`  | `1800`                                                     | HTTP timeout (seconds) per judge call during the utility phase.                                                                                                                   |
