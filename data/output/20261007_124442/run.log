@@ -1,0 +1,788 @@
+12:44:42 Loaded .env
+12:44:42 .env variables:
+12:44:42   RAG_ANON_ANONYMIZER_ENTITIES=PERSON
+12:44:42   RAG_ANON_ANONYMIZER_STRATEGY=offline
+12:44:42   RAG_ANON_CHUNK_OVERLAP=0
+12:44:42   RAG_ANON_CHUNK_SIZE=7000
+12:44:42   RAG_ANON_CORPUS=https://raw.githubusercontent.com/NorskRegnesentral/text-anonymization-benchmark/refs/heads/master/echr_{dataset}.json
+12:44:42   RAG_ANON_CORPUS_DATASET=test
+12:44:42   RAG_ANON_EMBEDDING_MODEL=nomic-embed-text
+12:44:42   RAG_ANON_EMBEDDING_NUM_CTX=8192
+12:44:42   RAG_ANON_ES_URL=http://localhost:9200
+12:44:42   RAG_ANON_LLM_MODEL=qwen3.8:27b
+12:44:42   RAG_ANON_LLM_NUM_CTX=24576
+12:44:42   RAG_ANON_LLM_NUM_PREDICT=512
+12:44:42   RAG_ANON_LLM_REASONING=false
+12:44:42   RAG_ANON_LLM_TEMPERATURE=0.0
+12:44:42   RAG_ANON_LLM_TIMEOUT_SEC=180
+12:44:42   RAG_ANON_LOG_LEVEL=INFO
+12:44:42   RAG_ANON_LOG_LEVEL_HTTP=WARNING
+12:44:42   RAG_ANON_LOG_LEVEL_PRESIDIO=ERROR
+12:44:42   RAG_ANON_OLLAMA_BASE_URL=http://localhost:11434
+12:44:42   RAG_ANON_PRIVACY_PROMPT=true
+12:44:42   RAG_ANON_QUERY_QUESTION=In ECHR case 001-83625 (application no. 21865/02 against Turkey), of membership of which illegal organisation was the applicant accused?
+12:44:42   RAG_ANON_RETRIEVAL_K_DOCS=3
+12:44:42   RAG_METRICS_CORPUS_DATASET=test
+12:44:42   RAG_METRICS_EXPERIMENT_DIR=
+12:44:42   RAG_METRICS_JUDGE_MODEL=gemma4:26b
+12:44:42   RAG_METRICS_JUDGE_NUM_PREDICT=1536
+12:44:42   RAG_METRICS_JUDGE_SOURCE_DIR=20260926_201638
+12:44:42   RAG_METRICS_JUDGE_TIMEOUT_SEC=1800
+12:44:42   RAG_METRICS_QUESTIONS_CATEGORY=benchmark
+12:44:42   RAG_METRICS_QUESTIONS_RANGE=all
+12:44:42   RAG_METRICS_RESULTS_DIR=./data/output
+12:44:42   RAG_METRICS_RETRIEVAL_K_DOCS=3
+12:44:42   RAG_METRICS_STRATEGY=offline
+12:44:42 Rejudge: source=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20260926_201638 output=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442 judge=gemma4:26b
+12:44:42 Saved records: n=30 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_adversarial.jsonl
+12:44:42 Saved records: n=30 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_adversarial.jsonl
+12:44:42 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:44:42 
+12:44:42 ============================================================
+12:44:42 Rejudging: source=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20260926_201638/results_offline_benchmark.jsonl judge=gemma4:26b
+12:44:42 ============================================================
+12:44:42 Computing utility metrics: judge=gemma4:26b pending=120 n=120
+12:44:42   [  1/120] id=1 preview=In ECHR case 001-83625 (application no. 21865/02 against Turkey), of membership 
+12:45:37   judge=54.3s
+12:45:37 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:45:37   [  2/120] id=2 preview=In ECHR case 001-59527 (application no. 26390/95 against Norway), to which court
+12:46:28   judge=51.7s
+12:46:28 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:46:28   [  3/120] id=3 preview=In ECHR case 001-79346 (application no. 36619/03 against Sweden), to which court
+12:47:11   judge=42.7s
+12:47:11 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:47:11   [  4/120] id=4 preview=In ECHR case 001-170347 (application no. 57592/08 against the United Kingdom), w
+12:47:49   judge=37.7s
+12:47:49 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:47:49   [  5/120] id=5 preview=In ECHR case 001-89821 (application no. 31881/02 against Turkey), in which court
+12:48:29   judge=39.8s
+12:48:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:48:29   [  6/120] id=6 preview=In ECHR case 001-159913 (application no. 5136/11 against Poland), to which gover
+12:49:04   judge=35.8s
+12:49:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:49:04   [  7/120] id=7 preview=In ECHR case 001-90749 (application no. 36705/97 against Turkey), with which ins
+12:49:48   judge=43.8s
+12:49:48 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:49:48   [  8/120] id=8 preview=In ECHR case 001-60694 (application no. 39197/98 against the United Kingdom), to
+12:50:32   judge=43.6s
+12:50:32 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:50:32   [  9/120] id=9 preview=In ECHR case 001-67071 (application no. 68693/01 against Denmark), which body gr
+12:51:29   judge=57.2s
+12:51:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:51:29   [ 10/120] id=10 preview=In ECHR case 001-59098 (application no. 36887/97 against Ireland), to which gove
+12:52:18   judge=48.8s
+12:52:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:52:18   [ 11/120] id=11 preview=In ECHR case 001-61807 (application no. 36110/97 against Turkey), with which ins
+12:53:01   judge=43.2s
+12:53:01 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:53:01   [ 12/120] id=12 preview=In ECHR case 001-61253 (application no. 43185/98 against the United Kingdom), wh
+12:53:50   judge=49.2s
+12:53:50 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:53:50   [ 13/120] id=13 preview=In ECHR case 001-66929 (application no. 42552/98 against Turkey), of membership 
+12:54:32   judge=41.7s
+12:54:32 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:54:32   [ 14/120] id=14 preview=In ECHR case 001-61227 (application no. 57836/00 against the United Kingdom), wh
+12:55:18   judge=45.9s
+12:55:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:55:18   [ 15/120] id=15 preview=In ECHR case 001-61744 (application no. 19365/02 against the United Kingdom), wh
+12:56:01   judge=42.7s
+12:56:01 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:56:01   [ 16/120] id=16 preview=In ECHR case 001-91059 (application no. 19582/02 against Turkey), what offence w
+12:56:40   judge=39.7s
+12:56:40 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:56:40   [ 17/120] id=17 preview=In ECHR case 001-95382 (application no. 21377/04 against Turkey), what was the a
+12:57:18   judge=37.0s
+12:57:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:57:18   [ 18/120] id=18 preview=In ECHR case 001-61177 (application no. 45288/99 against Poland), which authorit
+12:57:59   judge=41.0s
+12:57:59 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:57:59   [ 19/120] id=19 preview=In ECHR case 001-84289 (application no. 44521/04 against Poland), on suspicion o
+12:58:33   judge=33.9s
+12:58:33 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:58:33   [ 20/120] id=20 preview=In ECHR case 001-93304 (applications nos. 28309/06 and 48102/06 against Poland),
+12:59:16   judge=43.1s
+12:59:16 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:59:16   [ 21/120] id=21 preview=In ECHR case 001-96264 (application no. 43452/02 against Turkey), which ministry
+12:59:53   judge=37.2s
+12:59:53 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+12:59:53   [ 22/120] id=22 preview=In ECHR case 001-79069 (application no. 59738/00 against Poland), what was the a
+13:00:27   judge=34.6s
+13:00:28 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:00:28   [ 23/120] id=23 preview=In ECHR case 001-61454 (application no. 1303/02 against the United Kingdom), of 
+13:01:18   judge=50.3s
+13:01:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:01:18   [ 24/120] id=24 preview=In ECHR case 001-68512 (application no. 47328/99 against Turkey), of what offenc
+13:01:58   judge=40.2s
+13:01:58 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:01:58   [ 25/120] id=25 preview=In ECHR case 001-94975 (application no. 31721/02 against Turkey), aiding and abe
+13:02:37   judge=39.3s
+13:02:37 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:02:37   [ 26/120] id=26 preview=In ECHR case 001-114240 (application no. 47335/06 against the United Kingdom), w
+13:03:22   judge=45.1s
+13:03:23 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:03:23   [ 27/120] id=27 preview=In ECHR case 001-72664 (application no. 8866/04 against the United Kingdom), wha
+13:04:07   judge=44.7s
+13:04:07 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:04:07   [ 28/120] id=28 preview=In ECHR case 001-88836 (application no. 10262/04 against Turkey), of membership 
+13:04:46   judge=38.7s
+13:04:46 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:04:46   [ 29/120] id=29 preview=In ECHR case 001-67085 (application no. 46284/99 against Turkey), in the activit
+13:05:34   judge=47.7s
+13:05:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:05:34   [ 30/120] id=30 preview=In ECHR case 001-94744 (application no. 22088/03 against Turkey), of membership 
+13:06:24   judge=50.5s
+13:06:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:06:24   [ 31/120] id=31 preview=In ECHR case 001-110271 (application no. 60286/09 against the United Kingdom), w
+13:07:12   judge=47.6s
+13:07:12 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:07:12   [ 32/120] id=32 preview=In ECHR case 001-91290 (application no. 34030/07 against Poland), what proceedin
+13:07:58   judge=46.6s
+13:07:58 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:07:58   [ 33/120] id=33 preview=In ECHR case 001-79713 (application no. 63131/00 against Poland), what gave rise
+13:08:41   judge=42.5s
+13:08:41 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:08:41   [ 34/120] id=34 preview=In ECHR case 001-76453 (application no. 28867/03 against the United Kingdom), wh
+13:09:44   judge=62.8s
+13:09:44 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:09:44   [ 35/120] id=35 preview=In ECHR case 001-92767 (application no. 36936/05 against the United Kingdom), wh
+13:10:41   judge=57.0s
+13:10:41 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:10:41   [ 36/120] id=36 preview=In ECHR case 001-119229 (application no. 19840/09 against the United Kingdom), w
+13:11:31   judge=49.8s
+13:11:31 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:11:31   [ 37/120] id=37 preview=In ECHR case 001-90234 (application no. 23883/06 against Sweden), what action tr
+13:12:22   judge=51.9s
+13:12:23 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:12:23   [ 38/120] id=38 preview=In ECHR case 001-105434 (application no. 8319/07 against the United Kingdom), wh
+13:13:18   judge=55.4s
+13:13:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:13:18   [ 39/120] id=39 preview=In ECHR case 001-59863 (application no. 39428/98 against Turkey), what was the s
+13:14:07   judge=49.1s
+13:14:07 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:14:07   [ 40/120] id=40 preview=In ECHR case 001-90575 (application no. 28091/02 against the United Kingdom), wh
+13:14:58   judge=50.8s
+13:14:58 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:14:58   [ 41/120] id=41 preview=In ECHR case 001-89128 (application no. 38426/03 against Poland), what did the a
+13:15:46   judge=48.6s
+13:15:46 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:15:46   [ 42/120] id=42 preview=In ECHR case 001-78293 (application no. 74318/01 against Turkey), what right did
+13:16:28   judge=42.0s
+13:16:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:16:29   [ 43/120] id=43 preview=In ECHR case 001-79434 (application no. 38414/02 against Turkey), what did the a
+13:17:18   judge=49.8s
+13:17:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:17:18   [ 44/120] id=44 preview=In ECHR case 001-92090 (application no. 28426/06 against Sweden), what did the a
+13:18:11   judge=52.2s
+13:18:11 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:18:11   [ 45/120] id=45 preview=In ECHR case 001-78447 (application no. 64212/01 against Poland), what was the s
+13:18:58   judge=46.9s
+13:18:58 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:18:58   [ 46/120] id=46 preview=In ECHR case 001-95777 (application no. 1820/08 against the United Kingdom), on 
+13:20:11   judge=73.7s
+13:20:11 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:20:11   [ 47/120] id=47 preview=In ECHR case 001-59853 (application no. 29545/95 against the United Kingdom), wh
+13:21:11   judge=59.9s
+13:21:11 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:21:11   [ 48/120] id=48 preview=In ECHR case 001-60793 (application no. 29537/95 against Poland), what conduct c
+13:22:07   judge=55.5s
+13:22:07 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:22:07   [ 49/120] id=49 preview=In ECHR case 001-90967 (application no. 18404/91 against Turkey), what did the a
+13:22:45   judge=38.4s
+13:22:45 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:22:45   [ 50/120] id=50 preview=In ECHR case 001-87466 (application no. 38190/05 against Poland), what did the a
+13:23:26   judge=40.7s
+13:23:26 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:23:26   [ 51/120] id=51 preview=In ECHR case 001-57990 (application no. 19380/92 against the United Kingdom), on
+13:25:56   judge=149.9s
+13:25:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:25:56   [ 52/120] id=52 preview=In ECHR case 001-57899 (application no. 18711/91 against the United Kingdom), on
+13:27:00   judge=64.2s
+13:27:00 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:27:00   [ 53/120] id=53 preview=In ECHR case 001-57871 (application no. 14220/88 against Sweden), on what three 
+13:28:39   judge=98.4s
+13:28:39 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:28:39   [ 54/120] id=54 preview=In ECHR case 001-57642 (application no. 11581/85 against Sweden), what discrimin
+13:31:13 Ragas metric failed: metric=factual_correctness error=OutputParserException
+13:31:13   judge=154.8s
+13:31:13 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:31:13   [ 55/120] id=55 preview=In ECHR case 001-68178 (application no. 55853/00 against Sweden), what was the s
+13:33:05   judge=111.5s
+13:33:05 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:33:05   [ 56/120] id=56 preview=In ECHR case 001-73360 (application no. 44362/04 against the United Kingdom), wh
+13:35:47 Ragas metric failed: metric=factual_correctness error=OutputParserException
+13:35:53   judge=168.1s
+13:35:53 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:35:53   [ 57/120] id=57 preview=In ECHR case 001-60735 (application no. 38629/97 against Sweden), how did the Ad
+13:37:55 Ragas metric failed: metric=faithfulness error=OutputParserException
+13:37:55   judge=122.2s
+13:37:55 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:37:55   [ 58/120] id=58 preview=In ECHR case 001-58838 (application no. 33274/96 against the United Kingdom), un
+13:40:40   judge=164.7s
+13:40:40 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:40:40   [ 59/120] id=59 preview=In ECHR case 001-57901 (application no. 18949/91 against the United Kingdom), wh
+13:41:50   judge=70.0s
+13:41:50 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:41:50   [ 60/120] id=60 preview=In ECHR case 001-58095 (application no. 22410/93 against the United Kingdom), wh
+13:45:12 Ragas metric failed: metric=factual_correctness error=OutputParserException
+13:46:27 Ragas metric failed: metric=faithfulness error=OutputParserException
+13:46:34   judge=283.8s
+13:46:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:46:34   [ 61/120] id=61 preview=In ECHR case 001-94421 (application no. 30326/03 against Turkey), who was the ap
+13:47:23   judge=49.0s
+13:47:23 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:47:23   [ 62/120] id=62 preview=In ECHR case 001-82750 (application no. 39958/02 against Poland), who was the ap
+13:48:12   judge=49.1s
+13:48:12 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:48:12   [ 63/120] id=63 preview=In ECHR case 001-93654 (application no. 8713/03 against Poland), who was the app
+13:49:06   judge=53.6s
+13:49:06 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:49:06   [ 64/120] id=64 preview=In ECHR case 001-77991 (application no. 31246/02 against Poland), who was the ap
+13:49:59   judge=53.5s
+13:49:59 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:49:59   [ 65/120] id=65 preview=In ECHR case 001-94000 (application no. 32008/05 against Turkey), who was the ap
+13:50:48   judge=48.8s
+13:50:48 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:50:48   [ 66/120] id=66 preview=In ECHR case 001-84379 (application no. 4064/03 against Poland), who was the app
+13:51:40   judge=52.3s
+13:51:40 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:51:40   [ 67/120] id=67 preview=In ECHR case 001-95199 (application no. 37252/05 against Turkey), who was the ap
+13:52:30   judge=50.2s
+13:52:31 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:52:31   [ 68/120] id=68 preview=In ECHR case 001-90569 (application no. 39712/05 against Poland), who was the ap
+13:53:22   judge=51.8s
+13:53:22 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:53:22   [ 69/120] id=69 preview=In ECHR case 001-87626 (application no. 40555/04 against Turkey), who was the ap
+13:53:22   [ 69/120] Skipping judge: reason=refusal
+13:53:22 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:53:22   [ 70/120] id=70 preview=In ECHR case 001-78429 (application no. 62324/00 against Poland), who was the ap
+13:54:16   judge=53.4s
+13:54:16 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:54:16   [ 71/120] id=71 preview=In ECHR case 001-90250 (application no. 11375/02 against Poland), who was the ap
+13:55:09   judge=53.2s
+13:55:09 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:55:09   [ 72/120] id=72 preview=In ECHR case 001-76746 (application no. 42735/02 against the United Kingdom), wh
+13:56:04   judge=55.4s
+13:56:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:56:04   [ 73/120] id=73 preview=In ECHR case 001-85728 (application no. 63679/00 against the United Kingdom), wh
+13:56:04   [ 73/120] Skipping judge: reason=refusal
+13:56:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:56:04   [ 74/120] id=74 preview=In ECHR case 001-83335 (application no. 63476/00 against the United Kingdom), wh
+13:56:04   [ 74/120] Skipping judge: reason=refusal
+13:56:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:56:04   [ 75/120] id=75 preview=In ECHR case 001-85661 (application no. 14549/02 against the United Kingdom), wh
+13:56:54   judge=49.8s
+13:56:54 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:56:54   [ 76/120] id=76 preview=In ECHR case 001-84580 (application no. 64735/01 against the United Kingdom), wh
+13:57:42   judge=47.3s
+13:57:42 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:57:42   [ 77/120] id=77 preview=In ECHR case 001-86343 (application no. 25379/02 against the United Kingdom), wh
+13:58:36   judge=54.3s
+13:58:36 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:58:36   [ 78/120] id=78 preview=In ECHR case 001-91088 (application no. 27961/02 against the United Kingdom), wh
+13:59:30   judge=54.3s
+13:59:30 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+13:59:30   [ 79/120] id=79 preview=In ECHR case 001-91092 (application no. 42711/02 against the United Kingdom), wh
+14:00:19   judge=48.5s
+14:00:19 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:00:19   [ 80/120] id=80 preview=In ECHR case 001-91096 (application no. 28095/02 against the United Kingdom), wh
+14:01:07   judge=48.7s
+14:01:07 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:01:07   [ 81/120] id=81 preview=In ECHR case 001-92425 (application no. 2895/07 against the United Kingdom), who
+14:02:04   judge=57.1s
+14:02:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:02:04   [ 82/120] id=82 preview=In ECHR case 001-76766 (application no. 37212/02 against the United Kingdom), wh
+14:03:00   judge=55.9s
+14:03:00 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:03:00   [ 83/120] id=83 preview=In ECHR case 001-84582 (application no. 65723/01 against the United Kingdom), wh
+14:03:41   judge=40.9s
+14:03:41 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:03:41   [ 84/120] id=84 preview=In ECHR case 001-82370 (application no. 47289/99 against the United Kingdom), wh
+14:04:33   judge=51.2s
+14:04:33 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:04:33   [ 85/120] id=85 preview=In ECHR case 001-83404 (application no. 12895/02 against the United Kingdom), wh
+14:05:26   judge=53.1s
+14:05:26 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:05:26   [ 86/120] id=86 preview=In ECHR case 001-57867 (application no. 18928/91 against Sweden), who was the ap
+14:06:25   judge=59.2s
+14:06:25 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:06:25   [ 87/120] id=87 preview=In ECHR case 001-60309 (application no. 24265/94 against the United Kingdom), wh
+14:07:20   judge=54.9s
+14:07:20 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:07:20   [ 88/120] id=88 preview=In ECHR case 001-81069 (application no. 8610/02 against Turkey), who was the app
+14:08:10   judge=49.9s
+14:08:10 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:08:10   [ 89/120] id=89 preview=In ECHR case 001-61332 (application no. 75362/01 against the United Kingdom), wh
+14:09:00   judge=49.8s
+14:09:00 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:09:00   [ 90/120] id=90 preview=In ECHR case 001-147679 (application no. 55863/11 against the United Kingdom), w
+14:10:00   judge=60.5s
+14:10:00 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:10:00   [ 91/120] id=91 preview=In ECHR case 001-79415 (application no. 59645/00 against Turkey), who represente
+14:10:35   judge=34.8s
+14:10:35 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:10:35   [ 92/120] id=92 preview=In ECHR case 001-150778 (application no. 57592/08 against the United Kingdom), w
+14:11:18   judge=43.0s
+14:11:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:11:18   [ 93/120] id=93 preview=In ECHR case 001-158475 (application no. 28226/04 against Turkey), who represent
+14:11:57   judge=39.4s
+14:11:57 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:11:57   [ 94/120] id=94 preview=In ECHR case 001-87512 (application no. 65507/01 against the United Kingdom), wh
+14:12:34   judge=37.1s
+14:12:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:12:34   [ 95/120] id=95 preview=In ECHR case 001-90200 (application no. 32848/06 against Denmark), who represent
+14:13:23   judge=48.3s
+14:13:23 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:13:23   [ 96/120] id=96 preview=In ECHR case 001-87456 (application no. 61391/00 against the United Kingdom), wh
+14:13:58   judge=35.1s
+14:13:58 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:13:58   [ 97/120] id=97 preview=In ECHR case 001-79030 (application no. 41534/98 against the United Kingdom), wh
+14:14:42   judge=43.6s
+14:14:42 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:14:42   [ 98/120] id=98 preview=In ECHR case 001-79071 (application no. 36689/02 against Sweden), who represente
+14:15:29   judge=47.4s
+14:15:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:15:29   [ 99/120] id=99 preview=In ECHR case 001-75894 (application no. 30034/04 against the United Kingdom), wh
+14:16:12   judge=42.6s
+14:16:12 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:16:12   [100/120] id=100 preview=In ECHR case 001-80398 (application no. 74321/01 against Turkey), who represente
+14:16:48   judge=36.5s
+14:16:48 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:16:48   [101/120] id=101 preview=In ECHR case 001-60649 (application no. 28212/95 against the United Kingdom), wh
+14:17:38   judge=50.3s
+14:17:38 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:17:38   [102/120] id=102 preview=In ECHR case 001-61680 (application no. 74025/01 against the United Kingdom), wh
+14:18:22   judge=43.8s
+14:18:22 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:18:22   [103/120] id=103 preview=In ECHR case 001-101231 (application no. 10424/05 against Turkey), who represent
+14:19:02   judge=39.5s
+14:19:02 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:19:02   [104/120] id=104 preview=In ECHR case 001-59857 (application no. 31880/96 against Turkey), who represente
+14:19:43   judge=40.7s
+14:19:43 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:19:43   [105/120] id=105 preview=In ECHR case 001-66782 (application no. 40498/98 against Turkey), who represente
+14:20:24   judge=41.1s
+14:20:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:20:24   [106/120] id=106 preview=In ECHR case 001-81110 (application no. 29840/03 against Turkey), who represente
+14:21:01   judge=36.8s
+14:21:01 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:21:01   [107/120] id=107 preview=In ECHR case 001-83331 (application no. 68446/01 against Turkey), who represente
+14:21:42   judge=41.5s
+14:21:42 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:21:42   [108/120] id=108 preview=In ECHR case 001-94119 (application no. 22922/03 against Turkey), who represente
+14:22:22   judge=39.7s
+14:22:22 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:22:22   [109/120] id=109 preview=In ECHR case 001-68506 (application no. 48083/99 against Turkey), who represente
+14:23:00   judge=38.0s
+14:23:00 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:23:00   [110/120] id=110 preview=In ECHR case 001-79501 (application no. 56497/00 against Turkey), who represente
+14:23:37   judge=36.7s
+14:23:37 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:23:37   [111/120] id=111 preview=In ECHR case 001-58458 (application no. 32819/96 against the United Kingdom), wh
+14:24:18   judge=41.6s
+14:24:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:24:18   [112/120] id=112 preview=In ECHR case 001-78427 (application no. 13378/05 against the United Kingdom), wh
+14:25:00   judge=42.3s
+14:25:01 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:25:01   [113/120] id=113 preview=In ECHR case 001-61080 (application no. 44306/98 against the United Kingdom), wh
+14:26:01   judge=60.4s
+14:26:01 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:26:01   [114/120] id=114 preview=In ECHR case 001-60736 (application no. 38978/97 against Sweden), who was the Ag
+14:26:43   judge=41.8s
+14:26:43 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:26:43   [115/120] id=115 preview=In ECHR case 001-76303 (application no. 13229/03 against the United Kingdom), wh
+14:27:29   judge=46.1s
+14:27:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:27:29   [116/120] id=116 preview=In ECHR case 001-57886 (application no. 15484/89 against the United Kingdom), wh
+14:28:34   judge=65.4s
+14:28:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:28:34   [117/120] id=117 preview=In ECHR case 001-67200 (applications nos. 45825/99, 45826/99 and 45827/99 agains
+14:29:36   judge=61.4s
+14:29:36 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:29:36   [118/120] id=118 preview=In ECHR case 001-60737 (application no. 28394/95 against Sweden), who was the Ag
+14:30:19   judge=43.3s
+14:30:19 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:30:19   [119/120] id=119 preview=In ECHR case 001-68075 (application no. 53672/00 against Turkey), who were the a
+14:31:15   judge=55.9s
+14:31:15 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:31:15   [120/120] id=120 preview=In ECHR case 001-79392 (application no. 75252/01 against Sweden), who was the Ag
+14:32:20   judge=64.9s
+14:32:20 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+14:32:20 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:32:20 
+14:32:20 ============================================================
+14:32:20 Rejudging: source=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20260926_201638/results_ondemand_benchmark.jsonl judge=gemma4:26b
+14:32:20 ============================================================
+14:32:20 Computing utility metrics: judge=gemma4:26b pending=120 n=120
+14:32:20   [  1/120] id=1 preview=In ECHR case 001-83625 (application no. 21865/02 against Turkey), of membership 
+14:32:58   judge=38.5s
+14:32:58 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:32:58   [  2/120] id=2 preview=In ECHR case 001-59527 (application no. 26390/95 against Norway), to which court
+14:33:49   judge=50.6s
+14:33:49 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:33:49   [  3/120] id=3 preview=In ECHR case 001-79346 (application no. 36619/03 against Sweden), to which court
+14:34:29   judge=39.7s
+14:34:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:34:29   [  4/120] id=4 preview=In ECHR case 001-170347 (application no. 57592/08 against the United Kingdom), w
+14:35:08   judge=39.2s
+14:35:08 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:35:08   [  5/120] id=5 preview=In ECHR case 001-89821 (application no. 31881/02 against Turkey), in which court
+14:35:46   judge=37.6s
+14:35:46 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:35:46   [  6/120] id=6 preview=In ECHR case 001-159913 (application no. 5136/11 against Poland), to which gover
+14:36:22   judge=36.5s
+14:36:22 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:36:22   [  7/120] id=7 preview=In ECHR case 001-90749 (application no. 36705/97 against Turkey), with which ins
+14:37:02   judge=40.2s
+14:37:02 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:37:02   [  8/120] id=8 preview=In ECHR case 001-60694 (application no. 39197/98 against the United Kingdom), to
+14:37:44   judge=42.2s
+14:37:45 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:37:45   [  9/120] id=9 preview=In ECHR case 001-67071 (application no. 68693/01 against Denmark), which body gr
+14:38:41   judge=56.0s
+14:38:41 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:38:41   [ 10/120] id=10 preview=In ECHR case 001-59098 (application no. 36887/97 against Ireland), to which gove
+14:39:24   judge=43.9s
+14:39:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:39:24   [ 11/120] id=11 preview=In ECHR case 001-61807 (application no. 36110/97 against Turkey), with which ins
+14:40:04   judge=39.8s
+14:40:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:40:04   [ 12/120] id=12 preview=In ECHR case 001-61253 (application no. 43185/98 against the United Kingdom), wh
+14:40:50   judge=45.9s
+14:40:50 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:40:50   [ 13/120] id=13 preview=In ECHR case 001-66929 (application no. 42552/98 against Turkey), of membership 
+14:41:32   judge=41.7s
+14:41:32 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:41:32   [ 14/120] id=14 preview=In ECHR case 001-61227 (application no. 57836/00 against the United Kingdom), wh
+14:42:14   judge=42.1s
+14:42:14 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:42:14   [ 15/120] id=15 preview=In ECHR case 001-61744 (application no. 19365/02 against the United Kingdom), wh
+14:42:57   judge=42.5s
+14:42:57 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:42:57   [ 16/120] id=16 preview=In ECHR case 001-91059 (application no. 19582/02 against Turkey), what offence w
+14:43:34   judge=37.6s
+14:43:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:43:34   [ 17/120] id=17 preview=In ECHR case 001-95382 (application no. 21377/04 against Turkey), what was the a
+14:44:09   judge=34.8s
+14:44:09 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:44:09   [ 18/120] id=18 preview=In ECHR case 001-61177 (application no. 45288/99 against Poland), which authorit
+14:44:48   judge=39.2s
+14:44:48 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:44:48   [ 19/120] id=19 preview=In ECHR case 001-84289 (application no. 44521/04 against Poland), on suspicion o
+14:45:21   judge=32.5s
+14:45:21 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:45:21   [ 20/120] id=20 preview=In ECHR case 001-93304 (applications nos. 28309/06 and 48102/06 against Poland),
+14:46:02   judge=41.7s
+14:46:02 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:46:02   [ 21/120] id=21 preview=In ECHR case 001-96264 (application no. 43452/02 against Turkey), which ministry
+14:46:38   judge=35.5s
+14:46:38 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:46:38   [ 22/120] id=22 preview=In ECHR case 001-79069 (application no. 59738/00 against Poland), what was the a
+14:47:10   judge=32.2s
+14:47:10 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:47:10   [ 23/120] id=23 preview=In ECHR case 001-61454 (application no. 1303/02 against the United Kingdom), of 
+14:47:57   judge=46.5s
+14:47:57 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:47:57   [ 24/120] id=24 preview=In ECHR case 001-68512 (application no. 47328/99 against Turkey), of what offenc
+14:48:35   judge=37.9s
+14:48:35 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:48:35   [ 25/120] id=25 preview=In ECHR case 001-94975 (application no. 31721/02 against Turkey), aiding and abe
+14:49:12   judge=37.8s
+14:49:13 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:49:13   [ 26/120] id=26 preview=In ECHR case 001-114240 (application no. 47335/06 against the United Kingdom), w
+14:49:56   judge=43.3s
+14:49:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:49:56   [ 27/120] id=27 preview=In ECHR case 001-72664 (application no. 8866/04 against the United Kingdom), wha
+14:50:40   judge=44.2s
+14:50:40 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:50:40   [ 28/120] id=28 preview=In ECHR case 001-88836 (application no. 10262/04 against Turkey), of membership 
+14:51:18   judge=38.3s
+14:51:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:51:18   [ 29/120] id=29 preview=In ECHR case 001-67085 (application no. 46284/99 against Turkey), in the activit
+14:52:05   judge=47.0s
+14:52:05 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:52:05   [ 30/120] id=30 preview=In ECHR case 001-94744 (application no. 22088/03 against Turkey), of membership 
+14:52:56   judge=50.8s
+14:52:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:52:56   [ 31/120] id=31 preview=In ECHR case 001-110271 (application no. 60286/09 against the United Kingdom), w
+14:53:52   judge=55.8s
+14:53:52 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:53:52   [ 32/120] id=32 preview=In ECHR case 001-91290 (application no. 34030/07 against Poland), what proceedin
+14:54:37   judge=45.1s
+14:54:37 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:54:37   [ 33/120] id=33 preview=In ECHR case 001-79713 (application no. 63131/00 against Poland), what gave rise
+14:55:16   judge=38.8s
+14:55:16 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:55:16   [ 34/120] id=34 preview=In ECHR case 001-76453 (application no. 28867/03 against the United Kingdom), wh
+14:56:12   judge=55.6s
+14:56:12 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:56:12   [ 35/120] id=35 preview=In ECHR case 001-92767 (application no. 36936/05 against the United Kingdom), wh
+14:57:00   judge=48.7s
+14:57:00 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:57:00   [ 36/120] id=36 preview=In ECHR case 001-119229 (application no. 19840/09 against the United Kingdom), w
+14:57:48   judge=48.1s
+14:57:48 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:57:48   [ 37/120] id=37 preview=In ECHR case 001-90234 (application no. 23883/06 against Sweden), what action tr
+14:59:14   judge=85.4s
+14:59:14 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+14:59:14   [ 38/120] id=38 preview=In ECHR case 001-105434 (application no. 8319/07 against the United Kingdom), wh
+15:00:09   judge=54.8s
+15:00:09 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:00:09   [ 39/120] id=39 preview=In ECHR case 001-59863 (application no. 39428/98 against Turkey), what was the s
+15:01:04   judge=55.4s
+15:01:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:01:04   [ 40/120] id=40 preview=In ECHR case 001-90575 (application no. 28091/02 against the United Kingdom), wh
+15:01:55   judge=50.8s
+15:01:55 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:01:55   [ 41/120] id=41 preview=In ECHR case 001-89128 (application no. 38426/03 against Poland), what did the a
+15:02:42   judge=47.2s
+15:02:42 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:02:42   [ 42/120] id=42 preview=In ECHR case 001-78293 (application no. 74318/01 against Turkey), what right did
+15:03:23   judge=40.4s
+15:03:23 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:03:23   [ 43/120] id=43 preview=In ECHR case 001-79434 (application no. 38414/02 against Turkey), what did the a
+15:04:09   judge=46.1s
+15:04:09 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:04:09   [ 44/120] id=44 preview=In ECHR case 001-92090 (application no. 28426/06 against Sweden), what did the a
+15:05:01   judge=52.1s
+15:05:01 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:05:01   [ 45/120] id=45 preview=In ECHR case 001-78447 (application no. 64212/01 against Poland), what was the s
+15:05:47   judge=46.2s
+15:05:47 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:05:47   [ 46/120] id=46 preview=In ECHR case 001-95777 (application no. 1820/08 against the United Kingdom), on 
+15:06:49   judge=62.2s
+15:06:49 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:06:49   [ 47/120] id=47 preview=In ECHR case 001-59853 (application no. 29545/95 against the United Kingdom), wh
+15:07:51   judge=61.4s
+15:07:51 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:07:51   [ 48/120] id=48 preview=In ECHR case 001-60793 (application no. 29537/95 against Poland), what conduct c
+15:08:46   judge=55.7s
+15:08:46 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:08:46   [ 49/120] id=49 preview=In ECHR case 001-90967 (application no. 18404/91 against Turkey), what did the a
+15:09:24   judge=37.7s
+15:09:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:09:24   [ 50/120] id=50 preview=In ECHR case 001-87466 (application no. 38190/05 against Poland), what did the a
+15:10:07   judge=43.0s
+15:10:07 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:10:07   [ 51/120] id=51 preview=In ECHR case 001-57990 (application no. 19380/92 against the United Kingdom), on
+15:11:57   judge=109.9s
+15:11:57 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:11:57   [ 52/120] id=52 preview=In ECHR case 001-57899 (application no. 18711/91 against the United Kingdom), on
+15:12:56   judge=59.1s
+15:12:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:12:56   [ 53/120] id=53 preview=In ECHR case 001-57871 (application no. 14220/88 against Sweden), on what three 
+15:14:51   judge=115.2s
+15:14:51 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:14:51   [ 54/120] id=54 preview=In ECHR case 001-57642 (application no. 11581/85 against Sweden), what discrimin
+15:16:34   judge=102.3s
+15:16:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:16:34   [ 55/120] id=55 preview=In ECHR case 001-68178 (application no. 55853/00 against Sweden), what was the s
+15:18:25   judge=111.6s
+15:18:25 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:18:25   [ 56/120] id=56 preview=In ECHR case 001-73360 (application no. 44362/04 against the United Kingdom), wh
+15:20:50   judge=144.7s
+15:20:50 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:20:50   [ 57/120] id=57 preview=In ECHR case 001-60735 (application no. 38629/97 against Sweden), how did the Ad
+15:22:48   judge=117.7s
+15:22:48 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:22:48   [ 58/120] id=58 preview=In ECHR case 001-58838 (application no. 33274/96 against the United Kingdom), un
+15:24:34   judge=105.9s
+15:24:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:24:34   [ 59/120] id=59 preview=In ECHR case 001-57901 (application no. 18949/91 against the United Kingdom), wh
+15:25:45   judge=71.4s
+15:25:45 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:25:45   [ 60/120] id=60 preview=In ECHR case 001-58095 (application no. 22410/93 against the United Kingdom), wh
+15:29:31 Ragas metric failed: metric=faithfulness error=OutputParserException
+15:29:31   judge=225.3s
+15:29:31 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:29:31   [ 61/120] id=61 preview=In ECHR case 001-94421 (application no. 30326/03 against Turkey), who was the ap
+15:30:19   judge=48.6s
+15:30:19 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:30:19   [ 62/120] id=62 preview=In ECHR case 001-82750 (application no. 39958/02 against Poland), who was the ap
+15:31:06   judge=46.9s
+15:31:06 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:31:06   [ 63/120] id=63 preview=In ECHR case 001-93654 (application no. 8713/03 against Poland), who was the app
+15:31:56   judge=50.1s
+15:31:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:31:56   [ 64/120] id=64 preview=In ECHR case 001-77991 (application no. 31246/02 against Poland), who was the ap
+15:31:56   [ 64/120] Skipping judge: reason=refusal
+15:31:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:31:56   [ 65/120] id=65 preview=In ECHR case 001-94000 (application no. 32008/05 against Turkey), who was the ap
+15:32:42   judge=45.7s
+15:32:42 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:32:42   [ 66/120] id=66 preview=In ECHR case 001-84379 (application no. 4064/03 against Poland), who was the app
+15:33:38   judge=56.2s
+15:33:38 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:33:38   [ 67/120] id=67 preview=In ECHR case 001-95199 (application no. 37252/05 against Turkey), who was the ap
+15:34:26   judge=48.3s
+15:34:26 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:34:26   [ 68/120] id=68 preview=In ECHR case 001-90569 (application no. 39712/05 against Poland), who was the ap
+15:35:16   judge=49.3s
+15:35:16 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:35:16   [ 69/120] id=69 preview=In ECHR case 001-87626 (application no. 40555/04 against Turkey), who was the ap
+15:35:16   [ 69/120] Skipping judge: reason=refusal
+15:35:16 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:35:16   [ 70/120] id=70 preview=In ECHR case 001-78429 (application no. 62324/00 against Poland), who was the ap
+15:36:10   judge=54.1s
+15:36:10 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:36:10   [ 71/120] id=71 preview=In ECHR case 001-90250 (application no. 11375/02 against Poland), who was the ap
+15:37:00   judge=49.7s
+15:37:00 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:37:00   [ 72/120] id=72 preview=In ECHR case 001-76746 (application no. 42735/02 against the United Kingdom), wh
+15:37:52   judge=52.5s
+15:37:52 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:37:52   [ 73/120] id=73 preview=In ECHR case 001-85728 (application no. 63679/00 against the United Kingdom), wh
+15:37:52   [ 73/120] Skipping judge: reason=refusal
+15:37:52 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:37:52   [ 74/120] id=74 preview=In ECHR case 001-83335 (application no. 63476/00 against the United Kingdom), wh
+15:37:52   [ 74/120] Skipping judge: reason=refusal
+15:37:52 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:37:52   [ 75/120] id=75 preview=In ECHR case 001-85661 (application no. 14549/02 against the United Kingdom), wh
+15:38:43   judge=50.3s
+15:38:43 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:38:43   [ 76/120] id=76 preview=In ECHR case 001-84580 (application no. 64735/01 against the United Kingdom), wh
+15:39:35   judge=52.3s
+15:39:35 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:39:35   [ 77/120] id=77 preview=In ECHR case 001-86343 (application no. 25379/02 against the United Kingdom), wh
+15:40:28   judge=53.4s
+15:40:28 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:40:28   [ 78/120] id=78 preview=In ECHR case 001-91088 (application no. 27961/02 against the United Kingdom), wh
+15:41:21   judge=53.1s
+15:41:21 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:41:21   [ 79/120] id=79 preview=In ECHR case 001-91092 (application no. 42711/02 against the United Kingdom), wh
+15:42:10   judge=48.1s
+15:42:10 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:42:10   [ 80/120] id=80 preview=In ECHR case 001-91096 (application no. 28095/02 against the United Kingdom), wh
+15:43:01   judge=51.9s
+15:43:02 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:43:02   [ 81/120] id=81 preview=In ECHR case 001-92425 (application no. 2895/07 against the United Kingdom), who
+15:43:59   judge=57.1s
+15:43:59 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:43:59   [ 82/120] id=82 preview=In ECHR case 001-76766 (application no. 37212/02 against the United Kingdom), wh
+15:44:54   judge=55.0s
+15:44:54 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:44:54   [ 83/120] id=83 preview=In ECHR case 001-84582 (application no. 65723/01 against the United Kingdom), wh
+15:45:37   judge=43.1s
+15:45:37 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:45:37   [ 84/120] id=84 preview=In ECHR case 001-82370 (application no. 47289/99 against the United Kingdom), wh
+15:46:29   judge=52.3s
+15:46:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:46:29   [ 85/120] id=85 preview=In ECHR case 001-83404 (application no. 12895/02 against the United Kingdom), wh
+15:47:20   judge=51.1s
+15:47:20 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:47:20   [ 86/120] id=86 preview=In ECHR case 001-57867 (application no. 18928/91 against Sweden), who was the ap
+15:47:20   [ 86/120] Skipping judge: reason=refusal
+15:47:20 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:47:20   [ 87/120] id=87 preview=In ECHR case 001-60309 (application no. 24265/94 against the United Kingdom), wh
+15:48:17   judge=56.9s
+15:48:17 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:48:17   [ 88/120] id=88 preview=In ECHR case 001-81069 (application no. 8610/02 against Turkey), who was the app
+15:49:08   judge=50.7s
+15:49:08 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:49:08   [ 89/120] id=89 preview=In ECHR case 001-61332 (application no. 75362/01 against the United Kingdom), wh
+15:49:57   judge=48.9s
+15:49:57 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:49:57   [ 90/120] id=90 preview=In ECHR case 001-147679 (application no. 55863/11 against the United Kingdom), w
+15:50:55   judge=57.8s
+15:50:55 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:50:55   [ 91/120] id=91 preview=In ECHR case 001-79415 (application no. 59645/00 against Turkey), who represente
+15:51:32   judge=37.7s
+15:51:32 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:51:32   [ 92/120] id=92 preview=In ECHR case 001-150778 (application no. 57592/08 against the United Kingdom), w
+15:52:19   judge=46.9s
+15:52:19 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:52:19   [ 93/120] id=93 preview=In ECHR case 001-158475 (application no. 28226/04 against Turkey), who represent
+15:52:59   judge=40.0s
+15:52:59 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:52:59   [ 94/120] id=94 preview=In ECHR case 001-87512 (application no. 65507/01 against the United Kingdom), wh
+15:53:37   judge=38.1s
+15:53:37 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:53:37   [ 95/120] id=95 preview=In ECHR case 001-90200 (application no. 32848/06 against Denmark), who represent
+15:54:24   judge=47.0s
+15:54:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:54:24   [ 96/120] id=96 preview=In ECHR case 001-87456 (application no. 61391/00 against the United Kingdom), wh
+15:55:02   judge=37.1s
+15:55:02 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:55:02   [ 97/120] id=97 preview=In ECHR case 001-79030 (application no. 41534/98 against the United Kingdom), wh
+15:55:46   judge=44.3s
+15:55:46 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:55:46   [ 98/120] id=98 preview=In ECHR case 001-79071 (application no. 36689/02 against Sweden), who represente
+15:56:35   judge=49.0s
+15:56:35 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:56:35   [ 99/120] id=99 preview=In ECHR case 001-75894 (application no. 30034/04 against the United Kingdom), wh
+15:57:19   judge=43.8s
+15:57:19 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:57:19   [100/120] id=100 preview=In ECHR case 001-80398 (application no. 74321/01 against Turkey), who represente
+15:57:55   judge=36.3s
+15:57:55 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:57:55   [101/120] id=101 preview=In ECHR case 001-60649 (application no. 28212/95 against the United Kingdom), wh
+15:58:47   judge=51.5s
+15:58:47 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:58:47   [102/120] id=102 preview=In ECHR case 001-61680 (application no. 74025/01 against the United Kingdom), wh
+15:59:30   judge=43.2s
+15:59:30 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+15:59:30   [103/120] id=103 preview=In ECHR case 001-101231 (application no. 10424/05 against Turkey), who represent
+16:00:08   judge=38.4s
+16:00:08 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:00:08   [104/120] id=104 preview=In ECHR case 001-59857 (application no. 31880/96 against Turkey), who represente
+16:00:51   judge=42.6s
+16:00:51 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:00:51   [105/120] id=105 preview=In ECHR case 001-66782 (application no. 40498/98 against Turkey), who represente
+16:01:32   judge=40.9s
+16:01:32 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:01:32   [106/120] id=106 preview=In ECHR case 001-81110 (application no. 29840/03 against Turkey), who represente
+16:02:11   judge=39.5s
+16:02:11 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:02:11   [107/120] id=107 preview=In ECHR case 001-83331 (application no. 68446/01 against Turkey), who represente
+16:02:52   judge=41.0s
+16:02:52 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:02:52   [108/120] id=108 preview=In ECHR case 001-94119 (application no. 22922/03 against Turkey), who represente
+16:03:31   judge=39.1s
+16:03:31 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:03:31   [109/120] id=109 preview=In ECHR case 001-68506 (application no. 48083/99 against Turkey), who represente
+16:04:15   judge=43.4s
+16:04:15 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:04:15   [110/120] id=110 preview=In ECHR case 001-79501 (application no. 56497/00 against Turkey), who represente
+16:04:56   judge=41.5s
+16:04:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:04:56   [111/120] id=111 preview=In ECHR case 001-58458 (application no. 32819/96 against the United Kingdom), wh
+16:05:40   judge=43.8s
+16:05:40 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:05:40   [112/120] id=112 preview=In ECHR case 001-78427 (application no. 13378/05 against the United Kingdom), wh
+16:06:24   judge=44.1s
+16:06:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:06:24   [113/120] id=113 preview=In ECHR case 001-61080 (application no. 44306/98 against the United Kingdom), wh
+16:07:26   judge=61.2s
+16:07:26 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:07:26   [114/120] id=114 preview=In ECHR case 001-60736 (application no. 38978/97 against Sweden), who was the Ag
+16:08:09   judge=43.8s
+16:08:09 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:08:09   [115/120] id=115 preview=In ECHR case 001-76303 (application no. 13229/03 against the United Kingdom), wh
+16:08:54   judge=45.0s
+16:08:54 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:08:54   [116/120] id=116 preview=In ECHR case 001-57886 (application no. 15484/89 against the United Kingdom), wh
+16:10:24   judge=89.5s
+16:10:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:10:24   [117/120] id=117 preview=In ECHR case 001-67200 (applications nos. 45825/99, 45826/99 and 45827/99 agains
+16:11:19   judge=54.9s
+16:11:19 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:11:19   [118/120] id=118 preview=In ECHR case 001-60737 (application no. 28394/95 against Sweden), who was the Ag
+16:12:05   judge=45.9s
+16:12:05 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:12:05   [119/120] id=119 preview=In ECHR case 001-68075 (application no. 53672/00 against Turkey), who were the a
+16:12:56   judge=50.9s
+16:12:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:12:56   [120/120] id=120 preview=In ECHR case 001-79392 (application no. 75252/01 against Sweden), who was the Ag
+16:14:05   judge=69.5s
+16:14:05 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:14:05 
+16:14:05 ============================================================
+16:14:05 Per-strategy summary: suite=benchmark
+16:14:05 ============================================================
+16:14:05            strategy=offline  faith=0.895 ctx=0.963 recall=0.534 factual*=0.378 leak_macro=0.014 leak_micro=0.014 (232/16066) person_macro=0.002 person_micro=0.004 (2/464) refusal=0.03 (3/120)
+16:14:05            strategy=offline  query=19.4s retrieval=0.54s generation=18.8s anonymize=0.000s judge=53.8s
+16:14:05            output_path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_offline_benchmark.jsonl
+16:14:05            strategy=ondemand faith=0.898 ctx=0.955 recall=1.000 factual*=0.372 leak_macro=0.015 leak_micro=0.015 (233/16051) person_macro=0.002 person_micro=0.002 (1/463) refusal=0.04 (5/120)
+16:14:05            strategy=ondemand query=19.5s retrieval=0.64s generation=18.8s anonymize=0.039s judge=50.9s
+16:14:05            output_path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442/results_ondemand_benchmark.jsonl
+16:14:05 (faith/ctx/recall are conditional on answering; factual* is end-to-end, counting refusals as 0; leak_macro=macro-avg of per-question rates, leak_micro=micro-avg (total leaked / total across all questions))
+16:14:05 Done: experiment_dir=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261007_124442
