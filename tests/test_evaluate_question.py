@@ -31,7 +31,12 @@ def test_evaluate_question_records_offline_timings(monkeypatch):
 
     record = evaluate_question(
         pipeline,
-        {"id": "1", "question": "Who applied?", "ground_truth": "gt"},
+        {
+            "id": "1",
+            "question": "Who applied?",
+            "ground_truth": "gt",
+            "source_doc_id": "d1",
+        },
         pii_index={"d1": set()},
         person_pii_index={},
         judge_model="gemma",
@@ -72,7 +77,12 @@ def test_evaluate_question_times_ondemand_anonymize(monkeypatch):
 
     record = evaluate_question(
         pipeline,
-        {"id": "1", "question": "Who applied?", "ground_truth": "gt"},
+        {
+            "id": "1",
+            "question": "Who applied?",
+            "ground_truth": "gt",
+            "source_doc_id": "d1",
+        },
         pii_index={"d1": set()},
         person_pii_index={},
         judge_model="gemma",
@@ -84,3 +94,41 @@ def test_evaluate_question_times_ondemand_anonymize(monkeypatch):
     assert record.final_answer == "anon:the applicant"
     assert record.anonymize_sec == pytest.approx(0.04)
     assert record.query_sec == pytest.approx(1.4)
+
+
+@pytest.mark.parametrize(
+    ("source_doc_id", "expected"),
+    [("d1", 1), ("d9", 0)],
+)
+def test_evaluate_question_records_retrieval_hit(monkeypatch, source_doc_id, expected):
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.query_rag",
+        lambda *a, **k: _rag_result(),
+    )
+    pipeline = Pipeline(
+        strategy="offline",
+        gen_model="qwen",
+        chain=object(),
+        retrieval_store=object(),
+        anonymizer=None,
+    )
+    question = {
+        "id": "1",
+        "question": "Who applied?",
+        "ground_truth": "gt",
+        "source_doc_id": source_doc_id,
+    }
+
+    record = evaluate_question(
+        pipeline,
+        question,
+        pii_index={"d1": set()},
+        person_pii_index={},
+        judge_model="gemma",
+        run_id="abc",
+        dataset="dev",
+        k_docs=3,
+    )
+
+    assert record.source_doc_id == source_doc_id
+    assert record.retrieval_hit == expected

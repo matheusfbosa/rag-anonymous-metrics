@@ -12,8 +12,6 @@ def source_dir(tmp_path: Path) -> Path:
     scored = dict(
         judge_model="gemma",
         faithfulness=0.1,
-        context_precision=0.1,
-        context_recall=0.1,
         factual_correctness=0.1,
         judge_sec=5.0,
     )
@@ -91,7 +89,7 @@ def test_rejudge_resumes_without_rescoring(
     assert scorers[0].scored_questions == ["first", "second"]
 
 
-def test_rejudge_refusal_scores_zero(tmp_path: Path, fake_scorer):
+def test_rejudge_judges_refusal(tmp_path: Path, fake_scorer):
     src = tmp_path / "source"
     _save_jsonl(
         [_record(question_id="1", answer_is_refusal=True, factual_correctness=0.0)],
@@ -101,7 +99,8 @@ def test_rejudge_refusal_scores_zero(tmp_path: Path, fake_scorer):
     rejudge_experiment(src, tmp_path / "out", "llama")
 
     (record,) = _load_jsonl(tmp_path / "out" / "results_offline_benchmark.jsonl")
-    assert record.factual_correctness == 0.0
+    assert record.factual_correctness == 0.6
+    assert record.fc_n_ref == 5
     assert record.faithfulness is None
 
 
@@ -113,3 +112,18 @@ def test_rejudge_rejects_same_dir(source_dir: Path):
 def test_rejudge_requires_benchmark_files(tmp_path: Path):
     with pytest.raises(ValueError, match="No results_"):
         rejudge_experiment(tmp_path, tmp_path / "out", "llama")
+
+
+def test_rejudge_caches_context_recall_per_judge(
+    tmp_path: Path, source_dir: Path, fake_scorer
+):
+    rejudge_experiment(source_dir, tmp_path / "out", "gemma4:26b")
+
+    cache = (
+        tmp_path
+        / "output"
+        / "context_recall"
+        / "gemma4_26b"
+        / "results_offline_benchmark.jsonl"
+    )
+    assert [line for line in cache.read_text().splitlines() if line]

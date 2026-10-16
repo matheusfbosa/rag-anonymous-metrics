@@ -16,6 +16,10 @@ from rag_anonymous import (
     query_rag,
 )
 from rag_anonymous_metrics.config import Settings
+from rag_anonymous_metrics.context_recall import (
+    attach_context_recall,
+    context_recall_path,
+)
 from rag_anonymous_metrics.log_config import log_item_progress, log_section
 from rag_anonymous_metrics.metrics.privacy import (
     build_person_pii_index,
@@ -97,6 +101,7 @@ def evaluate_question(
         person_pii_index,
     )
     refusal = is_refusal_answer(final_answer)
+    source_doc_id = question_obj["source_doc_id"]
 
     return QueryRecord(
         run_id=run_id,
@@ -119,6 +124,8 @@ def evaluate_question(
         anonymize_sec=anonymize_sec,
         query_sec=query_sec,
         chunk_ids=chunk_ids,
+        source_doc_id=source_doc_id,
+        retrieval_hit=int(source_doc_id in doc_ids),
         **cast(dict[str, Any], privacy),
     )
 
@@ -353,10 +360,15 @@ def _reset_utility(record: QueryRecord) -> QueryRecord:
     return replace(
         record,
         faithfulness=None,
-        context_precision=None,
-        context_recall=None,
         factual_correctness=None,
+        answer_accuracy=None,
+        semantic_similarity=None,
+        fc_n_resp=None,
+        fc_n_resp_ok=None,
+        fc_n_ref=None,
+        fc_n_ref_ok=None,
         judge_sec=None,
+        judge_metric_sec=None,
     )
 
 
@@ -365,7 +377,20 @@ def _attach_utility(
     judge_model: str,
     output_path: Path,
 ) -> None:
-    from rag_anonymous_metrics.metrics.utility import UtilityScorer
+    _attach_answer_utility(records, judge_model, output_path)
+    attach_context_recall(
+        records,
+        judge_model,
+        context_recall_path(Settings.load().results_dir, judge_model, output_path.name),
+    )
+
+
+def _attach_answer_utility(
+    records: list[QueryRecord],
+    judge_model: str,
+    output_path: Path,
+) -> None:
+    from rag_anonymous_metrics.metrics.utility import COVERAGE_KEYS, UtilityScorer
 
     pending = [r for r in records if _needs_utility(r)]
     if not pending:
@@ -373,16 +398,13 @@ def _attach_utility(
         _upsert_jsonl(output_path, records)
         return
 
-    need_judge = any(not _is_refusal(r) for r in pending)
-    scorer = UtilityScorer(judge_model) if need_judge else None
+    scorer = UtilityScorer(judge_model)
     logger.info(
         "Computing utility metrics: judge=%s pending=%d n=%d",
         judge_model,
         len(pending),
         len(records),
     )
-    width = len(str(len(records)))
-
     for idx, record in enumerate(records, 1):
         if not _needs_utility(record):
             continue
@@ -394,20 +416,7 @@ def _attach_utility(
             record.question,
         )
 
-        if _is_refusal(record):
-            logger.info(
-                "  [%*d/%d] Skipping judge: reason=refusal",
-                width,
-                idx,
-                len(records),
-            )
-            record.judge_model = judge_model
-            record.factual_correctness = 0.0
-            record.judge_sec = 0.0
-            _upsert_jsonl(output_path, records)
-            continue
-
-        assert scorer is not None
+        refusal = _is_refusal(record)
         started = time.perf_counter()
         try:
             scores = scorer.score(
@@ -415,6 +424,7 @@ def _attach_utility(
                 record.final_answer,
                 record.contexts,
                 record.ground_truth,
+                refusal=refusal,
             )
         except Exception:
             logger.exception(
@@ -424,15 +434,18 @@ def _attach_utility(
             continue
         record.judge_model = judge_model
         record.judge_sec = time.perf_counter() - started
+        record.judge_metric_sec = scores["judge_metric_sec"]
+        if record.fc_n_ref is None:
+            record.factual_correctness = scores["factual_correctness"]
+            for key in COVERAGE_KEYS:
+                setattr(record, key, scores[key])
+        if record.answer_accuracy is None:
+            record.answer_accuracy = scores["answer_accuracy"]
+        if record.semantic_similarity is None:
+            record.semantic_similarity = scores["semantic_similarity"]
         if record.faithfulness is None:
             record.faithfulness = scores["faithfulness"]
-        if record.context_precision is None:
-            record.context_precision = scores["context_precision"]
-        if record.context_recall is None:
-            record.context_recall = scores["context_recall"]
-        if record.factual_correctness is None:
-            record.factual_correctness = scores["factual_correctness"]
-        logger.info("  judge=%.1fs", record.judge_sec)
+        logger.info("  judge=%.1fs refusal=%s", record.judge_sec, refusal)
         _upsert_jsonl(output_path, records)
 
 
@@ -441,13 +454,15 @@ def _is_refusal(record: QueryRecord) -> bool:
 
 
 def _needs_utility(record: QueryRecord) -> bool:
-    if _is_refusal(record):
-        return record.factual_correctness is None
     return (
-        record.faithfulness is None
-        or record.context_precision is None
-        or record.context_recall is None
-        or record.factual_correctness is None
+        record.fc_n_ref is None
+        or record.answer_accuracy is None
+        or record.semantic_similarity is None
+        or (
+            record.faithfulness is None
+            and bool(record.contexts)
+            and not _is_refusal(record)
+        )
     )
 
 

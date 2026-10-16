@@ -18,28 +18,38 @@ def dump_judge_prompts(
     judge_model: str,
     range_spec: RangeSpec,
 ) -> list[Path]:
-    from rag_anonymous_metrics.metrics.utility import UtilityScorer
+    from rag_anonymous_metrics.metrics.utility import (
+        ContextRecallScorer,
+        UtilityScorer,
+    )
 
     sources = sorted(source_dir.glob("results_*_benchmark.jsonl"))
     if not sources:
         raise ValueError(f"No results_*_benchmark.jsonl in {source_dir}")
 
     scorer = UtilityScorer(judge_model)
+    recall_scorer = ContextRecallScorer(judge_model)
     written: list[Path] = []
     for source in sources:
         items = [{"id": r.question_id, "record": r} for r in _load_jsonl(source)]
         for item in apply_id_range(items, range_spec):
             record = item["record"]
-            if _is_refusal(record):
-                logger.info("Skipping refusal: question_id=%s", record.question_id)
-                continue
             with _capture_prompts() as calls:
-                scorer.score(
+                scorer.run_prompt_metrics(
                     record.question,
                     record.final_answer,
                     record.contexts,
                     record.ground_truth,
+                    refusal=_is_refusal(record),
                 )
+                recall_scorer.score(
+                    record.question, record.contexts, record.ground_truth
+                )
+            calls.extend(
+                scorer.answer_accuracy_prompts(
+                    record.question, record.final_answer, record.ground_truth
+                )
+            )
             folder = (
                 output_dir
                 / "judge_prompts"

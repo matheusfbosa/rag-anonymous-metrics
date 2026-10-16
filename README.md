@@ -16,7 +16,7 @@ This package evaluates two anonymization strategies against a benchmark question
 Each experiment runs in two phases, into one folder per generator:
 
 1. **Generate** — per question × strategy: retrieval, generation (with privacy system prompt), Presidio on the answer (On-Demand only) and **privacy metrics** (PII leakage on `generated_answer` and `final_answer`, refusal). Covers the **benchmark** and the **adversarial** suites; saved to JSONL with wall-clock timings.
-2. **Judge** — Ollama models are unloaded; the judge LLM scores the saved **benchmark** answers with Ragas (faithfulness, context precision, context recall, factual correctness). Refusals: `null` for the first three, `0` for factual correctness. The adversarial suite has no judge; it reports **Attack Success Rate (ASR)**.
+2. **Judge** — Ollama models are unloaded; the judge LLM scores the saved **benchmark** answers with Ragas (factual correctness as coverage, answer accuracy, faithfulness; context recall once per strategy), plus judge-free retrieval hit and semantic similarity. Every answer is judged, refusals included; only faithfulness is `null` on refusal. The adversarial suite has no judge; it reports **Attack Success Rate (ASR)**.
 
 `rejudge` repeats phase 2 with another judge over the same saved answers, into a new folder.
 
@@ -39,7 +39,7 @@ flowchart TD
     final_answer --> jsonl
 
     subgraph judge ["Phase 2 · Judge (benchmark only)"]
-        utility["Judge LLM via Ragas\n(faithfulness, context precision/recall,\nfactual correctness)"]
+        utility["Judge LLM via Ragas\n(factual correctness, answer accuracy,\nfaithfulness, context recall)"]
     end
 
     jsonl --> utility
@@ -62,7 +62,7 @@ rag-anonymous-metrics/
 │   └── metrics/
 │       ├── adversarial.py  # ASR summary helpers
 │       ├── privacy.py      # PII leakage index/rate + refusal heuristics
-│       └── utility.py      # Ragas faithfulness + context precision (judge LLM)
+│       └── utility.py      # Ragas utility metrics (judge LLM) + retrieval hit, semantic similarity
 ├── data/
 │   ├── input/
 │   │   ├── adversarial_attacks_{dev,train,test}.json
@@ -78,65 +78,80 @@ rag-anonymous-metrics/
 
 ## Metrics
 
-Utility metrics (faithfulness, context precision, context recall, factual correctness) are computed by the [Ragas](https://docs.ragas.io) framework, driven by a dedicated **judge LLM** (`RAG_METRICS_JUDGE_MODEL`) that is intentionally different from the generator (`RAG_ANON_LLM_MODEL`) to avoid self-evaluation bias. Context recall and factual correctness compare against the benchmark `ground_truth`; faithfulness and context precision do not use a reference. Privacy metrics (PII leakage rate, answer refusal rate) are computed deterministically and do not involve Ragas or the judge.
+Utility metrics are computed with the [Ragas](https://docs.ragas.io) framework, driven by a dedicated **judge LLM** (`RAG_METRICS_JUDGE_MODEL`) that is intentionally different from the generator (`RAG_ANON_LLM_MODEL`) to avoid self-evaluation bias. Two utility metrics need no judge (`retrieval_hit`, `semantic_similarity`). Privacy metrics (PII leakage rate, answer refusal rate) are computed deterministically and do not involve Ragas or the judge.
+
+| Metric | Field | Role | Scope | Judge |
+| ------ | ----- | ---- | ----- | ----- |
+| Factual correctness (coverage) | `factual_correctness` + `fc_n_*` | **Primary utility (H1)** | every answer | yes |
+| Answer accuracy | `answer_accuracy` | Confirms H1 | every answer | yes |
+| Faithfulness | `faithfulness` | Diagnostic: hallucination | every answer except refusals | yes |
+| Context recall | `context_recall` | Diagnostic: retrieval | once per strategy × question | yes |
+| Retrieval hit | `retrieval_hit` | Diagnostic: retrieval | once per strategy × question | no |
+| Semantic similarity | `semantic_similarity` | Judge-free anchor (H4) | every answer | no (embedding) |
+
+Context precision (`LLMContextPrecisionWithoutReference`) was removed on 2026-10-16: it judged chunks against the response rather than the reference, so it did not measure retrieval.
+
+### Factual correctness (coverage)
+
+**Factual correctness** measures how much of the **reference answer** (`ground_truth`) the **final answer** delivers, independent of the retrieved context. It ranges from **0 to 1**.
+
+**How it’s calculated:** Uses the prompts of Ragas' [`FactualCorrectness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/) (claim decomposition + NLI, `atomicity="low"`, `coverage="low"`) with the same four judge calls:
+
+1. decompose `final_answer` into claims and verify each against `ground_truth`;
+2. decompose `ground_truth` into claims and verify each against `final_answer`.
+
+The raw counts are stored:
+
+| Field | Meaning |
+| ----- | ------- |
+| `fc_n_resp` | claims in the answer |
+| `fc_n_resp_ok` | answer claims supported by the reference |
+| `fc_n_ref` | claims in the reference |
+| `fc_n_ref_ok` | reference claims covered by the answer |
+
+$$
+\text{factual\_correctness} = \frac{\texttt{fc\_n\_ref\_ok}}{\texttt{fc\_n\_ref}}
+$$
+
+Precision (`fc_n_resp_ok / fc_n_resp`) and F1 can be derived from the counts without calling the judge again. Coverage replaces the Ragas F1 default because F1 penalises correct details missing from the reference, and Ragas' own `recall` mode mixes answer-claim and reference-claim counts. If the reference yields no claims the score is `null`.
+
+**Every answer is judged, refusals included.** A full refusal covers no reference claim and scores 0 through the judge; a partial refusal (refusal phrase followed by an answer) gets credit for what it delivers.
+
+### Answer accuracy
+
+Ragas' Nvidia metric [`AnswerAccuracy`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/nvidia_metrics/). Two judge prompts rate the agreement between `final_answer` and `ground_truth` on a 0/2/4 scale, the second with the roles swapped; ratings are mapped to $[0,1]$ and averaged. Two short calls (no context). It cross-checks factual correctness against judge noise. Every answer is judged.
 
 ### Faithfulness
 
-The **Faithfulness** metric measures how factually consistent a **response** is with the **retrieved context**. It ranges from **0 to 1**, with higher scores indicating better consistency.
-
-A response is considered **faithful** if all its claims can be supported by the retrieved context.
-
-To calculate this:
-
-1. Identify all the claims in the response.
-2. Check each claim to see if it can be inferred from the retrieved context.
-3. Compute the faithfulness score using the formula:
+The **Faithfulness** metric measures how factually consistent a **response** is with the **retrieved context** — not whether it is correct. It ranges from **0 to 1**.
 
 $$
 \text{Faithfulness} = \frac{\text{Number of claims in the response supported by the retrieved context}}{\text{Total number of claims in the response}}.
 $$
 
-**How it’s calculated:** Computed by Ragas' `[Faithfulness](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/faithfulness/)` metric. The **response** is `final_answer` (after any strategy-specific anonymisation) and the **retrieved context** is the list of chunk texts returned by the retriever, passed as a `SingleTurnSample`. Ragas performs steps (1)–(2) — claim decomposition and per-claim verification — internally via the judge LLM. If no claims are extracted the score is **undefined** (Ragas returns `NaN`) and stored as `null`; otherwise the score is in $[0,1]$.
-
-### Context precision
-
-**Context precision** evaluates the retriever’s ability to place **relevant** chunks **higher** than irrelevant ones: it rewards relevant items that appear near the top of the ranked `retrieved_contexts` list.
-
-Ragas defines **Context Precision@K** as:
-
-$$
-\text{Context Precision@}K = \frac{\sum_{k=1}^{K} \bigl(\text{Precision@}k \times v_k\bigr)}{\text{Total number of relevant items in the top } K \text{ results}}
-$$
-
-$$
-\text{Precision@}k = \frac{\text{true positives@}k}{\text{true positives@}k + \text{false positives@}k}
-$$
-
-where $K$ is the number of chunks in `retrieved_contexts` and $v_k \in 0,1$ is the relevance indicator at rank $k$. With one binary label per rank, the denominator at cut $k$ is $k$, and $\text{true positives@}k$ is the count of relevant chunks among positions $1..k$, so $\text{Precision@}k$ matches the cumulative precision used here.
-
-**How it’s calculated:** Computed by Ragas' `[LLMContextPrecisionWithoutReference](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/)` metric. Relevance $v_k$ is judged by the **judge LLM** from the **user question** and the **model response** (whether each chunk is useful *for producing that answer*) — the without-reference variant, since we have no gold `reference` string. Ragas computes the weighted Precision@$k$ formula above internally over the full `retrieved_contexts` list. If $\sum_k v_k = 0$ the score is **0**; if the metric cannot be computed it returns `NaN` and is stored as `null`.
+**How it’s calculated:** Ragas' [`Faithfulness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/faithfulness/) on `final_answer` and the retrieved chunk texts. It answers whether masked context induces hallucination. It is `null` on refusals (a refusal makes no claims about the case) and when no claims are extracted.
 
 ### Context recall
 
-**Context recall** measures whether the **retrieved context** contains the information needed to produce the **reference answer** (`ground_truth`). It is the retrieval complement of context precision: precision penalises irrelevant chunks, recall penalises *missing* relevant chunks. It ranges from **0 to 1**, with higher scores indicating that more of the reference answer is supported by the retrieved context.
+**Context recall** measures whether the **retrieved context** contains the information needed for the **reference answer** (`ground_truth`):
 
 $$
 \text{Context Recall} = \frac{\text{Number of reference claims attributable to the retrieved context}}{\text{Total number of reference claims}}.
 $$
 
-**How it’s calculated:** Computed by Ragas' `[LLMContextRecall](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_recall/)` metric. Ragas decomposes the `ground_truth` into claims and, via the **judge LLM**, checks each claim against the `retrieved_contexts`. This is the signal most sensitive to the **offline** strategy, where anonymising the corpus *before* indexing can remove the anchors a query relies on. If the metric cannot be computed it returns `NaN` and is stored as `null`.
+**How it’s calculated:** Ragas' [`LLMContextRecall`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_recall/). It does not use the answer, and retrieval does not depend on the generator, so it is computed **once per strategy × question** per judge (240 judge calls instead of one per generator) and for every question, refusals included. The judge phase (`judge`, `judge-strategies`, `rejudge`) computes it into a shared cache per judge (see [Output](#output)) and reuses it for every other generator; a cached row is reused only if its `doc_ids` and `chunk_ids` match the run's, otherwise it is recomputed with a warning. The notebooks join it by `question_id`. This is the signal most sensitive to the **offline** strategy, where masking names before indexing removes what identity references need.
 
-### Factual correctness
+### Retrieval hit
 
-**Factual correctness** measures how well the **model response** agrees with the **reference answer** (`ground_truth`), independent of the retrieved context. Whereas faithfulness asks whether the answer is grounded in *what was retrieved*, factual correctness asks whether it matches *the truth*. It ranges from **0 to 1**.
+`retrieval_hit` is `1` if the question's `source_doc_id` is among the retrieved `doc_ids` (top $k$), else `0`. Deterministic, no judge. Set during generation together with `source_doc_id`. It separates *finding the document* from *the retrieved content containing the answer* (context recall).
 
-**How it’s calculated:** Computed by Ragas' `[FactualCorrectness](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/)` metric. Ragas decomposes both the **response** and the `ground_truth` into claims and uses the **judge LLM** to verify them against each other (natural-language inference), reporting an F1-style score over supported claims. This is the cleanest **utility** signal for the privacy/utility trade-off: it quantifies how much anonymisation degrades the correctness of answers relative to the gold reference. If the metric cannot be computed it returns `NaN` and is stored as `null`.
+### Semantic similarity
 
-Unlike the other utility metrics, factual correctness is **not censored on refusal**: a refusal delivers zero correct facts, so it is scored **0** rather than `null`. This makes factual correctness an **end-to-end utility** measure — averaged over *all* benchmark questions, including refusals — so it stays comparable across strategies regardless of how often each one abstains. The other three metrics remain *conditional on answering* (refusals → `null`), so always read them alongside the refusal rate.
+Cosine similarity between the embeddings of `final_answer` and `ground_truth` (Ragas' [`SemanticSimilarity`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/semantic_similarity/), embedding `nomic-embed-text`, the retriever's model). No judge LLM, so it anchors the judge-scale comparison (H4). It is weak on fine-grained factual errors and does not decide H1.
 
 ### Answer refusal rate
 
-Let $R_{\mathrm{ref}} \in 0,1$ be an **abstention indicator** computed by deterministic string heuristics (including the privacy-prompt refusal “I cannot disclose personal identifiers…”).
+Let $R_{\mathrm{ref}} \in \{0,1\}$ be an **abstention indicator** computed by deterministic string heuristics (including the privacy-prompt refusal “I cannot disclose personal identifiers…”).
 
 Over $N$ benchmark items, the **refusal rate** is
 
@@ -144,7 +159,12 @@ $$
 \rho = \frac{1}{N}\sum_{j=1}^{N} R_{\mathrm{ref}}^{(j)}.  
 $$
 
-**Censoring of utility:** When $R_{\mathrm{ref}}=1$, faithfulness, context precision and context recall are **omitted** (recorded as `null`) so the judge is not applied to non-answers — these stay *conditional on answering*. **Factual correctness is the exception**: a refusal is scored **0**, making it an end-to-end utility measure over all questions (see [Factual correctness](#factual-correctness)).
+The refusal flag is **descriptive**: it feeds the refusal rate and sets faithfulness to `null`, but it does not set any other utility score. Factual correctness, answer accuracy and semantic similarity are computed on every answer.
+
+Known limitations, kept on purpose:
+
+- **Partial refusals get no faithfulness.** An answer that opens with the refusal phrase and then summarises the case is flagged, so its faithfulness is `null`. Scoring every answer instead would give pure refusals a low faithfulness, as if they hallucinated.
+- **The refusal rate mixes full and partial refusals.** It counts every answer containing a refusal phrase, including those that go on to answer. Read it as "answers with a refusal phrase", not "unanswered questions".
 
 ### PII leakage rate
 
@@ -199,7 +219,8 @@ Operational cost per question, stored on the same JSONL record. `query_sec` is t
 | `generation_sec` | Generator LLM | Timed even when a recoverable error yields an empty answer. |
 | `anonymize_sec` | Post-generation Presidio | `0` for Offline (anonymization already happened at ingest). |
 | `query_sec` | `retrieval_sec` + `generation_sec` + `anonymize_sec` | Use this to compare query cost across strategies. |
-| `judge_sec` | Ragas utility (four metrics, concurrent) | `0` on refusal (judge not called). Absent on the adversarial suite. |
+| `judge_sec` | Utility phase per answer (factual correctness, answer accuracy, semantic similarity, faithfulness) | Context recall is timed separately, once per strategy. Absent on the adversarial suite. |
+| `judge_metric_sec` | Same phase, per metric | Metrics run one after another, so this splits `judge_sec`; use it to see which metric dominates the judge time. |
 
 Generation dominates on this hardware; `anonymize_sec` is the strategy-specific increment. Older JSONL lines load as `null` and are left untouched on resume.
 
@@ -281,7 +302,7 @@ make run-smoke-strategies      # same, on RANGE_SMOKE
 Runs in two phases so the generator and the judge are never loaded together:
 
 1. **Generate** — per strategy: retrieval, generation, Presidio (On-Demand), privacy metrics; with `CATEGORY=benchmark` also the adversarial suite. No judge.
-2. **Judge** — Ollama models are unloaded, then Ragas scores the saved answers of both strategies.
+2. **Judge** — Ollama models are unloaded, then Ragas scores the saved answers of both strategies; context recall is filled from the per-judge cache, computing only what is missing.
 
 ### 3. Run phases separately
 
@@ -329,6 +350,7 @@ Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollam
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
   - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — `llm_model`, `judge_model`, `answer_is_refusal`, privacy/utility scores, ranked retrieval lists (`contexts`, `doc_ids`, `chunk_ids`), and the timing fields in [Wall-clock timings](#wall-clock-timings). Older JSONL without `chunk_ids` loads as `null`.
   - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields (`pii_*`, `pii_person_*`) + `ASR_tab` / `ASR_person` summary in the logs (no Ragas scores).
+- **Context recall (shared):** `data/output/context_recall/<judge>/results_{strategy}_benchmark.jsonl` (`:` in the judge tag becomes `_`, e.g. `gemma4_26b`) — one line per question with `question_id`, `strategy`, `doc_ids`, `chunk_ids`, `context_recall`, `judge_model`, `judge_sec`; logs go to the `run.log` of the run that computed them.
 
 
 

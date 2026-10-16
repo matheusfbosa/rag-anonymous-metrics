@@ -52,6 +52,8 @@ def _record(**overrides) -> QueryRecord:
         pii_person_leaked_final=0,
         pii_person_leakage_rate_final=0.0,
         pii_person_any_leak_final=0,
+        source_doc_id="d1",
+        retrieval_hit=1,
     )
     data.update(overrides)
     return QueryRecord(**data)
@@ -64,18 +66,37 @@ def metrics_env(monkeypatch):
     monkeypatch.delenv("RAG_METRICS_OVERWRITE", raising=False)
 
 
+SCORED = dict(
+    faithfulness=0.1,
+    factual_correctness=0.4,
+    fc_n_resp=2,
+    fc_n_resp_ok=1,
+    fc_n_ref=5,
+    fc_n_ref_ok=2,
+    answer_accuracy=0.5,
+    semantic_similarity=0.8,
+)
+
+
 class FakeScorer:
     def __init__(self, judge_model: str):
         self.judge_model = judge_model
         self.scored_questions: list[str] = []
+        self.refusals: list[bool] = []
 
-    def score(self, question, answer, contexts, reference):
+    def score(self, question, answer, contexts, reference, *, refusal=False):
         self.scored_questions.append(question)
+        self.refusals.append(refusal)
         return {
-            "faithfulness": 0.9,
-            "context_precision": 0.8,
-            "context_recall": 0.7,
             "factual_correctness": 0.6,
+            "fc_n_resp": 4,
+            "fc_n_resp_ok": 3,
+            "fc_n_ref": 5,
+            "fc_n_ref_ok": 3,
+            "answer_accuracy": 0.75,
+            "semantic_similarity": 0.85,
+            "faithfulness": None if refusal else 0.9,
+            "judge_metric_sec": {"factual_correctness": 1.0},
         }
 
 
@@ -130,12 +151,7 @@ def test_append_jsonl_keeps_distinct_ids(tmp_path: Path):
 
 
 def test_needs_utility_false_when_scored():
-    rec = _record(
-        faithfulness=0.5,
-        context_precision=0.4,
-        context_recall=0.3,
-        factual_correctness=0.2,
-    )
+    rec = _record(**SCORED)
     assert _needs_utility(rec) is False
 
 
@@ -145,14 +161,16 @@ def test_needs_utility_true_when_unscored():
 
 
 def test_needs_utility_true_when_partially_scored():
-    rec = _record(faithfulness=0.5, context_precision=0.4)
+    rec = _record(faithfulness=0.5, answer_accuracy=0.4)
     assert _needs_utility(rec) is True
 
 
-def test_refusal_does_not_need_judge_once_factual_is_set():
-    rec = _record(answer_is_refusal=True, factual_correctness=0.0)
-    assert _is_refusal(rec) is True
-    assert _needs_utility(rec) is False
+def test_refusal_needs_judge_without_faithfulness():
+    old = _record(answer_is_refusal=True, factual_correctness=0.0)
+    scored = _record(answer_is_refusal=True, **{**SCORED, "faithfulness": None})
+    assert _is_refusal(old) is True
+    assert _needs_utility(old) is True
+    assert _needs_utility(scored) is False
 
 
 def test_evaluate_strategy_skips_saved_question_ids(
@@ -204,14 +222,7 @@ def test_evaluate_strategy_skips_saved_question_ids(
 def test_evaluate_strategy_scores_only_unscored_records(
     tmp_path: Path, monkeypatch, metrics_env
 ):
-    scored = _record(
-        question_id="1",
-        question="first",
-        faithfulness=0.1,
-        context_precision=0.2,
-        context_recall=0.3,
-        factual_correctness=0.4,
-    )
+    scored = _record(question_id="1", question="first", **SCORED)
     pending = _record(question_id="2", question="second")
     _save_jsonl([scored, pending], tmp_path / "results_offline_benchmark.jsonl")
 
@@ -263,9 +274,7 @@ def test_evaluate_strategy_scores_only_unscored_records(
     assert by_id["2"].judge_sec >= 0.0
 
 
-def test_evaluate_strategy_skips_judge_for_refusal(
-    tmp_path: Path, monkeypatch, metrics_env
-):
+def test_evaluate_strategy_judges_refusal(tmp_path: Path, monkeypatch, metrics_env):
     refusal = _record(
         question_id="1",
         question="secret?",
@@ -273,10 +282,12 @@ def test_evaluate_strategy_skips_judge_for_refusal(
         final_answer="I cannot help with that",
     )
     _save_jsonl([refusal], tmp_path / "results_offline_benchmark.jsonl")
+    scorers: list[FakeScorer] = []
 
-    class BoomScorer:
+    class TrackingScorer(FakeScorer):
         def __init__(self, judge_model: str):
-            raise AssertionError("judge should not be constructed")
+            super().__init__(judge_model)
+            scorers.append(self)
 
     monkeypatch.setattr(
         "rag_anonymous_metrics.run.build_pipeline",
@@ -284,10 +295,10 @@ def test_evaluate_strategy_skips_judge_for_refusal(
     )
     monkeypatch.setattr(
         "rag_anonymous_metrics.metrics.utility.UtilityScorer",
-        BoomScorer,
+        TrackingScorer,
     )
 
-    result = evaluate_strategy(
+    evaluate_strategy(
         "offline",
         [{"id": "1", "question": "secret?", "ground_truth": "gt"}],
         pii_index={"d1": set()},
@@ -299,11 +310,13 @@ def test_evaluate_strategy_skips_judge_for_refusal(
         output_basename="results_offline_benchmark.jsonl",
     )
 
-    assert result.records[0].factual_correctness == 0.0
-    assert result.records[0].judge_sec == 0.0
+    assert scorers[0].refusals == [True]
     loaded = _load_jsonl(tmp_path / "results_offline_benchmark.jsonl")
-    assert loaded[0].factual_correctness == 0.0
-    assert loaded[0].judge_sec == 0.0
+    assert loaded[0].factual_correctness == 0.6
+    assert loaded[0].fc_n_ref_ok == 3
+    assert loaded[0].answer_accuracy == 0.75
+    assert loaded[0].faithfulness is None
+    assert loaded[0].judge_metric_sec == {"factual_correctness": 1.0}
 
 
 def test_evaluate_strategy_overwrite_reruns_everything(
@@ -357,7 +370,7 @@ def test_evaluate_strategy_records_judge_wall_clock(
     pending = _record(question_id="1", question="first")
     _save_jsonl([pending], tmp_path / "results_offline_benchmark.jsonl")
 
-    ticks = iter([10.0, 22.5])
+    ticks = iter([10.0, 22.5, 30.0, 31.0])
     monkeypatch.setattr(
         "rag_anonymous_metrics.run.time.perf_counter", lambda: next(ticks)
     )
@@ -394,7 +407,7 @@ def test_evaluate_strategy_rescores_partial_utility(
         question_id="1",
         question="first",
         faithfulness=0.1,
-        context_precision=0.2,
+        answer_accuracy=0.2,
     )
     _save_jsonl([partial], tmp_path / "results_offline_benchmark.jsonl")
 
@@ -421,9 +434,15 @@ def test_evaluate_strategy_rescores_partial_utility(
 
     rec = result.records[0]
     assert rec.faithfulness == 0.1
-    assert rec.context_precision == 0.2
-    assert rec.context_recall == 0.7
+    assert rec.answer_accuracy == 0.2
     assert rec.factual_correctness == 0.6
+    assert (rec.fc_n_resp, rec.fc_n_resp_ok, rec.fc_n_ref, rec.fc_n_ref_ok) == (
+        4,
+        3,
+        5,
+        3,
+    )
+    assert rec.semantic_similarity == 0.85
 
 
 def test_evaluate_strategy_skips_empty_generation(

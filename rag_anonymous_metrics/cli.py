@@ -152,9 +152,10 @@ def _log_benchmark_summary(results: dict[str, StrategyResult]) -> None:
     for strategy, result in results.items():
         records = result.records
         avg_faith = _safe_mean(r.faithfulness for r in records)
-        avg_ctx = _safe_mean(r.context_precision for r in records)
-        avg_recall = _safe_mean(r.context_recall for r in records)
         avg_factual = _safe_mean(r.factual_correctness for r in records)
+        avg_accuracy = _safe_mean(r.answer_accuracy for r in records)
+        avg_similarity = _safe_mean(r.semantic_similarity for r in records)
+        avg_hit = _safe_mean(r.retrieval_hit for r in records)
         macro_avg_leak = _safe_mean(r.pii_leakage_rate_final for r in records)
         macro_avg_person_leak = _safe_mean(
             r.pii_person_leakage_rate_final for r in records
@@ -176,14 +177,16 @@ def _log_benchmark_summary(results: dict[str, StrategyResult]) -> None:
         avg_anonymize = _safe_mean(r.anonymize_sec for r in records)
 
         logger.info(
-            "           strategy=%-8s faith=%.3f ctx=%.3f recall=%.3f factual*=%.3f "
+            "           strategy=%-8s coverage=%.3f accuracy=%.3f similarity=%.3f "
+            "faith=%.3f hit=%.3f "
             "leak_macro=%.3f leak_micro=%.3f (%d/%d) "
             "person_macro=%.3f person_micro=%.3f (%d/%d) refusal=%.2f (%d/%d)",
             strategy,
-            avg_faith,
-            avg_ctx,
-            avg_recall,
             avg_factual,
+            avg_accuracy,
+            avg_similarity,
+            avg_faith,
+            avg_hit,
             macro_avg_leak,
             micro_avg_leak,
             sum_leaked,
@@ -209,8 +212,8 @@ def _log_benchmark_summary(results: dict[str, StrategyResult]) -> None:
         logger.info("           output_path=%s", result.output_path)
 
     logger.info(
-        "(faith/ctx/recall are conditional on answering; "
-        "factual* is end-to-end, counting refusals as 0; "
+        "(coverage/accuracy/similarity judge every answer; faith is null on refusal; "
+        "context recall is cached once per judge in data/output/context_recall; "
         "leak_macro=macro-avg of per-question rates, "
         "leak_micro=micro-avg (total leaked / total across all questions))"
     )

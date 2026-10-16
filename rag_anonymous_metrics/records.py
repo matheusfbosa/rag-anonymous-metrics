@@ -32,11 +32,11 @@ class QueryRecord:
     pii_person_leaked_final: int
     pii_person_leakage_rate_final: float
     pii_person_any_leak_final: int
+    source_doc_id: str
+    retrieval_hit: int
     item_type: str | None = None
     category: str | None = None
     faithfulness: float | None = None
-    context_precision: float | None = None
-    context_recall: float | None = None
     factual_correctness: float | None = None
     retrieval_sec: float | None = None
     generation_sec: float | None = None
@@ -44,6 +44,13 @@ class QueryRecord:
     query_sec: float | None = None
     judge_sec: float | None = None
     chunk_ids: list[str] | None = None
+    answer_accuracy: float | None = None
+    semantic_similarity: float | None = None
+    fc_n_resp: int | None = None
+    fc_n_resp_ok: int | None = None
+    fc_n_ref: int | None = None
+    fc_n_ref_ok: int | None = None
+    judge_metric_sec: dict[str, float] | None = None
 
 
 @dataclass(frozen=True, slots=True)
