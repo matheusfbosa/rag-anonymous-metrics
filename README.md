@@ -304,7 +304,30 @@ Runs in two phases so the generator and the judge are never loaded together:
 1. **Generate** — per strategy: retrieval, generation, Presidio (On-Demand), privacy metrics; with `CATEGORY=benchmark` also the adversarial suite. No judge.
 2. **Judge** — Ollama models are unloaded, then Ragas scores the saved answers of both strategies; context recall is filled from the per-judge cache, computing only what is missing.
 
-### 3. Run phases separately
+### 3. All experiments at once
+
+Runs every generator × judge combination, with and without the privacy system prompt, for `DATASET`:
+
+```sh
+make run-experiments
+```
+
+| Variable | Default | Meaning |
+| -------- | ------- | ------- |
+| `GENERATORS` | `qwen3:4b-q4_K_M qwen3:8b qwen3:14b qwen3:32b mistral:7b qwen3.5:4b qwen3.8:27b` | Run with the privacy prompt **off** |
+| `PRIVACY_PROMPT_GENERATORS` | `qwen3:4b-q4_K_M qwen3:32b` | Also run with the privacy prompt **on** |
+| `JUDGES` | `gemma4:26b gemma4:12b` | Each generator's answers are judged by every judge |
+| `RUN_ID` | current timestamp | Prefix of every output folder; pass the same value to resume |
+
+For each generator and prompt setting, `run-model` generates the answers once (benchmark and adversarial suites, both strategies), judges them with the first judge, then rejudges the same answers with each remaining judge, unloading Ollama models between phases. Folders are named `<RUN_ID>_<generator>_pp<0|1>_<judge>` (`:` becomes `-`), e.g. `20261017_090000_qwen3-32b_pp0_gemma4-26b`. A failed model does not stop the others; the command lists the failures at the end and exits non-zero. Re-running with the same `RUN_ID` skips everything already saved.
+
+```sh
+make run-experiments RUN_ID=20261017_090000                    # resume
+make run-model GEN=qwen3:32b PRIVACY_PROMPT=1 RUN_ID=…          # one generator
+make run-experiments GENERATORS="qwen3:8b" PRIVACY_PROMPT_GENERATORS=   # subset
+```
+
+### 4. Run phases separately
 
 ```sh
 make generate-strategies                              # phase 1 only (prints the folder)
@@ -313,7 +336,7 @@ make judge-strategies EXPERIMENT_DIR=20260926_101500  # phase 2 on that folder
 
 For one strategy: `make generate STRATEGY=ondemand`, `make judge STRATEGY=ondemand EXPERIMENT_DIR=…`, or `make run STRATEGY=ondemand CATEGORY=identity` (single category, generate + judge).
 
-### 4. Resume after a crash
+### 5. Resume after a crash
 
 Every question is checkpointed to JSONL. Re-run the same target with the same folder; saved answers and scores are skipped:
 
@@ -323,7 +346,7 @@ make run-strategies EXPERIMENT_DIR=20260926_101500
 
 `OVERWRITE=1` redoes the generation from scratch (the judge phase never overwrites).
 
-### 5. Rejudge with another judge
+### 6. Rejudge with another judge
 
 Rescores the same saved answers with `RAG_METRICS_JUDGE_MODEL` into a new folder; no retrieval or generation, source folder untouched, adversarial files copied as is:
 
@@ -333,7 +356,7 @@ RAG_METRICS_JUDGE_MODEL=gemma4:26b make rejudge SOURCE_DIR=20260912_142811
 
 Resume with `EXPERIMENT_DIR=<output folder>`. Point the notebook's `RUN_FOLDER` at the output folder to analyze it.
 
-### 6. Inspect the judge prompts
+### 7. Inspect the judge prompts
 
 Saves the exact prompts Ragas would send to the judge, one file per call, without calling any LLM. They are the Ragas default prompts, rendered with `to_string()` as described in [Modifying prompts in metrics](https://docs.ragas.io/en/stable/howtos/customizations/metrics/modifying-prompts-metrics/), filled with the saved question, answer, contexts and `ground_truth`:
 
@@ -348,9 +371,9 @@ Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollam
 ## Output
 
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
-  - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — `llm_model`, `judge_model`, `answer_is_refusal`, privacy/utility scores, ranked retrieval lists (`contexts`, `doc_ids`, `chunk_ids`), and the timing fields in [Wall-clock timings](#wall-clock-timings). Older JSONL without `chunk_ids` loads as `null`.
+  - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — `llm_model`, `judge_model`, `privacy_prompt`, `answer_is_refusal`, privacy/utility scores, ranked retrieval lists (`contexts`, `doc_ids`, `chunk_ids`), and the timing fields in [Wall-clock timings](#wall-clock-timings). Older JSONL without `chunk_ids` loads as `null`.
   - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields (`pii_*`, `pii_person_*`) + `ASR_tab` / `ASR_person` summary in the logs (no Ragas scores).
-- **Context recall (shared):** `data/output/context_recall/<judge>/results_{strategy}_benchmark.jsonl` (`:` in the judge tag becomes `_`, e.g. `gemma4_26b`) — one line per question with `question_id`, `strategy`, `doc_ids`, `chunk_ids`, `context_recall`, `judge_model`, `judge_sec`; logs go to the `run.log` of the run that computed them.
+- **Context recall (shared):** `data/output/context_recall/<dataset>/<judge>/results_{strategy}_benchmark.jsonl` (`:` in the judge tag becomes `_`, e.g. `gemma4_26b`) — one line per question with `question_id`, `strategy`, `doc_ids`, `chunk_ids`, `context_recall`, `judge_model`, `judge_sec`; logs go to the `run.log` of the run that computed them.
 
 
 
@@ -363,7 +386,7 @@ Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollam
 | `RAG_ANON_EMBEDDING_MODEL`       | `nomic-embed-text`                                         | Embeddings model                                                                                                                                                                  |
 | `RAG_ANON_ES_URL`                | `http://localhost:9200`                                    | Elasticsearch base URL (shared with `rag-anonymous`)                                                                                                                              |
 | `RAG_ANON_LLM_MODEL`             | `qwen3:8b`                                                 | Generator LLM                                                                                                                                                                     |
-| `RAG_ANON_PRIVACY_PROMPT`        | `true`                                                     | Zhang et al. (2024) goal-prioritization on the generator (`rag-anonymous`), adapted to `PERSON`. Set `false` only for ablation against the legacy template.          |
+| `RAG_ANON_PRIVACY_PROMPT`        | `true`                                                     | Zhang et al. (2024) goal-prioritization on the generator (`rag-anonymous`), adapted to `PERSON`. `run-experiments` sets it per run (`PRIVACY_PROMPT=0|1`); each answer records the value in `privacy_prompt`.          |
 | `RAG_ANON_LLM_NUM_CTX`           | `8192`                                                     | Ollama context window for the generator (and judge `num_ctx`). Caps total tokens (prompt + generated output). Increase if retrieved chunks + prompt exceed the default; lower to reduce VRAM usage. |
 | `RAG_ANON_LLM_NUM_PREDICT`       | `512`                                                      | Max tokens generated per RAG call. Shared by generator and adversarial runs.                                                                                                      |
 | `RAG_ANON_LLM_REASONING`         | `false`                                                    | Forwards to `ChatOllama(reasoning=...)`; `false` disables thinking for both generator and judge (faster, cleaner Yes/No verdicts). Accepted truthy values: `1`, `true`, `yes`.    |

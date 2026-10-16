@@ -9,8 +9,16 @@ from rag_anonymous_metrics.records import QueryRecord
 logger = logging.getLogger(__name__)
 
 
-def context_recall_path(results_dir: Path, judge_model: str, basename: str) -> Path:
-    return results_dir / "context_recall" / judge_model.replace(":", "_") / basename
+def context_recall_path(
+    results_dir: Path, dataset: str, judge_model: str, basename: str
+) -> Path:
+    return (
+        results_dir
+        / "context_recall"
+        / dataset
+        / judge_model.replace(":", "_")
+        / basename
+    )
 
 
 def attach_context_recall(

@@ -83,6 +83,6 @@ def test_attach_recomputes_on_retrieval_mismatch(tmp_path: Path, scorers, caplog
 
 
 def test_context_recall_path_sanitizes_judge(tmp_path: Path):
-    assert context_recall_path(tmp_path, "gemma4:26b", "r.jsonl") == (
-        tmp_path / "context_recall" / "gemma4_26b" / "r.jsonl"
+    assert context_recall_path(tmp_path, "test", "gemma4:26b", "r.jsonl") == (
+        tmp_path / "context_recall" / "test" / "gemma4_26b" / "r.jsonl"
     )

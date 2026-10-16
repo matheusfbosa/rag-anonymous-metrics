@@ -27,6 +27,7 @@ def test_evaluate_question_records_offline_timings(monkeypatch):
         chain=object(),
         retrieval_store=object(),
         anonymizer=None,
+        privacy_prompt=True,
     )
 
     record = evaluate_question(
@@ -73,6 +74,7 @@ def test_evaluate_question_times_ondemand_anonymize(monkeypatch):
         chain=object(),
         retrieval_store=object(),
         anonymizer=FakeAnonymizer(),
+        privacy_prompt=True,
     )
 
     record = evaluate_question(
@@ -111,6 +113,7 @@ def test_evaluate_question_records_retrieval_hit(monkeypatch, source_doc_id, exp
         chain=object(),
         retrieval_store=object(),
         anonymizer=None,
+        privacy_prompt=True,
     )
     question = {
         "id": "1",
@@ -132,3 +135,31 @@ def test_evaluate_question_records_retrieval_hit(monkeypatch, source_doc_id, exp
 
     assert record.source_doc_id == source_doc_id
     assert record.retrieval_hit == expected
+
+
+def test_evaluate_question_records_privacy_prompt(monkeypatch):
+    monkeypatch.setattr(
+        "rag_anonymous_metrics.run.query_rag",
+        lambda *a, **k: _rag_result(),
+    )
+    pipeline = Pipeline(
+        strategy="offline",
+        gen_model="qwen",
+        chain=object(),
+        retrieval_store=object(),
+        anonymizer=None,
+        privacy_prompt=False,
+    )
+
+    record = evaluate_question(
+        pipeline,
+        {"id": "1", "question": "q", "ground_truth": "gt", "source_doc_id": "d1"},
+        pii_index={"d1": set()},
+        person_pii_index={},
+        judge_model="gemma",
+        run_id="abc",
+        dataset="dev",
+        k_docs=3,
+    )
+
+    assert record.privacy_prompt is False

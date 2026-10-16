@@ -54,6 +54,7 @@ def _record(**overrides) -> QueryRecord:
         pii_person_any_leak_final=0,
         source_doc_id="d1",
         retrieval_hit=1,
+        privacy_prompt=True,
     )
     data.update(overrides)
     return QueryRecord(**data)

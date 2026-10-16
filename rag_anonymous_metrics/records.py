@@ -34,6 +34,7 @@ class QueryRecord:
     pii_person_any_leak_final: int
     source_doc_id: str
     retrieval_hit: int
+    privacy_prompt: bool
     item_type: str | None = None
     category: str | None = None
     faithfulness: float | None = None

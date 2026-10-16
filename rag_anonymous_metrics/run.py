@@ -15,6 +15,9 @@ from rag_anonymous import (
     load_retriever,
     query_rag,
 )
+from rag_anonymous import (
+    Settings as AnonSettings,
+)
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.context_recall import (
     attach_context_recall,
@@ -39,6 +42,7 @@ class Pipeline:
     chain: Any
     retrieval_store: Any
     anonymizer: Anonymizer | None
+    privacy_prompt: bool
 
 
 def build_pipeline(strategy: str, gen_model: str, dataset: str) -> Pipeline:
@@ -51,6 +55,7 @@ def build_pipeline(strategy: str, gen_model: str, dataset: str) -> Pipeline:
         chain=chain,
         retrieval_store=retrieval_store,
         anonymizer=anonymizer,
+        privacy_prompt=AnonSettings.load().privacy_prompt,
     )
 
 
@@ -126,6 +131,7 @@ def evaluate_question(
         chunk_ids=chunk_ids,
         source_doc_id=source_doc_id,
         retrieval_hit=int(source_doc_id in doc_ids),
+        privacy_prompt=pipeline.privacy_prompt,
         **cast(dict[str, Any], privacy),
     )
 
@@ -378,10 +384,13 @@ def _attach_utility(
     output_path: Path,
 ) -> None:
     _attach_answer_utility(records, judge_model, output_path)
+    cfg = Settings.load()
     attach_context_recall(
         records,
         judge_model,
-        context_recall_path(Settings.load().results_dir, judge_model, output_path.name),
+        context_recall_path(
+            cfg.results_dir, cfg.dataset, judge_model, output_path.name
+        ),
     )
 
 

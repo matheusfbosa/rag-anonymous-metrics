@@ -123,6 +123,7 @@ def test_rejudge_caches_context_recall_per_judge(
         tmp_path
         / "output"
         / "context_recall"
+        / "dev"
         / "gemma4_26b"
         / "results_offline_benchmark.jsonl"
     )

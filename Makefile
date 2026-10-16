@@ -11,6 +11,13 @@ SKIP_JUDGE ?=
 SOURCE_DIR ?=
 STRATEGY ?= offline
 
+GENERATORS ?= qwen3:4b-q4_K_M qwen3:8b qwen3:14b qwen3:32b mistral:7b qwen3.5:4b qwen3.8:27b
+PRIVACY_PROMPT_GENERATORS ?= qwen3:4b-q4_K_M qwen3:32b
+JUDGES ?= gemma4:26b gemma4:12b
+RUN_ID := $(or $(RUN_ID),$(shell date +%Y%m%d_%H%M%S))
+GEN ?=
+PRIVACY_PROMPT ?= 0
+
 RUN_ENV = RAG_METRICS_STRATEGY=$(STRATEGY) \
 	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
 	RAG_METRICS_QUESTIONS_CATEGORY=$(CATEGORY) \
@@ -22,9 +29,13 @@ RUN_ENV = RAG_METRICS_STRATEGY=$(STRATEGY) \
 STAMP := $(or $(EXPERIMENT_DIR),$(shell date +%Y%m%d_%H%M%S))
 
 require = @test -n "$($(1))" || { echo "$@: set $(1)=<run folder under data/output>" >&2; exit 1; }
+slug = $(subst :,-,$(1))
+run_dir = $(RUN_ID)_$(call slug,$(GEN))_pp$(PRIVACY_PROMPT)_$(call slug,$(1))
+MODEL_ENV = RAG_ANON_LLM_MODEL=$(GEN) RAG_ANON_PRIVACY_PROMPT=$(PRIVACY_PROMPT)
 
 .DEFAULT_GOAL := help
 .PHONY: help format lint test hooks ingest check-judge check-judge-smoke \
+	run-experiments run-model \
 	run-strategies generate-strategies judge-strategies run-smoke-strategies run-all \
 	run generate judge rejudge judge-prompts ollama-unload
 
@@ -46,6 +57,35 @@ check-judge: ## Sanity-check RAG_METRICS_JUDGE_MODEL (own vs foreign ground trut
 
 check-judge-smoke: ## check-judge on RANGE_SMOKE
 	$(MAKE) check-judge RANGE=$(RANGE_SMOKE)
+
+## Experiments: generators × judges × privacy prompt
+
+run-experiments: ## All runs: GENERATORS with prompt off, PRIVACY_PROMPT_GENERATORS with prompt on, each judged by every JUDGES model; resume with RUN_ID
+	@echo "run-experiments: RUN_ID=$(RUN_ID) DATASET=$(DATASET)"
+	@failed=""; \
+	for g in $(GENERATORS); do \
+	  $(MAKE) run-model RUN_ID=$(RUN_ID) GEN=$$g PRIVACY_PROMPT=0 || failed="$$failed $$g:pp0"; \
+	done; \
+	for g in $(PRIVACY_PROMPT_GENERATORS); do \
+	  $(MAKE) run-model RUN_ID=$(RUN_ID) GEN=$$g PRIVACY_PROMPT=1 || failed="$$failed $$g:pp1"; \
+	done; \
+	if [ -n "$$failed" ]; then \
+	  echo "run-experiments: failed:$$failed — rerun with RUN_ID=$(RUN_ID) to resume" >&2; exit 1; \
+	fi; \
+	echo "run-experiments: done RUN_ID=$(RUN_ID)"
+
+run-model: ## One generator (GEN, PRIVACY_PROMPT=0|1): generate once, judge with the first of JUDGES, rejudge with the others
+	@test -n "$(GEN)" || { echo "$@: set GEN=<generator tag>" >&2; exit 1; }
+	$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(firstword $(JUDGES)) \
+		$(MAKE) generate-strategies EXPERIMENT_DIR=$(call run_dir,$(firstword $(JUDGES)))
+	$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(firstword $(JUDGES)) $(MAKE) ollama-unload
+	$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(firstword $(JUDGES)) \
+		$(MAKE) judge-strategies EXPERIMENT_DIR=$(call run_dir,$(firstword $(JUDGES)))
+	$(foreach judge,$(wordlist 2,$(words $(JUDGES)),$(JUDGES)),\
+		$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(firstword $(JUDGES)) $(MAKE) ollama-unload && \
+		$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(judge) \
+		$(MAKE) rejudge SOURCE_DIR=$(call run_dir,$(firstword $(JUDGES))) EXPERIMENT_DIR=$(call run_dir,$(judge)) &&) true
+	$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(lastword $(JUDGES)) $(MAKE) ollama-unload
 
 ## Experiment: both strategies in one folder
 
@@ -110,7 +150,11 @@ judge-prompts: ## Save the exact Ragas judge prompts for RANGE of SOURCE_DIR (no
 
 # OLLAMA_VIA_DOCKER: 1 = force docker exec, 0 = force host CLI, unset = auto
 ollama-unload: ## Unload judge, generator and embedding models from Ollama
-	@set -a; [ -f .env ] && . ./.env; set +a; \
+	@_judge="$$RAG_METRICS_JUDGE_MODEL"; _llm="$$RAG_ANON_LLM_MODEL"; _embed="$$RAG_ANON_EMBEDDING_MODEL"; \
+	set -a; [ -f .env ] && . ./.env; set +a; \
+	RAG_METRICS_JUDGE_MODEL="$${_judge:-$$RAG_METRICS_JUDGE_MODEL}"; \
+	RAG_ANON_LLM_MODEL="$${_llm:-$$RAG_ANON_LLM_MODEL}"; \
+	RAG_ANON_EMBEDDING_MODEL="$${_embed:-$$RAG_ANON_EMBEDDING_MODEL}"; \
 	OLLAMA_VIA_DOCKER="$(OLLAMA_VIA_DOCKER)"; \
 	_use_docker() { \
 	  case "$${OLLAMA_VIA_DOCKER}" in \
