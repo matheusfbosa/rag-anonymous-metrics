@@ -1,3 +1,5 @@
+import asyncio
+
 import pytest
 from test_run_checkpoint import metrics_env  # noqa: F401
 
@@ -27,9 +29,11 @@ class FakeMetric:
     def __init__(self, score):
         self.score = score
         self.calls = 0
+        self.loops: list[asyncio.AbstractEventLoop] = []
 
     async def single_turn_ascore(self, sample):
         self.calls += 1
+        self.loops.append(asyncio.get_running_loop())
         return self.score
 
 
@@ -84,3 +88,12 @@ def test_score_nan_metric_becomes_none(scorer):
     scores = scorer.score("q", "answer", ["ctx"], "reference")
 
     assert scores["answer_accuracy"] is None
+
+
+def test_score_reuses_one_event_loop(scorer):
+    scorer.score("q", "answer", ["ctx"], "reference")
+    scorer.score("q", "answer", ["ctx"], "reference")
+
+    first, second = scorer._answer_accuracy.loops
+    assert first is second
+    assert not first.is_closed()

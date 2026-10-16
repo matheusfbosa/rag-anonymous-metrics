@@ -51,6 +51,9 @@ def _embeddings() -> LangchainEmbeddingsWrapper:
 
 class UtilityScorer:
     def __init__(self, judge_model: str) -> None:
+        # One loop per scorer: the judge client's pooled connections are bound
+        # to the loop that opened them and fail under a fresh asyncio.run.
+        self._loop = asyncio.new_event_loop()
         llm = judge_llm(judge_model)
         self._factual_correctness = FactualCorrectness(llm=llm)
         self._answer_accuracy = AnswerAccuracy(llm=llm)
@@ -66,7 +69,7 @@ class UtilityScorer:
         *,
         refusal: bool = False,
     ) -> dict[str, Any]:
-        return asyncio.run(
+        return self._loop.run_until_complete(
             self._ascore(question, answer, contexts, reference, refusal=refusal)
         )
 
@@ -135,7 +138,7 @@ class UtilityScorer:
             if contexts and not refusal:
                 await _safe(self._faithfulness, sample, "faithfulness")
 
-        asyncio.run(run())
+        self._loop.run_until_complete(run())
 
     def answer_accuracy_prompts(
         self, question: str, answer: str, reference: str
@@ -200,6 +203,7 @@ class UtilityScorer:
 
 class ContextRecallScorer:
     def __init__(self, judge_model: str) -> None:
+        self._loop = asyncio.new_event_loop()
         self._context_recall = LLMContextRecall(llm=judge_llm(judge_model))
 
     def score(self, question: str, contexts: list[str], reference: str) -> float | None:
@@ -210,7 +214,9 @@ class ContextRecallScorer:
             retrieved_contexts=contexts,
             reference=reference,
         )
-        return asyncio.run(_safe(self._context_recall, sample, "context_recall"))
+        return self._loop.run_until_complete(
+            _safe(self._context_recall, sample, "context_recall")
+        )
 
 
 async def _timed[T](timings: dict[str, float], name: str, task: Awaitable[T]) -> T:

@@ -151,7 +151,7 @@ Cosine similarity between the embeddings of `final_answer` and `ground_truth` (R
 
 ### Answer refusal rate
 
-Let $R_{\mathrm{ref}} \in \{0,1\}$ be an **abstention indicator** computed by deterministic string heuristics (including the privacy-prompt refusal “I cannot disclose personal identifiers…”).
+Let $R_{\mathrm{ref}} \in \{0,1\}$ be an **abstention indicator** computed by deterministic string heuristics (including the privacy-prompt refusal “I cannot disclose personal identifiers…”). Abstention phrases such as “not provided in the context” count only in the answer's opening sentence; later in an answer they only qualify a partial answer or a list of names.
 
 Over $N$ benchmark items, the **refusal rate** is
 

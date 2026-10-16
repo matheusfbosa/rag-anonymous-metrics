@@ -11,7 +11,11 @@ class FakeRecallScorer:
 
 
 @pytest.fixture(autouse=True)
-def context_recall_isolated(tmp_path, monkeypatch):
+def isolated_settings(tmp_path, monkeypatch):
+    monkeypatch.setenv("RAG_METRICS_STRATEGY", "offline")
+    monkeypatch.setenv("RAG_METRICS_CORPUS_DATASET", "dev")
+    monkeypatch.setenv("RAG_METRICS_QUESTIONS_CATEGORY", "benchmark")
+    monkeypatch.setenv("RAG_METRICS_QUESTIONS_RANGE", "all")
     monkeypatch.setenv("RAG_METRICS_RESULTS_DIR", str(tmp_path / "output"))
     monkeypatch.setattr(
         "rag_anonymous_metrics.metrics.utility.ContextRecallScorer",

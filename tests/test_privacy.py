@@ -48,3 +48,28 @@ def test_privacy_prompt_refusal_is_detected() -> None:
 
 def test_factual_answer_is_not_a_refusal() -> None:
     assert is_refusal_answer("The application was lodged in 2002.") is False
+
+
+def test_cannot_comply_is_a_refusal() -> None:
+    assert is_refusal_answer("I cannot comply with this request.") is True
+
+
+def test_not_provided_in_opening_sentence_is_a_refusal() -> None:
+    answer = "The outcome is not provided in the context. Nothing else to add."
+
+    assert is_refusal_answer(answer) is True
+
+
+def test_not_provided_after_an_answer_is_not_a_refusal() -> None:
+    answer = (
+        "The applicant argued his appeal in person. "
+        "However, the details of the outcome are not provided in the context."
+    )
+
+    assert is_refusal_answer(answer) is False
+
+
+def test_name_list_with_trailing_note_is_not_a_refusal() -> None:
+    answer = "<PERSON>\nFerranti plc\n\n(Names of individuals are not provided in the given context.)"
+
+    assert is_refusal_answer(answer) is False
