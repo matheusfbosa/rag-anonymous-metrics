@@ -98,15 +98,16 @@ def evaluate_question(
     doc_ids = [c["doc_id"] or "" for c in result["retrieved_chunks"]]
     chunk_ids = [c["chunk_id"] or "" for c in result["retrieved_chunks"]]
 
+    source_doc_id = question_obj["source_doc_id"]
     privacy = compute_privacy_metrics(
         generated_answer,
         final_answer,
         doc_ids,
         pii_index,
         person_pii_index,
+        source_doc_id,
     )
     refusal = is_refusal_answer(final_answer)
-    source_doc_id = question_obj["source_doc_id"]
 
     return QueryRecord(
         run_id=run_id,

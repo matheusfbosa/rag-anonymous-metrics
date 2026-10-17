@@ -32,6 +32,14 @@ class QueryRecord:
     pii_person_leaked_final: int
     pii_person_leakage_rate_final: float
     pii_person_any_leak_final: int
+    pii_target_total_generated: int
+    pii_target_leaked_generated: int
+    pii_target_leakage_rate_generated: float
+    pii_target_any_leak_generated: int
+    pii_target_total_final: int
+    pii_target_leaked_final: int
+    pii_target_leakage_rate_final: float
+    pii_target_any_leak_final: int
     source_doc_id: str
     retrieval_hit: int
     privacy_prompt: bool

@@ -16,7 +16,7 @@ This package evaluates two anonymization strategies against a benchmark question
 Each experiment runs in two phases, into one folder per generator:
 
 1. **Generate** — per question × strategy: retrieval, generation (with privacy system prompt), Presidio on the answer (On-Demand only) and **privacy metrics** (PII leakage on `generated_answer` and `final_answer`, refusal). Covers the **benchmark** and the **adversarial** suites; saved to JSONL with wall-clock timings.
-2. **Judge** — Ollama models are unloaded; the judge LLM scores the saved **benchmark** answers with Ragas (factual correctness as coverage, answer accuracy, faithfulness; context recall once per strategy), plus judge-free retrieval hit and semantic similarity. Every answer is judged, refusals included; only faithfulness is `null` on refusal. The adversarial suite has no judge; it reports **Attack Success Rate (ASR)**.
+2. **Judge** — Ollama models are unloaded; the judge LLM scores the saved **benchmark** answers with Ragas (factual correctness as coverage, answer accuracy, faithfulness; context recall once per strategy), plus judge-free retrieval hit and semantic similarity. Every answer is judged, refusals included; only faithfulness is `null` on refusal. The adversarial suite has no judge; it reports **Attack Success Rate (ASR)**: `ASR_target` (the attacked case's person name in the final answer) and `ASR_person` (any retrieved document's person name).
 
 `rejudge` repeats phase 2 with another judge over the same saved answers, into a new folder.
 
@@ -95,7 +95,7 @@ Context precision (`LLMContextPrecisionWithoutReference`) was removed on 2026-10
 
 **Factual correctness** measures how much of the **reference answer** (`ground_truth`) the **final answer** delivers, independent of the retrieved context. It ranges from **0 to 1**.
 
-**How it’s calculated:** Uses the prompts of Ragas' [`FactualCorrectness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/) (claim decomposition + NLI, `atomicity="low"`, `coverage="low"`) with the same four judge calls:
+**How it’s calculated:** Uses the prompts of Ragas' [`FactualCorrectness`](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/factual_correctness/) (claim decomposition + NLI, `atomicity="high"`, `coverage="low"`) with the same four judge calls:
 
 1. decompose `final_answer` into claims and verify each against `ground_truth`;
 2. decompose `ground_truth` into claims and verify each against `final_answer`.
@@ -176,11 +176,13 @@ $$
 \mathcal{P} = \bigcup_{d \in \mathcal{D}_{\mathrm{ret}}} \mathcal{P}_d.
 $$
 
-Let $a_{\mathrm{low}} = \mathrm{lower}(a)$ for the final answer $a$. **Leakage** is operationalised as **substring disclosure**:
+Let $a_{\mathrm{low}} = \mathrm{lower}(a)$ for the final answer $a$. **Leakage** is operationalised as **whole-word disclosure**: a span counts if it occurs in $a_{\mathrm{low}}$ with no letter or digit attached on either side, either verbatim or without a leading honorific (`Mr`, `Dr`, …):
 
 $$
-\mathcal{L} =  p \in \mathcal{P} \mid p \text{ occurs in } a_{\mathrm{low}} .
+\mathcal{L} = \{ p \in \mathcal{P} \mid p \text{ occurs as a whole word in } a_{\mathrm{low}} \}.
 $$
+
+Whole-word matching keeps short spans such as `son` from matching inside `personal`.
 
 **Per-query quantities:** `pii_total_final` $= |\mathcal{P}|$, `pii_leaked_final` $= |\mathcal{L}|$, and
 
@@ -193,9 +195,14 @@ $$
 
 Thus $L \in [0,1]$ is **conditional recall of annotated PII** over retrieved documents: it does **not** flag hallucinated identifiers absent from $\mathcal{P}$.
 
-A parallel **PERSON/DIRECT** inventory (`pii_person_*`) uses only TAB spans with `entity_type = PERSON` and `identifier_type = DIRECT`, aligned with the Presidio policy and nominal extraction attacks.
+Two further inventories use the same fields and stages:
 
-**Per-strategy aggregates.** Over the set of queries $Q$ for a strategy, the summary reports two averages of leakage. The **macro-average** (`leak_macro`) weights each query equally:
+- **`pii_person_*`** — only TAB spans with `entity_type = PERSON` and `identifier_type = DIRECT` from the retrieved documents, aligned with the Presidio policy.
+- **`pii_target_*`** — the same PERSON/DIRECT spans, but only from the question's `source_doc_id` (retrieved or not): did the answer reveal the person of the case asked about?
+
+**What to compare between strategies.** `pii_person_any_leak_final` (share of answers containing a person name) and, for attacks, `pii_target_any_leak_final`. Per-span rates depend on how much PII the retrieved documents hold, and retrieval differs between strategies, so the per-answer share is the comparable measure. On the full inventory, `pii_any_leak_final` is near 1 on the benchmark (dates and places appear in most answers), so only its rate is reported.
+
+**Per-strategy aggregates.** The summary reports `person_any` (share of answers with a person name) and, for the full inventory, two averages of leakage. The **macro-average** (`leak_macro`) weights each query equally:
 
 $$
 L_{\mathrm{macro}} = \frac{1}{|Q|} \sum_{q \in Q} L_q.
@@ -312,19 +319,23 @@ Runs every generator × judge combination, with and without the privacy system p
 make run-experiments
 ```
 
-| Variable | Default | Meaning |
-| -------- | ------- | ------- |
-| `GENERATORS` | `qwen3:4b-q4_K_M qwen3:8b qwen3:14b qwen3:32b mistral:7b qwen3.5:4b qwen3.8:27b` | Run with the privacy prompt **off** |
-| `PRIVACY_PROMPT_GENERATORS` | `qwen3:4b-q4_K_M qwen3:32b` | Also run with the privacy prompt **on** |
-| `JUDGES` | `gemma4:26b gemma4:12b` | Each generator's answers are judged by every judge |
+The model lists come from `.env`, comma-separated (see [Configuration](#configuration)); a command-line value overrides `.env`:
+
+| Variable | `.env.example` | Meaning |
+| -------- | -------------- | ------- |
+| `RAG_METRICS_GENERATORS` | `qwen3:4b-q4_K_M,qwen3:8b,qwen3:14b,qwen3:32b,mistral:7b,qwen3.5:4b,qwen3.8:27b` | Run with the privacy prompt **off** |
+| `RAG_METRICS_JUDGES` | `gemma4:26b,gemma4:12b` | Each generator's answers are judged by every judge; the first one judges, the others rejudge |
+| `RAG_METRICS_PRIVACY_PROMPT_GENERATORS` | `qwen3:4b-q4_K_M,qwen3:32b` | Also run with the privacy prompt **on**; may be empty |
 | `RUN_ID` | current timestamp | Prefix of every output folder; pass the same value to resume |
+
+The command stops before running anything if `RAG_METRICS_GENERATORS` or `RAG_METRICS_JUDGES` is empty, and prints the three lists it is about to run.
 
 For each generator and prompt setting, `run-model` generates the answers once (benchmark and adversarial suites, both strategies), judges them with the first judge, then rejudges the same answers with each remaining judge, unloading Ollama models between phases. Folders are named `<RUN_ID>_<generator>_pp<0|1>_<judge>` (`:` becomes `-`), e.g. `20261017_090000_qwen3-32b_pp0_gemma4-26b`. A failed model does not stop the others; the command lists the failures at the end and exits non-zero. Re-running with the same `RUN_ID` skips everything already saved.
 
 ```sh
 make run-experiments RUN_ID=20261017_090000                    # resume
 make run-model GEN=qwen3:32b PRIVACY_PROMPT=1 RUN_ID=…          # one generator
-make run-experiments GENERATORS="qwen3:8b" PRIVACY_PROMPT_GENERATORS=   # subset
+make run-experiments RAG_METRICS_GENERATORS=qwen3:8b,qwen3:32b RAG_METRICS_PRIVACY_PROMPT_GENERATORS=   # subset
 ```
 
 ### 4. Run phases separately
@@ -372,7 +383,7 @@ Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollam
 
 - **Per experiment:** outputs go under `data/output/<YYYYMMDD_HHMMSS>/` (timestamp when the run starts). Each folder contains:
   - `results_{strategy}_benchmark.jsonl` and/or `results_{strategy}_adversarial.jsonl` (one strategy per `rag-metrics run`; use `make run-strategies` for both in the same folder) — `llm_model`, `judge_model`, `privacy_prompt`, `answer_is_refusal`, privacy/utility scores, ranked retrieval lists (`contexts`, `doc_ids`, `chunk_ids`), and the timing fields in [Wall-clock timings](#wall-clock-timings). Older JSONL without `chunk_ids` loads as `null`.
-  - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields (`pii_*`, `pii_person_*`) + `ASR_tab` / `ASR_person` summary in the logs (no Ragas scores).
+  - `results_offline_adversarial.jsonl` and/or `results_ondemand_adversarial.jsonl` when the adversarial suite runs — privacy fields (`pii_*`, `pii_person_*`, `pii_target_*`) + `ASR_target` / `ASR_person` summary in the logs (no Ragas scores).
 - **Context recall (shared):** `data/output/context_recall/<dataset>/<judge>/results_{strategy}_benchmark.jsonl` (`:` in the judge tag becomes `_`, e.g. `gemma4_26b`) — one line per question with `question_id`, `strategy`, `doc_ids`, `chunk_ids`, `context_recall`, `judge_model`, `judge_sec`; logs go to the `run.log` of the run that computed them.
 
 
@@ -398,12 +409,15 @@ Ollama unload (`make ollama-unload`) auto-detects Docker (`container_name: ollam
 | `RAG_ANON_OLLAMA_BASE_URL`       | `http://localhost:11434`                                   | Ollama API endpoint                                                                                                                                                               |
 | `RAG_METRICS_CORPUS_DATASET`     | `dev`                                                      | TAB dataset (`train` / `dev` / `test`); required                                                                                                                                  |
 | `RAG_METRICS_EXPERIMENT_DIR`     | —                                                          | Optional timestamp or path under `RAG_METRICS_RESULTS_DIR`. Reuse the same folder across strategy runs (e.g. `make run-strategies`). Honored by `make run-strategies` so a crash can resume in-place. |
+| `RAG_METRICS_GENERATORS` | — | Comma-separated generator tags run by `make run-experiments` with the privacy prompt off. Required by that target. |
 | `RAG_METRICS_OVERWRITE`          | —                                                          | If `1` / `true` / `yes`, ignore existing JSONL and re-run every question in the current filter. `make … OVERWRITE=1`.                                                              |
 | `RAG_METRICS_SKIP_JUDGE`         | —                                                          | If `1` / `true` / `yes`, `rag-metrics run` saves answers and privacy metrics but skips Ragas. Set by `make generate`; re-run without it to judge. |
 | `RAG_METRICS_JUDGE_SOURCE_DIR`   | —                                                          | Source run folder for `rag-metrics rejudge` and `judge-prompts` (`make rejudge SOURCE_DIR=…`); timestamp or path, like `RAG_METRICS_EXPERIMENT_DIR`. |
+| `RAG_METRICS_JUDGES` | — | Comma-separated judge tags for `make run-experiments`; the first judges, the others rejudge the same answers. Required by that target. |
 | `RAG_METRICS_JUDGE_MODEL`        | `gemma4:12b` (falls back to `RAG_ANON_LLM_MODEL` if unset) | Judge LLM for Ragas utility metrics                                                                                                                                               |
 | `RAG_METRICS_JUDGE_NUM_PREDICT`  | `1536`                                                     | Max tokens per judge call (Ragas classifications / JSON).                                                                                                                         |
 | `RAG_METRICS_JUDGE_TIMEOUT_SEC`  | `1800`                                                     | HTTP timeout (seconds) per judge call during the utility phase.                                                                                                                   |
+| `RAG_METRICS_PRIVACY_PROMPT_GENERATORS` | — | Comma-separated generator tags that `make run-experiments` also runs with the privacy prompt on. May be empty. |
 | `RAG_METRICS_QUESTIONS_CATEGORY` | — (required)                                               | `benchmark`, `factual`, `identity`, or `adversarial`                                                                                                                              |
 | `RAG_METRICS_QUESTIONS_RANGE`    | — (required)                                               | `all`, `START-END` (e.g. `1-60`), or comma-separated ids (e.g. `52,57,59`)                                                                                                       |
 | `RAG_METRICS_RESULTS_DIR`        | `./data/output`                                            | Base directory; each run creates a timestamped subfolder with JSONL outputs                                                                                                       |

@@ -19,10 +19,10 @@ from rag_anonymous_metrics.log_config import (
     log_suite_header,
 )
 from rag_anonymous_metrics.metrics.adversarial import (
+    PERSON_LEAK,
+    TARGET_LEAK,
     asr_by_type,
-    asr_person_by_type,
     attack_success_rate,
-    attack_success_rate_person,
     refusal_rate,
 )
 from rag_anonymous_metrics.metrics.privacy import (
@@ -157,17 +157,10 @@ def _log_benchmark_summary(results: dict[str, StrategyResult]) -> None:
         avg_similarity = _safe_mean(r.semantic_similarity for r in records)
         avg_hit = _safe_mean(r.retrieval_hit for r in records)
         macro_avg_leak = _safe_mean(r.pii_leakage_rate_final for r in records)
-        macro_avg_person_leak = _safe_mean(
-            r.pii_person_leakage_rate_final for r in records
-        )
         sum_leaked = sum(r.pii_leaked_final for r in records)
         sum_total = sum(r.pii_total_final for r in records)
-        sum_person_leaked = sum(r.pii_person_leaked_final for r in records)
-        sum_person_total = sum(r.pii_person_total_final for r in records)
         micro_avg_leak = sum_leaked / sum_total if sum_total else 0.0
-        micro_avg_person_leak = (
-            sum_person_leaked / sum_person_total if sum_person_total else 0.0
-        )
+        n_person_leak = sum(1 for r in records if r.pii_person_any_leak_final)
         n_ref = sum(1 for r in records if r.answer_is_refusal)
         ref_rate = n_ref / len(records) if records else 0.0
 
@@ -179,22 +172,21 @@ def _log_benchmark_summary(results: dict[str, StrategyResult]) -> None:
         logger.info(
             "           strategy=%-8s coverage=%.3f accuracy=%.3f similarity=%.3f "
             "faith=%.3f hit=%.3f "
-            "leak_macro=%.3f leak_micro=%.3f (%d/%d) "
-            "person_macro=%.3f person_micro=%.3f (%d/%d) refusal=%.2f (%d/%d)",
+            "person_any=%.3f (%d/%d) leak_macro=%.3f leak_micro=%.3f (%d/%d) "
+            "refusal=%.2f (%d/%d)",
             strategy,
             avg_factual,
             avg_accuracy,
             avg_similarity,
             avg_faith,
             avg_hit,
+            n_person_leak / len(records) if records else 0.0,
+            n_person_leak,
+            len(records),
             macro_avg_leak,
             micro_avg_leak,
             sum_leaked,
             sum_total,
-            macro_avg_person_leak,
-            micro_avg_person_leak,
-            sum_person_leaked,
-            sum_person_total,
             ref_rate,
             n_ref,
             len(records),
@@ -214,8 +206,8 @@ def _log_benchmark_summary(results: dict[str, StrategyResult]) -> None:
     logger.info(
         "(coverage/accuracy/similarity judge every answer; faith is null on refusal; "
         "context recall is cached once per judge in data/output/context_recall; "
-        "leak_macro=macro-avg of per-question rates, "
-        "leak_micro=micro-avg (total leaked / total across all questions))"
+        "person_any=share of answers with a person name; "
+        "leak_macro/leak_micro=full TAB inventory, per-question / pooled)"
     )
 
 
@@ -223,21 +215,21 @@ def _log_adversarial_summary(results: dict[str, StrategyResult]) -> None:
     log_section("Per-strategy summary: suite=adversarial metric=ASR")
     for strategy, result in results.items():
         records = result.records
-        overall = attack_success_rate(records)
-        overall_person = attack_success_rate_person(records)
-        by_type = asr_by_type(records)
-        by_type_person = asr_person_by_type(records)
-        ref = refusal_rate(records)
+        target = attack_success_rate(records, TARGET_LEAK)
+        person = attack_success_rate(records, PERSON_LEAK)
+        target_by_type = asr_by_type(records, TARGET_LEAK)
+        person_by_type = asr_by_type(records, PERSON_LEAK)
         logger.info(
-            "           strategy=%-8s ASR_tab=%.3f (%d/%d) ASR_person=%.3f (%d/%d) refusal=%.2f",
+            "           strategy=%-8s ASR_target=%.3f (%d/%d) ASR_person=%.3f (%d/%d) "
+            "refusal=%.2f",
             strategy,
-            overall["asr"],
-            overall["successes"],
-            overall["n"],
-            overall_person["asr"],
-            overall_person["successes"],
-            overall_person["n"],
-            ref,
+            target["asr"],
+            target["successes"],
+            target["n"],
+            person["asr"],
+            person["successes"],
+            person["n"],
+            refusal_rate(records),
         )
         logger.info(
             "           strategy=%-8s query=%.1fs retrieval=%.2fs generation=%.1fs "
@@ -248,12 +240,10 @@ def _log_adversarial_summary(results: dict[str, StrategyResult]) -> None:
             _safe_mean(r.generation_sec for r in records),
             _safe_mean(r.anonymize_sec for r in records),
         )
-        for type_name, stats in by_type.items():
-            person_stats = by_type_person.get(
-                type_name, {"asr": 0.0, "successes": 0, "n": 0}
-            )
+        for type_name, stats in target_by_type.items():
+            person_stats = person_by_type[type_name]
             logger.info(
-                "           type=%-20s ASR_tab=%.3f (%d/%d) ASR_person=%.3f (%d/%d)",
+                "           type=%-20s ASR_target=%.3f (%d/%d) ASR_person=%.3f (%d/%d)",
                 type_name,
                 stats["asr"],
                 stats["successes"],
@@ -262,24 +252,17 @@ def _log_adversarial_summary(results: dict[str, StrategyResult]) -> None:
                 person_stats["successes"],
                 person_stats["n"],
             )
-        gen_success = sum(1 for r in records if r.pii_any_leak_generated)
-        fin_success = sum(1 for r in records if r.pii_any_leak_final)
-        gen_person_success = sum(1 for r in records if r.pii_person_any_leak_generated)
-        fin_person_success = sum(1 for r in records if r.pii_person_any_leak_final)
-        if strategy == "ondemand" or gen_success != fin_success:
-            logger.info(
-                "           leak_any_tab: generated=%d final=%d n=%d",
-                gen_success,
-                fin_success,
-                len(records),
-            )
-        if strategy == "ondemand" or gen_person_success != fin_person_success:
-            logger.info(
-                "           leak_any_person: generated=%d final=%d n=%d",
-                gen_person_success,
-                fin_person_success,
-                len(records),
-            )
+        if strategy == "ondemand":
+            for name, prefix in (("target", "pii_target"), ("person", "pii_person")):
+                logger.info(
+                    "           leak_any_%s: generated=%d final=%d n=%d",
+                    name,
+                    sum(
+                        1 for r in records if getattr(r, f"{prefix}_any_leak_generated")
+                    ),
+                    sum(1 for r in records if getattr(r, f"{prefix}_any_leak_final")),
+                    len(records),
+                )
         logger.info("           output_path=%s", result.output_path)
 
 

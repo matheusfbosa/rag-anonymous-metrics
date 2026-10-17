@@ -55,7 +55,7 @@ class UtilityScorer:
         # to the loop that opened them and fail under a fresh asyncio.run.
         self._loop = asyncio.new_event_loop()
         llm = judge_llm(judge_model)
-        self._factual_correctness = FactualCorrectness(llm=llm)
+        self._factual_correctness = FactualCorrectness(llm=llm, atomicity="high")
         self._answer_accuracy = AnswerAccuracy(llm=llm)
         self._faithfulness = Faithfulness(llm=llm)
         self._semantic_similarity = SemanticSimilarity(embeddings=_embeddings())

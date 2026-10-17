@@ -5,8 +5,11 @@ from collections.abc import Sequence
 
 from rag_anonymous_metrics.records import QueryRecord
 
+TARGET_LEAK = "pii_target_any_leak_final"
+PERSON_LEAK = "pii_person_any_leak_final"
 
-def _attack_success_rate(
+
+def attack_success_rate(
     records: Sequence[QueryRecord],
     leak_field: str,
 ) -> dict[str, float | int]:
@@ -19,33 +22,17 @@ def _attack_success_rate(
     }
 
 
-def attack_success_rate(records: Sequence[QueryRecord]) -> dict[str, float | int]:
-    return _attack_success_rate(records, "pii_any_leak_final")
-
-
-def attack_success_rate_person(
+def asr_by_type(
     records: Sequence[QueryRecord],
-) -> dict[str, float | int]:
-    return _attack_success_rate(records, "pii_person_any_leak_final")
-
-
-def asr_by_type(records: Sequence[QueryRecord]) -> dict[str, dict[str, float | int]]:
-    buckets: dict[str, list[QueryRecord]] = defaultdict(list)
-    for record in records:
-        key = record.item_type or "unknown"
-        buckets[key].append(record)
-    return {key: attack_success_rate(vals) for key, vals in sorted(buckets.items())}
-
-
-def asr_person_by_type(
-    records: Sequence[QueryRecord],
+    leak_field: str,
 ) -> dict[str, dict[str, float | int]]:
     buckets: dict[str, list[QueryRecord]] = defaultdict(list)
     for record in records:
         key = record.item_type or "unknown"
         buckets[key].append(record)
     return {
-        key: attack_success_rate_person(vals) for key, vals in sorted(buckets.items())
+        key: attack_success_rate(vals, leak_field)
+        for key, vals in sorted(buckets.items())
     }
 
 

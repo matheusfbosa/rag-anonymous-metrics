@@ -11,9 +11,16 @@ SKIP_JUDGE ?=
 SOURCE_DIR ?=
 STRATEGY ?= offline
 
-GENERATORS ?= qwen3:4b-q4_K_M qwen3:8b qwen3:14b qwen3:32b mistral:7b qwen3.5:4b qwen3.8:27b
-PRIVACY_PROMPT_GENERATORS ?= qwen3:4b-q4_K_M qwen3:32b
-JUDGES ?= gemma4:26b gemma4:12b
+comma := ,
+env_value = $(shell sed -n 's/^$(1)=//p' .env 2>/dev/null)
+env_list = $(strip $(subst $(comma), ,$(1)))
+
+RAG_METRICS_GENERATORS ?= $(call env_value,RAG_METRICS_GENERATORS)
+RAG_METRICS_JUDGES ?= $(call env_value,RAG_METRICS_JUDGES)
+RAG_METRICS_PRIVACY_PROMPT_GENERATORS ?= $(call env_value,RAG_METRICS_PRIVACY_PROMPT_GENERATORS)
+GENERATORS := $(call env_list,$(RAG_METRICS_GENERATORS))
+JUDGES := $(call env_list,$(RAG_METRICS_JUDGES))
+PRIVACY_PROMPT_GENERATORS := $(call env_list,$(RAG_METRICS_PRIVACY_PROMPT_GENERATORS))
 RUN_ID := $(or $(RUN_ID),$(shell date +%Y%m%d_%H%M%S))
 GEN ?=
 PRIVACY_PROMPT ?= 0
@@ -60,8 +67,13 @@ check-judge-smoke: ## check-judge on RANGE_SMOKE
 
 ## Experiments: generators × judges × privacy prompt
 
-run-experiments: ## All runs: GENERATORS with prompt off, PRIVACY_PROMPT_GENERATORS with prompt on, each judged by every JUDGES model; resume with RUN_ID
+run-experiments: ## All runs: RAG_METRICS_GENERATORS with prompt off, RAG_METRICS_PRIVACY_PROMPT_GENERATORS with prompt on, each judged by every RAG_METRICS_JUDGES model; resume with RUN_ID
+	@test -n "$(GENERATORS)" || { echo "$@: set RAG_METRICS_GENERATORS in .env (comma-separated)" >&2; exit 1; }
+	@test -n "$(JUDGES)" || { echo "$@: set RAG_METRICS_JUDGES in .env (comma-separated)" >&2; exit 1; }
 	@echo "run-experiments: RUN_ID=$(RUN_ID) DATASET=$(DATASET)"
+	@echo "  generators (prompt off): $(GENERATORS)"
+	@echo "  generators (prompt on):  $(PRIVACY_PROMPT_GENERATORS)"
+	@echo "  judges:                  $(JUDGES)"
 	@failed=""; \
 	for g in $(GENERATORS); do \
 	  $(MAKE) run-model RUN_ID=$(RUN_ID) GEN=$$g PRIVACY_PROMPT=0 || failed="$$failed $$g:pp0"; \
@@ -74,8 +86,9 @@ run-experiments: ## All runs: GENERATORS with prompt off, PRIVACY_PROMPT_GENERAT
 	fi; \
 	echo "run-experiments: done RUN_ID=$(RUN_ID)"
 
-run-model: ## One generator (GEN, PRIVACY_PROMPT=0|1): generate once, judge with the first of JUDGES, rejudge with the others
+run-model: ## One generator (GEN, PRIVACY_PROMPT=0|1): generate once, judge with the first of RAG_METRICS_JUDGES, rejudge with the others
 	@test -n "$(GEN)" || { echo "$@: set GEN=<generator tag>" >&2; exit 1; }
+	@test -n "$(JUDGES)" || { echo "$@: set RAG_METRICS_JUDGES in .env (comma-separated)" >&2; exit 1; }
 	$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(firstword $(JUDGES)) \
 		$(MAKE) generate-strategies EXPERIMENT_DIR=$(call run_dir,$(firstword $(JUDGES)))
 	$(MODEL_ENV) RAG_METRICS_JUDGE_MODEL=$(firstword $(JUDGES)) $(MAKE) ollama-unload
