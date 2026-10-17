@@ -11,6 +11,7 @@ from rag_anonymous_metrics.corpus import (
     load_corpus,
     load_questions,
 )
+from rag_anonymous_metrics.environment import log_environment
 from rag_anonymous_metrics.judge_prompts import dump_judge_prompts
 from rag_anonymous_metrics.log_config import (
     configure_logging,
@@ -326,6 +327,7 @@ def main() -> None:
         append_log=reuse_dir is not None and reuse_dir.exists(),
     )
     configure_logging()
+    log_environment(logger)
 
     if command in ("run", "evaluate"):
         cmd_run_experiment(experiment_dir)
