@@ -57,7 +57,7 @@ def test_evaluate_question_records_offline_timings(monkeypatch):
 
 def test_evaluate_question_times_ondemand_anonymize(monkeypatch):
     class FakeAnonymizer:
-        def anonymize(self, text: str) -> str:
+        def anonymize_answer(self, text: str) -> str:
             return f"anon:{text}"
 
     ticks = iter([50.0, 50.04])

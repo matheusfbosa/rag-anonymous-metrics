@@ -4,6 +4,7 @@ import sys
 from collections.abc import Iterable
 from pathlib import Path
 
+from rag_anonymous import Anonymizer
 from rag_anonymous_metrics.check_judge import check_judge
 from rag_anonymous_metrics.config import Settings
 from rag_anonymous_metrics.corpus import (
@@ -37,11 +38,15 @@ from rag_anonymous_metrics.questions_filter import (
     describe_range,
 )
 from rag_anonymous_metrics.records import StrategyResult
-from rag_anonymous_metrics.run import rejudge_experiment, run_experiment
+from rag_anonymous_metrics.run import (
+    reanonymize_experiment,
+    rejudge_experiment,
+    run_experiment,
+)
 
 logger = logging.getLogger(__name__)
 
-USAGE = "Usage: rag-metrics {run|rejudge|judge-prompts|check-judge}"
+USAGE = "Usage: rag-metrics {run|rejudge|reanonymize|judge-prompts|check-judge}"
 
 
 def cmd_run_experiment(experiment_dir: Path) -> None:
@@ -291,6 +296,32 @@ def cmd_rejudge(experiment_dir: Path) -> None:
     logger.info("Done: experiment_dir=%s", experiment_dir)
 
 
+def cmd_reanonymize(experiment_dir: Path) -> None:
+    cfg = Settings.load()
+    if cfg.judge_source_dir is None:
+        raise SystemExit("RAG_METRICS_JUDGE_SOURCE_DIR is required for reanonymize")
+    logger.info(
+        "Reanonymize: source=%s output=%s judge=%s",
+        cfg.judge_source_dir,
+        experiment_dir,
+        cfg.judge_model,
+    )
+    corpus = load_corpus(cfg.dataset)
+    try:
+        results = reanonymize_experiment(
+            cfg.judge_source_dir,
+            experiment_dir,
+            cfg.judge_model,
+            Anonymizer(),
+            build_pii_index(corpus),
+            build_person_pii_index(corpus),
+        )
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    _log_benchmark_summary(results)
+    logger.info("Done: experiment_dir=%s", experiment_dir)
+
+
 def cmd_judge_prompts(experiment_dir: Path) -> None:
     cfg = Settings.load()
     if cfg.judge_source_dir is None:
@@ -308,7 +339,14 @@ def cmd_judge_prompts(experiment_dir: Path) -> None:
 
 
 def main() -> None:
-    commands = ("run", "evaluate", "rejudge", "judge-prompts", "check-judge")
+    commands = (
+        "run",
+        "evaluate",
+        "rejudge",
+        "reanonymize",
+        "judge-prompts",
+        "check-judge",
+    )
     if len(sys.argv) != 2 or sys.argv[1] not in commands:
         raise SystemExit(USAGE)
 
@@ -333,6 +371,8 @@ def main() -> None:
         cmd_run_experiment(experiment_dir)
     elif command == "rejudge":
         cmd_rejudge(experiment_dir)
+    elif command == "reanonymize":
+        cmd_reanonymize(experiment_dir)
     elif command == "judge-prompts":
         cmd_judge_prompts(experiment_dir)
     else:

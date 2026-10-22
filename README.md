@@ -15,10 +15,10 @@ This package evaluates two anonymization strategies against a benchmark question
 
 Each experiment runs in two phases, into one folder per generator:
 
-1. **Generate** — per question × strategy: retrieval, generation (with privacy system prompt), Presidio on the answer (On-Demand only) and **privacy metrics** (PII leakage on `generated_answer` and `final_answer`, refusal). Covers the **benchmark** and the **adversarial** suites; saved to JSONL with wall-clock timings.
+1. **Generate** — per question × strategy: retrieval, generation (with privacy system prompt), Presidio on the answer (On-Demand only, Markdown emphasis stripped first) and **privacy metrics** (PII leakage on `generated_answer` and `final_answer`, refusal). Covers the **benchmark** and the **adversarial** suites; saved to JSONL with wall-clock timings.
 2. **Judge** — Ollama models are unloaded; the judge LLM scores the saved **benchmark** answers with Ragas (factual correctness as coverage, answer accuracy, faithfulness; context recall once per strategy), plus judge-free retrieval hit and semantic similarity. Every answer is judged, refusals included; only faithfulness is `null` on refusal. The adversarial suite has no judge; it reports **Attack Success Rate (ASR)**: `ASR_target` (the attacked case's person name in the final answer) and `ASR_person` (any retrieved document's person name).
 
-`rejudge` repeats phase 2 with another judge over the same saved answers, into a new folder.
+`rejudge` repeats phase 2 with another judge over the same saved answers, into a new folder. `reanonymize` reruns Presidio on the saved On-Demand generations and judges only the answers whose text changed, into a new folder.
 
 ```mermaid
 flowchart TD
@@ -366,6 +366,16 @@ RAG_METRICS_JUDGE_MODEL=gemma4:26b make rejudge SOURCE_DIR=20260912_142811
 ```
 
 Resume with `EXPERIMENT_DIR=<output folder>`. Point the notebook's `RUN_FOLDER` at the output folder to analyze it.
+
+#### Reanonymize the On-Demand answers
+
+Runs Presidio again on the saved On-Demand `generated_answer` (Markdown emphasis stripped first) and recomputes `final_answer`, privacy metrics and refusal, into a new folder; no retrieval or generation, source folder untouched, Offline files copied as is. Answers whose text changed beyond Markdown are judged again with `RAG_METRICS_JUDGE_MODEL`; the others keep their scores:
+
+```sh
+RAG_METRICS_JUDGE_MODEL=gemma4:26b make reanonymize SOURCE_DIR=20261017_132313_qwen3-14b_pp0_gemma4-26b EXPERIMENT_DIR=20261023_090000_qwen3-14b_pp0_gemma4-26b
+```
+
+For every folder of a `run-experiments` round (same `.env` lists), judges in order: `make reanonymize-experiments SOURCE_RUN_ID=<old RUN_ID> RUN_ID=<new RUN_ID>`. Resume with the same `RUN_ID`.
 
 ### 7. Inspect the judge prompts
 

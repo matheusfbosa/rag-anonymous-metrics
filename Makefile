@@ -9,6 +9,7 @@ RANGE    ?= all
 RANGE_SMOKE ?= 1-5
 SKIP_JUDGE ?=
 SOURCE_DIR ?=
+SOURCE_RUN_ID ?=
 STRATEGY ?= offline
 
 comma := ,
@@ -23,6 +24,7 @@ JUDGES := $(call env_list,$(RAG_METRICS_JUDGES))
 PRIVACY_PROMPT_GENERATORS := $(call env_list,$(RAG_METRICS_PRIVACY_PROMPT_GENERATORS))
 RUN_ID := $(or $(RUN_ID),$(shell date +%Y%m%d_%H%M%S))
 GEN ?=
+JUDGE ?=
 PRIVACY_PROMPT ?= 0
 
 RUN_ENV = RAG_METRICS_STRATEGY=$(STRATEGY) \
@@ -44,7 +46,8 @@ MODEL_ENV = RAG_ANON_LLM_MODEL=$(GEN) RAG_ANON_PRIVACY_PROMPT=$(PRIVACY_PROMPT)
 .PHONY: help format lint test hooks ingest check-judge check-judge-smoke \
 	run-experiments run-model \
 	run-strategies generate-strategies judge-strategies run-smoke-strategies run-all \
-	run generate judge rejudge judge-prompts ollama-unload
+	run generate judge rejudge judge-prompts ollama-unload \
+	reanonymize reanonymize-model reanonymize-experiments
 
 help: ## List targets
 	@awk 'BEGIN {FS = ":.*## "} /^[a-z-]+:.*## / {printf "  %-22s %s\n", $$1, $$2} /^## / {printf "\n%s\n", substr($$0, 4)}' $(MAKEFILE_LIST)
@@ -149,6 +152,44 @@ rejudge: ## Rescore SOURCE_DIR with RAG_METRICS_JUDGE_MODEL into a new folder
 	RAG_METRICS_JUDGE_SOURCE_DIR=$(SOURCE_DIR) \
 	RAG_METRICS_EXPERIMENT_DIR=$(EXPERIMENT_DIR) \
 	rag-metrics rejudge
+
+## Reanonymize: same generations, On-Demand answers anonymized again
+
+reanonymize: ## Reanonymize the On-Demand answers of SOURCE_DIR into a new folder; judge (RAG_METRICS_JUDGE_MODEL) only answers whose text changed
+	$(call require,SOURCE_DIR)
+	RAG_METRICS_STRATEGY=$(STRATEGY) \
+	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
+	RAG_METRICS_JUDGE_SOURCE_DIR=$(SOURCE_DIR) \
+	RAG_METRICS_EXPERIMENT_DIR=$(EXPERIMENT_DIR) \
+	rag-metrics reanonymize
+
+reanonymize-model: ## One folder: reanonymize SOURCE_RUN_ID's (GEN, PRIVACY_PROMPT, JUDGE) into RUN_ID
+	@test -n "$(SOURCE_RUN_ID)" || { echo "$@: set SOURCE_RUN_ID=<RUN_ID of the source folders>" >&2; exit 1; }
+	@test -n "$(GEN)" || { echo "$@: set GEN=<generator tag>" >&2; exit 1; }
+	@test -n "$(JUDGE)" || { echo "$@: set JUDGE=<judge tag>" >&2; exit 1; }
+	RAG_METRICS_JUDGE_MODEL=$(JUDGE) $(MAKE) reanonymize \
+		SOURCE_DIR=$(SOURCE_RUN_ID)_$(call slug,$(GEN))_pp$(PRIVACY_PROMPT)_$(call slug,$(JUDGE)) \
+		EXPERIMENT_DIR=$(call run_dir,$(JUDGE))
+
+reanonymize-experiments: ## Every folder of SOURCE_RUN_ID (same generators, prompts and judges as run-experiments) into RUN_ID; resume with RUN_ID
+	@test -n "$(SOURCE_RUN_ID)" || { echo "$@: set SOURCE_RUN_ID=<RUN_ID of the source folders>" >&2; exit 1; }
+	@test -n "$(GENERATORS)" || { echo "$@: set RAG_METRICS_GENERATORS in .env (comma-separated)" >&2; exit 1; }
+	@test -n "$(JUDGES)" || { echo "$@: set RAG_METRICS_JUDGES in .env (comma-separated)" >&2; exit 1; }
+	@echo "reanonymize-experiments: SOURCE_RUN_ID=$(SOURCE_RUN_ID) RUN_ID=$(RUN_ID) DATASET=$(DATASET)"
+	@failed=""; \
+	for j in $(JUDGES); do \
+	  for g in $(GENERATORS); do \
+	    $(MAKE) reanonymize-model RUN_ID=$(RUN_ID) GEN=$$g PRIVACY_PROMPT=0 JUDGE=$$j || failed="$$failed $$g:pp0:$$j"; \
+	  done; \
+	  for g in $(PRIVACY_PROMPT_GENERATORS); do \
+	    $(MAKE) reanonymize-model RUN_ID=$(RUN_ID) GEN=$$g PRIVACY_PROMPT=1 JUDGE=$$j || failed="$$failed $$g:pp1:$$j"; \
+	  done; \
+	  RAG_METRICS_JUDGE_MODEL=$$j $(MAKE) ollama-unload; \
+	done; \
+	if [ -n "$$failed" ]; then \
+	  echo "reanonymize-experiments: failed:$$failed — rerun with RUN_ID=$(RUN_ID) to resume" >&2; exit 1; \
+	fi; \
+	echo "reanonymize-experiments: done RUN_ID=$(RUN_ID)"
 
 judge-prompts: ## Save the exact Ragas judge prompts for RANGE of SOURCE_DIR (no LLM call)
 	$(call require,SOURCE_DIR)

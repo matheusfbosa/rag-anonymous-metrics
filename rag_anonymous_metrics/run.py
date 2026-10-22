@@ -14,6 +14,7 @@ from rag_anonymous import (
     create_chain,
     load_retriever,
     query_rag,
+    strip_markdown_emphasis,
 )
 from rag_anonymous import (
     Settings as AnonSettings,
@@ -78,7 +79,7 @@ def evaluate_question(
     anonymize_sec = 0.0
     if pipeline.anonymizer:
         started = time.perf_counter()
-        final_answer = pipeline.anonymizer.anonymize(generated_answer)
+        final_answer = pipeline.anonymizer.anonymize_answer(generated_answer)
         anonymize_sec = time.perf_counter() - started
     else:
         final_answer = generated_answer
@@ -361,6 +362,85 @@ def rejudge_experiment(
             strategy=strategy, records=records, output_path=str(output_path)
         )
     return results
+
+
+def reanonymize_experiment(
+    source_dir: Path,
+    output_dir: Path,
+    judge_model: str,
+    anonymizer: Anonymizer,
+    pii_index: dict,
+    person_pii_index: dict,
+) -> dict[str, StrategyResult]:
+    if source_dir.resolve() == output_dir.resolve():
+        raise ValueError(
+            f"Reanonymize output must differ from source: dir={source_dir}"
+        )
+    sources = sorted(source_dir.glob("results_*.jsonl"))
+    if not sources:
+        raise ValueError(f"No results_*.jsonl in {source_dir}")
+
+    results = {}
+    for source in sources:
+        output_path = output_dir / source.name
+        source_records = _load_jsonl(source)
+        if output_path.exists():
+            records = _load_jsonl(output_path)
+            logger.info("Resuming reanonymize: path=%s n=%d", output_path, len(records))
+        else:
+            records = [
+                _reanonymize(r, anonymizer, pii_index, person_pii_index)
+                if r.strategy == "ondemand"
+                else r
+                for r in source_records
+            ]
+            _save_jsonl(records, output_path)
+        if not source.name.endswith("_benchmark.jsonl"):
+            continue
+        before = {r.question_id: r.final_answer for r in source_records}
+        changed = [
+            r
+            for r in records
+            if r.strategy == "ondemand"
+            and strip_markdown_emphasis(before.get(r.question_id, "")) != r.final_answer
+        ]
+        log_section(
+            f"Reanonymized: source={source} changed={len(changed)} judge={judge_model}"
+        )
+        if changed:
+            _attach_utility(changed, judge_model, output_path)
+        strategy = records[0].strategy if records else source.stem
+        results[strategy] = StrategyResult(
+            strategy=strategy, records=records, output_path=str(output_path)
+        )
+    return results
+
+
+def _reanonymize(
+    record: QueryRecord,
+    anonymizer: Anonymizer,
+    pii_index: dict,
+    person_pii_index: dict,
+) -> QueryRecord:
+    final_answer = anonymizer.anonymize_answer(record.generated_answer)
+    privacy = compute_privacy_metrics(
+        record.generated_answer,
+        final_answer,
+        record.doc_ids,
+        pii_index,
+        person_pii_index,
+        record.source_doc_id,
+    )
+    updated = replace(
+        record,
+        final_answer=final_answer,
+        answer_is_refusal=is_refusal_answer(final_answer),
+        **cast(dict[str, Any], privacy),
+    )
+    # Markdown-only changes keep their scores; new content is judged again
+    if strip_markdown_emphasis(record.final_answer) == final_answer:
+        return updated
+    return _reset_utility(updated)
 
 
 def _reset_utility(record: QueryRecord) -> QueryRecord:
