@@ -372,7 +372,7 @@ Resume with `EXPERIMENT_DIR=<output folder>`. Point the notebook's `RUN_FOLDER` 
 Runs Presidio again on the saved On-Demand `generated_answer` (Markdown emphasis stripped first) and recomputes `final_answer`, privacy metrics and refusal, into a new folder; no retrieval or generation, source folder untouched, Offline files copied as is. Answers whose text changed beyond Markdown are judged again with `RAG_METRICS_JUDGE_MODEL`; the others keep their scores:
 
 ```sh
-RAG_METRICS_JUDGE_MODEL=gemma4:26b make reanonymize SOURCE_DIR=20261017_132313_qwen3-14b_pp0_gemma4-26b EXPERIMENT_DIR=20261023_090000_qwen3-14b_pp0_gemma4-26b
+RAG_METRICS_JUDGE_MODEL=gemma4:26b make reanonymize SOURCE_DIR=<source folder> EXPERIMENT_DIR=<new folder>
 ```
 
 For every folder of a `run-experiments` round (same `.env` lists), judges in order: `make reanonymize-experiments SOURCE_RUN_ID=<old RUN_ID> RUN_ID=<new RUN_ID>`. Resume with the same `RUN_ID`.
