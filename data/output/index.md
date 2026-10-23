@@ -1,18 +1,24 @@
 # Experiment index
 
-Judge `gemma4:12b`:
+Run: `RUN_ID=20261023_090000` · dataset `test` · folders `<RUN_ID>_<generator>_pp<0|1>_<judge>` (`pp0` = privacy prompt off, `pp1` = on).
 
-- `qwen3:8b`: `[20260926_201638](20260926_201638/)`
-- `qwen3:4b-q4_K_M`: `[20261003_155714](20261003_155714/)`
-- `qwen3.5:4b`: `[20261004_102407](20261004_102407/)`
-- `mistral:7b`: `[20261004_224047](20261004_224047/)`
+Context recall cache: `[context_recall/test/](context_recall/test/)`.
 
-Judge `gemma4:26b`:
+## Privacy prompt off
 
-- `qwen3:14b`: `[20261004_121738](20261004_121738/)`
-- `qwen3:32b`: `[20261004_172304](20261004_172304/)`
-- `qwen3.8:27b`: `[20261006_074720](20261006_074720/)`
-- `qwen3:8b` (rejudge of `20260926_201638`): `[20261007_124442](20261007_124442/)`
-- `qwen3:4b-q4_K_M` (rejudge of `20261003_155714`): `[20261007_171222](20261007_171222/)`
-- `qwen3.5:4b` (rejudge of `20261004_102407`): `[20261008_062805](20261008_062805/)`
-- `mistral:7b` (rejudge of `20261004_224047`): `[20261008_093136](20261008_093136/)`
+| Generator | `gemma4:26b` | `gemma4:12b` |
+| --------- | ------------ | ------------ |
+| `qwen3:4b-q4_K_M` | [20261023_090000_qwen3-4b-q4_K_M_pp0_gemma4-26b](20261023_090000_qwen3-4b-q4_K_M_pp0_gemma4-26b/) | [20261023_090000_qwen3-4b-q4_K_M_pp0_gemma4-12b](20261023_090000_qwen3-4b-q4_K_M_pp0_gemma4-12b/) |
+| `qwen3:8b` | [20261023_090000_qwen3-8b_pp0_gemma4-26b](20261023_090000_qwen3-8b_pp0_gemma4-26b/) | [20261023_090000_qwen3-8b_pp0_gemma4-12b](20261023_090000_qwen3-8b_pp0_gemma4-12b/) |
+| `qwen3:14b` | [20261023_090000_qwen3-14b_pp0_gemma4-26b](20261023_090000_qwen3-14b_pp0_gemma4-26b/) | [20261023_090000_qwen3-14b_pp0_gemma4-12b](20261023_090000_qwen3-14b_pp0_gemma4-12b/) |
+| `qwen3:32b` | [20261023_090000_qwen3-32b_pp0_gemma4-26b](20261023_090000_qwen3-32b_pp0_gemma4-26b/) | [20261023_090000_qwen3-32b_pp0_gemma4-12b](20261023_090000_qwen3-32b_pp0_gemma4-12b/) |
+| `mistral:7b` | [20261023_090000_mistral-7b_pp0_gemma4-26b](20261023_090000_mistral-7b_pp0_gemma4-26b/) | [20261023_090000_mistral-7b_pp0_gemma4-12b](20261023_090000_mistral-7b_pp0_gemma4-12b/) |
+| `qwen3.5:4b` | [20261023_090000_qwen3.5-4b_pp0_gemma4-26b](20261023_090000_qwen3.5-4b_pp0_gemma4-26b/) | [20261023_090000_qwen3.5-4b_pp0_gemma4-12b](20261023_090000_qwen3.5-4b_pp0_gemma4-12b/) |
+| `qwen3.8:27b` | [20261023_090000_qwen3.8-27b_pp0_gemma4-26b](20261023_090000_qwen3.8-27b_pp0_gemma4-26b/) | [20261023_090000_qwen3.8-27b_pp0_gemma4-12b](20261023_090000_qwen3.8-27b_pp0_gemma4-12b/) |
+
+## Privacy prompt on
+
+| Generator | `gemma4:26b` | `gemma4:12b` |
+| --------- | ------------ | ------------ |
+| `qwen3:4b-q4_K_M` | [20261023_090000_qwen3-4b-q4_K_M_pp1_gemma4-26b](20261023_090000_qwen3-4b-q4_K_M_pp1_gemma4-26b/) | [20261023_090000_qwen3-4b-q4_K_M_pp1_gemma4-12b](20261023_090000_qwen3-4b-q4_K_M_pp1_gemma4-12b/) |
+| `qwen3:32b` | [20261023_090000_qwen3-32b_pp1_gemma4-26b](20261023_090000_qwen3-32b_pp1_gemma4-26b/) | [20261023_090000_qwen3-32b_pp1_gemma4-12b](20261023_090000_qwen3-32b_pp1_gemma4-12b/) |

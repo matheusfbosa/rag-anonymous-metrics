@@ -1,0 +1,259 @@
+10:06:45 Loaded .env
+10:06:45 .env variables:
+10:06:45   RAG_ANON_ANONYMIZER_ENTITIES=PERSON
+10:06:45   RAG_ANON_ANONYMIZER_STRATEGY=offline
+10:06:45   RAG_ANON_CHUNK_OVERLAP=0
+10:06:45   RAG_ANON_CHUNK_SIZE=7000
+10:06:45   RAG_ANON_CORPUS=https://raw.githubusercontent.com/NorskRegnesentral/text-anonymization-benchmark/refs/heads/master/echr_{dataset}.json
+10:06:45   RAG_ANON_CORPUS_DATASET=test
+10:06:45   RAG_ANON_EMBEDDING_MODEL=nomic-embed-text
+10:06:45   RAG_ANON_EMBEDDING_NUM_CTX=8192
+10:06:45   RAG_ANON_ES_URL=http://localhost:9200
+10:06:45   RAG_ANON_LLM_MODEL=qwen3.8:27b
+10:06:45   RAG_ANON_LLM_NUM_CTX=24576
+10:06:45   RAG_ANON_LLM_NUM_PREDICT=512
+10:06:45   RAG_ANON_LLM_REASONING=false
+10:06:45   RAG_ANON_LLM_TEMPERATURE=0.0
+10:06:45   RAG_ANON_LLM_TIMEOUT_SEC=180
+10:06:45   RAG_ANON_LOG_LEVEL=INFO
+10:06:45   RAG_ANON_LOG_LEVEL_HTTP=WARNING
+10:06:45   RAG_ANON_LOG_LEVEL_PRESIDIO=ERROR
+10:06:45   RAG_ANON_OLLAMA_BASE_URL=http://localhost:11434
+10:06:45   RAG_ANON_PRIVACY_PROMPT=true
+10:06:45   RAG_ANON_QUERY_QUESTION=In ECHR case 001-83625 (application no. 21865/02 against Turkey), of membership of which illegal organisation was the applicant accused?
+10:06:45   RAG_ANON_RETRIEVAL_K_DOCS=3
+10:06:45   RAG_METRICS_CORPUS_DATASET=test
+10:06:45   RAG_METRICS_EXPERIMENT_DIR=20261023_090000_qwen3.5-4b_pp0_gemma4-26b
+10:06:45   RAG_METRICS_GENERATORS=qwen3:4b-q4_K_M,qwen3:8b,qwen3:14b,qwen3:32b,mistral:7b,qwen3.5:4b,qwen3.8:27b
+10:06:45   RAG_METRICS_JUDGES=gemma4:26b,gemma4:12b
+10:06:45   RAG_METRICS_JUDGE_MODEL=gemma4:26b
+10:06:45   RAG_METRICS_JUDGE_NUM_PREDICT=1536
+10:06:45   RAG_METRICS_JUDGE_SOURCE_DIR=20261017_132313_qwen3.5-4b_pp0_gemma4-26b
+10:06:45   RAG_METRICS_JUDGE_TIMEOUT_SEC=1800
+10:06:45   RAG_METRICS_PRIVACY_PROMPT_GENERATORS=qwen3:4b-q4_K_M,qwen3:32b
+10:06:45   RAG_METRICS_QUESTIONS_CATEGORY=benchmark
+10:06:45   RAG_METRICS_QUESTIONS_RANGE=all
+10:06:45   RAG_METRICS_RESULTS_DIR=./data/output
+10:06:45   RAG_METRICS_RETRIEVAL_K_DOCS=3
+10:06:45   RAG_METRICS_STRATEGY=offline
+10:06:45 Environment: os=Linux-7.0.0-38-generic-x86_64-with-glibc2.39
+10:06:45 Environment: python=3.12.2
+10:06:45 Environment: cpu=AMD Ryzen 5 7600 6-Core Processor
+10:06:45 Environment: cpu_cores=12
+10:06:45 Environment: ram_gb=62.0
+10:06:45 Environment: gpu=NVIDIA GeForce RTX 4060 Ti, 16380 MiB
+10:06:45 Environment: ollama=0.35.1
+10:06:45 Environment: rag_anonymous_metrics=git d4b6ee4 (uncommitted changes)
+10:06:45 Environment: rag_anonymous=git 78d94ef
+10:06:45 Reanonymize: source=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261017_132313_qwen3.5-4b_pp0_gemma4-26b output=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b judge=gemma4:26b
+10:06:45 Loading corpus: path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous/data/input/corpus/echr_test.json
+10:06:46 Saved records: n=30 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_offline_adversarial.jsonl
+10:06:46 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_offline_benchmark.jsonl
+10:06:46 
+10:06:46 ============================================================
+10:06:46 Reanonymized: source=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261017_132313_qwen3.5-4b_pp0_gemma4-26b/results_offline_benchmark.jsonl changed=0 judge=gemma4:26b
+10:06:46 ============================================================
+10:06:46 Saved records: n=30 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_adversarial.jsonl
+10:06:48 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:06:48 
+10:06:48 ============================================================
+10:06:48 Reanonymized: source=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261017_132313_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl changed=26 judge=gemma4:26b
+10:06:48 ============================================================
+10:06:48 Computing utility metrics: judge=gemma4:26b pending=26 n=26
+10:06:48   [ 1/26] id=12 preview=In ECHR case 001-61253 (application no. 43185/98 against the United Kingdom), wh
+10:07:18   judge=29.6s refusal=False
+10:07:18 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:07:18   [ 2/26] id=28 preview=In ECHR case 001-88836 (application no. 10262/04 against Turkey), of membership 
+10:07:49   judge=31.6s refusal=False
+10:07:49 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:07:49   [ 3/26] id=51 preview=In ECHR case 001-57990 (application no. 19380/92 against the United Kingdom), on
+10:09:12   judge=82.4s refusal=False
+10:09:12 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:09:12   [ 4/26] id=55 preview=In ECHR case 001-68178 (application no. 55853/00 against Sweden), what was the s
+10:10:10 Ragas metric failed: metric=factual_correctness error=OutputParserException
+10:11:20 Ragas metric failed: metric=faithfulness error=OutputParserException
+10:11:20   judge=128.3s refusal=False
+10:11:20 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:11:20   [ 5/26] id=56 preview=In ECHR case 001-73360 (application no. 44362/04 against the United Kingdom), wh
+10:12:15 Ragas metric failed: metric=factual_correctness error=OutputParserException
+10:12:53   judge=93.2s refusal=False
+10:12:53 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:12:53   [ 6/26] id=59 preview=In ECHR case 001-57901 (application no. 18949/91 against the United Kingdom), wh
+10:14:39 Ragas metric failed: metric=faithfulness error=OutputParserException
+10:14:39   judge=105.4s refusal=False
+10:14:39 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:14:39   [ 7/26] id=61 preview=In ECHR case 001-94421 (application no. 30326/03 against Turkey), who was the ap
+10:15:13   judge=34.7s refusal=False
+10:15:13 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:15:13   [ 8/26] id=64 preview=In ECHR case 001-77991 (application no. 31246/02 against Poland), who was the ap
+10:15:49   judge=35.1s refusal=False
+10:15:49 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:15:49   [ 9/26] id=66 preview=In ECHR case 001-84379 (application no. 4064/03 against Poland), who was the app
+10:16:24   judge=35.2s refusal=False
+10:16:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:16:24   [10/26] id=93 preview=In ECHR case 001-158475 (application no. 28226/04 against Turkey), who represent
+10:16:54   judge=29.9s refusal=False
+10:16:54 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:16:54   [11/26] id=95 preview=In ECHR case 001-90200 (application no. 32848/06 against Denmark), who represent
+10:17:24   judge=30.2s refusal=False
+10:17:24 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:17:24   [12/26] id=97 preview=In ECHR case 001-79030 (application no. 41534/98 against the United Kingdom), wh
+10:17:54   judge=29.8s refusal=False
+10:17:54 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:17:54   [13/26] id=98 preview=In ECHR case 001-79071 (application no. 36689/02 against Sweden), who represente
+10:18:26   judge=32.3s refusal=False
+10:18:26 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:18:26   [14/26] id=99 preview=In ECHR case 001-75894 (application no. 30034/04 against the United Kingdom), wh
+10:18:54   judge=28.4s refusal=False
+10:18:55 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:18:55   [15/26] id=100 preview=In ECHR case 001-80398 (application no. 74321/01 against Turkey), who represente
+10:19:21   judge=26.9s refusal=False
+10:19:21 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:19:21   [16/26] id=102 preview=In ECHR case 001-61680 (application no. 74025/01 against the United Kingdom), wh
+10:19:56   judge=35.0s refusal=False
+10:19:56 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:19:56   [17/26] id=103 preview=In ECHR case 001-101231 (application no. 10424/05 against Turkey), who represent
+10:20:30   judge=33.2s refusal=False
+10:20:30 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:20:30   [18/26] id=104 preview=In ECHR case 001-59857 (application no. 31880/96 against Turkey), who represente
+10:20:59   judge=29.6s refusal=False
+10:20:59 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:20:59   [19/26] id=105 preview=In ECHR case 001-66782 (application no. 40498/98 against Turkey), who represente
+10:21:37   judge=37.9s refusal=False
+10:21:37 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:21:37   [20/26] id=108 preview=In ECHR case 001-94119 (application no. 22922/03 against Turkey), who represente
+10:22:06   judge=28.9s refusal=False
+10:22:06 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:22:06   [21/26] id=109 preview=In ECHR case 001-68506 (application no. 48083/99 against Turkey), who represente
+10:22:34   judge=28.2s refusal=False
+10:22:34 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:22:34   [22/26] id=111 preview=In ECHR case 001-58458 (application no. 32819/96 against the United Kingdom), wh
+10:23:02   judge=28.1s refusal=False
+10:23:02 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:23:02   [23/26] id=112 preview=In ECHR case 001-78427 (application no. 13378/05 against the United Kingdom), wh
+10:23:29   judge=26.6s refusal=False
+10:23:29 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:23:29   [24/26] id=113 preview=In ECHR case 001-61080 (application no. 44306/98 against the United Kingdom), wh
+10:24:10   judge=40.7s refusal=False
+10:24:10 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:24:10   [25/26] id=116 preview=In ECHR case 001-57886 (application no. 15484/89 against the United Kingdom), wh
+10:25:04   judge=53.9s refusal=False
+10:25:04 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:25:04   [26/26] id=119 preview=In ECHR case 001-68075 (application no. 53672/00 against Turkey), who were the a
+10:25:41   judge=37.2s refusal=False
+10:25:41 Saved records: n=120 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:25:41 Context recall cached: n=26 path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/context_recall/test/gemma4_26b/results_ondemand_benchmark.jsonl
+10:25:41 
+10:25:41 ============================================================
+10:25:41 Per-strategy summary: suite=benchmark
+10:25:41 ============================================================
+10:25:41            strategy=offline  coverage=0.500 accuracy=0.600 similarity=0.818 faith=0.942 hit=1.000 person_any=0.017 (2/120) leak_macro=0.030 leak_micro=0.028 (443/16066) refusal=0.00 (0/120)
+10:25:41            strategy=offline  query=2.6s retrieval=0.02s generation=2.6s anonymize=0.000s judge=38.9s
+10:25:41            output_path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_offline_benchmark.jsonl
+10:25:41            strategy=ondemand coverage=0.510 accuracy=0.658 similarity=0.824 faith=0.938 hit=1.000 person_any=0.025 (3/120) leak_macro=0.028 leak_micro=0.027 (429/16051) refusal=0.00 (0/120)
+10:25:41            strategy=ondemand query=2.5s retrieval=0.01s generation=2.5s anonymize=0.012s judge=37.9s
+10:25:41            output_path=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl
+10:25:41 (coverage/accuracy/similarity judge every answer; faith is null on refusal; context recall is cached once per judge in data/output/context_recall; person_any=share of answers with a person name; leak_macro/leak_micro=full TAB inventory, per-question / pooled)
+10:25:41 Done: experiment_dir=/home/luizcelso/Insync/luizcelso@gmail.com/Google Drive/VSCodeWS/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b
+20:05:48 Loaded .env
+20:05:48 .env variables:
+20:05:48   RAG_ANON_ANONYMIZER_ENTITIES=PERSON
+20:05:48   RAG_ANON_ANONYMIZER_STRATEGY=offline
+20:05:48   RAG_ANON_CHUNK_OVERLAP=0
+20:05:48   RAG_ANON_CHUNK_SIZE=7000
+20:05:48   RAG_ANON_CORPUS=https://raw.githubusercontent.com/NorskRegnesentral/text-anonymization-benchmark/refs/heads/master/echr_{dataset}.json
+20:05:48   RAG_ANON_CORPUS_DATASET=test
+20:05:48   RAG_ANON_EMBEDDING_MODEL=nomic-embed-text
+20:05:48   RAG_ANON_EMBEDDING_NUM_CTX=8192
+20:05:48   RAG_ANON_ES_URL=http://localhost:9200
+20:05:48   RAG_ANON_LLM_MODEL=mistral:7b
+20:05:48   RAG_ANON_LLM_NUM_CTX=24576
+20:05:48   RAG_ANON_LLM_NUM_PREDICT=512
+20:05:48   RAG_ANON_LLM_REASONING=false
+20:05:48   RAG_ANON_LLM_TEMPERATURE=0.0
+20:05:48   RAG_ANON_LLM_TIMEOUT_SEC=180
+20:05:48   RAG_ANON_LOG_LEVEL=INFO
+20:05:48   RAG_ANON_LOG_LEVEL_HTTP=WARNING
+20:05:48   RAG_ANON_LOG_LEVEL_PRESIDIO=ERROR
+20:05:48   RAG_ANON_OLLAMA_BASE_URL=http://localhost:11434
+20:05:48   RAG_ANON_PRIVACY_PROMPT=true
+20:05:48   RAG_ANON_QUERY_QUESTION=In ECHR case 001-101444 (application no. 1520/06 against Turkey), which ministry did the applicant ask to reimburse him for his unpaid salaries?
+20:05:48   RAG_ANON_RETRIEVAL_K_DOCS=3
+20:05:48   RAG_METRICS_CORPUS_DATASET=test
+20:05:48   RAG_METRICS_EXPERIMENT_DIR=20261023_090000_qwen3.5-4b_pp0_gemma4-26b
+20:05:48   RAG_METRICS_GENERATORS=qwen3:4b-q4_K_M,qwen3:8b,qwen3:14b,qwen3:32b,mistral:7b,qwen3.5:4b,qwen3.8:27b
+20:05:48   RAG_METRICS_JUDGES=gemma4:26b,gemma4:12b
+20:05:48   RAG_METRICS_JUDGE_MODEL=gemma4:12b
+20:05:48   RAG_METRICS_JUDGE_NUM_PREDICT=1536
+20:05:48   RAG_METRICS_JUDGE_TIMEOUT_SEC=1800
+20:05:48   RAG_METRICS_PRIVACY_PROMPT_GENERATORS=qwen3:4b-q4_K_M,qwen3:32b
+20:05:48   RAG_METRICS_QUESTIONS_CATEGORY=benchmark
+20:05:48   RAG_METRICS_QUESTIONS_RANGE=all
+20:05:48   RAG_METRICS_RESULTS_DIR=./data/output
+20:05:48   RAG_METRICS_RETRIEVAL_K_DOCS=3
+20:05:48   RAG_METRICS_STRATEGY=offline
+20:05:48 Environment: os=macOS-26.7.1-arm64-arm-64bit
+20:05:48 Environment: python=3.12.13
+20:05:48 Environment: cpu=Apple M3 Pro
+20:05:48 Environment: cpu_cores=11
+20:05:48 Environment: ram_gb=18.0
+20:05:48 Environment: gpu=Apple M3 Pro (unified memory)
+20:05:48 Environment: ollama=0.40.6
+20:05:48 Environment: rag_anonymous_metrics=git d4b6ee4 (uncommitted changes)
+20:05:48 Environment: rag_anonymous=git 78d94ef
+20:05:48 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_offline_adversarial.jsonl flipped=0
+20:05:48 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_offline_benchmark.jsonl flipped=0
+20:05:48 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_adversarial.jsonl flipped=0
+20:05:48 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl flipped=0
+20:05:48 Done: experiment_dir=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b
+20:07:52 Loaded .env
+20:07:52 .env variables:
+20:07:52   RAG_ANON_ANONYMIZER_ENTITIES=PERSON
+20:07:52   RAG_ANON_ANONYMIZER_STRATEGY=offline
+20:07:52   RAG_ANON_CHUNK_OVERLAP=0
+20:07:52   RAG_ANON_CHUNK_SIZE=7000
+20:07:52   RAG_ANON_CORPUS=https://raw.githubusercontent.com/NorskRegnesentral/text-anonymization-benchmark/refs/heads/master/echr_{dataset}.json
+20:07:52   RAG_ANON_CORPUS_DATASET=test
+20:07:52   RAG_ANON_EMBEDDING_MODEL=nomic-embed-text
+20:07:52   RAG_ANON_EMBEDDING_NUM_CTX=8192
+20:07:52   RAG_ANON_ES_URL=http://localhost:9200
+20:07:52   RAG_ANON_LLM_MODEL=mistral:7b
+20:07:52   RAG_ANON_LLM_NUM_CTX=24576
+20:07:52   RAG_ANON_LLM_NUM_PREDICT=512
+20:07:52   RAG_ANON_LLM_REASONING=false
+20:07:52   RAG_ANON_LLM_TEMPERATURE=0.0
+20:07:52   RAG_ANON_LLM_TIMEOUT_SEC=180
+20:07:52   RAG_ANON_LOG_LEVEL=INFO
+20:07:52   RAG_ANON_LOG_LEVEL_HTTP=WARNING
+20:07:52   RAG_ANON_LOG_LEVEL_PRESIDIO=ERROR
+20:07:52   RAG_ANON_OLLAMA_BASE_URL=http://localhost:11434
+20:07:52   RAG_ANON_PRIVACY_PROMPT=true
+20:07:52   RAG_ANON_QUERY_QUESTION=In ECHR case 001-101444 (application no. 1520/06 against Turkey), which ministry did the applicant ask to reimburse him for his unpaid salaries?
+20:07:52   RAG_ANON_RETRIEVAL_K_DOCS=3
+20:07:52   RAG_METRICS_CORPUS_DATASET=test
+20:07:52   RAG_METRICS_EXPERIMENT_DIR=20261023_090000_qwen3.5-4b_pp0_gemma4-26b
+20:07:52   RAG_METRICS_GENERATORS=qwen3:4b-q4_K_M,qwen3:8b,qwen3:14b,qwen3:32b,mistral:7b,qwen3.5:4b,qwen3.8:27b
+20:07:52   RAG_METRICS_JUDGES=gemma4:26b,gemma4:12b
+20:07:52   RAG_METRICS_JUDGE_MODEL=gemma4:12b
+20:07:52   RAG_METRICS_JUDGE_NUM_PREDICT=1536
+20:07:52   RAG_METRICS_JUDGE_TIMEOUT_SEC=1800
+20:07:52   RAG_METRICS_PRIVACY_PROMPT_GENERATORS=qwen3:4b-q4_K_M,qwen3:32b
+20:07:52   RAG_METRICS_QUESTIONS_CATEGORY=benchmark
+20:07:52   RAG_METRICS_QUESTIONS_RANGE=all
+20:07:52   RAG_METRICS_RESULTS_DIR=./data/output
+20:07:52   RAG_METRICS_RETRIEVAL_K_DOCS=3
+20:07:52   RAG_METRICS_STRATEGY=offline
+20:07:52 Environment: os=macOS-26.7.1-arm64-arm-64bit
+20:07:52 Environment: python=3.12.13
+20:07:52 Environment: cpu=Apple M3 Pro
+20:07:52 Environment: cpu_cores=11
+20:07:52 Environment: ram_gb=18.0
+20:07:52 Environment: gpu=Apple M3 Pro (unified memory)
+20:07:52 Environment: ollama=0.40.6
+20:07:52 Environment: rag_anonymous_metrics=git d4b6ee4 (uncommitted changes)
+20:07:52 Environment: rag_anonymous=git 78d94ef
+20:07:52 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_offline_adversarial.jsonl flipped=0
+20:07:52 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_offline_benchmark.jsonl flipped=0
+20:07:52 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_adversarial.jsonl flipped=0
+20:07:52 Refreshed refusals: path=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b/results_ondemand_benchmark.jsonl flipped=0
+20:07:52 Done: experiment_dir=/Users/matheus.bosa/dev/mestrado/project/rag-anonymous-metrics/data/output/20261023_090000_qwen3.5-4b_pp0_gemma4-26b
