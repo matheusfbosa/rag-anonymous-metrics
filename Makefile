@@ -47,7 +47,7 @@ MODEL_ENV = RAG_ANON_LLM_MODEL=$(GEN) RAG_ANON_PRIVACY_PROMPT=$(PRIVACY_PROMPT)
 	run-experiments run-model \
 	run-strategies generate-strategies judge-strategies run-smoke-strategies run-all \
 	run generate judge rejudge judge-prompts ollama-unload \
-	reanonymize reanonymize-model reanonymize-experiments
+	reanonymize reanonymize-model reanonymize-experiments refresh-refusals
 
 help: ## List targets
 	@awk 'BEGIN {FS = ":.*## "} /^[a-z-]+:.*## / {printf "  %-22s %s\n", $$1, $$2} /^## / {printf "\n%s\n", substr($$0, 4)}' $(MAKEFILE_LIST)
@@ -190,6 +190,13 @@ reanonymize-experiments: ## Every folder of SOURCE_RUN_ID (same generators, prom
 	  echo "reanonymize-experiments: failed:$$failed — rerun with RUN_ID=$(RUN_ID) to resume" >&2; exit 1; \
 	fi; \
 	echo "reanonymize-experiments: done RUN_ID=$(RUN_ID)"
+
+refresh-refusals: ## Reapply the refusal detector to every results_*.jsonl in EXPERIMENT_DIR (in place, no LLM call)
+	$(call require,EXPERIMENT_DIR)
+	RAG_METRICS_STRATEGY=$(STRATEGY) \
+	RAG_METRICS_CORPUS_DATASET=$(DATASET) \
+	RAG_METRICS_EXPERIMENT_DIR=$(EXPERIMENT_DIR) \
+	rag-metrics refresh-refusals
 
 judge-prompts: ## Save the exact Ragas judge prompts for RANGE of SOURCE_DIR (no LLM call)
 	$(call require,SOURCE_DIR)

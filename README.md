@@ -377,6 +377,10 @@ RAG_METRICS_JUDGE_MODEL=gemma4:26b make reanonymize SOURCE_DIR=20261017_132313_q
 
 For every folder of a `run-experiments` round (same `.env` lists), judges in order: `make reanonymize-experiments SOURCE_RUN_ID=<old RUN_ID> RUN_ID=<new RUN_ID>`. Resume with the same `RUN_ID`.
 
+#### Refresh refusal flags
+
+After a change to the refusal detector, `make refresh-refusals EXPERIMENT_DIR=<folder>` reapplies it to every `results_*.jsonl` of the folder in place, without any LLM call. A benchmark answer that becomes a refusal gets `faithfulness = null`; one that stops being a refusal is scored by `make judge`.
+
 ### 7. Inspect the judge prompts
 
 Saves the exact prompts Ragas would send to the judge, one file per call, without calling any LLM. They are the Ragas default prompts, rendered with `to_string()` as described in [Modifying prompts in metrics](https://docs.ragas.io/en/stable/howtos/customizations/metrics/modifying-prompts-metrics/), filled with the saved question, answer, contexts and `ground_truth`:

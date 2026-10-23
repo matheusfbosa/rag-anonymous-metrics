@@ -416,6 +416,30 @@ def reanonymize_experiment(
     return results
 
 
+def refresh_refusals(experiment_dir: Path) -> dict[str, int]:
+    paths = sorted(experiment_dir.glob("results_*.jsonl"))
+    if not paths:
+        raise ValueError(f"No results_*.jsonl in {experiment_dir}")
+    flipped: dict[str, int] = {}
+    for path in paths:
+        records = _load_jsonl(path)
+        changed = [
+            r
+            for r in records
+            if r.answer_is_refusal != is_refusal_answer(r.final_answer)
+        ]
+        for record in changed:
+            record.answer_is_refusal = not record.answer_is_refusal
+            # Faithfulness is null on refusal; a new non-refusal is scored by `judge`
+            if record.answer_is_refusal:
+                record.faithfulness = None
+        if changed:
+            _save_jsonl(records, path)
+        flipped[path.name] = len(changed)
+        logger.info("Refreshed refusals: path=%s flipped=%d", path, len(changed))
+    return flipped
+
+
 def _reanonymize(
     record: QueryRecord,
     anonymizer: Anonymizer,

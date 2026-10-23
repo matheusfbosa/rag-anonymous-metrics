@@ -40,13 +40,17 @@ from rag_anonymous_metrics.questions_filter import (
 from rag_anonymous_metrics.records import StrategyResult
 from rag_anonymous_metrics.run import (
     reanonymize_experiment,
+    refresh_refusals,
     rejudge_experiment,
     run_experiment,
 )
 
 logger = logging.getLogger(__name__)
 
-USAGE = "Usage: rag-metrics {run|rejudge|reanonymize|judge-prompts|check-judge}"
+USAGE = (
+    "Usage: rag-metrics "
+    "{run|rejudge|reanonymize|refresh-refusals|judge-prompts|check-judge}"
+)
 
 
 def cmd_run_experiment(experiment_dir: Path) -> None:
@@ -322,6 +326,14 @@ def cmd_reanonymize(experiment_dir: Path) -> None:
     logger.info("Done: experiment_dir=%s", experiment_dir)
 
 
+def cmd_refresh_refusals(experiment_dir: Path) -> None:
+    try:
+        refresh_refusals(experiment_dir)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    logger.info("Done: experiment_dir=%s", experiment_dir)
+
+
 def cmd_judge_prompts(experiment_dir: Path) -> None:
     cfg = Settings.load()
     if cfg.judge_source_dir is None:
@@ -344,6 +356,7 @@ def main() -> None:
         "evaluate",
         "rejudge",
         "reanonymize",
+        "refresh-refusals",
         "judge-prompts",
         "check-judge",
     )
@@ -373,6 +386,8 @@ def main() -> None:
         cmd_rejudge(experiment_dir)
     elif command == "reanonymize":
         cmd_reanonymize(experiment_dir)
+    elif command == "refresh-refusals":
+        cmd_refresh_refusals(experiment_dir)
     elif command == "judge-prompts":
         cmd_judge_prompts(experiment_dir)
     else:

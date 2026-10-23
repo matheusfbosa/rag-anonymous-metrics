@@ -4,7 +4,12 @@ import pytest
 from test_run_checkpoint import SCORED, FakeScorer, _record
 
 from rag_anonymous import strip_markdown_emphasis
-from rag_anonymous_metrics.run import _load_jsonl, _save_jsonl, reanonymize_experiment
+from rag_anonymous_metrics.run import (
+    _load_jsonl,
+    _save_jsonl,
+    reanonymize_experiment,
+    refresh_refusals,
+)
 
 PERSON_INDEX = {"d1": {"mr x"}}
 
@@ -135,3 +140,22 @@ def test_resume_does_not_rescore(tmp_path: Path, source_dir: Path, scorers):
 def test_rejects_same_dir(source_dir: Path):
     with pytest.raises(ValueError, match="must differ"):
         _run(source_dir, source_dir)
+
+
+def test_refresh_refusals_flags_missed_refusal(tmp_path: Path):
+    path = tmp_path / "results_offline_benchmark.jsonl"
+    _save_jsonl(
+        [
+            _record(question_id="1", final_answer="It cannot be answered.", **SCORED),
+            _record(question_id="2", **SCORED),
+        ],
+        path,
+    )
+
+    assert refresh_refusals(tmp_path) == {"results_offline_benchmark.jsonl": 1}
+
+    first, second = _load_jsonl(path)
+    assert first.answer_is_refusal is True
+    assert first.faithfulness is None
+    assert first.factual_correctness == SCORED["factual_correctness"]
+    assert second.answer_is_refusal is False

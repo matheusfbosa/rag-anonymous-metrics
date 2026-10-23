@@ -23,7 +23,8 @@ _HONORIFIC_PREFIX = re.compile(
 
 _REFUSAL_PATTERN = re.compile(
     # abstentions
-    r"it\s+is\s+not\s+possible\s+to\s+answer"
+    r"it\s+is\s+not\s+possible\s+to\s+(?:answer|provide|list|identify)"
+    r"|cannot\s+be\s+(?:provided|answered)"
     r"|based\s+on\s+the\s+(?:context\s+provided|provided\s+context),\s*i\s+cannot"
     r"|cannot\s+be\s+determined\s+from"
     r"|(?:provided\s+)?context\s+does\s+not"
