@@ -110,7 +110,7 @@ The raw counts are stored:
 | `fc_n_ref_ok` | reference claims covered by the answer |
 
 $$
-\text{factual\_correctness} = \frac{\texttt{fc\_n\_ref\_ok}}{\texttt{fc\_n\_ref}}
+\text{factual\\_correctness} = \frac{\texttt{fc\\_n\\_ref\\_ok}}{\texttt{fc\\_n\\_ref}}
 $$
 
 Precision (`fc_n_resp_ok / fc_n_resp`) and F1 can be derived from the counts without calling the judge again. Coverage replaces the Ragas F1 default because F1 penalises correct details missing from the reference, and Ragas' own `recall` mode mixes answer-claim and reference-claim counts. If the reference yields no claims the score is `null`.
