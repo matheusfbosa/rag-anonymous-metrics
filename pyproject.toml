@@ -21,6 +21,8 @@ rag-metrics = "rag_anonymous_metrics.cli:main"
 [project.optional-dependencies]
 test = [
     "pytest>=8",
+    "scipy>=1.11,<2",
+    "statsmodels>=0.14,<1",
 ]
 dev = [
     "rag-anonymous-metrics[test]",

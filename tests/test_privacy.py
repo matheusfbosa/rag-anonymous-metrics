@@ -2,7 +2,21 @@ from rag_anonymous_metrics.metrics.privacy import (
     compute_pii_leakage,
     compute_privacy_metrics,
     is_refusal_answer,
+    normalise,
+    span_in_answer,
 )
+
+
+def test_normalise_lowercases_and_strips_markdown_emphasis() -> None:
+    assert normalise("**Göran** `Ravnsborg`\u2019s") == "göran ravnsborg's"
+
+
+def test_span_in_answer_matches_core_without_honorific() -> None:
+    assert span_in_answer("mr göran ravnsborg", "göran ravnsborg was the applicant")
+
+
+def test_span_in_answer_ignores_span_inside_a_word() -> None:
+    assert not span_in_answer("son", "personal identifiers")
 
 
 def test_span_matches_without_honorific_in_answer() -> None:
