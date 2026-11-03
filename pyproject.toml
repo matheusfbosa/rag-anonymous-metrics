@@ -81,6 +81,10 @@ explicit_package_bases = true
 
 [[tool.mypy.overrides]]
 module = [
+    "pandas",
+    "pandas.*",
     "ragas.*",
+    "statsmodels",
+    "statsmodels.*",
 ]
 ignore_missing_imports = true
